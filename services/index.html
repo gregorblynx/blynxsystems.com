@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BLYNX | Redirecting</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script>
+      (function () {
+        var language = localStorage.getItem("preferredLanguage") || localStorage.getItem("blynxPreferredLanguage");
+        if (language === "en" || language === "es") {
+          window.location.replace("/" + language + "/services");
+        } else {
+          window.location.replace("/");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="language-gate">
+      <section class="language-panel">
+        <a class="brand language-brand" href="/" aria-label="BLYNX language selection">
+          <span class="brand-mark" aria-hidden="true">BX</span>
+          <span class="brand-text">
+            <span class="brand-name">BLYNX</span>
+          </span>
+        </a>
+        <h1>Choose your language</h1>
+        <p>Select a language to continue.</p>
+        <div class="language-actions">
+          <a class="btn btn-primary" href="/en/services" data-language-choice="en">English</a>
+          <a class="btn btn-secondary" href="/es/services" data-language-choice="es">Español</a>
+        </div>
+      </section>
+    </main>
+    <script src="/assets/site.js"></script>
+  </body>
+</html>
