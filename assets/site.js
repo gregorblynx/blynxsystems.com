@@ -132,11 +132,10 @@ function populateAuditContextFields(form) {
   });
 })();
 
-// TODO: set this to the live endpoint that should receive lead submissions
-// (a Google Apps Script Web App URL, n8n/Make/Zapier webhook, or a custom API
-// route — see integrations/google-apps-script.gs). Leave empty to keep
-// logging submissions to the console only.
-const LEAD_WEBHOOK_URL = "";
+// Google Apps Script Web App (see integrations/google-apps-script.gs):
+// appends each lead to the "BLYNX Leads" spreadsheet and emails hello@blynxsystems.com.
+const LEAD_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbxQhYyBg_WIMmItlMU_tNusDLgAcpgC0vRtmhzx3ie4kaoR_g044V9nP2bxJm2B0zYp/exec";
 
 function formToObject(form) {
   const formData = new FormData(form);
