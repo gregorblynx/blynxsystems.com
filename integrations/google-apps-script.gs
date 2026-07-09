@@ -17,7 +17,7 @@
  * columns added automatically if the form ever changes) and triggers an email notification.
  */
 
-const NOTIFY_EMAIL = "hello@blynxsystems.com"; // TODO: replace with the real inbox for lead alerts
+const NOTIFY_EMAIL = "hello@blynxsystems.com";
 const SHEET_NAME = "Leads";
 
 function doPost(e) {
