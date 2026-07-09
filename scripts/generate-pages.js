@@ -4,6 +4,56 @@ const path = require("path");
 const root = path.resolve(__dirname, "..");
 
 const SITE_URL = "https://www.blynxsystems.com";
+const OG_IMAGE = `${SITE_URL}/assets/og-image.png`;
+
+function structuredData(lang, title, description, canonicalUrl) {
+  const orgDescription =
+    lang === "es"
+      ? "BLYNX ayuda a negocios locales de servicios a aparecer en Google, captar más leads calificados y hacer seguimiento más rápido."
+      : "BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.";
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": `${SITE_URL}/#organization`,
+        name: "BLYNX AIMA AGENCY",
+        description: orgDescription,
+        url: `${SITE_URL}/`,
+        email: "hello@blynxsystems.com",
+        image: OG_IMAGE,
+        logo: OG_IMAGE,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Nashville",
+          addressRegion: "TN",
+          addressCountry: "US"
+        },
+        areaServed: { "@type": "Country", name: "United States" },
+        knowsLanguage: ["en", "es"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        url: `${SITE_URL}/`,
+        name: "BLYNX AIMA AGENCY",
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        inLanguage: lang === "es" ? "es" : "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": canonicalUrl,
+        url: canonicalUrl,
+        name: title,
+        description: description,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": `${SITE_URL}/#organization` },
+        inLanguage: lang === "es" ? "es" : "en"
+      }
+    ]
+  };
+  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+}
 
 const copy = {
   en: {
@@ -952,7 +1002,12 @@ function shell(lang, meta, active, switchPath, body) {
     <meta property="og:url" content="${canonicalUrl}">
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
     <meta property="og:locale:alternate" content="${lang === "es" ? "en_US" : "es_ES"}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${OG_IMAGE}">
+    ${structuredData(lang, meta.title, meta.description, canonicalUrl)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -1791,7 +1846,12 @@ function stagePage(lang) {
     <meta property="og:url" content="${lang === "es" ? esUrl : enUrl}">
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
     <meta property="og:locale:alternate" content="${lang === "es" ? "en_US" : "es_ES"}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${OG_IMAGE}">
+    ${structuredData(lang, p.title, p.description, lang === "es" ? esUrl : enUrl)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -1837,18 +1897,23 @@ function languageGate() {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BLYNX AIMA AGENCY | Choose Language</title>
-    <meta name="description" content="Choose English or Spanish to continue to the BLYNX website.">
+    <title>BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish</title>
+    <meta name="description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
     <link rel="canonical" href="${SITE_URL}/">
     <link rel="alternate" hreflang="en" href="${SITE_URL}/en/start">
     <link rel="alternate" hreflang="es" href="${SITE_URL}/es/start">
     <link rel="alternate" hreflang="x-default" href="${SITE_URL}/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BLYNX AIMA AGENCY">
-    <meta property="og:title" content="BLYNX AIMA AGENCY | Choose Language">
-    <meta property="og:description" content="Choose English or Spanish to continue to the BLYNX website.">
+    <meta property="og:title" content="BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish">
+    <meta property="og:description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
     <meta property="og:url" content="${SITE_URL}/">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="${OG_IMAGE}">
+    ${structuredData("en", "BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
