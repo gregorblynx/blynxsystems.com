@@ -57,6 +57,24 @@ function instagramLink(label = `@${BUSINESS.instagramHandle}`) {
   return `<a href="${BUSINESS.instagramUrl}" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">${label}</a>`;
 }
 
+const contactIcons = {
+  email:
+    '<svg viewBox="0 0 24 24" focusable="false"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>',
+  phone:
+    '<svg viewBox="0 0 24 24" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.91.32 1.8.59 2.65a2 2 0 0 1-.45 2.11L8.09 9.64a16 16 0 0 0 6.27 6.27l1.16-1.16a2 2 0 0 1 2.11-.45c.85.27 1.74.47 2.65.59A2 2 0 0 1 22 16.92z"/></svg>',
+  location:
+    '<svg viewBox="0 0 24 24" focusable="false"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+  serviceArea:
+    '<svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/></svg>',
+  instagram:
+    '<svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>'
+};
+
+function contactLine(icon, content) {
+  if (!content) return "";
+  return `<span class="contact-line"><span class="contact-icon" aria-hidden="true">${contactIcons[icon]}</span><span>${content}</span></span>`;
+}
+
 function structuredData(lang, title, description, canonicalUrl, breadcrumbs = []) {
   const orgDescription =
     lang === "es"
@@ -1227,7 +1245,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit") {
 function footer(lang, auditSlug = "free-audit") {
   const t = copy[lang];
   const serviceAreaLabel =
-    lang === "es" ? `Negocios en ${BUSINESS.serviceArea}` : `Serving businesses across the ${BUSINESS.serviceArea}`;
+    lang === "es" ? "Negocios en Estados Unidos" : `Serving businesses across the ${BUSINESS.serviceArea}`;
   return `
     <footer class="footer">
       <div class="container footer-grid">
@@ -1250,11 +1268,11 @@ function footer(lang, auditSlug = "free-audit") {
           <a href="${pagePath(lang, "terms")}">${t.nav.terms}</a>
         </div>
         <div class="footer-contact">
-          <span>${emailLink()}</span>
-          ${hasConfiguredPhone() ? `<span>${phoneLink()}</span>` : ""}
-          <span>${BUSINESS.location}</span>
-          <span>${serviceAreaLabel}</span>
-          ${instagramLink() ? `<span>${instagramLink()}</span>` : ""}
+          ${contactLine("email", emailLink())}
+          ${hasConfiguredPhone() ? contactLine("phone", phoneLink()) : ""}
+          ${contactLine("location", BUSINESS.location)}
+          ${contactLine("serviceArea", serviceAreaLabel)}
+          ${instagramLink() ? contactLine("instagram", instagramLink()) : ""}
         </div>
       </div>
     </footer>`;
@@ -1427,7 +1445,7 @@ function homePage(lang) {
             <h2>${h.problemTitle}</h2>
             <p>${h.problemCopy}</p>
           </div>
-          <div class="results-grid">
+          <div class="results-grid problem-grid">
             ${problemCards[lang]
               .map(
                 ([title, text], index) => `
@@ -2060,7 +2078,7 @@ function contactPage(lang) {
   const t = copy[lang];
   const p = t.contactPage;
   const serviceAreaText =
-    lang === "es" ? `Negocios locales en ${BUSINESS.serviceArea}` : `Serving businesses across the ${BUSINESS.serviceArea}`;
+    lang === "es" ? "Negocios locales en Estados Unidos" : `Serving businesses across the ${BUSINESS.serviceArea}`;
   const body = `
     <main id="main">
       <section class="page-hero">
@@ -2076,29 +2094,29 @@ function contactPage(lang) {
           <aside class="contact-stack">
             <div class="contact-card">
               <h3>${p.emailTitle}</h3>
-              <p>${emailLink()}</p>
+              <p>${contactLine("email", emailLink())}</p>
             </div>
             ${
               hasConfiguredPhone()
                 ? `<div class="contact-card">
               <h3>${p.phoneTitle}</h3>
-              <p>${phoneLink()}</p>
+              <p>${contactLine("phone", phoneLink())}</p>
             </div>`
                 : ""
             }
             <div class="contact-card">
               <h3>${p.locationTitle}</h3>
-              <p>${BUSINESS.location}</p>
+              <p>${contactLine("location", BUSINESS.location)}</p>
             </div>
             <div class="contact-card">
               <h3>${p.serviceAreaTitle}</h3>
-              <p>${serviceAreaText}</p>
+              <p>${contactLine("serviceArea", serviceAreaText)}</p>
             </div>
             ${
               instagramLink()
                 ? `<div class="contact-card">
               <h3>${p.instagramTitle}</h3>
-              <p>${instagramLink()}</p>
+              <p>${contactLine("instagram", instagramLink())}</p>
             </div>`
                 : ""
             }
