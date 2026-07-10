@@ -1927,7 +1927,7 @@ function languageGate() {
             <span class="brand-name">BLYNX</span>
           </span>
         </a>
-        <p class="eyebrow">BLYNX AIMA Agency</p>
+        <p class="eyebrow">AIMA Agency</p>
         <h1>Local Lead Systems for Service Businesses</h1>
         <p>Choose your preferred language to continue.</p>
         <div class="language-actions">
