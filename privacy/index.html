@@ -11,7 +11,7 @@
       (function () {
         var language = localStorage.getItem("preferredLanguage") || localStorage.getItem("blynxPreferredLanguage");
         if (language === "en" || language === "es") {
-          window.location.replace("/" + language + "/services");
+          window.location.replace("/" + language + "/privacy");
         } else {
           window.location.replace("/");
         }
@@ -30,8 +30,8 @@
         <h1>Choose your language</h1>
         <p>Select a language to continue.</p>
         <div class="language-actions">
-          <a class="btn btn-primary" href="/en/services" data-language-choice="en">English</a>
-          <a class="btn btn-secondary" href="/es/services" data-language-choice="es">Español</a>
+          <a class="btn btn-primary" href="/en/privacy" data-language-choice="en">English</a>
+          <a class="btn btn-secondary" href="/es/privacy" data-language-choice="es">Español</a>
         </div>
       </section>
     </main>

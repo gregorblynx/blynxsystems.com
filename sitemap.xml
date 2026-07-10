@@ -121,21 +121,33 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/contact"/>
   </url>
   <url>
-    <loc>https://www.blynxsystems.com/en/resources</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/resources"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/resources"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/resources"/>
+    <loc>https://www.blynxsystems.com/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/privacy"/>
   </url>
   <url>
-    <loc>https://www.blynxsystems.com/es/resources</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/resources"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/resources"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/resources"/>
+    <loc>https://www.blynxsystems.com/es/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/privacy"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/en/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/terms"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/terms"/>
   </url>
   <url>
     <loc>https://www.blynxsystems.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/start"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/start"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/start"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en"/>
   </url>
 </urlset>

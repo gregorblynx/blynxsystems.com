@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="Auditoría Gratis para Base Digital | BLYNX">
     <meta name="twitter:description" content="Solicita una auditoría gratis para un negocio local que empieza desde cero.">
     <meta name="twitter:image" content="https://www.blynxsystems.com/assets/og-image.jpg">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX ayuda a negocios locales de servicios a aparecer en Google, captar más leads calificados y hacer seguimiento más rápido.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"es"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/es/free-audit-zero","url":"https://www.blynxsystems.com/es/free-audit-zero","name":"Auditoría Gratis para Base Digital | BLYNX","description":"Solicita una auditoría gratis para un negocio local que empieza desde cero.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"es"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX ayuda a negocios locales de servicios a aparecer en Google, captar más leads calificados y hacer seguimiento más rápido.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","telephone":"+16452469219","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"es"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/es/free-audit-zero","url":"https://www.blynxsystems.com/es/free-audit-zero","name":"Auditoría Gratis para Base Digital | BLYNX","description":"Solicita una auditoría gratis para un negocio local que empieza desde cero.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"es"},{"@type":"BreadcrumbList","@id":"https://www.blynxsystems.com/es/free-audit-zero#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://www.blynxsystems.com/es"},{"@type":"ListItem","position":2,"name":"Planifica tu Base Digital","item":"https://www.blynxsystems.com/es/free-audit-zero"}]}]}</script>
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -82,8 +82,14 @@
             </ul>
           </aside>
 
-          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="Gracias. Hemos recibido tu solicitud de auditoría gratis. Revisaremos tu negocio y te contactaremos con los próximos pasos." data-error-message="Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com.">
+          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="Gracias. Hemos recibido tu solicitud de auditoría gratis. Revisaremos tu negocio y te contactaremos con los próximos pasos." data-error-message="Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com." data-loading-label="Enviando...">
             <input type="hidden" name="businessStage" value="zero" data-business-stage-field data-business-stage-default="zero">
+            <input type="hidden" name="preferredLanguage" value="Spanish" data-preferred-language-field>
+            
+            <div class="field honeypot-field" aria-hidden="true">
+              <label for="es-zero-company-website-extra">Deja este campo vacío</label>
+              <input id="es-zero-company-website-extra" name="companyWebsiteExtra" type="text" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-grid">
               <div class="field">
                 <label for="es-zero-full-name">Nombre completo</label>
@@ -94,52 +100,52 @@
                 <input id="es-zero-business-name" name="businessName" type="text" autocomplete="organization" required>
               </div>
               <div class="field">
-                <label for="es-zero-email">Email</label>
+                <label for="es-zero-email">Correo</label>
                 <input id="es-zero-email" name="email" type="email" autocomplete="email" required>
               </div>
               <div class="field">
                 <label for="es-zero-phone">Teléfono</label>
-                <input id="es-zero-phone" name="phone" type="tel" autocomplete="tel" required>
+                <input id="es-zero-phone" name="phone" type="tel" autocomplete="tel">
               </div>
               
               <div class="field">
-                <label for="es-zero-city-state">Ciudad / Estado</label>
+                <label for="es-zero-city-state">Ciudad y estado</label>
                 <input id="es-zero-city-state" name="cityState" type="text" autocomplete="address-level2" required>
               </div>
               <div class="field">
                 <label for="es-zero-business-type">Tipo de negocio</label>
                 <input id="es-zero-business-type" name="businessType" type="text" placeholder="Servicios del hogar, dental, med spa, restaurante..." required>
               </div>
-              <div class="field field-full">
-                <label for="es-zero-audit-language">Idioma preferido</label>
-                <select id="es-zero-audit-language" name="preferredLanguage" required data-preferred-language-field>
-                  <option value="">Idioma preferido</option>
-                  <option>Inglés</option><option>Español</option>
+              <div class="field">
+                <label for="es-zero-main-goal">¿Qué necesitas configurar?</label>
+                <select id="es-zero-main-goal" name="mainGoal" required>
+                  <option value="">¿Qué necesitas configurar?</option>
+                  <option>Configuración de Google Business Profile</option><option>Landing page de conversión</option><option>Formulario inteligente</option><option>Control básico de leads</option><option>Automatización de seguimiento</option><option>Sistema para pedir reseñas</option><option>No estoy seguro</option>
                 </select>
-              </div>
-              
-              <fieldset class="field field-full">
-                <legend>¿Qué necesitas configurar?</legend>
-                <div class="choice-grid">
-                  <label class="choice"><input type="checkbox" name="foundationNeeds" value="Configuración de Google Business Profile"> Configuración de Google Business Profile</label><label class="choice"><input type="checkbox" name="foundationNeeds" value="Landing page de conversión"> Landing page de conversión</label><label class="choice"><input type="checkbox" name="foundationNeeds" value="Formulario inteligente"> Formulario inteligente</label><label class="choice"><input type="checkbox" name="foundationNeeds" value="Control básico de leads"> Control básico de leads</label><label class="choice"><input type="checkbox" name="foundationNeeds" value="Automatización de seguimiento"> Automatización de seguimiento</label><label class="choice"><input type="checkbox" name="foundationNeeds" value="Sistema para pedir reseñas"> Sistema para pedir reseñas</label><label class="choice"><input type="checkbox" name="foundationNeeds" value="No estoy seguro"> No estoy seguro</label>
-                </div>
-              </fieldset>
-              <div class="field field-full">
-                <label for="es-zero-timeline">¿Qué tan pronto quieres lanzar esto?</label>
-                <select id="es-zero-timeline" name="timeline" required>
-                  <option value="">¿Qué tan pronto quieres lanzar esto?</option>
-                  <option>Inmediatamente</option><option>Este mes</option><option>En los próximos 2–3 meses</option><option>Solo estoy investigando</option>
-                </select>
-              </div>
-              <div class="field field-full">
-                <label for="es-zero-message">Mensaje / Notas</label>
-                <textarea id="es-zero-message" name="message" placeholder="Comparte cualquier detalle útil sobre tus metas, retos o presencia digital actual."></textarea>
               </div>
             </div>
+            <details class="form-details">
+              <summary>Agregar más detalles del negocio</summary>
+              <div class="form-grid">
+                
+                <div class="field field-full">
+                  <label for="es-zero-timeline">¿Qué tan pronto quieres lanzar esto?</label>
+                  <select id="es-zero-timeline" name="timeline">
+                    <option value="">¿Qué tan pronto quieres lanzar esto?</option>
+                    <option>Inmediatamente</option><option>Este mes</option><option>En los próximos 2–3 meses</option><option>Solo estoy investigando</option>
+                  </select>
+                </div>
+                <div class="field field-full">
+                  <label for="es-zero-message">Mensaje / Notas</label>
+                  <textarea id="es-zero-message" name="message" placeholder="Comparte cualquier detalle útil sobre tus metas, retos o presencia digital actual."></textarea>
+                </div>
+              </div>
+            </details>
             <div class="form-actions">
               <button class="btn btn-primary btn-full" type="submit">Empezar mi Auditoría Gratis</button>
+              <p class="form-consent">Al enviar este formulario, aceptas nuestra <a href="/es/privacy">Política de Privacidad</a> y nuestros <a href="/es/terms">Términos de Servicio</a>.</p>
               <p class="form-note">Tu información solo se usa para preparar tu auditoría gratis — nada de spam.</p>
-              <div class="form-status" tabindex="-1" hidden data-form-status></div>
+              <div class="form-status" role="status" aria-live="polite" tabindex="-1" hidden data-form-status></div>
             </div>
           </form>
         </div>
@@ -147,14 +153,31 @@
     </main>
     
     <footer class="footer">
-      <div class="container footer-inner">
-        <span>&copy; 2026 BLYNX AIMA AGENCY. Creado para el crecimiento de negocios locales.</span>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/es" aria-label="Inicio de BLYNX">
+            <span class="brand-mark" aria-hidden="true">BX</span>
+            <span class="brand-text"><span class="brand-name">BLYNX</span></span>
+          </a>
+          <p>Creado para el crecimiento de negocios locales.</p>
+          <span>&copy; 2026 BLYNX AIMA AGENCY.</span>
+        </div>
         <div class="footer-links">
           <a href="/es/services">Sistema</a>
           <a href="/es/about">Nosotros</a>
-          <a href="/es/resources">Recursos</a>
           <a href="/es/contact">Contacto</a>
           <a href="/es/free-audit-zero">Auditoría Gratis</a>
+        </div>
+        <div class="footer-links">
+          <a href="/es/privacy">Política de Privacidad</a>
+          <a href="/es/terms">Términos de Servicio</a>
+        </div>
+        <div class="footer-contact">
+          <span><a href="mailto:hello@blynxsystems.com" data-analytics-event="email_click">hello@blynxsystems.com</a></span>
+          <span><a href="tel:+16452469219" data-analytics-event="phone_click">(645) 246-9219</a></span>
+          <span>Nashville, Tennessee</span>
+          <span>Negocios en United States</span>
+          <span><a href="https://www.instagram.com/blynx.ai/" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">@blynx.ai</a></span>
         </div>
       </div>
     </footer>

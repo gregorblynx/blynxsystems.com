@@ -6,8 +6,8 @@
     <title>BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish</title>
     <meta name="description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
     <link rel="canonical" href="https://www.blynxsystems.com/">
-    <link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/start">
-    <link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/start">
+    <link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en">
+    <link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es">
     <link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BLYNX AIMA AGENCY">
@@ -21,10 +21,22 @@
     <meta name="twitter:title" content="BLYNX — AIMA Agency">
     <meta name="twitter:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
     <meta name="twitter:image" content="https://www.blynxsystems.com/assets/og-image.jpg">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish","description":"BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","telephone":"+16452469219","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish","description":"BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"}]}</script>
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
-    <script src="/assets/site.js" defer></script>
+    <script>
+      (function () {
+        var saved = "";
+        try {
+          saved = localStorage.getItem("preferredLanguage") || localStorage.getItem("blynxPreferredLanguage") || "";
+        } catch (error) {
+          saved = "";
+        }
+        var browserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
+        var language = saved === "en" || saved === "es" ? saved : browserLanguage.toLowerCase().indexOf("es") === 0 ? "es" : "en";
+        window.location.replace("/" + language);
+      })();
+    </script>
   </head>
   <body>
     <main id="main" class="language-gate">
@@ -37,14 +49,15 @@
         </a>
         <p class="eyebrow">AIMA</p>
         <h1>Local Lead Systems for Service Businesses</h1>
-        <p>Choose your preferred language to continue.</p>
+        <p>Redirecting you to the best language version. You can choose manually below.</p>
         <div class="language-actions">
-          <a class="btn btn-primary" href="/en/start" data-language-choice="en">English</a>
-          <a class="btn btn-secondary" href="/es/start" data-language-choice="es">Español</a>
+          <a class="btn btn-primary" href="/en" data-language-choice="en">English</a>
+          <a class="btn btn-secondary" href="/es" data-language-choice="es">Español</a>
         </div>
         <p class="language-support">English and Spanish support for local business growth.</p>
         <p class="saved-language" hidden data-saved-language></p>
       </section>
     </main>
+    <script src="/assets/site.js"></script>
   </body>
 </html>

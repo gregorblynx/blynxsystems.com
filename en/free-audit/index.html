@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="Get Your Free Lead System Audit | BLYNX">
     <meta name="twitter:description" content="Request a free lead system audit from BLYNX for your local business.">
     <meta name="twitter:image" content="https://www.blynxsystems.com/assets/og-image.jpg">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/en/free-audit","url":"https://www.blynxsystems.com/en/free-audit","name":"Get Your Free Lead System Audit | BLYNX","description":"Request a free lead system audit from BLYNX for your local business.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","telephone":"+16452469219","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/en/free-audit","url":"https://www.blynxsystems.com/en/free-audit","name":"Get Your Free Lead System Audit | BLYNX","description":"Request a free lead system audit from BLYNX for your local business.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://www.blynxsystems.com/en/free-audit#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.blynxsystems.com/en"},{"@type":"ListItem","position":2,"name":"Get Your Free Lead System Audit","item":"https://www.blynxsystems.com/en/free-audit"}]}]}</script>
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -83,8 +83,14 @@
             </ul>
           </aside>
 
-          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="Thank you. Your free audit request has been received. We’ll review your business and contact you with the next steps." data-error-message="Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com.">
+          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="Thank you. Your free audit request has been received. We’ll review your business and contact you with the next steps." data-error-message="Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com." data-loading-label="Submitting...">
             <input type="hidden" name="businessStage" data-business-stage-field>
+            <input type="hidden" name="preferredLanguage" value="English" data-preferred-language-field>
+            
+            <div class="field honeypot-field" aria-hidden="true">
+              <label for="en-company-website-extra">Leave this field empty</label>
+              <input id="en-company-website-extra" name="companyWebsiteExtra" type="text" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-grid">
               <div class="field">
                 <label for="full-name">Full Name</label>
@@ -99,15 +105,7 @@
                 <input id="email" name="email" type="email" autocomplete="email" required>
               </div>
               <div class="field">
-                <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" required>
-              </div>
-              <div class="field">
-                <label for="website-url">Website URL</label>
-                <input id="website-url" name="websiteUrl" type="url" placeholder="https://example.com">
-              </div>
-              <div class="field">
-                <label for="city-state">City / State</label>
+                <label for="city-state">City and State</label>
                 <input id="city-state" name="cityState" type="text" autocomplete="address-level2" required>
               </div>
               <div class="field">
@@ -115,52 +113,60 @@
                 <input id="business-type" name="businessType" type="text" placeholder="Home services, dental, med spa, restaurant..." required>
               </div>
               <div class="field">
-                <label for="gbp-link">Google Business Profile Link</label>
-                <input id="gbp-link" name="googleBusinessProfileLink" type="url" placeholder="https://g.page/...">
+                <label for="website-url">Website or Google Business Profile URL</label>
+                <input id="website-url" name="websiteUrl" type="url" placeholder="https://example.com" required>
               </div>
               <div class="field">
-                <label for="website-status">Do you currently have a website?</label>
-                <select id="website-status" name="websiteStatus" required>
-                  <option value="">Do you currently have a website?</option>
-                  <option>Yes</option><option>No</option><option>I have one, but it needs improvement</option>
+                <label for="main-goal">Main Goal</label>
+                <select id="main-goal" name="mainGoal" required>
+                  <option value="">Main Goal</option>
+                  <option>More calls</option><option>More website leads</option><option>Better Google visibility</option><option>More reviews</option><option>Better landing page</option><option>Follow-up automation</option><option>Not sure</option>
                 </select>
-              </div>
-              <div class="field">
-                <label for="gbp-status">Do you have a Google Business Profile?</label>
-                <select id="gbp-status" name="googleBusinessProfileStatus" required>
-                  <option value="">Do you have a Google Business Profile?</option>
-                  <option>Yes</option><option>No</option><option>Not sure</option>
-                </select>
-              </div>
-              <div class="field field-full">
-                <label for="audit-language">Preferred Language</label>
-                <select id="audit-language" name="preferredLanguage" required data-preferred-language-field>
-                  <option value="">Preferred Language</option>
-                  <option>English</option><option>Spanish</option>
-                </select>
-              </div>
-              <fieldset class="field field-full">
-                <legend>What do you want to improve?</legend>
-                <div class="choice-grid">
-                  <label class="choice"><input type="checkbox" name="improvements" value="More calls"> More calls</label><label class="choice"><input type="checkbox" name="improvements" value="More website leads"> More website leads</label><label class="choice"><input type="checkbox" name="improvements" value="Better Google visibility"> Better Google visibility</label><label class="choice"><input type="checkbox" name="improvements" value="More reviews"> More reviews</label><label class="choice"><input type="checkbox" name="improvements" value="Better landing page"> Better landing page</label><label class="choice"><input type="checkbox" name="improvements" value="Follow-up automation"> Follow-up automation</label><label class="choice"><input type="checkbox" name="improvements" value="Not sure"> Not sure</label>
-                </div>
-              </fieldset>
-              <div class="field field-full">
-                <label for="timeline">How soon do you want to improve this?</label>
-                <select id="timeline" name="timeline" required>
-                  <option value="">How soon do you want to improve this?</option>
-                  <option>Immediately</option><option>This month</option><option>Next 2–3 months</option><option>Just researching</option>
-                </select>
-              </div>
-              <div class="field field-full">
-                <label for="message">Message / Notes</label>
-                <textarea id="message" name="message" placeholder="Share anything useful about your current goals, challenges, or online presence."></textarea>
               </div>
             </div>
+            <details class="form-details">
+              <summary>Add more business details</summary>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel">
+                </div>
+                <div class="field">
+                  <label for="gbp-link">Additional URL</label>
+                  <input id="gbp-link" name="googleBusinessProfileLink" type="url" placeholder="https://g.page/...">
+                </div>
+                <div class="field">
+                  <label for="website-status">Do you currently have a website?</label>
+                  <select id="website-status" name="websiteStatus">
+                    <option value="">Do you currently have a website?</option>
+                    <option>Yes</option><option>No</option><option>I have one, but it needs improvement</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="gbp-status">Do you have a Google Business Profile?</label>
+                  <select id="gbp-status" name="googleBusinessProfileStatus">
+                    <option value="">Do you have a Google Business Profile?</option>
+                    <option>Yes</option><option>No</option><option>Not sure</option>
+                  </select>
+                </div>
+                <div class="field field-full">
+                  <label for="timeline">How soon do you want to improve this?</label>
+                  <select id="timeline" name="timeline">
+                    <option value="">How soon do you want to improve this?</option>
+                    <option>Immediately</option><option>This month</option><option>Next 2–3 months</option><option>Just researching</option>
+                  </select>
+                </div>
+                <div class="field field-full">
+                  <label for="message">Message / Notes</label>
+                  <textarea id="message" name="message" placeholder="Share anything useful about your current goals, challenges, or online presence."></textarea>
+                </div>
+              </div>
+            </details>
             <div class="form-actions">
               <button class="btn btn-primary btn-full" type="submit">Submit My Free Audit Request</button>
+              <p class="form-consent">By submitting this form, you agree to our <a href="/en/privacy">Privacy Policy</a> and <a href="/en/terms">Terms of Service</a>.</p>
               <p class="form-note">Your information is only used to prepare your free audit — no spam, ever.</p>
-              <div class="form-status" tabindex="-1" hidden data-form-status></div>
+              <div class="form-status" role="status" aria-live="polite" tabindex="-1" hidden data-form-status></div>
             </div>
           </form>
         </div>
@@ -168,14 +174,31 @@
     </main>
     
     <footer class="footer">
-      <div class="container footer-inner">
-        <span>&copy; 2026 BLYNX AIMA AGENCY. Built for local business growth.</span>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/en" aria-label="BLYNX home">
+            <span class="brand-mark" aria-hidden="true">BX</span>
+            <span class="brand-text"><span class="brand-name">BLYNX</span></span>
+          </a>
+          <p>Built for local business growth.</p>
+          <span>&copy; 2026 BLYNX AIMA AGENCY.</span>
+        </div>
         <div class="footer-links">
           <a href="/en/services">System</a>
           <a href="/en/about">About</a>
-          <a href="/en/resources">Resources</a>
           <a href="/en/contact">Contact</a>
           <a href="/en/free-audit">Free Audit</a>
+        </div>
+        <div class="footer-links">
+          <a href="/en/privacy">Privacy Policy</a>
+          <a href="/en/terms">Terms of Service</a>
+        </div>
+        <div class="footer-contact">
+          <span><a href="mailto:hello@blynxsystems.com" data-analytics-event="email_click">hello@blynxsystems.com</a></span>
+          <span><a href="tel:+16452469219" data-analytics-event="phone_click">(645) 246-9219</a></span>
+          <span>Nashville, Tennessee</span>
+          <span>Serving businesses across the United States</span>
+          <span><a href="https://www.instagram.com/blynx.ai/" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">@blynx.ai</a></span>
         </div>
       </div>
     </footer>

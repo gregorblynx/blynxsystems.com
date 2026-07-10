@@ -22,7 +22,18 @@ const SHEET_NAME = "Leads";
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    const data = sanitizeData(JSON.parse(e.postData.contents));
+    const validation = validateSubmission(data);
+    if (!validation.ok) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ result: "error", message: validation.message })
+      ).setMimeType(ContentService.MimeType.JSON);
+    }
+    if (data.companyWebsiteExtra) {
+      return ContentService.createTextOutput(JSON.stringify({ result: "success" })).setMimeType(
+        ContentService.MimeType.JSON
+      );
+    }
     const sheet = getOrCreateSheet();
     appendRow(sheet, data);
     sendNotificationEmail(data);
@@ -38,6 +49,37 @@ function doPost(e) {
 
 function doGet() {
   return ContentService.createTextOutput("BLYNX lead intake is running.");
+}
+
+function sanitizeData(data) {
+  const cleaned = {};
+  Object.keys(data || {}).forEach((key) => {
+    const value = data[key];
+    if (Array.isArray(value)) {
+      cleaned[key] = value.map((item) => sanitizeText(item));
+    } else {
+      cleaned[key] = sanitizeText(value);
+    }
+  });
+  return cleaned;
+}
+
+function sanitizeText(value) {
+  if (value === undefined || value === null) return "";
+  return String(value).replace(/[<>]/g, "").trim();
+}
+
+function validateSubmission(data) {
+  const formType = data.formType || "";
+  const required = formType === "contact" ? ["fullName", "email", "message"] : ["fullName", "businessName", "email"];
+  const missing = required.filter((key) => !data[key]);
+  if (missing.length) {
+    return { ok: false, message: "Missing required fields." };
+  }
+  if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    return { ok: false, message: "Invalid email." };
+  }
+  return { ok: true };
 }
 
 function getOrCreateSheet() {

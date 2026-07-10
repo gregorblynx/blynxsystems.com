@@ -2,5 +2,17 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/en/resources",
+      "destination": "/en/services",
+      "permanent": true
+    },
+    {
+      "source": "/es/resources",
+      "destination": "/es/services",
+      "permanent": true
+    }
+  ]
 }

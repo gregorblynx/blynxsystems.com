@@ -5,8 +5,59 @@ const root = path.resolve(__dirname, "..");
 
 const SITE_URL = "https://www.blynxsystems.com";
 const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
+const LEGAL_EFFECTIVE_DATE = "July 9, 2026";
+const BUSINESS = {
+  legalName: "BLYNX AIMA AGENCY",
+  shortName: "BLYNX",
+  email: "hello@blynxsystems.com",
+  phone: "6452469219",
+  location: "Nashville, Tennessee",
+  city: "Nashville",
+  region: "TN",
+  country: "US",
+  serviceArea: "United States",
+  instagramHandle: "blynx.ai",
+  instagramUrl: "https://www.instagram.com/blynx.ai/"
+};
 
-function structuredData(lang, title, description, canonicalUrl) {
+function phoneDigits() {
+  return String(BUSINESS.phone || "").replace(/\D/g, "");
+}
+
+function hasConfiguredPhone() {
+  const value = String(BUSINESS.phone || "").trim();
+  return Boolean(value && !value.includes("[BLYNX_PHONE]") && phoneDigits().length >= 10);
+}
+
+function phoneDisplay() {
+  const digits = phoneDigits();
+  if (!hasConfiguredPhone()) return "";
+  const normalized = digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+  if (normalized.length !== 10) return BUSINESS.phone;
+  return `(${normalized.slice(0, 3)}) ${normalized.slice(3, 6)}-${normalized.slice(6)}`;
+}
+
+function phoneHref() {
+  const digits = phoneDigits();
+  if (!hasConfiguredPhone()) return "";
+  return `tel:+${digits.length === 10 ? `1${digits}` : digits}`;
+}
+
+function emailLink(label = BUSINESS.email) {
+  return `<a href="mailto:${BUSINESS.email}" data-analytics-event="email_click">${label}</a>`;
+}
+
+function phoneLink() {
+  if (!hasConfiguredPhone()) return "";
+  return `<a href="${phoneHref()}" data-analytics-event="phone_click">${phoneDisplay()}</a>`;
+}
+
+function instagramLink(label = `@${BUSINESS.instagramHandle}`) {
+  if (!BUSINESS.instagramUrl || BUSINESS.instagramUrl.includes("[INSTAGRAM_URL]")) return "";
+  return `<a href="${BUSINESS.instagramUrl}" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">${label}</a>`;
+}
+
+function structuredData(lang, title, description, canonicalUrl, breadcrumbs = []) {
   const orgDescription =
     lang === "es"
       ? "BLYNX ayuda a negocios locales de servicios a aparecer en Google, captar más leads calificados y hacer seguimiento más rápido."
@@ -17,26 +68,27 @@ function structuredData(lang, title, description, canonicalUrl) {
       {
         "@type": "ProfessionalService",
         "@id": `${SITE_URL}/#organization`,
-        name: "BLYNX AIMA AGENCY",
+        name: BUSINESS.legalName,
         description: orgDescription,
         url: `${SITE_URL}/`,
-        email: "hello@blynxsystems.com",
+        email: BUSINESS.email,
         image: OG_IMAGE,
         logo: OG_IMAGE,
+        ...(hasConfiguredPhone() ? { telephone: phoneHref().replace("tel:", "") } : {}),
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Nashville",
-          addressRegion: "TN",
-          addressCountry: "US"
+          addressLocality: BUSINESS.city,
+          addressRegion: BUSINESS.region,
+          addressCountry: BUSINESS.country
         },
-        areaServed: { "@type": "Country", name: "United States" },
+        areaServed: { "@type": "Country", name: BUSINESS.serviceArea },
         knowsLanguage: ["en", "es"]
       },
       {
         "@type": "WebSite",
         "@id": `${SITE_URL}/#website`,
         url: `${SITE_URL}/`,
-        name: "BLYNX AIMA AGENCY",
+        name: BUSINESS.legalName,
         publisher: { "@id": `${SITE_URL}/#organization` },
         inLanguage: lang === "es" ? "es" : "en"
       },
@@ -52,6 +104,18 @@ function structuredData(lang, title, description, canonicalUrl) {
       }
     ]
   };
+  if (breadcrumbs.length) {
+    data["@graph"].push({
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalUrl}#breadcrumb`,
+      itemListElement: breadcrumbs.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: item.url
+      }))
+    });
+  }
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
 }
 
@@ -74,7 +138,9 @@ const copy = {
       about: "About",
       resources: "Resources",
       contact: "Contact",
-      audit: "Free Audit"
+      audit: "Free Audit",
+      privacy: "Privacy Policy",
+      terms: "Terms of Service"
     },
     cta: {
       audit: "Get a Free Audit",
@@ -96,6 +162,7 @@ const copy = {
         open: "Open today | Nashville, TN",
         rating: "4.8 rating | 126 reviews",
         call: "Call Now",
+        demoLabel: "Example Lead Flow",
         leadLabel: "Lead System",
         leadTitle: "New Lead Captured",
         leadDetail: "Smart form submitted for a service quote.",
@@ -119,7 +186,7 @@ const copy = {
       },
       auditEyebrow: "Free audit",
       auditTitle: "How the Free Audit Works",
-      auditSubtitle: "AI-powered for speed. Human-reviewed for quality.",
+      auditSubtitle: "AI-assisted for speed. Human-reviewed for quality.",
       processEyebrow: "Process",
       processTitle: "How the Local Lead System Comes Together",
       resultsEyebrow: "Results",
@@ -160,13 +227,15 @@ const copy = {
         businessName: "Business Name",
         email: "Email",
         phone: "Phone",
-        website: "Website URL",
-        cityState: "City / State",
+        website: "Website or Google Business Profile URL",
+        additionalUrl: "Additional URL",
+        cityState: "City and State",
         businessType: "Business Type",
         gbp: "Google Business Profile Link",
         websiteStatus: "Do you currently have a website?",
         gbpStatus: "Do you have a Google Business Profile?",
         language: "Preferred Language",
+        mainGoal: "Main Goal",
         improvements: "What do you want to improve?",
         timeline: "How soon do you want to improve this?",
         message: "Message / Notes"
@@ -188,8 +257,14 @@ const copy = {
       websiteStatusOptions: ["Yes", "No", "I have one, but it needs improvement"],
       gbpStatusOptions: ["Yes", "No", "Not sure"],
       languageOptions: ["English", "Spanish"],
+      detailsSummary: "Add more business details",
       timelines: ["Immediately", "This month", "Next 2–3 months", "Just researching"],
+      consentPrefix: "By submitting this form, you agree to our",
+      consentPrivacy: "Privacy Policy",
+      consentMiddle: "and",
+      consentTerms: "Terms of Service",
       submit: "Submit My Free Audit Request",
+      loading: "Submitting...",
       note: "Your information is only used to prepare your free audit — no spam, ever.",
       success: "Thank you. Your free audit request has been received. We\u2019ll review your business and contact you with the next steps.",
       error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
@@ -230,6 +305,17 @@ const copy = {
         ["Practical", "Clear systems for owners who want outcomes, not technical confusion."],
         ["Focused", "Not a social media-first agency. Social content is available only as an optional add-on."]
       ],
+      founder: {
+        eyebrow: "Founder-led",
+        title: "Direct Strategy and Implementation",
+        name: "Gregor Silva",
+        role: "Founder of BLYNX",
+        body:
+          "BLYNX was created from firsthand experience with the digital problems local service businesses face: incomplete online profiles, websites that do not generate clear actions, scattered leads and slow follow-up.\n\nGregor works directly on strategy and implementation, combining practical digital systems with AI-assisted workflows to help business owners operate with more clarity, consistency and speed.",
+        support:
+          "You work directly with the person responsible for the strategy — without being passed between departments.",
+        alt: "Gregor Silva, founder of BLYNX"
+      },
       ctaTitle: "See what your business may be missing online.",
       ctaSubtitle: "The free audit is the simplest first step."
     },
@@ -240,6 +326,10 @@ const copy = {
       h1: "Talk with BLYNX about your local lead flow.",
       subtitle: "Use the form below or start with the free audit if you want to see where leads may be getting lost.",
       emailTitle: "Email",
+      phoneTitle: "Phone",
+      locationTitle: "Based in",
+      serviceAreaTitle: "Service area",
+      instagramTitle: "Instagram",
       auditTitle: "Start with an audit",
       auditCopy: "Not sure what you need yet? Request a free digital presence audit first.",
       languageTitle: "Language support",
@@ -264,7 +354,12 @@ const copy = {
         "Not sure"
       ],
       languageOptions: ["English", "Spanish"],
+      consentPrefix: "By submitting this form, you agree to our",
+      consentPrivacy: "Privacy Policy",
+      consentMiddle: "and",
+      consentTerms: "Terms of Service",
       submit: "Send Message",
+      loading: "Sending...",
       success: "Thank you. Your message has been received. BLYNX will follow up with the next steps.",
       error: "Something went wrong sending your message. Please try again, or email us directly at hello@blynxsystems.com."
     },
@@ -299,7 +394,9 @@ const copy = {
       about: "Nosotros",
       resources: "Recursos",
       contact: "Contacto",
-      audit: "Auditoría Gratis"
+      audit: "Auditoría Gratis",
+      privacy: "Política de Privacidad",
+      terms: "Términos de Servicio"
     },
     cta: {
       audit: "Solicitar Auditoría Gratis",
@@ -321,6 +418,7 @@ const copy = {
         open: "Abierto hoy | Nashville, TN",
         rating: "4.8 calificación | 126 reseñas",
         call: "Llamar Ahora",
+        demoLabel: "Ejemplo de Flujo de Captación",
         leadLabel: "Sistema de Captación",
         leadTitle: "Nueva Oportunidad Capturada",
         leadDetail: "Formulario enviado para solicitar una cotización.",
@@ -344,7 +442,7 @@ const copy = {
       },
       auditEyebrow: "Auditoría gratis",
       auditTitle: "Cómo Funciona la Auditoría Gratis",
-      auditSubtitle: "Impulsada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
+      auditSubtitle: "Apoyada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
       processEyebrow: "Proceso",
       processTitle: "Cómo se Construye tu Sistema de Captación",
       resultsEyebrow: "Resultados",
@@ -383,15 +481,17 @@ const copy = {
       fields: {
         fullName: "Nombre completo",
         businessName: "Nombre del negocio",
-        email: "Email",
+        email: "Correo",
         phone: "Teléfono",
-        website: "Sitio web",
-        cityState: "Ciudad / Estado",
+        website: "Sitio web o enlace de Google Business Profile",
+        additionalUrl: "URL adicional",
+        cityState: "Ciudad y estado",
         businessType: "Tipo de negocio",
         gbp: "Link de Google Business Profile",
         websiteStatus: "¿Actualmente tienes sitio web?",
         gbpStatus: "¿Tienes Google Business Profile?",
         language: "Idioma preferido",
+        mainGoal: "Objetivo principal",
         improvements: "¿Qué quieres mejorar?",
         timeline: "¿Qué tan pronto quieres mejorar esto?",
         message: "Mensaje / Notas"
@@ -413,8 +513,14 @@ const copy = {
       websiteStatusOptions: ["Sí", "No", "Tengo uno, pero necesita mejorar"],
       gbpStatusOptions: ["Sí", "No", "No estoy seguro"],
       languageOptions: ["Inglés", "Español"],
+      detailsSummary: "Agregar más detalles del negocio",
       timelines: ["Inmediatamente", "Este mes", "En los próximos 2–3 meses", "Solo estoy investigando"],
+      consentPrefix: "Al enviar este formulario, aceptas nuestra",
+      consentPrivacy: "Política de Privacidad",
+      consentMiddle: "y nuestros",
+      consentTerms: "Términos de Servicio",
       submit: "Enviar Solicitud de Auditoría Gratis",
+      loading: "Enviando...",
       note: "Tu información solo se usa para preparar tu auditoría gratis — nada de spam.",
       success: "Gracias. Hemos recibido tu solicitud de auditoría gratis. Revisaremos tu negocio y te contactaremos con los próximos pasos.",
       error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
@@ -455,6 +561,17 @@ const copy = {
         ["Práctico", "Sistemas claros para dueños que quieren resultados, no confusión técnica."],
         ["Enfocado", "No somos una agencia general de marketing. Nos enfocamos en captación, organización y seguimiento."]
       ],
+      founder: {
+        eyebrow: "Dirigido por su fundador",
+        title: "Estrategia e Implementación Directa",
+        name: "Gregor Silva",
+        role: "Fundador de BLYNX",
+        body:
+          "BLYNX nació de la experiencia directa con los problemas digitales que enfrentan los negocios locales: perfiles incompletos, sitios web sin acciones claras, leads dispersos y seguimiento lento.\n\nGregor trabaja directamente en la estrategia y la implementación, combinando sistemas digitales prácticos con procesos apoyados por inteligencia artificial para ayudar a los dueños a operar con mayor claridad, consistencia y rapidez.",
+        support:
+          "Trabajas directamente con la persona responsable de la estrategia, sin pasar entre diferentes departamentos.",
+        alt: "Gregor Silva, fundador de BLYNX"
+      },
       ctaTitle: "Descubre qué oportunidades puede estar perdiendo tu negocio en internet.",
       ctaSubtitle: "La auditoría gratis es el primer paso más simple."
     },
@@ -464,7 +581,11 @@ const copy = {
       eyebrow: "Contacto",
       h1: "Habla con BLYNX sobre tu sistema de captación.",
       subtitle: "Usa el formulario de abajo o empieza con la auditoría gratis si quieres ver dónde se pueden estar perdiendo oportunidades.",
-      emailTitle: "Email",
+      emailTitle: "Correo",
+      phoneTitle: "Teléfono",
+      locationTitle: "Ubicación",
+      serviceAreaTitle: "Área de servicio",
+      instagramTitle: "Instagram",
       auditTitle: "Empieza con una auditoría",
       auditCopy: "¿No estás seguro de qué necesitas? Solicita primero una auditoría gratis de presencia digital.",
       languageTitle: "Soporte de idioma",
@@ -472,7 +593,7 @@ const copy = {
       fields: {
         name: "Nombre completo",
         business: "Nombre del negocio",
-        email: "Email",
+        email: "Correo",
         phone: "Teléfono",
         language: "Idioma preferido",
         topic: "¿En qué podemos ayudarte?",
@@ -489,7 +610,12 @@ const copy = {
         "No estoy seguro"
       ],
       languageOptions: ["Inglés", "Español"],
+      consentPrefix: "Al enviar este formulario, aceptas nuestra",
+      consentPrivacy: "Política de Privacidad",
+      consentMiddle: "y nuestros",
+      consentTerms: "Términos de Servicio",
       submit: "Enviar Mensaje",
+      loading: "Enviando...",
       success: "Gracias. Hemos recibido tu mensaje. BLYNX te contactará con los próximos pasos.",
       error: "Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
@@ -838,7 +964,7 @@ const auditFlow = {
     ["Click Free Audit", "Start your free audit request on our website."],
     ["Choose Language", "English or Spanish support available."],
     ["Answer Smart Form", "Share your business, goals, contact information, and current online presence."],
-    ["AI Snapshot Scan", "Google Business Profile, reviews, visibility, and lead flow signals are checked."],
+    ["Initial Digital Snapshot", "Your current presence and lead flow details are organized for review."],
     ["Human Review", "BLYNX reviews the findings and adds personalized recommendations."],
     ["Audit Delivered + Book a Call", "You receive your audit summary and can book a strategy call."]
   ],
@@ -846,7 +972,7 @@ const auditFlow = {
     ["Haz clic en Auditoría Gratis", "Inicia tu solicitud de auditoría gratis en nuestro sitio."],
     ["Elige Idioma", "Soporte disponible en inglés o español."],
     ["Responde el Formulario", "Comparte tu negocio, metas, contacto y presencia actual en internet."],
-    ["Revisión Inicial con IA", "Se revisan señales de Google Business Profile, reseñas, visibilidad y flujo de captación."],
+    ["Revisión Digital Inicial", "La información de tu presencia actual y flujo de captación se organiza para revisión."],
     ["Revisión de BLYNX", "BLYNX revisa los hallazgos y agrega recomendaciones personalizadas."],
     ["Auditoría Entregada + Agenda una Llamada", "Recibes el resumen de tu auditoría y puedes agendar una llamada estratégica."]
   ]
@@ -882,15 +1008,138 @@ const results = {
   ]
 };
 
-const testimonials = {
-  en: [
-    ["BLYNX helped us clean up our online presence and turn more visitors into real inquiries.", "Local Service Business Owner"],
-    ["The follow-up system made it easier to respond to leads without losing track of potential customers.", "Home Services Business Owner"]
-  ],
-  es: [
-    ["BLYNX nos ayudó a ordenar nuestra presencia digital y convertir más visitantes en solicitudes reales.", "Dueño de Negocio de Servicios Locales"],
-    ["El sistema de seguimiento hizo más fácil responder a leads sin perder oportunidades.", "Dueño de Negocio de Servicios del Hogar"]
-  ]
+const connectedInfrastructure = {
+  en: {
+    eyebrow: "Connected infrastructure",
+    title: "What Your Lead System Can Connect",
+    intro:
+      "Every business starts from a different place. BLYNX connects the pieces needed to create a clearer path from online discovery to organized follow-up.",
+    cards: [
+      ["Local Visibility", "Google Business Profile, Apple Business Connect, Bing Places, local listings, business information and trust signals."],
+      ["Website or Landing Page", "A focused digital experience that clearly explains the service and gives visitors an obvious next step."],
+      ["Smart Lead Capture", "Quote forms, contact buttons, booking options and structured information collection."],
+      ["Lead Organization", "A simple CRM or organized pipeline that gives every opportunity a status and next action."],
+      ["Faster Follow-Up", "Confirmations, owner notifications, email, SMS or WhatsApp workflows based on the business needs."],
+      ["Review Strategy", "A practical process for requesting reviews, strengthening trust and improving local credibility."]
+    ],
+    disclaimer: "The final system depends on the needs, current setup and approved scope of each business."
+  },
+  es: {
+    eyebrow: "Infraestructura conectada",
+    title: "Lo que Puede Conectar tu Sistema de Captación",
+    intro:
+      "Cada negocio comienza desde un punto diferente. BLYNX conecta las piezas necesarias para crear un camino más claro desde que un cliente encuentra el negocio hasta que recibe seguimiento.",
+    cards: [
+      ["Visibilidad Local", "Google Business Profile, Apple Business Connect, Bing Places, directorios locales, información comercial y señales de confianza."],
+      ["Sitio Web o Landing Page", "Una experiencia digital enfocada que explica claramente el servicio y ofrece al visitante un siguiente paso evidente."],
+      ["Captura Inteligente", "Formularios de cotización, botones de contacto, opciones de reserva y recopilación organizada de información."],
+      ["Organización de Leads", "Un CRM simple o pipeline organizado que asigna a cada oportunidad un estado y una próxima acción."],
+      ["Seguimiento Más Rápido", "Confirmaciones, notificaciones al negocio y flujos de email, SMS o WhatsApp según las necesidades."],
+      ["Estrategia de Reseñas", "Un proceso práctico para solicitar reseñas, aumentar la confianza y mejorar la credibilidad local."]
+    ],
+    disclaimer: "El sistema final depende de las necesidades, configuración actual y alcance aprobado de cada negocio."
+  }
+};
+
+const legalPages = {
+  en: {
+    privacy: {
+      title: "Privacy Policy | BLYNX",
+      description: "Privacy Policy for BLYNX AIMA AGENCY.",
+      eyebrow: "Privacy",
+      h1: "Privacy Policy",
+      effective: `Effective date: ${LEGAL_EFFECTIVE_DATE}`,
+      sections: [
+        ["Introduction", "This Privacy Policy explains how BLYNX AIMA AGENCY collects, uses and protects information submitted through this website and normal website use. By using the website or submitting a form, you acknowledge the practices described here."],
+        ["Information We Collect", "We may collect information you provide directly, including full name, business name, email, phone, website, city and state, business type, Google Business Profile URL, business goals, messages and notes. We may also collect technical information produced by normal website use, such as browser type, device information, pages visited and general performance information."],
+        ["Information Submitted Through Forms", "Free audit and contact forms may ask for information needed to understand your business, respond to your request, prepare an audit, route communications and maintain internal records. Some fields may be optional, but submitting incomplete information may limit how useful our response can be."],
+        ["How We Use Information", "We use information to respond to requests, prepare free audits, provide services, maintain related communications, improve the website, understand performance and keep operational records."],
+        ["Communications", "When you submit a form, BLYNX may contact you about that request, your audit or related service needs. Promotional communications require an appropriate basis and opt-out option when applicable."],
+        ["Service Providers and Third-Party Tools", "Information may be processed by trusted service providers used to operate the website, deliver forms, send messages, maintain records, analyze performance or provide requested services. BLYNX does not sell personal information."],
+        ["Cookies and Analytics", "The website may use basic cookies, analytics or performance tools to understand website use and improve the experience. Analytics events should not include names, email addresses, phone numbers, private messages or other personal information."],
+        ["Data Retention", "We keep information for as long as reasonably needed to respond to requests, provide services, maintain records, comply with obligations and resolve disputes. Retention periods may vary based on operational needs."],
+        ["Data Security", "We use reasonable safeguards appropriate for a small business website and lead intake process. No website, storage system or transmission method can guarantee absolute security."],
+        ["Your Choices", `You may request correction or deletion of information by contacting ${BUSINESS.email}. We may need to retain limited information where required for legitimate business, legal or security reasons.`],
+        ["Children’s Privacy", "This website is intended for business owners and adults. It is not directed to children, and we do not knowingly collect information from children."],
+        ["Changes to This Policy", "We may update this Privacy Policy as the website, services or operational tools change. The effective date will be updated when material changes are made."],
+        ["Contact Information", `Questions about this Privacy Policy can be sent to ${BUSINESS.legalName} at ${BUSINESS.email}.`]
+      ]
+    },
+    terms: {
+      title: "Terms of Service | BLYNX",
+      description: "Terms of Service for BLYNX AIMA AGENCY.",
+      eyebrow: "Terms",
+      h1: "Terms of Service",
+      effective: `Effective date: ${LEGAL_EFFECTIVE_DATE}`,
+      sections: [
+        ["Acceptance of Terms", "By accessing this website, submitting a form or using BLYNX materials, you agree to these Terms of Service. If you do not agree, do not use the website."],
+        ["Description of Services", "BLYNX provides practical local lead system support for service businesses, including local visibility, focused landing pages, lead capture, lead organization, follow-up workflows, review strategy and related reporting or advisory work."],
+        ["Free Audits and Informational Materials", "Free audits, website content, recommendations and informational materials are provided for general business evaluation. A free audit is not a guarantee of rankings, leads, sales, revenue or any specific outcome."],
+        ["No Guarantee of Results", "BLYNX does not guarantee search rankings, number of leads, sales, revenue, advertising results, customer reviews, platform approvals or other business outcomes. Results depend on many factors outside BLYNX’s control."],
+        ["AI-Assisted Processes", "BLYNX may use AI-assisted workflows to organize information, speed up review and support implementation. Important final recommendations and client-facing decisions receive human review."],
+        ["Client Responsibilities", "Recommendations and implementation may require accurate information, timely approvals, account access, platform permissions, client cooperation and follow-through. Delays or incomplete information can affect timelines and results."],
+        ["Third-Party Platforms", "Google, Apple, Bing, Meta, CRM platforms, email/SMS tools, hosting providers and other third-party services maintain their own rules, availability and approval processes. BLYNX does not control ranking decisions, suspensions, approvals, outages or platform changes."],
+        ["Intellectual Property", "The BLYNX website, content, design, processes and materials are protected by applicable intellectual property laws, except for materials owned by clients or third parties."],
+        ["Paid Services, Proposals and Agreements", "Paid projects are subject to separate proposal, scope, price, timeline and agreement terms. Website information does not create a paid engagement by itself."],
+        ["Prohibited Use", "You may not use this website to submit false information, interfere with website operations, attempt unauthorized access, scrape content in a harmful way or use BLYNX materials for unlawful purposes."],
+        ["Disclaimer of Warranties", "The website and informational materials are provided on an as-is and as-available basis. BLYNX disclaims warranties to the fullest extent permitted by law."],
+        ["Limitation of Liability", "To the fullest extent permitted by law, BLYNX will not be liable for indirect, incidental, special, consequential or punitive damages, or for lost profits, lost revenue or lost data arising from website use or informational materials."],
+        ["Termination", "BLYNX may restrict or discontinue access to the website or communications where misuse, security risk or violation of these Terms is suspected."],
+        ["Changes to These Terms", "BLYNX may update these Terms as services, tools or operations change. Continued website use after updates means you accept the revised Terms."],
+        ["Governing Law", "These Terms are governed by the laws of Tennessee, United States, without regard to conflict of law rules."],
+        ["Contact Information", `Questions about these Terms can be sent to ${BUSINESS.legalName} at ${BUSINESS.email}.`]
+      ]
+    }
+  },
+  es: {
+    privacy: {
+      title: "Política de Privacidad | BLYNX",
+      description: "Política de Privacidad de BLYNX AIMA AGENCY.",
+      eyebrow: "Privacidad",
+      h1: "Política de Privacidad",
+      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
+      sections: [
+        ["Introducción", "Esta Política de Privacidad explica cómo BLYNX AIMA AGENCY recopila, utiliza y protege la información enviada a través de este sitio web y la información generada por el uso normal del sitio. Al usar el sitio o enviar un formulario, reconoces las prácticas descritas aquí."],
+        ["Información que Recopilamos", "Podemos recopilar información que proporcionas directamente, incluyendo nombre completo, nombre del negocio, correo, teléfono, sitio web, ciudad y estado, tipo de negocio, URL de Google Business Profile, objetivos del negocio, mensajes y notas. También podemos recopilar información técnica generada por el uso normal del sitio, como tipo de navegador, información del dispositivo, páginas visitadas e información general de rendimiento."],
+        ["Información Enviada en Formularios", "Los formularios de auditoría gratis y contacto pueden solicitar información necesaria para entender tu negocio, responder a tu solicitud, preparar una auditoría, dirigir comunicaciones y mantener registros internos. Algunos campos pueden ser opcionales, pero enviar información incompleta puede limitar la utilidad de nuestra respuesta."],
+        ["Cómo Usamos la Información", "Usamos la información para responder solicitudes, preparar auditorías gratis, prestar servicios, mantener comunicaciones relacionadas, mejorar el sitio, entender el rendimiento y conservar registros operativos."],
+        ["Comunicaciones", "Cuando envías un formulario, BLYNX puede contactarte sobre esa solicitud, tu auditoría o necesidades de servicio relacionadas. Las comunicaciones promocionales requieren una base adecuada y opción de exclusión cuando corresponda."],
+        ["Proveedores de Servicios y Herramientas de Terceros", "La información puede ser procesada por proveedores de confianza utilizados para operar el sitio, entregar formularios, enviar mensajes, mantener registros, analizar rendimiento o prestar servicios solicitados. BLYNX no vende información personal."],
+        ["Cookies y Analítica", "El sitio puede usar cookies básicas, analítica o herramientas de rendimiento para entender el uso del sitio y mejorar la experiencia. Los eventos de analítica no deben incluir nombres, correos, teléfonos, mensajes privados u otra información personal."],
+        ["Retención de Datos", "Conservamos la información durante el tiempo razonablemente necesario para responder solicitudes, prestar servicios, mantener registros, cumplir obligaciones y resolver disputas. Los periodos de retención pueden variar según necesidades operativas."],
+        ["Seguridad de Datos", "Usamos medidas razonables para un sitio de pequeña empresa y proceso de recepción de leads. Ningún sitio web, sistema de almacenamiento o método de transmisión puede garantizar seguridad absoluta."],
+        ["Tus Opciones", `Puedes solicitar corrección o eliminación de información contactando a ${BUSINESS.email}. Es posible que debamos conservar información limitada por razones legítimas de negocio, legales o de seguridad.`],
+        ["Privacidad de Menores", "Este sitio está dirigido a dueños de negocios y adultos. No está dirigido a menores y no recopilamos intencionalmente información de menores."],
+        ["Cambios a Esta Política", "Podemos actualizar esta Política de Privacidad cuando cambien el sitio, los servicios o las herramientas operativas. La fecha de vigencia se actualizará cuando haya cambios importantes."],
+        ["Información de Contacto", `Las preguntas sobre esta Política de Privacidad pueden enviarse a ${BUSINESS.legalName} en ${BUSINESS.email}.`]
+      ]
+    },
+    terms: {
+      title: "Términos de Servicio | BLYNX",
+      description: "Términos de Servicio de BLYNX AIMA AGENCY.",
+      eyebrow: "Términos",
+      h1: "Términos de Servicio",
+      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
+      sections: [
+        ["Aceptación de los Términos", "Al acceder a este sitio, enviar un formulario o usar materiales de BLYNX, aceptas estos Términos de Servicio. Si no estás de acuerdo, no uses el sitio."],
+        ["Descripción de los Servicios", "BLYNX ofrece soporte práctico para sistemas de captación local para negocios de servicios, incluyendo visibilidad local, landing pages enfocadas, captura de leads, organización de oportunidades, flujos de seguimiento, estrategia de reseñas y reportes o asesoría relacionada."],
+        ["Auditorías Gratis y Materiales Informativos", "Las auditorías gratis, contenido del sitio, recomendaciones y materiales informativos se proporcionan para evaluación general del negocio. Una auditoría gratis no garantiza rankings, leads, ventas, ingresos ni resultados específicos."],
+        ["Sin Garantía de Resultados", "BLYNX no garantiza posiciones en buscadores, cantidad de leads, ventas, ingresos, resultados publicitarios, reseñas de clientes, aprobaciones de plataformas u otros resultados de negocio. Los resultados dependen de muchos factores fuera del control de BLYNX."],
+        ["Procesos Apoyados por IA", "BLYNX puede usar procesos apoyados por inteligencia artificial para organizar información, acelerar revisiones y apoyar la implementación. Las recomendaciones finales importantes y decisiones orientadas al cliente reciben revisión humana."],
+        ["Responsabilidades del Cliente", "Las recomendaciones e implementación pueden requerir información correcta, aprobaciones oportunas, acceso a cuentas, permisos de plataformas, cooperación del cliente y seguimiento de tareas. Los retrasos o información incompleta pueden afectar tiempos y resultados."],
+        ["Plataformas de Terceros", "Google, Apple, Bing, Meta, plataformas CRM, herramientas de email/SMS, proveedores de hosting y otros servicios externos mantienen sus propias reglas, disponibilidad y procesos de aprobación. BLYNX no controla decisiones de rankings, suspensiones, aprobaciones, fallas o cambios de plataformas."],
+        ["Propiedad Intelectual", "El sitio, contenido, diseño, procesos y materiales de BLYNX están protegidos por leyes aplicables de propiedad intelectual, excepto materiales que pertenezcan a clientes o terceros."],
+        ["Servicios Pagados, Propuestas y Acuerdos", "Los proyectos pagados estarán sujetos a propuesta, alcance, precio, tiempos y condiciones independientes. La información del sitio no crea por sí sola una contratación pagada."],
+        ["Uso Prohibido", "No puedes usar este sitio para enviar información falsa, interferir con operaciones del sitio, intentar acceso no autorizado, extraer contenido de forma dañina o usar materiales de BLYNX con fines ilegales."],
+        ["Descargo de Garantías", "El sitio y materiales informativos se proporcionan tal como están y según disponibilidad. BLYNX rechaza garantías en la medida máxima permitida por la ley."],
+        ["Limitación de Responsabilidad", "En la medida máxima permitida por la ley, BLYNX no será responsable por daños indirectos, incidentales, especiales, consecuentes o punitivos, ni por pérdida de ganancias, ingresos o datos derivados del uso del sitio o materiales informativos."],
+        ["Terminación", "BLYNX puede restringir o discontinuar el acceso al sitio o comunicaciones cuando sospeche uso indebido, riesgo de seguridad o violación de estos Términos."],
+        ["Cambios a Estos Términos", "BLYNX puede actualizar estos Términos cuando cambien los servicios, herramientas u operaciones. El uso continuo del sitio después de actualizaciones significa que aceptas los Términos revisados."],
+        ["Ley Aplicable", "Estos Términos se rigen por las leyes de Tennessee, Estados Unidos, sin considerar normas de conflicto de leyes."],
+        ["Información de Contacto", `Las preguntas sobre estos Términos pueden enviarse a ${BUSINESS.legalName} en ${BUSINESS.email}.`]
+      ]
+    }
+  }
 };
 
 function write(file, contents) {
@@ -907,6 +1156,20 @@ function localizedHref(lang, href) {
   if (href.startsWith("/#")) return `/${lang}${href}`;
   if (href.startsWith("/")) return `/${lang}${href}`;
   return href;
+}
+
+function founderMedia(lang) {
+  const imagePath = path.join(root, "public/images/gregor-silva.webp");
+  const alt = copy[lang].aboutPage.founder.alt;
+  if (fs.existsSync(imagePath)) {
+    return `<img src="/public/images/gregor-silva.webp" alt="${alt}" width="520" height="620" loading="lazy" decoding="async">`;
+  }
+  return `
+    <div class="founder-placeholder" role="img" aria-label="${alt}">
+      <span class="brand-mark" aria-hidden="true">BX</span>
+      <strong>Gregor Silva</strong>
+      <span>${copy[lang].aboutPage.founder.role}</span>
+    </div>`;
 }
 
 function languageSwitcher(lang, switchPath) {
@@ -963,16 +1226,35 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit") {
 
 function footer(lang, auditSlug = "free-audit") {
   const t = copy[lang];
+  const serviceAreaLabel =
+    lang === "es" ? `Negocios en ${BUSINESS.serviceArea}` : `Serving businesses across the ${BUSINESS.serviceArea}`;
   return `
     <footer class="footer">
-      <div class="container footer-inner">
-        <span>&copy; 2026 BLYNX AIMA AGENCY. ${t.footer}</span>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="${pagePath(lang)}" aria-label="${t.brandAria}">
+            <span class="brand-mark" aria-hidden="true">BX</span>
+            <span class="brand-text"><span class="brand-name">BLYNX</span></span>
+          </a>
+          <p>${t.footer}</p>
+          <span>&copy; 2026 ${BUSINESS.legalName}.</span>
+        </div>
         <div class="footer-links">
           <a href="${pagePath(lang, "services")}">${t.nav.services}</a>
           <a href="${pagePath(lang, "about")}">${t.nav.about}</a>
-          <a href="${pagePath(lang, "resources")}">${t.nav.resources}</a>
           <a href="${pagePath(lang, "contact")}">${t.nav.contact}</a>
           <a href="${pagePath(lang, auditSlug)}">${t.nav.audit}</a>
+        </div>
+        <div class="footer-links">
+          <a href="${pagePath(lang, "privacy")}">${t.nav.privacy}</a>
+          <a href="${pagePath(lang, "terms")}">${t.nav.terms}</a>
+        </div>
+        <div class="footer-contact">
+          <span>${emailLink()}</span>
+          ${hasConfiguredPhone() ? `<span>${phoneLink()}</span>` : ""}
+          <span>${BUSINESS.location}</span>
+          <span>${serviceAreaLabel}</span>
+          ${instagramLink() ? `<span>${instagramLink()}</span>` : ""}
         </div>
       </div>
     </footer>`;
@@ -984,6 +1266,12 @@ function shell(lang, meta, active, switchPath, body) {
   const enUrl = `${SITE_URL}/en${pathPart}`;
   const esUrl = `${SITE_URL}/es${pathPart}`;
   const canonicalUrl = lang === "es" ? esUrl : enUrl;
+  const breadcrumbs = pathPart
+    ? [
+        { name: t.nav.home, url: `${SITE_URL}/${lang}` },
+        { name: meta.h1 || meta.title, url: canonicalUrl }
+      ]
+    : [];
   return `<!doctype html>
 <html lang="${t.htmlLang}">
   <head>
@@ -1009,7 +1297,7 @@ function shell(lang, meta, active, switchPath, body) {
     <meta name="twitter:title" content="${meta.title}">
     <meta name="twitter:description" content="${meta.description}">
     <meta name="twitter:image" content="${OG_IMAGE}">
-    ${structuredData(lang, meta.title, meta.description, canonicalUrl)}
+    ${structuredData(lang, meta.title, meta.description, canonicalUrl, breadcrumbs)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -1035,6 +1323,24 @@ function serviceCards(lang, cardClass = "service-card", iconClass = "service-ico
     .join("");
 }
 
+function preferredLanguageValue(lang) {
+  return lang === "es" ? "Spanish" : "English";
+}
+
+function consentNotice(lang) {
+  const p = copy[lang].auditPage;
+  return `<p class="form-consent">${p.consentPrefix} <a href="${pagePath(lang, "privacy")}">${p.consentPrivacy}</a> ${p.consentMiddle} <a href="${pagePath(lang, "terms")}">${p.consentTerms}</a>.</p>`;
+}
+
+function honeypotField(lang) {
+  const label = String(lang).startsWith("es") ? "Deja este campo vacío" : "Leave this field empty";
+  return `
+            <div class="field honeypot-field" aria-hidden="true">
+              <label for="${lang}-company-website-extra">${label}</label>
+              <input id="${lang}-company-website-extra" name="companyWebsiteExtra" type="text" tabindex="-1" autocomplete="off">
+            </div>`;
+}
+
 function homePage(lang) {
   const t = copy[lang];
   const h = t.home;
@@ -1058,6 +1364,7 @@ function homePage(lang) {
 
           <div class="hero-visual" aria-label="${h.visual.aria}">
             <div class="visual-stage">
+              <span class="demo-label">${h.visual.demoLabel}</span>
               <div class="laptop-mockup">
                 <div class="laptop-frame">
                   <div class="laptop-screen">
@@ -1247,16 +1554,25 @@ function homePage(lang) {
               .join("")}
           </div>
 
-          <div class="testimonial-grid" aria-label="Testimonials">
-            ${testimonials[lang]
-              .map(
-                ([quote, name]) => `
-            <article class="testimonial-card">
-              <blockquote>&ldquo;${quote}&rdquo;</blockquote>
-              <cite>${name}</cite>
-            </article>`
-              )
-              .join("")}
+          <div class="connected-system">
+            <div class="section-heading">
+              <p class="eyebrow">${connectedInfrastructure[lang].eyebrow}</p>
+              <h2>${connectedInfrastructure[lang].title}</h2>
+              <p>${connectedInfrastructure[lang].intro}</p>
+            </div>
+            <div class="feature-grid">
+              ${connectedInfrastructure[lang].cards
+                .map(
+                  ([title, text], index) => `
+              <article class="feature-card">
+                <div class="feature-icon">${String(index + 1).padStart(2, "0")}</div>
+                <h3>${title}</h3>
+                <p>${text}</p>
+              </article>`
+                )
+                .join("")}
+            </div>
+            <p class="section-disclaimer">${connectedInfrastructure[lang].disclaimer}</p>
           </div>
         </div>
       </section>
@@ -1304,6 +1620,8 @@ function homePage(lang) {
 function auditPage(lang) {
   const t = copy[lang];
   const p = t.auditPage;
+  const requiredUrlLabel = p.fields.website;
+  const additionalUrlLabel = p.fields.additionalUrl;
   const body = `
     <main id="main">
       <section class="page-hero">
@@ -1326,8 +1644,10 @@ function auditPage(lang) {
             </ul>
           </aside>
 
-          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="${p.success}" data-error-message="${p.error}">
+          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="${p.success}" data-error-message="${p.error}" data-loading-label="${p.loading}">
             <input type="hidden" name="businessStage" data-business-stage-field>
+            <input type="hidden" name="preferredLanguage" value="${preferredLanguageValue(lang)}" data-preferred-language-field>
+            ${honeypotField(lang)}
             <div class="form-grid">
               <div class="field">
                 <label for="full-name">${p.fields.fullName}</label>
@@ -1342,14 +1662,6 @@ function auditPage(lang) {
                 <input id="email" name="email" type="email" autocomplete="email" required>
               </div>
               <div class="field">
-                <label for="phone">${p.fields.phone}</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" required>
-              </div>
-              <div class="field">
-                <label for="website-url">${p.fields.website}</label>
-                <input id="website-url" name="websiteUrl" type="url" placeholder="https://example.com">
-              </div>
-              <div class="field">
                 <label for="city-state">${p.fields.cityState}</label>
                 <input id="city-state" name="cityState" type="text" autocomplete="address-level2" required>
               </div>
@@ -1358,54 +1670,60 @@ function auditPage(lang) {
                 <input id="business-type" name="businessType" type="text" placeholder="${p.placeholders.businessType}" required>
               </div>
               <div class="field">
-                <label for="gbp-link">${p.fields.gbp}</label>
-                <input id="gbp-link" name="googleBusinessProfileLink" type="url" placeholder="${p.placeholders.gbp}">
+                <label for="website-url">${requiredUrlLabel}</label>
+                <input id="website-url" name="websiteUrl" type="url" placeholder="https://example.com" required>
               </div>
               <div class="field">
-                <label for="website-status">${p.fields.websiteStatus}</label>
-                <select id="website-status" name="websiteStatus" required>
-                  <option value="">${p.fields.websiteStatus}</option>
-                  ${p.websiteStatusOptions.map((item) => `<option>${item}</option>`).join("")}
+                <label for="main-goal">${p.fields.mainGoal}</label>
+                <select id="main-goal" name="mainGoal" required>
+                  <option value="">${p.fields.mainGoal}</option>
+                  ${p.improvements.map((item) => `<option>${item}</option>`).join("")}
                 </select>
-              </div>
-              <div class="field">
-                <label for="gbp-status">${p.fields.gbpStatus}</label>
-                <select id="gbp-status" name="googleBusinessProfileStatus" required>
-                  <option value="">${p.fields.gbpStatus}</option>
-                  ${p.gbpStatusOptions.map((item) => `<option>${item}</option>`).join("")}
-                </select>
-              </div>
-              <div class="field field-full">
-                <label for="audit-language">${p.fields.language}</label>
-                <select id="audit-language" name="preferredLanguage" required data-preferred-language-field>
-                  <option value="">${p.fields.language}</option>
-                  ${p.languageOptions.map((item) => `<option>${item}</option>`).join("")}
-                </select>
-              </div>
-              <fieldset class="field field-full">
-                <legend>${p.fields.improvements}</legend>
-                <div class="choice-grid">
-                  ${p.improvements
-                    .map((item) => `<label class="choice"><input type="checkbox" name="improvements" value="${item}"> ${item}</label>`)
-                    .join("")}
-                </div>
-              </fieldset>
-              <div class="field field-full">
-                <label for="timeline">${p.fields.timeline}</label>
-                <select id="timeline" name="timeline" required>
-                  <option value="">${p.fields.timeline}</option>
-                  ${p.timelines.map((item) => `<option>${item}</option>`).join("")}
-                </select>
-              </div>
-              <div class="field field-full">
-                <label for="message">${p.fields.message}</label>
-                <textarea id="message" name="message" placeholder="${p.placeholders.message}"></textarea>
               </div>
             </div>
+            <details class="form-details">
+              <summary>${p.detailsSummary}</summary>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="phone">${p.fields.phone}</label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel">
+                </div>
+                <div class="field">
+                  <label for="gbp-link">${additionalUrlLabel}</label>
+                  <input id="gbp-link" name="googleBusinessProfileLink" type="url" placeholder="${p.placeholders.gbp}">
+                </div>
+                <div class="field">
+                  <label for="website-status">${p.fields.websiteStatus}</label>
+                  <select id="website-status" name="websiteStatus">
+                    <option value="">${p.fields.websiteStatus}</option>
+                    ${p.websiteStatusOptions.map((item) => `<option>${item}</option>`).join("")}
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="gbp-status">${p.fields.gbpStatus}</label>
+                  <select id="gbp-status" name="googleBusinessProfileStatus">
+                    <option value="">${p.fields.gbpStatus}</option>
+                    ${p.gbpStatusOptions.map((item) => `<option>${item}</option>`).join("")}
+                  </select>
+                </div>
+                <div class="field field-full">
+                  <label for="timeline">${p.fields.timeline}</label>
+                  <select id="timeline" name="timeline">
+                    <option value="">${p.fields.timeline}</option>
+                    ${p.timelines.map((item) => `<option>${item}</option>`).join("")}
+                  </select>
+                </div>
+                <div class="field field-full">
+                  <label for="message">${p.fields.message}</label>
+                  <textarea id="message" name="message" placeholder="${p.placeholders.message}"></textarea>
+                </div>
+              </div>
+            </details>
             <div class="form-actions">
               <button class="btn btn-primary btn-full" type="submit">${p.submit}</button>
+              ${consentNotice(lang)}
               <p class="form-note">${p.note}</p>
-              <div class="form-status" tabindex="-1" hidden data-form-status></div>
+              <div class="form-status" role="status" aria-live="polite" tabindex="-1" hidden data-form-status></div>
             </div>
           </form>
         </div>
@@ -1493,34 +1811,34 @@ function stageAuditPage(lang, stage) {
     stage === "existing"
       ? `
               <div class="field">
-                <label for="${lang}-${stage}-website-url">${p.fields.website}</label>
-                <input id="${lang}-${stage}-website-url" name="websiteUrl" type="url" placeholder="https://example.com">
-              </div>
-              <div class="field">
-                <label for="${lang}-${stage}-gbp-link">${p.fields.gbp}</label>
-                <input id="${lang}-${stage}-gbp-link" name="googleBusinessProfileLink" type="url" placeholder="${base.placeholders.gbp}">
+                <label for="${lang}-${stage}-website-url">${base.fields.website}</label>
+                <input id="${lang}-${stage}-website-url" name="websiteUrl" type="url" placeholder="https://example.com" required>
               </div>`
       : "";
-  const stageChoices =
+  const stageGoalLabel = stage === "existing" ? base.fields.mainGoal : p.fields.needs;
+  const stageGoalOptions = stage === "existing" ? p.improvements : p.needs;
+  const optionalPresenceFields =
     stage === "existing"
       ? `
-              <fieldset class="field field-full">
-                <legend>${p.fields.improvements}</legend>
-                <div class="choice-grid">
-                  ${p.improvements
-                    .map((item) => `<label class="choice"><input type="checkbox" name="improvements" value="${item}"> ${item}</label>`)
-                    .join("")}
+                <div class="field">
+                  <label for="${lang}-${stage}-gbp-link">${base.fields.additionalUrl}</label>
+                  <input id="${lang}-${stage}-gbp-link" name="googleBusinessProfileLink" type="url" placeholder="${base.placeholders.gbp}">
                 </div>
-              </fieldset>`
-      : `
-              <fieldset class="field field-full">
-                <legend>${p.fields.needs}</legend>
-                <div class="choice-grid">
-                  ${p.needs
-                    .map((item) => `<label class="choice"><input type="checkbox" name="foundationNeeds" value="${item}"> ${item}</label>`)
-                    .join("")}
+                <div class="field">
+                  <label for="${lang}-${stage}-website-status">${base.fields.websiteStatus}</label>
+                  <select id="${lang}-${stage}-website-status" name="websiteStatus">
+                    <option value="">${base.fields.websiteStatus}</option>
+                    ${base.websiteStatusOptions.map((item) => `<option>${item}</option>`).join("")}
+                  </select>
                 </div>
-              </fieldset>`;
+                <div class="field">
+                  <label for="${lang}-${stage}-gbp-status">${base.fields.gbpStatus}</label>
+                  <select id="${lang}-${stage}-gbp-status" name="googleBusinessProfileStatus">
+                    <option value="">${base.fields.gbpStatus}</option>
+                    ${base.gbpStatusOptions.map((item) => `<option>${item}</option>`).join("")}
+                  </select>
+                </div>`
+      : "";
   const body = `
     <main id="main">
       <section class="page-hero">
@@ -1542,8 +1860,10 @@ function stageAuditPage(lang, stage) {
             </ul>
           </aside>
 
-          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="${p.success}" data-error-message="${p.error}">
+          <form class="form-card" onsubmit="handleAuditSubmit(event)" data-success-message="${p.success}" data-error-message="${p.error}" data-loading-label="${base.loading}">
             <input type="hidden" name="businessStage" value="${stage}" data-business-stage-field data-business-stage-default="${stage}">
+            <input type="hidden" name="preferredLanguage" value="${preferredLanguageValue(lang)}" data-preferred-language-field>
+            ${honeypotField(`${lang}-${stage}`)}
             <div class="form-grid">
               <div class="field">
                 <label for="${lang}-${stage}-full-name">${commonLabels.fullName}</label>
@@ -1559,7 +1879,7 @@ function stageAuditPage(lang, stage) {
               </div>
               <div class="field">
                 <label for="${lang}-${stage}-phone">${commonLabels.phone}</label>
-                <input id="${lang}-${stage}-phone" name="phone" type="tel" autocomplete="tel" required>
+                <input id="${lang}-${stage}-phone" name="phone" type="tel" autocomplete="tel">
               </div>
               ${presenceFields}
               <div class="field">
@@ -1570,30 +1890,36 @@ function stageAuditPage(lang, stage) {
                 <label for="${lang}-${stage}-business-type">${commonLabels.businessType}</label>
                 <input id="${lang}-${stage}-business-type" name="businessType" type="text" placeholder="${base.placeholders.businessType}" required>
               </div>
-              <div class="field field-full">
-                <label for="${lang}-${stage}-audit-language">${commonLabels.language}</label>
-                <select id="${lang}-${stage}-audit-language" name="preferredLanguage" required data-preferred-language-field>
-                  <option value="">${commonLabels.language}</option>
-                  ${base.languageOptions.map((item) => `<option>${item}</option>`).join("")}
+              <div class="field">
+                <label for="${lang}-${stage}-main-goal">${stageGoalLabel}</label>
+                <select id="${lang}-${stage}-main-goal" name="mainGoal" required>
+                  <option value="">${stageGoalLabel}</option>
+                  ${stageGoalOptions.map((item) => `<option>${item}</option>`).join("")}
                 </select>
-              </div>
-              ${stageChoices}
-              <div class="field field-full">
-                <label for="${lang}-${stage}-timeline">${p.fields.timeline}</label>
-                <select id="${lang}-${stage}-timeline" name="timeline" required>
-                  <option value="">${p.fields.timeline}</option>
-                  ${p.timelines.map((item) => `<option>${item}</option>`).join("")}
-                </select>
-              </div>
-              <div class="field field-full">
-                <label for="${lang}-${stage}-message">${p.fields.message}</label>
-                <textarea id="${lang}-${stage}-message" name="message" placeholder="${base.placeholders.message}"></textarea>
               </div>
             </div>
+            <details class="form-details">
+              <summary>${base.detailsSummary}</summary>
+              <div class="form-grid">
+                ${optionalPresenceFields}
+                <div class="field field-full">
+                  <label for="${lang}-${stage}-timeline">${p.fields.timeline}</label>
+                  <select id="${lang}-${stage}-timeline" name="timeline">
+                    <option value="">${p.fields.timeline}</option>
+                    ${p.timelines.map((item) => `<option>${item}</option>`).join("")}
+                  </select>
+                </div>
+                <div class="field field-full">
+                  <label for="${lang}-${stage}-message">${p.fields.message}</label>
+                  <textarea id="${lang}-${stage}-message" name="message" placeholder="${base.placeholders.message}"></textarea>
+                </div>
+              </div>
+            </details>
             <div class="form-actions">
               <button class="btn btn-primary btn-full" type="submit">${p.submit}</button>
+              ${consentNotice(lang)}
               <p class="form-note">${base.note}</p>
-              <div class="form-status" tabindex="-1" hidden data-form-status></div>
+              <div class="form-status" role="status" aria-live="polite" tabindex="-1" hidden data-form-status></div>
             </div>
           </form>
         </div>
@@ -1697,6 +2023,24 @@ function aboutPage(lang) {
       </section>
 
       <section class="section">
+        <div class="container founder-band">
+          <div class="founder-media">
+            ${founderMedia(lang)}
+          </div>
+          <div class="about-copy">
+            <p class="eyebrow">${p.founder.eyebrow}</p>
+            <h2>${p.founder.title}</h2>
+            <p class="founder-name"><strong>${p.founder.name}</strong><span>${p.founder.role}</span></p>
+            ${p.founder.body
+              .split("\n\n")
+              .map((paragraph) => `<p>${paragraph}</p>`)
+              .join("")}
+            <p class="form-fit-line">${p.founder.support}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
         <div class="container">
           <div class="cta-panel">
             <h2>${p.ctaTitle}</h2>
@@ -1715,6 +2059,8 @@ function aboutPage(lang) {
 function contactPage(lang) {
   const t = copy[lang];
   const p = t.contactPage;
+  const serviceAreaText =
+    lang === "es" ? `Negocios locales en ${BUSINESS.serviceArea}` : `Serving businesses across the ${BUSINESS.serviceArea}`;
   const body = `
     <main id="main">
       <section class="page-hero">
@@ -1730,20 +2076,42 @@ function contactPage(lang) {
           <aside class="contact-stack">
             <div class="contact-card">
               <h3>${p.emailTitle}</h3>
-              <p>hello@blynxsystems.com</p>
+              <p>${emailLink()}</p>
             </div>
+            ${
+              hasConfiguredPhone()
+                ? `<div class="contact-card">
+              <h3>${p.phoneTitle}</h3>
+              <p>${phoneLink()}</p>
+            </div>`
+                : ""
+            }
+            <div class="contact-card">
+              <h3>${p.locationTitle}</h3>
+              <p>${BUSINESS.location}</p>
+            </div>
+            <div class="contact-card">
+              <h3>${p.serviceAreaTitle}</h3>
+              <p>${serviceAreaText}</p>
+            </div>
+            ${
+              instagramLink()
+                ? `<div class="contact-card">
+              <h3>${p.instagramTitle}</h3>
+              <p>${instagramLink()}</p>
+            </div>`
+                : ""
+            }
             <div class="contact-card">
               <h3>${p.auditTitle}</h3>
               <p>${p.auditCopy}</p>
-              <p><a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a></p>
-            </div>
-            <div class="contact-card">
-              <h3>${p.languageTitle}</h3>
-              <p>${p.languageCopy}</p>
+              <p><a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}" data-analytics-event="free_audit_cta_click">${t.cta.audit}</a></p>
             </div>
           </aside>
 
-          <form class="form-card" onsubmit="handleContactSubmit(event)" data-success-message="${p.success}" data-error-message="${p.error}">
+          <form class="form-card" onsubmit="handleContactSubmit(event)" data-success-message="${p.success}" data-error-message="${p.error}" data-loading-label="${p.loading}">
+            <input type="hidden" name="preferredLanguage" value="${preferredLanguageValue(lang)}">
+            ${honeypotField(`contact-${lang}`)}
             <div class="form-grid">
               <div class="field">
                 <label for="contact-name">${p.fields.name}</label>
@@ -1762,15 +2130,8 @@ function contactPage(lang) {
                 <input id="contact-phone" name="phone" type="tel" autocomplete="tel">
               </div>
               <div class="field">
-                <label for="contact-language">${p.fields.language}</label>
-                <select id="contact-language" name="preferredLanguage" required>
-                  <option value="">${p.fields.language}</option>
-                  ${p.languageOptions.map((item) => `<option>${item}</option>`).join("")}
-                </select>
-              </div>
-              <div class="field">
                 <label for="contact-topic">${p.fields.topic}</label>
-                <select id="contact-topic" name="topic" required>
+                <select id="contact-topic" name="topic">
                   <option value="">${p.fields.topic}</option>
                   ${p.topics.map((item) => `<option>${item}</option>`).join("")}
                 </select>
@@ -1782,7 +2143,8 @@ function contactPage(lang) {
             </div>
             <div class="form-actions">
               <button class="btn btn-primary btn-full" type="submit">${p.submit}</button>
-              <div class="form-status" tabindex="-1" hidden data-form-status></div>
+              ${consentNotice(lang)}
+              <div class="form-status" role="status" aria-live="polite" tabindex="-1" hidden data-form-status></div>
             </div>
           </form>
         </div>
@@ -1822,6 +2184,37 @@ function resourcesPage(lang) {
     </main>`;
 
   return shell(lang, p, "resources", "resources", body);
+}
+
+function legalPage(lang, type) {
+  const p = legalPages[lang][type];
+  const body = `
+    <main id="main">
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <p class="eyebrow">${p.eyebrow}</p>
+          <h1>${p.h1}</h1>
+          <p>${p.description}</p>
+          <span class="trust-line">${p.effective}</span>
+        </div>
+      </section>
+
+      <section class="section section-tight">
+        <div class="container legal-content">
+          ${p.sections
+            .map(
+              ([heading, text]) => `
+          <section class="legal-section">
+            <h2>${heading}</h2>
+            <p>${text}</p>
+          </section>`
+            )
+            .join("")}
+        </div>
+      </section>
+    </main>`;
+
+  return shell(lang, p, "", type, body);
 }
 
 function stagePage(lang) {
@@ -1904,8 +2297,8 @@ function languageGate() {
     <title>BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish</title>
     <meta name="description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
     <link rel="canonical" href="${SITE_URL}/">
-    <link rel="alternate" hreflang="en" href="${SITE_URL}/en/start">
-    <link rel="alternate" hreflang="es" href="${SITE_URL}/es/start">
+    <link rel="alternate" hreflang="en" href="${SITE_URL}/en">
+    <link rel="alternate" hreflang="es" href="${SITE_URL}/es">
     <link rel="alternate" hreflang="x-default" href="${SITE_URL}/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BLYNX AIMA AGENCY">
@@ -1922,7 +2315,19 @@ function languageGate() {
     ${structuredData("en", "BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
-    <script src="/assets/site.js" defer></script>
+    <script>
+      (function () {
+        var saved = "";
+        try {
+          saved = localStorage.getItem("preferredLanguage") || localStorage.getItem("blynxPreferredLanguage") || "";
+        } catch (error) {
+          saved = "";
+        }
+        var browserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
+        var language = saved === "en" || saved === "es" ? saved : browserLanguage.toLowerCase().indexOf("es") === 0 ? "es" : "en";
+        window.location.replace("/" + language);
+      })();
+    </script>
   </head>
   <body>
     <main id="main" class="language-gate">
@@ -1935,15 +2340,16 @@ function languageGate() {
         </a>
         <p class="eyebrow">AIMA</p>
         <h1>Local Lead Systems for Service Businesses</h1>
-        <p>Choose your preferred language to continue.</p>
+        <p>Redirecting you to the best language version. You can choose manually below.</p>
         <div class="language-actions">
-          <a class="btn btn-primary" href="/en/start" data-language-choice="en">English</a>
-          <a class="btn btn-secondary" href="/es/start" data-language-choice="es">Español</a>
+          <a class="btn btn-primary" href="/en" data-language-choice="en">English</a>
+          <a class="btn btn-secondary" href="/es" data-language-choice="es">Español</a>
         </div>
         <p class="language-support">English and Spanish support for local business growth.</p>
         <p class="saved-language" hidden data-saved-language></p>
       </section>
     </main>
+    <script src="/assets/site.js"></script>
   </body>
 </html>`;
 }
@@ -1992,6 +2398,32 @@ function redirectPage(slug) {
 </html>`;
 }
 
+function permanentRedirectPage(targetPath, lang = "en") {
+  const isSpanish = lang === "es";
+  return `<!doctype html>
+<html lang="${isSpanish ? "es" : "en"}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BLYNX | Redirecting</title>
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0; url=${targetPath}">
+    <link rel="canonical" href="${SITE_URL}${targetPath}">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script>window.location.replace("${targetPath}");</script>
+  </head>
+  <body>
+    <main class="language-gate">
+      <section class="language-panel">
+        <h1>${isSpanish ? "Redirigiendo" : "Redirecting"}</h1>
+        <p><a class="btn btn-primary" href="${targetPath}">${isSpanish ? "Continuar" : "Continue"}</a></p>
+      </section>
+    </main>
+  </body>
+</html>`;
+}
+
 write("index.html", languageGate());
 
 for (const lang of ["en", "es"]) {
@@ -2005,12 +2437,16 @@ for (const lang of ["en", "es"]) {
   write(`${lang}/services/index.html`, servicesPage(lang));
   write(`${lang}/about/index.html`, aboutPage(lang));
   write(`${lang}/contact/index.html`, contactPage(lang));
-  write(`${lang}/resources/index.html`, resourcesPage(lang));
+  write(`${lang}/privacy/index.html`, legalPage(lang, "privacy"));
+  write(`${lang}/terms/index.html`, legalPage(lang, "terms"));
+  write(`${lang}/resources/index.html`, permanentRedirectPage(pagePath(lang, "services"), lang));
 }
 
-for (const slug of ["free-audit", "services", "about", "contact", "resources"]) {
+for (const slug of ["free-audit", "services", "about", "contact", "privacy", "terms"]) {
   write(`${slug}/index.html`, redirectPage(slug));
 }
+
+write("resources/index.html", redirectPage("services"));
 
 const sitemapRoutes = [
   "",
@@ -2023,7 +2459,8 @@ const sitemapRoutes = [
   "services",
   "about",
   "contact",
-  "resources"
+  "privacy",
+  "terms"
 ];
 
 const sitemapUrls = sitemapRoutes
@@ -2035,7 +2472,7 @@ const sitemapUrls = sitemapRoutes
       { loc: esLoc, enLoc, esLoc }
     ];
   })
-  .concat([{ loc: `${SITE_URL}/`, enLoc: `${SITE_URL}/en/start`, esLoc: `${SITE_URL}/es/start` }]);
+  .concat([{ loc: `${SITE_URL}/`, enLoc: `${SITE_URL}/en`, esLoc: `${SITE_URL}/es` }]);
 
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -2056,6 +2493,9 @@ write(
   "robots.txt",
   `User-agent: *
 Allow: /
+Disallow: /dist/
+Disallow: /en/resources
+Disallow: /es/resources
 
 Sitemap: ${SITE_URL}/sitemap.xml`
 );

@@ -21,6 +21,8 @@ const requiredFiles = [
   "en/services/index.html",
   "en/about/index.html",
   "en/contact/index.html",
+  "en/privacy/index.html",
+  "en/terms/index.html",
   "en/resources/index.html",
   "es/index.html",
   "es/start/index.html",
@@ -32,21 +34,26 @@ const requiredFiles = [
   "es/services/index.html",
   "es/about/index.html",
   "es/contact/index.html",
+  "es/privacy/index.html",
+  "es/terms/index.html",
   "es/resources/index.html",
   "free-audit/index.html",
   "services/index.html",
   "about/index.html",
   "contact/index.html",
+  "privacy/index.html",
+  "terms/index.html",
   "resources/index.html"
 ];
 
 const requiredSnippets = new Map([
   ["index.html", [
     "Local Lead Systems for Service Businesses",
-    "Choose your preferred language to continue.",
+    "Redirecting you to the best language version.",
     "English and Spanish support for local business growth.",
-    "href=\"/en/start\"",
-    "href=\"/es/start\"",
+    "window.location.replace",
+    "href=\"/en\"",
+    "href=\"/es\"",
     "data-language-choice=\"en\"",
     "data-language-choice=\"es\""
   ]],
@@ -97,6 +104,8 @@ const requiredSnippets = new Map([
     "Most Local Businesses Lose Leads Without Realizing It",
     "The System We Build",
     "Two Ways We Can Help",
+    "What Your Lead System Can Connect",
+    "Example Lead Flow",
     "Digital Foundation",
     "Start From Zero",
     "data-stage-banner",
@@ -108,6 +117,8 @@ const requiredSnippets = new Map([
     "Sistemas de Captación para Negocios Locales",
     "Muchos Negocios Locales Pierden Oportunidades Sin Darse Cuenta",
     "El Sistema que Construimos",
+    "Lo que Puede Conectar tu Sistema de Captación",
+    "Ejemplo de Flujo de Captación",
     "Base Digital + Sistema de Captación",
     "Dos Formas en que Podemos Ayudarte",
     "Empezar Desde Cero",
@@ -120,25 +131,24 @@ const requiredSnippets = new Map([
     "Get Your Free Lead System Audit",
     "handleAuditSubmit",
     "This audit works whether you already have a digital presence or you are starting from zero.",
-    "Do you currently have a website?",
-    "Do you have a Google Business Profile?",
+    "Website or Google Business Profile URL",
+    "Add more business details",
     "name=\"businessStage\"",
     "data-business-stage-field",
-    "Preferred Language",
+    "name=\"preferredLanguage\"",
+    "Privacy Policy",
     "Submit My Free Audit Request"
   ]],
   ["en/free-audit-existing/index.html", [
     "Audit Your Current Digital Presence",
-    "Website URL",
-    "Google Business Profile Link",
-    "What do you want to improve?",
+    "Website or Google Business Profile URL",
+    "Main Goal",
     "data-business-stage-default=\"existing\""
   ]],
   ["en/free-audit-zero/index.html", [
     "Plan Your Digital Foundation",
     "What do you need help setting up?",
-    "Conversion landing page",
-    "name=\"foundationNeeds\"",
+    "name=\"mainGoal\"",
     "data-business-stage-default=\"zero\""
   ]],
   ["es/free-audit/index.html", [
@@ -146,27 +156,54 @@ const requiredSnippets = new Map([
     "Impulsada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
     "handleAuditSubmit",
     "Esta auditoría funciona tanto si ya tienes presencia digital como si estás empezando desde cero.",
-    "¿Actualmente tienes sitio web?",
-    "¿Tienes Google Business Profile?",
+    "Sitio web o enlace de Google Business Profile",
+    "Agregar más detalles del negocio",
     "name=\"businessStage\"",
     "data-business-stage-field",
-    "Idioma preferido",
+    "name=\"preferredLanguage\"",
+    "Política de Privacidad",
     "Enviar Solicitud de Auditoría Gratis",
     "Gracias. Hemos recibido tu solicitud de auditoría gratis."
   ]],
   ["es/free-audit-existing/index.html", [
     "Audita tu Presencia Digital Actual",
-    "Sitio web",
-    "Link de Google Business Profile",
-    "¿Qué quieres mejorar?",
+    "Sitio web o enlace de Google Business Profile",
+    "Objetivo principal",
     "data-business-stage-default=\"existing\""
   ]],
   ["es/free-audit-zero/index.html", [
     "Planifica tu Base Digital",
     "¿Qué necesitas configurar?",
-    "Landing page de conversión",
-    "name=\"foundationNeeds\"",
+    "name=\"mainGoal\"",
     "data-business-stage-default=\"zero\""
+  ]],
+  ["en/privacy/index.html", [
+    "Privacy Policy",
+    "Information We Collect",
+    "BLYNX does not sell personal information"
+  ]],
+  ["es/privacy/index.html", [
+    "Política de Privacidad",
+    "Información que Recopilamos",
+    "BLYNX no vende información personal"
+  ]],
+  ["en/terms/index.html", [
+    "Terms of Service",
+    "No Guarantee of Results",
+    "Governing Law"
+  ]],
+  ["es/terms/index.html", [
+    "Términos de Servicio",
+    "Sin Garantía de Resultados",
+    "Ley Aplicable"
+  ]],
+  ["en/resources/index.html", [
+    "noindex",
+    "/en/services"
+  ]],
+  ["es/resources/index.html", [
+    "noindex",
+    "/es/services"
   ]],
   ["assets/site.js", [
     "blynxPreferredLanguage",
@@ -174,6 +211,7 @@ const requiredSnippets = new Map([
     "businessStage",
     "data-language-choice",
     "data-stage-choice",
+    "trackEvent",
     "function handleAuditSubmit",
     "LEAD_WEBHOOK_URL"
   ]]
@@ -214,7 +252,7 @@ function copyRecursive(source, target) {
   fs.copyFileSync(source, target);
 }
 
-for (const entry of ["assets", "en", "es", "free-audit", "services", "about", "contact", "resources", "index.html", "404.html", "CNAME", "package.json", "robots.txt", "sitemap.xml"]) {
+for (const entry of ["assets", "public", "en", "es", "free-audit", "services", "about", "contact", "privacy", "terms", "resources", "index.html", "404.html", "CNAME", "package.json", "robots.txt", "sitemap.xml"]) {
   const sourcePath = path.join(root, entry);
   if (!fs.existsSync(sourcePath)) continue;
   copyRecursive(sourcePath, path.join(dist, entry));

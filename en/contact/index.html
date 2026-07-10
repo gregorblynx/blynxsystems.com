@@ -23,7 +23,7 @@
     <meta name="twitter:title" content="Contact | BLYNX AIMA AGENCY">
     <meta name="twitter:description" content="Contact BLYNX AIMA AGENCY for local lead flow, lead capture, and faster follow-up support.">
     <meta name="twitter:image" content="https://www.blynxsystems.com/assets/og-image.jpg">
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/en/contact","url":"https://www.blynxsystems.com/en/contact","name":"Contact | BLYNX AIMA AGENCY","description":"Contact BLYNX AIMA AGENCY for local lead flow, lead capture, and faster follow-up support.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX AIMA AGENCY","description":"BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","telephone":"+16452469219","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX AIMA AGENCY","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/en/contact","url":"https://www.blynxsystems.com/en/contact","name":"Contact | BLYNX AIMA AGENCY","description":"Contact BLYNX AIMA AGENCY for local lead flow, lead capture, and faster follow-up support.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://www.blynxsystems.com/en/contact#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.blynxsystems.com/en"},{"@type":"ListItem","position":2,"name":"Talk with BLYNX about your local lead flow.","item":"https://www.blynxsystems.com/en/contact"}]}]}</script>
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -76,20 +76,38 @@
           <aside class="contact-stack">
             <div class="contact-card">
               <h3>Email</h3>
-              <p>hello@blynxsystems.com</p>
+              <p><a href="mailto:hello@blynxsystems.com" data-analytics-event="email_click">hello@blynxsystems.com</a></p>
+            </div>
+            <div class="contact-card">
+              <h3>Phone</h3>
+              <p><a href="tel:+16452469219" data-analytics-event="phone_click">(645) 246-9219</a></p>
+            </div>
+            <div class="contact-card">
+              <h3>Based in</h3>
+              <p>Nashville, Tennessee</p>
+            </div>
+            <div class="contact-card">
+              <h3>Service area</h3>
+              <p>Serving businesses across the United States</p>
+            </div>
+            <div class="contact-card">
+              <h3>Instagram</h3>
+              <p><a href="https://www.instagram.com/blynx.ai/" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">@blynx.ai</a></p>
             </div>
             <div class="contact-card">
               <h3>Start with an audit</h3>
               <p>Not sure what you need yet? Request a free digital presence audit first.</p>
-              <p><a class="btn btn-secondary" href="/en/free-audit">Get a Free Audit</a></p>
-            </div>
-            <div class="contact-card">
-              <h3>Language support</h3>
-              <p>English and Spanish lead support can be requested through the audit or contact process.</p>
+              <p><a class="btn btn-secondary" href="/en/free-audit" data-analytics-event="free_audit_cta_click">Get a Free Audit</a></p>
             </div>
           </aside>
 
-          <form class="form-card" onsubmit="handleContactSubmit(event)" data-success-message="Thank you. Your message has been received. BLYNX will follow up with the next steps." data-error-message="Something went wrong sending your message. Please try again, or email us directly at hello@blynxsystems.com.">
+          <form class="form-card" onsubmit="handleContactSubmit(event)" data-success-message="Thank you. Your message has been received. BLYNX will follow up with the next steps." data-error-message="Something went wrong sending your message. Please try again, or email us directly at hello@blynxsystems.com." data-loading-label="Sending...">
+            <input type="hidden" name="preferredLanguage" value="English">
+            
+            <div class="field honeypot-field" aria-hidden="true">
+              <label for="contact-en-company-website-extra">Leave this field empty</label>
+              <input id="contact-en-company-website-extra" name="companyWebsiteExtra" type="text" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form-grid">
               <div class="field">
                 <label for="contact-name">Full Name</label>
@@ -108,15 +126,8 @@
                 <input id="contact-phone" name="phone" type="tel" autocomplete="tel">
               </div>
               <div class="field">
-                <label for="contact-language">Preferred Language</label>
-                <select id="contact-language" name="preferredLanguage" required>
-                  <option value="">Preferred Language</option>
-                  <option>English</option><option>Spanish</option>
-                </select>
-              </div>
-              <div class="field">
                 <label for="contact-topic">What can we help with?</label>
-                <select id="contact-topic" name="topic" required>
+                <select id="contact-topic" name="topic">
                   <option value="">What can we help with?</option>
                   <option>Local lead system</option><option>Google Business Profile</option><option>Focused landing page</option><option>Lead capture</option><option>Follow-up</option><option>Review strategy</option><option>Reporting</option><option>Not sure</option>
                 </select>
@@ -128,7 +139,8 @@
             </div>
             <div class="form-actions">
               <button class="btn btn-primary btn-full" type="submit">Send Message</button>
-              <div class="form-status" tabindex="-1" hidden data-form-status></div>
+              <p class="form-consent">By submitting this form, you agree to our <a href="/en/privacy">Privacy Policy</a> and <a href="/en/terms">Terms of Service</a>.</p>
+              <div class="form-status" role="status" aria-live="polite" tabindex="-1" hidden data-form-status></div>
             </div>
           </form>
         </div>
@@ -136,14 +148,31 @@
     </main>
     
     <footer class="footer">
-      <div class="container footer-inner">
-        <span>&copy; 2026 BLYNX AIMA AGENCY. Built for local business growth.</span>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/en" aria-label="BLYNX home">
+            <span class="brand-mark" aria-hidden="true">BX</span>
+            <span class="brand-text"><span class="brand-name">BLYNX</span></span>
+          </a>
+          <p>Built for local business growth.</p>
+          <span>&copy; 2026 BLYNX AIMA AGENCY.</span>
+        </div>
         <div class="footer-links">
           <a href="/en/services">System</a>
           <a href="/en/about">About</a>
-          <a href="/en/resources">Resources</a>
           <a href="/en/contact">Contact</a>
           <a href="/en/free-audit">Free Audit</a>
+        </div>
+        <div class="footer-links">
+          <a href="/en/privacy">Privacy Policy</a>
+          <a href="/en/terms">Terms of Service</a>
+        </div>
+        <div class="footer-contact">
+          <span><a href="mailto:hello@blynxsystems.com" data-analytics-event="email_click">hello@blynxsystems.com</a></span>
+          <span><a href="tel:+16452469219" data-analytics-event="phone_click">(645) 246-9219</a></span>
+          <span>Nashville, Tennessee</span>
+          <span>Serving businesses across the United States</span>
+          <span><a href="https://www.instagram.com/blynx.ai/" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">@blynx.ai</a></span>
         </div>
       </div>
     </footer>

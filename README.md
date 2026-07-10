@@ -40,4 +40,24 @@ Then in the repo: **Settings → Pages → Custom domain** → `www.blynxsystems
 
 ## Lead forms
 
-Form submissions post to `LEAD_WEBHOOK_URL` in `assets/site.js`. It is currently empty (submissions log to the browser console only). Set it to a Google Apps Script Web App URL, n8n/Make/Zapier webhook, or custom API endpoint to receive leads.
+Form submissions post to `LEAD_WEBHOOK_URL` in `assets/site.js`. The current implementation is connected to a Google Apps Script Web App that appends leads to a Google Sheet and sends email notifications.
+
+## Legal review note
+
+These legal pages are general operational drafts and should be reviewed by a qualified attorney before relying on them as final legal advice.
+
+## Manual post-deploy checklist
+
+- Confirm or replace the public phone value in the central business configuration.
+- Confirm or replace the Instagram URL in the central business configuration.
+- Add `public/images/gregor-silva.webp` when the approved founder photo is available.
+- Have Privacy Policy and Terms of Service reviewed by a qualified attorney.
+- Deploy to Vercel only after local build checks pass.
+- Test audit and contact forms in production without sending fake customer data.
+- Confirm submissions arrive in the correct CRM, email inbox, Google Sheet or database.
+- Review Google Search Console after deploy.
+- Request indexing for the main pages.
+- Submit the updated `sitemap.xml`.
+- Confirm `/en/resources` and `/es/resources` redirect correctly.
+- Verify Open Graph previews when sharing the site link.
+- Confirm no test URLs are indexable.

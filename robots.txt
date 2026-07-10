@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /dist/
+Disallow: /en/resources
+Disallow: /es/resources
 
 Sitemap: https://www.blynxsystems.com/sitemap.xml

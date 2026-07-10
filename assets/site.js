@@ -52,6 +52,29 @@ function populateAuditContextFields(form) {
   }
 }
 
+function trackEvent(eventName, data = {}) {
+  const safeData = { ...data };
+  delete safeData.fullName;
+  delete safeData.email;
+  delete safeData.phone;
+  delete safeData.message;
+  delete safeData.websiteUrl;
+  delete safeData.googleBusinessProfileLink;
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, safeData);
+  }
+  if (typeof window.fbq === "function") {
+    window.fbq("trackCustom", eventName, safeData);
+  }
+  if (typeof window.plausible === "function") {
+    window.plausible(eventName, { props: safeData });
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...safeData });
+}
+
 (function () {
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector("[data-menu-toggle]");
@@ -95,18 +118,33 @@ function populateAuditContextFields(form) {
   document.querySelectorAll("[data-language-choice]").forEach((choice) => {
     choice.addEventListener("click", () => {
       setStoredPreferredLanguage(choice.dataset.languageChoice);
+      trackEvent("language_switch", { language: choice.dataset.languageChoice });
     });
   });
 
   document.querySelectorAll("[data-language-switch]").forEach((switchLink) => {
     switchLink.addEventListener("click", () => {
       setStoredPreferredLanguage(switchLink.dataset.languageSwitch);
+      trackEvent("language_switch", { language: switchLink.dataset.languageSwitch });
     });
   });
 
   document.querySelectorAll("[data-stage-choice]").forEach((stageChoice) => {
     stageChoice.addEventListener("click", () => {
       setStoredBusinessStage(stageChoice.dataset.stageChoice);
+      trackEvent("starting_point_click", { stage: stageChoice.dataset.stageChoice });
+    });
+  });
+
+  document.querySelectorAll("[data-analytics-event]").forEach((element) => {
+    element.addEventListener("click", () => {
+      trackEvent(element.dataset.analyticsEvent);
+    });
+  });
+
+  document.querySelectorAll('a[href*="free-audit"]').forEach((link) => {
+    link.addEventListener("click", () => {
+      trackEvent("free_audit_cta_click");
     });
   });
 
@@ -129,6 +167,13 @@ function populateAuditContextFields(form) {
 
   document.querySelectorAll("form").forEach((form) => {
     populateAuditContextFields(form);
+    let hasStarted = false;
+    form.addEventListener("focusin", () => {
+      if (hasStarted) return;
+      hasStarted = true;
+      const isAudit = String(form.getAttribute("onsubmit") || "").includes("handleAuditSubmit");
+      if (isAudit) trackEvent("free_audit_form_start");
+    });
   });
 })();
 
@@ -137,15 +182,21 @@ function populateAuditContextFields(form) {
 const LEAD_WEBHOOK_URL =
   "https://script.google.com/macros/s/AKfycbxQhYyBg_WIMmItlMU_tNusDLgAcpgC0vRtmhzx3ie4kaoR_g044V9nP2bxJm2B0zYp/exec";
 
+function sanitizeValue(value) {
+  if (Array.isArray(value)) return value.map(sanitizeValue);
+  return String(value).replace(/[<>]/g, "").trim();
+}
+
 function formToObject(form) {
   const formData = new FormData(form);
   const data = {};
 
   for (const [key, value] of formData.entries()) {
+    const sanitizedValue = sanitizeValue(value);
     if (Object.prototype.hasOwnProperty.call(data, key)) {
-      data[key] = Array.isArray(data[key]) ? data[key].concat(value) : [data[key], value];
+      data[key] = Array.isArray(data[key]) ? data[key].concat(sanitizedValue) : [data[key], sanitizedValue];
     } else {
-      data[key] = value;
+      data[key] = sanitizedValue;
     }
   }
 
@@ -196,19 +247,45 @@ async function submitLead(formType, payload) {
 }
 
 async function submitForm(form, formType) {
+  if (form.dataset.submitting === "true") return;
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  const honeypot = form.querySelector('input[name="companyWebsiteExtra"]');
+  if (honeypot && honeypot.value) {
+    showFormSuccess(form, form.dataset.successMessage || "Thank you. Your request has been received.");
+    form.reset();
+    return;
+  }
+
   const submitButton = form.querySelector('button[type="submit"]');
-  if (submitButton) submitButton.disabled = true;
+  const originalButtonText = submitButton ? submitButton.textContent : "";
+  form.dataset.submitting = "true";
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = form.dataset.loadingLabel || originalButtonText;
+  }
 
   const data = formToObject(form);
   const ok = await submitLead(formType, data);
 
-  if (submitButton) submitButton.disabled = false;
+  if (submitButton) {
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+  }
+  form.dataset.submitting = "false";
 
   if (ok) {
     showFormSuccess(
       form,
       form.dataset.successMessage || "Thank you. Your request has been received."
     );
+    trackEvent(formType === "contact" ? "contact_form_submit" : "free_audit_form_submit", {
+      formType,
+      businessStage: data.businessStage || ""
+    });
     form.reset();
   } else {
     showFormError(
