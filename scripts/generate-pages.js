@@ -1693,7 +1693,7 @@ function auditPage(lang) {
               </div>
               <div class="field">
                 <label for="website-url">${requiredUrlLabel}</label>
-                <input id="website-url" name="websiteUrl" type="url" placeholder="https://example.com" required>
+                <input id="website-url" name="websiteUrl" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" data-flexible-url placeholder="example.com" required>
               </div>
               <div class="field">
                 <label for="main-goal">${p.fields.mainGoal}</label>
@@ -1712,7 +1712,7 @@ function auditPage(lang) {
                 </div>
                 <div class="field">
                   <label for="gbp-link">${additionalUrlLabel}</label>
-                  <input id="gbp-link" name="googleBusinessProfileLink" type="url" placeholder="${p.placeholders.gbp}">
+                  <input id="gbp-link" name="googleBusinessProfileLink" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" data-flexible-url placeholder="${p.placeholders.gbp}">
                 </div>
                 <div class="field">
                   <label for="website-status">${p.fields.websiteStatus}</label>
@@ -1834,7 +1834,7 @@ function stageAuditPage(lang, stage) {
       ? `
               <div class="field">
                 <label for="${lang}-${stage}-website-url">${base.fields.website}</label>
-                <input id="${lang}-${stage}-website-url" name="websiteUrl" type="url" placeholder="https://example.com" required>
+                <input id="${lang}-${stage}-website-url" name="websiteUrl" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" data-flexible-url placeholder="example.com" required>
               </div>`
       : "";
   const stageGoalLabel = stage === "existing" ? base.fields.mainGoal : p.fields.needs;
@@ -1844,7 +1844,7 @@ function stageAuditPage(lang, stage) {
       ? `
                 <div class="field">
                   <label for="${lang}-${stage}-gbp-link">${base.fields.additionalUrl}</label>
-                  <input id="${lang}-${stage}-gbp-link" name="googleBusinessProfileLink" type="url" placeholder="${base.placeholders.gbp}">
+                  <input id="${lang}-${stage}-gbp-link" name="googleBusinessProfileLink" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" data-flexible-url placeholder="${base.placeholders.gbp}">
                 </div>
                 <div class="field">
                   <label for="${lang}-${stage}-website-status">${base.fields.websiteStatus}</label>

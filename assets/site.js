@@ -167,6 +167,11 @@ function trackEvent(eventName, data = {}) {
 
   document.querySelectorAll("form").forEach((form) => {
     populateAuditContextFields(form);
+    form.querySelectorAll("[data-flexible-url]").forEach((field) => {
+      field.addEventListener("input", () => {
+        field.setCustomValidity(isValidFlexibleUrl(field.value) ? "" : flexibleUrlErrorMessage());
+      });
+    });
     let hasStarted = false;
     form.addEventListener("focusin", () => {
       if (hasStarted) return;
@@ -187,12 +192,56 @@ function sanitizeValue(value) {
   return String(value).replace(/[<>]/g, "").trim();
 }
 
+function buildFlexibleUrl(value) {
+  const trimmed = String(value || "").trim();
+  if (!trimmed) return "";
+  return /^[a-z][a-z\d+\-.]*:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+}
+
+function isValidFlexibleUrl(value) {
+  const candidate = buildFlexibleUrl(value);
+  if (!candidate) return true;
+
+  try {
+    const url = new URL(candidate);
+    return (
+      (url.protocol === "http:" || url.protocol === "https:") &&
+      !/\s/.test(candidate) &&
+      (url.hostname.includes(".") || url.hostname === "localhost")
+    );
+  } catch (error) {
+    return false;
+  }
+}
+
+function flexibleUrlErrorMessage() {
+  return pageLanguage() === "es"
+    ? "Escribe una URL válida, por ejemplo cleaner.com, www.cleaner.com o https://cleaner.com."
+    : "Enter a valid URL, for example cleaner.com, www.cleaner.com, or https://cleaner.com.";
+}
+
+function validateFlexibleUrlFields(form) {
+  const fields = form.querySelectorAll("[data-flexible-url]");
+  let isValid = true;
+
+  fields.forEach((field) => {
+    field.setCustomValidity("");
+    if (!isValidFlexibleUrl(field.value)) {
+      field.setCustomValidity(flexibleUrlErrorMessage());
+      isValid = false;
+    }
+  });
+
+  return isValid;
+}
+
 function formToObject(form) {
   const formData = new FormData(form);
   const data = {};
+  const urlFields = new Set(["websiteUrl", "googleBusinessProfileLink", "additionalUrl"]);
 
   for (const [key, value] of formData.entries()) {
-    const sanitizedValue = sanitizeValue(value);
+    const sanitizedValue = sanitizeValue(urlFields.has(key) ? buildFlexibleUrl(value) : value);
     if (Object.prototype.hasOwnProperty.call(data, key)) {
       data[key] = Array.isArray(data[key]) ? data[key].concat(sanitizedValue) : [data[key], sanitizedValue];
     } else {
@@ -248,6 +297,7 @@ async function submitLead(formType, payload) {
 
 async function submitForm(form, formType) {
   if (form.dataset.submitting === "true") return;
+  validateFlexibleUrlFields(form);
   if (!form.checkValidity()) {
     form.reportValidity();
     return;
