@@ -4,7 +4,7 @@ const path = require("path");
 const root = path.resolve(__dirname, "..");
 
 const SITE_URL = "https://www.blynxsystems.com";
-const OG_IMAGE = `${SITE_URL}/assets/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 
 function structuredData(lang, title, description, canonicalUrl) {
   const orgDescription =
@@ -190,7 +190,7 @@ const copy = {
       languageOptions: ["English", "Spanish"],
       timelines: ["Immediately", "This month", "Next 2–3 months", "Just researching"],
       submit: "Submit My Free Audit Request",
-      note: "No paid AI API is connected yet. Your request is currently logged locally for setup testing.",
+      note: "Your information is only used to prepare your free audit — no spam, ever.",
       success: "Thank you. Your free audit request has been received. We\u2019ll review your business and contact you with the next steps.",
       error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
     },
@@ -415,7 +415,7 @@ const copy = {
       languageOptions: ["Inglés", "Español"],
       timelines: ["Inmediatamente", "Este mes", "En los próximos 2–3 meses", "Solo estoy investigando"],
       submit: "Enviar Solicitud de Auditoría Gratis",
-      note: "Todavía no hay una API de IA pagada conectada. Por ahora la solicitud se registra localmente para pruebas.",
+      note: "Tu información solo se usa para preparar tu auditoría gratis — nada de spam.",
       success: "Gracias. Hemos recibido tu solicitud de auditoría gratis. Revisaremos tu negocio y te contactaremos con los próximos pasos.",
       error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
@@ -1006,6 +1006,8 @@ function shell(lang, meta, active, switchPath, body) {
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${meta.title}">
+    <meta name="twitter:description" content="${meta.description}">
     <meta name="twitter:image" content="${OG_IMAGE}">
     ${structuredData(lang, meta.title, meta.description, canonicalUrl)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -1850,6 +1852,8 @@ function stagePage(lang) {
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${p.title}">
+    <meta name="twitter:description" content="${p.description}">
     <meta name="twitter:image" content="${OG_IMAGE}">
     ${structuredData(lang, p.title, p.description, lang === "es" ? esUrl : enUrl)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -1905,13 +1909,15 @@ function languageGate() {
     <link rel="alternate" hreflang="x-default" href="${SITE_URL}/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BLYNX AIMA AGENCY">
-    <meta property="og:title" content="BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish">
-    <meta property="og:description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
+    <meta property="og:title" content="BLYNX — AIMA Agency">
+    <meta property="og:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
     <meta property="og:url" content="${SITE_URL}/">
     <meta property="og:image" content="${OG_IMAGE}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BLYNX — AIMA Agency">
+    <meta name="twitter:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
     <meta name="twitter:image" content="${OG_IMAGE}">
     ${structuredData("en", "BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -1927,7 +1933,7 @@ function languageGate() {
             <span class="brand-name">BLYNX</span>
           </span>
         </a>
-        <p class="eyebrow">AIMA Agency</p>
+        <p class="eyebrow">AIMA</p>
         <h1>Local Lead Systems for Service Businesses</h1>
         <p>Choose your preferred language to continue.</p>
         <div class="language-actions">
