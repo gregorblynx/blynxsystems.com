@@ -1177,10 +1177,14 @@ function localizedHref(lang, href) {
 }
 
 function founderMedia(lang) {
-  const imagePath = path.join(root, "public/images/gregor-silva.webp");
+  const imageCandidates = [
+    { file: "public/images/gregor-silva.webp", src: "/public/images/gregor-silva.webp" },
+    { file: "public/images/gregor-silva.png", src: "/public/images/gregor-silva.png" }
+  ];
   const alt = copy[lang].aboutPage.founder.alt;
-  if (fs.existsSync(imagePath)) {
-    return `<img src="/public/images/gregor-silva.webp" alt="${alt}" width="520" height="620" loading="lazy" decoding="async">`;
+  const image = imageCandidates.find((candidate) => fs.existsSync(path.join(root, candidate.file)));
+  if (image) {
+    return `<img src="${image.src}" alt="${alt}" width="520" height="620" loading="lazy" decoding="async">`;
   }
   return `
     <div class="founder-placeholder" role="img" aria-label="${alt}">
