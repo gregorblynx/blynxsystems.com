@@ -8,6 +8,7 @@ const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 const LEGAL_EFFECTIVE_DATE = "July 9, 2026";
 const BUSINESS = {
   legalName: "BLYNX AIMA AGENCY",
+  displayName: "BLYNX AIMA",
   shortName: "BLYNX",
   email: "hello@blynxsystems.com",
   phone: "6452469219",
@@ -106,7 +107,7 @@ function structuredData(lang, title, description, canonicalUrl, breadcrumbs = []
         "@type": "WebSite",
         "@id": `${SITE_URL}/#website`,
         url: `${SITE_URL}/`,
-        name: BUSINESS.legalName,
+        name: BUSINESS.displayName,
         publisher: { "@id": `${SITE_URL}/#organization` },
         inLanguage: lang === "es" ? "es" : "en"
       },
@@ -141,7 +142,7 @@ const copy = {
   en: {
     code: "en",
     htmlLang: "en",
-    titleSuffix: "BLYNX AIMA AGENCY",
+    titleSuffix: "BLYNX AIMA",
     skip: "Skip to content",
     brandAria: "BLYNX home",
     navAria: "Primary navigation",
@@ -168,7 +169,7 @@ const copy = {
       contact: "Contact BLYNX"
     },
     home: {
-      title: "BLYNX AIMA AGENCY | Local Lead Systems for Service Businesses",
+      title: "BLYNX AIMA | Local Lead Systems for Service Businesses",
       description: "BLYNX helps local service businesses get found online, capture more qualified leads, follow up faster, and stop losing sales opportunities.",
       eyebrow: "Local Lead System for Service Businesses",
       headline: 'Local Lead Systems for Service Businesses. <span class="text-gold">Stop Losing Sales Opportunities.</span>',
@@ -288,7 +289,7 @@ const copy = {
       error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Local Lead System | BLYNX AIMA AGENCY",
+      title: "Local Lead System | BLYNX AIMA",
       description: "A simple local lead system that helps service businesses get found, capture qualified leads, organize every opportunity, and follow up faster.",
       eyebrow: "Local Lead System",
       h1: "One practical lead flow for local service businesses.",
@@ -299,7 +300,7 @@ const copy = {
       ctaSubtitle: "See where your current lead flow is losing opportunities before deciding what to improve."
     },
     aboutPage: {
-      title: "About | BLYNX AIMA AGENCY",
+      title: "About | BLYNX AIMA",
       description: "BLYNX helps local service businesses get found, capture qualified leads, organize every opportunity, and follow up faster.",
       eyebrow: "About",
       h1: "Built for service businesses that need a clearer lead flow.",
@@ -338,7 +339,7 @@ const copy = {
       ctaSubtitle: "The free audit is the simplest first step."
     },
     contactPage: {
-      title: "Contact | BLYNX AIMA AGENCY",
+      title: "Contact | BLYNX AIMA",
       description: "Contact BLYNX AIMA AGENCY for local lead flow, lead capture, and faster follow-up support.",
       eyebrow: "Contact",
       h1: "Talk with BLYNX about your local lead flow.",
@@ -382,7 +383,7 @@ const copy = {
       error: "Something went wrong sending your message. Please try again, or email us directly at hello@blynxsystems.com."
     },
     resourcesPage: {
-      title: "Resources | BLYNX AIMA AGENCY",
+      title: "Resources | BLYNX AIMA",
       description: "Practical resources for local lead flow, lead capture, and follow-up.",
       eyebrow: "Resources",
       h1: "Practical growth resources for local business owners.",
@@ -397,7 +398,7 @@ const copy = {
   es: {
     code: "es",
     htmlLang: "es",
-    titleSuffix: "BLYNX AIMA AGENCY",
+    titleSuffix: "BLYNX AIMA",
     skip: "Saltar al contenido",
     brandAria: "Inicio de BLYNX",
     navAria: "Navegación principal",
@@ -424,7 +425,7 @@ const copy = {
       contact: "Contactar a BLYNX"
     },
     home: {
-      title: "BLYNX AIMA AGENCY | Sistemas de Captación para Negocios Locales",
+      title: "BLYNX AIMA | Sistemas de Captación para Negocios Locales",
       description: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar más oportunidades, dar seguimiento más rápido y no perder posibles clientes.",
       eyebrow: "Sistemas de Captación para Negocios Locales",
       headline: 'Sistemas de Captación para Negocios Locales. <span class="text-gold">No Pierdas Posibles Clientes.</span>',
@@ -544,7 +545,7 @@ const copy = {
       error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Sistema de Captación | BLYNX AIMA AGENCY",
+      title: "Sistema de Captación | BLYNX AIMA",
       description: "Un sistema de captación que ayuda a negocios locales a ser encontrados, capturar oportunidades, organizar leads y dar seguimiento rápido.",
       eyebrow: "Sistema de Captación",
       h1: "Un flujo práctico de captación para negocios locales.",
@@ -555,7 +556,7 @@ const copy = {
       ctaSubtitle: "Descubre dónde tu flujo actual de captación puede estar perdiendo oportunidades antes de decidir qué mejorar."
     },
     aboutPage: {
-      title: "Nosotros | BLYNX AIMA AGENCY",
+      title: "Nosotros | BLYNX AIMA",
       description: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar oportunidades, organizar leads y dar seguimiento más rápido.",
       eyebrow: "Nosotros",
       h1: "Creado para negocios locales que necesitan un flujo de captación más claro.",
@@ -594,7 +595,7 @@ const copy = {
       ctaSubtitle: "La auditoría gratis es el primer paso más simple."
     },
     contactPage: {
-      title: "Contacto | BLYNX AIMA AGENCY",
+      title: "Contacto | BLYNX AIMA",
       description: "Contacta a BLYNX AIMA AGENCY para mejorar tu flujo de captación y seguimiento.",
       eyebrow: "Contacto",
       h1: "Habla con BLYNX sobre tu sistema de captación.",
@@ -638,7 +639,7 @@ const copy = {
       error: "Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
     resourcesPage: {
-      title: "Recursos | BLYNX AIMA AGENCY",
+      title: "Recursos | BLYNX AIMA",
       description: "Recursos prácticos para captación, organización de leads y seguimiento.",
       eyebrow: "Recursos",
       h1: "Recursos prácticos de crecimiento para dueños de negocios locales.",
@@ -1306,7 +1307,7 @@ function shell(lang, meta, active, switchPath, body) {
     <link rel="alternate" hreflang="es" href="${esUrl}">
     <link rel="alternate" hreflang="x-default" href="${enUrl}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="BLYNX AIMA AGENCY">
+    <meta property="og:site_name" content="${BUSINESS.displayName}">
     <meta property="og:title" content="${meta.title}">
     <meta property="og:description" content="${meta.description}">
     <meta property="og:url" content="${canonicalUrl}">
@@ -2257,7 +2258,7 @@ function stagePage(lang) {
     <link rel="alternate" hreflang="es" href="${esUrl}">
     <link rel="alternate" hreflang="x-default" href="${enUrl}">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="BLYNX AIMA AGENCY">
+    <meta property="og:site_name" content="${BUSINESS.displayName}">
     <meta property="og:title" content="${p.title}">
     <meta property="og:description" content="${p.description}">
     <meta property="og:url" content="${lang === "es" ? esUrl : enUrl}">
@@ -2316,25 +2317,25 @@ function languageGate() {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish</title>
+    <title>BLYNX AIMA | Local Lead Systems in English & Spanish</title>
     <meta name="description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
     <link rel="canonical" href="${SITE_URL}/">
     <link rel="alternate" hreflang="en" href="${SITE_URL}/en">
     <link rel="alternate" hreflang="es" href="${SITE_URL}/es">
     <link rel="alternate" hreflang="x-default" href="${SITE_URL}/">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="BLYNX AIMA AGENCY">
-    <meta property="og:title" content="BLYNX — AIMA Agency">
+    <meta property="og:site_name" content="${BUSINESS.displayName}">
+    <meta property="og:title" content="${BUSINESS.displayName}">
     <meta property="og:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
     <meta property="og:url" content="${SITE_URL}/">
     <meta property="og:image" content="${OG_IMAGE}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="BLYNX — AIMA Agency">
+    <meta name="twitter:title" content="${BUSINESS.displayName}">
     <meta name="twitter:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
     <meta name="twitter:image" content="${OG_IMAGE}">
-    ${structuredData("en", "BLYNX AIMA AGENCY | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
+    ${structuredData("en", "BLYNX AIMA | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
