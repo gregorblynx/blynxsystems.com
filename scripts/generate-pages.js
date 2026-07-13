@@ -1249,10 +1249,11 @@ function founderMedia(lang) {
     </div>`;
 }
 
-function languageSwitcher(lang, switchPath) {
-  const pathPart = switchPath ? `/${switchPath}` : "";
-  const enHref = `/en${pathPart}`;
-  const esHref = `/es${pathPart}`;
+function languageSwitcher(lang, switchPath, switchPaths = null) {
+  const enPath = switchPaths ? switchPaths.en : switchPath;
+  const esPath = switchPaths ? switchPaths.es : switchPath;
+  const enHref = `/en${enPath ? `/${enPath}` : ""}`;
+  const esHref = `/es${esPath ? `/${esPath}` : ""}`;
   const t = copy[lang];
 
   return `
@@ -1263,7 +1264,7 @@ function languageSwitcher(lang, switchPath) {
     </div>`;
 }
 
-function header(lang, active, switchPath = "", auditSlug = "free-audit") {
+function header(lang, active, switchPath = "", auditSlug = "free-audit", switchPaths = null) {
   const t = copy[lang];
   const home = pagePath(lang);
   const systemHref = `${home}#system`;
@@ -1292,7 +1293,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit") {
           <a href="${auditHref}">${t.nav.audit}</a>
         </nav>
         <div class="header-actions">
-          ${languageSwitcher(lang, switchPath)}
+          ${languageSwitcher(lang, switchPath, switchPaths)}
           <a class="btn btn-primary" href="${auditHref}">${t.cta.audit}</a>
           <button class="menu-toggle" type="button" aria-label="${t.openMenu}" aria-expanded="false" data-menu-toggle>
             <span class="menu-toggle-lines" aria-hidden="true"></span>
@@ -2573,15 +2574,21 @@ function blogStructuredData(lang, meta, article = null) {
 function blogShell(lang, meta, body, article = null) {
   const t = copy[lang];
   const otherLang = lang === "en" ? "es" : "en";
-  const hasTranslation = article
-    ? blogArticles[otherLang].some((entry) => entry.slug === article.slug)
-    : blogArticles[otherLang].length > 0;
-  const switchPath = hasTranslation ? meta.switchPath : "";
-  const hreflangTags = hasTranslation
+  let otherPath = null;
+  if (article) {
+    const translation = blogArticles[otherLang].find((entry) => entry.translationKey === article.translationKey);
+    if (translation) otherPath = `blog/${translation.slug}`;
+  } else if (blogArticles[otherLang].length) {
+    otherPath = "blog";
+  }
+  const switchPaths = otherPath ? { [lang]: meta.switchPath, [otherLang]: otherPath } : null;
+  const enPath = lang === "en" ? meta.switchPath : otherPath;
+  const esPath = lang === "es" ? meta.switchPath : otherPath;
+  const hreflangTags = otherPath
     ? `
-    <link rel="alternate" hreflang="en" href="${SITE_URL}/en/${meta.switchPath}">
-    <link rel="alternate" hreflang="es" href="${SITE_URL}/es/${meta.switchPath}">
-    <link rel="alternate" hreflang="x-default" href="${SITE_URL}/en/${meta.switchPath}">`
+    <link rel="alternate" hreflang="en" href="${SITE_URL}/en/${enPath}">
+    <link rel="alternate" hreflang="es" href="${SITE_URL}/es/${esPath}">
+    <link rel="alternate" hreflang="x-default" href="${SITE_URL}/en/${enPath}">`
     : "";
   const articleOgTags = article
     ? `
@@ -2619,7 +2626,7 @@ function blogShell(lang, meta, body, article = null) {
     <script src="/assets/site.js" defer></script>
   </head>
   <body>
-    ${header(lang, "blog", switchPath)}
+    ${header(lang, "blog", switchPaths ? meta.switchPath : "", "free-audit", switchPaths)}
     ${body}
     ${footer(lang)}
   </body>
@@ -2823,7 +2830,7 @@ for (const lang of ["en", "es"]) {
   }
 }
 
-write("blog/index.html", permanentRedirectPage("/en/blog", "en"));
+write("blog/index.html", redirectPage("blog"));
 
 for (const slug of ["free-audit", "services", "about", "contact", "privacy", "terms"]) {
   write(`${slug}/index.html`, redirectPage(slug));
@@ -2857,14 +2864,26 @@ const sitemapUrls = sitemapRoutes
   })
   .concat([{ loc: `${SITE_URL}/`, enLoc: `${SITE_URL}/en`, esLoc: `${SITE_URL}/es` }]);
 
-// Blog URLs: no hreflang alternates until the same content exists in both languages.
+// Blog URLs: hreflang alternates only when the translation actually exists.
 for (const lang of ["en", "es"]) {
   if (!blogArticles[lang].length) continue;
-  sitemapUrls.push({ loc: `${SITE_URL}${pagePath(lang, "blog")}` });
+  const otherLang = lang === "en" ? "es" : "en";
+  const indexAlternates = blogArticles[otherLang].length
+    ? { enLoc: `${SITE_URL}/en/blog`, esLoc: `${SITE_URL}/es/blog` }
+    : {};
+  sitemapUrls.push({ loc: `${SITE_URL}${pagePath(lang, "blog")}`, ...indexAlternates });
   for (const article of blogArticles[lang]) {
+    const translation = blogArticles[otherLang].find((entry) => entry.translationKey === article.translationKey);
+    const articleAlternates = translation
+      ? {
+          enLoc: `${SITE_URL}/en/blog/${lang === "en" ? article.slug : translation.slug}`,
+          esLoc: `${SITE_URL}/es/blog/${lang === "es" ? article.slug : translation.slug}`
+        }
+      : {};
     sitemapUrls.push({
       loc: `${SITE_URL}${pagePath(lang, `blog/${article.slug}`)}`,
-      lastmod: article.updatedDate || article.publicationDate
+      lastmod: article.updatedDate || article.publicationDate,
+      ...articleAlternates
     });
   }
 }

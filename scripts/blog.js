@@ -147,6 +147,8 @@ function loadArticles(lang) {
 
       return {
         slug,
+        // Pairs translations across languages when slugs differ (defaults to the slug).
+        translationKey: meta.translationKey || slug,
         locale: lang,
         title: meta.title,
         description: meta.description,

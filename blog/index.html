@@ -5,18 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BLYNX | Redirecting</title>
     <meta name="robots" content="noindex">
-    <meta http-equiv="refresh" content="0; url=/en/blog">
-    <link rel="canonical" href="https://www.blynxsystems.com/en/blog">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
-    <script>window.location.replace("/en/blog");</script>
+    <script>
+      (function () {
+        var language = localStorage.getItem("preferredLanguage") || localStorage.getItem("blynxPreferredLanguage");
+        if (language === "en" || language === "es") {
+          window.location.replace("/" + language + "/blog");
+        } else {
+          window.location.replace("/");
+        }
+      })();
+    </script>
   </head>
   <body>
     <main class="language-gate">
       <section class="language-panel">
-        <h1>Redirecting</h1>
-        <p><a class="btn btn-primary" href="/en/blog">Continue</a></p>
+        <a class="brand language-brand" href="/" aria-label="BLYNX language selection">
+          <span class="brand-mark" aria-hidden="true">BX</span>
+          <span class="brand-text">
+            <span class="brand-name">BLYNX</span>
+          </span>
+        </a>
+        <h1>Choose your language</h1>
+        <p>Select a language to continue.</p>
+        <div class="language-actions">
+          <a class="btn btn-primary" href="/en/blog" data-language-choice="en">English</a>
+          <a class="btn btn-secondary" href="/es/blog" data-language-choice="es">Español</a>
+        </div>
       </section>
     </main>
+    <script src="/assets/site.js"></script>
   </body>
 </html>

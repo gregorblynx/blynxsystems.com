@@ -152,25 +152,84 @@
   </url>
   <url>
     <loc>https://www.blynxsystems.com/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog"/>
   </url>
   <url>
     <loc>https://www.blynxsystems.com/en/blog/what-is-a-local-lead-system</loc>
     <lastmod>2026-07-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/what-is-a-local-lead-system"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/que-es-un-sistema-de-captacion-local"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/what-is-a-local-lead-system"/>
   </url>
   <url>
     <loc>https://www.blynxsystems.com/en/blog/systems-beat-marketing</loc>
     <lastmod>2026-07-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/systems-beat-marketing"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/sistemas-le-ganan-al-marketing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/systems-beat-marketing"/>
   </url>
   <url>
     <loc>https://www.blynxsystems.com/en/blog/google-business-profile-new-storefront</loc>
     <lastmod>2026-07-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/google-business-profile-new-storefront"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/google-business-profile-nueva-vitrina"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/google-business-profile-new-storefront"/>
   </url>
   <url>
     <loc>https://www.blynxsystems.com/en/blog/cost-of-slow-lead-response</loc>
     <lastmod>2026-07-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/cost-of-slow-lead-response"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/costo-de-responder-tarde"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/cost-of-slow-lead-response"/>
   </url>
   <url>
     <loc>https://www.blynxsystems.com/en/blog/customers-buy-confidence</loc>
     <lastmod>2026-07-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/customers-buy-confidence"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/los-clientes-compran-confianza"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/customers-buy-confidence"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/blog/que-es-un-sistema-de-captacion-local</loc>
+    <lastmod>2026-07-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/what-is-a-local-lead-system"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/que-es-un-sistema-de-captacion-local"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/what-is-a-local-lead-system"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/blog/sistemas-le-ganan-al-marketing</loc>
+    <lastmod>2026-07-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/systems-beat-marketing"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/sistemas-le-ganan-al-marketing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/systems-beat-marketing"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/blog/google-business-profile-nueva-vitrina</loc>
+    <lastmod>2026-07-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/google-business-profile-new-storefront"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/google-business-profile-nueva-vitrina"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/google-business-profile-new-storefront"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/blog/costo-de-responder-tarde</loc>
+    <lastmod>2026-07-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/cost-of-slow-lead-response"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/costo-de-responder-tarde"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/cost-of-slow-lead-response"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/blog/los-clientes-compran-confianza</loc>
+    <lastmod>2026-07-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/blog/customers-buy-confidence"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/blog/los-clientes-compran-confianza"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/blog/customers-buy-confidence"/>
   </url>
 </urlset>

@@ -43,6 +43,12 @@ const requiredFiles = [
   "en/blog/cost-of-slow-lead-response/index.html",
   "en/blog/customers-buy-confidence/index.html",
   "en/blog/systems-beat-marketing/index.html",
+  "es/blog/index.html",
+  "es/blog/que-es-un-sistema-de-captacion-local/index.html",
+  "es/blog/google-business-profile-nueva-vitrina/index.html",
+  "es/blog/costo-de-responder-tarde/index.html",
+  "es/blog/los-clientes-compran-confianza/index.html",
+  "es/blog/sistemas-le-ganan-al-marketing/index.html",
   "blog/index.html",
   "public/images/blog/what-is-a-local-lead-system.svg",
   "public/images/blog/google-business-profile-new-storefront.svg",
@@ -234,10 +240,25 @@ const requiredSnippets = new Map([
     "Keep Reading",
     "article:published_time"
   ]],
+  ["es/blog/index.html", [
+    "Sistemas Prácticos de Crecimiento para Negocios Locales",
+    "data-blog-filter=\"all\"",
+    "Artículo destacado",
+    "/es/free-audit",
+    "hreflang=\"en\""
+  ]],
+  ["es/blog/que-es-un-sistema-de-captacion-local/index.html", [
+    "¿Qué Es un Sistema de Captación Local?",
+    "\"@type\":\"BlogPosting\"",
+    "Solicitar Auditoría Gratis",
+    "/en/blog/what-is-a-local-lead-system"
+  ]],
   ["sitemap.xml", [
     "/en/blog</loc>",
     "/en/blog/what-is-a-local-lead-system</loc>",
-    "/en/blog/systems-beat-marketing</loc>"
+    "/en/blog/systems-beat-marketing</loc>",
+    "/es/blog</loc>",
+    "/es/blog/que-es-un-sistema-de-captacion-local</loc>"
   ]],
   ["assets/site.js", [
     "blog_article_view",
