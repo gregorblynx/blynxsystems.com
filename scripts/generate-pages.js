@@ -1479,6 +1479,7 @@ function homePage(lang) {
 
           <div class="hero-visual" aria-label="${h.visual.aria}">
             <div class="visual-stage">
+              <img class="stage-backdrop" src="/public/images/site/hero-flow.jpg" alt="" width="1000" height="1000" decoding="async" aria-hidden="true">
               <span class="demo-label">${h.visual.demoLabel}</span>
               <div class="laptop-mockup">
                 <div class="laptop-frame">

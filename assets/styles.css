@@ -2283,3 +2283,12 @@ fieldset.field {
     aspect-ratio: 16 / 10;
   }
 }
+
+.stage-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}

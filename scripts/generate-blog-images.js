@@ -34,7 +34,9 @@ const IMAGES = {
   "site-nashville": `A very wide panoramic silhouette of the Nashville Tennessee skyline at dusk, deep charcoal buildings with scattered warm golden window lights, a soft amber glow on the horizon behind the skyline, calm and premium. ${STYLE}`
 };
 
-const ASPECTS = { "site-nashville": "21:9" };
+IMAGES["site-hero-flow"] = `An extremely subtle, quiet ambient backdrop: deep near-black charcoal space with very soft out-of-focus warm bokeh city lights along the bottom edge, and one single elegant thin thread of golden light flowing in a gentle S-curve from lower left to upper right with a faint glow; enormous amounts of empty dark negative space; nothing else; designed to sit behind foreground UI cards without competing. ${STYLE}`;
+
+const ASPECTS = { "site-nashville": "21:9", "site-hero-flow": "1:1" };
 
 async function generate(slug, prompt) {
   const response = await fetch(
