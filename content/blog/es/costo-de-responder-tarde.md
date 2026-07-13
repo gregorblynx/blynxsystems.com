@@ -5,8 +5,8 @@ publicationDate: 2026-07-09
 author: BLYNX
 category: follow-up
 tags: tiempo de respuesta, seguimiento, atención al cliente
-heroImage: /public/images/blog/cost-of-slow-lead-response.svg
-heroImageAlt: Reloj junto a una tarjeta de lead que se desvanece, representando una oportunidad perdida por responder tarde
+heroImage: /public/images/blog/cost-of-slow-lead-response.jpg
+heroImageAlt: Reloj de arena dorado agotándose mientras un avión de papel luminoso se aleja en la oscuridad
 featured: false
 translationKey: cost-of-slow-lead-response
 ---

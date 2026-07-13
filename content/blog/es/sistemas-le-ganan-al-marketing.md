@@ -5,8 +5,8 @@ publicationDate: 2026-07-11
 author: BLYNX
 category: capture-leads
 tags: captura de leads, estrategia de marketing, sistemas de negocio
-heroImage: /public/images/blog/systems-beat-marketing.svg
-heroImageAlt: Embudo con fugas siendo selladas, representando un sistema que conserva oportunidades en lugar de perderlas
+heroImage: /public/images/blog/systems-beat-marketing.jpg
+heroImageAlt: Embudo de cristal que canaliza corrientes de luz dorada hacia un pequeño recipiente radiante sin derramar una gota
 featured: false
 translationKey: systems-beat-marketing
 ---

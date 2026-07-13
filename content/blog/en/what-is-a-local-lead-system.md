@@ -5,8 +5,8 @@ publicationDate: 2026-07-12
 author: BLYNX
 category: local-business-systems
 tags: local lead system, lead generation, small business growth
-heroImage: /public/images/blog/what-is-a-local-lead-system.svg
-heroImageAlt: Diagram of connected steps showing how a local lead system moves a customer from search to follow-up
+heroImage: /public/images/blog/what-is-a-local-lead-system.jpg
+heroImageAlt: Golden illuminated path of connected nodes crossing a dark city toward a glowing open doorway
 featured: true
 ---
 

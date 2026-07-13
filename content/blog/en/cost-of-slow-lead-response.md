@@ -5,8 +5,8 @@ publicationDate: 2026-07-09
 author: BLYNX
 category: follow-up
 tags: lead response time, follow-up, customer service
-heroImage: /public/images/blog/cost-of-slow-lead-response.svg
-heroImageAlt: Clock face with a fading lead card, representing an opportunity lost to a slow response
+heroImage: /public/images/blog/cost-of-slow-lead-response.jpg
+heroImageAlt: Hourglass running out of golden sand while a glowing paper plane flies away into the dark
 featured: false
 ---
 

@@ -5,8 +5,8 @@ publicationDate: 2026-07-08
 author: BLYNX
 category: build-trust
 tags: señales de confianza, reseñas, reputación de negocios locales
-heroImage: /public/images/blog/customers-buy-confidence.svg
-heroImageAlt: Escudo con una estrella y marcas de reseñas, representando las señales de confianza que los clientes buscan antes de contratar
+heroImage: /public/images/blog/customers-buy-confidence.jpg
+heroImageAlt: Apretón de manos dorado resguardado bajo un suave arco de luz protector con pequeñas estrellas alrededor
 featured: false
 translationKey: customers-buy-confidence
 ---

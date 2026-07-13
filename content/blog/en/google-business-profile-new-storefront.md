@@ -5,8 +5,8 @@ publicationDate: 2026-07-10
 author: BLYNX
 category: get-found
 tags: google business profile, local seo, reviews
-heroImage: /public/images/blog/google-business-profile-new-storefront.svg
-heroImageAlt: Map pin over a storefront illustration with a review rating, representing a Google Business Profile
+heroImage: /public/images/blog/google-business-profile-new-storefront.jpg
+heroImageAlt: Warmly lit small storefront glowing inside a translucent map pin surrounded by golden review stars
 featured: false
 ---
 

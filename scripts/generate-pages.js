@@ -2541,7 +2541,7 @@ function blogStructuredData(lang, meta, article = null) {
       url: meta.canonicalUrl,
       headline: article.title,
       description: article.description,
-      image: OG_IMAGE,
+      image: `${SITE_URL}${article.heroImage}`,
       datePublished: article.publicationDate,
       dateModified: article.updatedDate || article.publicationDate,
       author: { "@type": "Organization", name: article.author, url: `${SITE_URL}/` },
@@ -2590,6 +2590,7 @@ function blogShell(lang, meta, body, article = null) {
     <link rel="alternate" hreflang="es" href="${SITE_URL}/es/${esPath}">
     <link rel="alternate" hreflang="x-default" href="${SITE_URL}/en/${enPath}">`
     : "";
+  const ogImage = article ? `${SITE_URL}${article.heroImage}` : `${SITE_URL}/public/images/blog/blog-og.jpg`;
   const articleOgTags = article
     ? `
     <meta property="article:published_time" content="${article.publicationDate}">
@@ -2613,13 +2614,13 @@ function blogShell(lang, meta, body, article = null) {
     <meta property="og:description" content="${meta.description}">
     <meta property="og:url" content="${meta.canonicalUrl}">
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
-    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image" content="${ogImage}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">${articleOgTags}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${meta.title}">
     <meta name="twitter:description" content="${meta.description}">
-    <meta name="twitter:image" content="${OG_IMAGE}">
+    <meta name="twitter:image" content="${ogImage}">
     ${blogStructuredData(lang, meta, article)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">

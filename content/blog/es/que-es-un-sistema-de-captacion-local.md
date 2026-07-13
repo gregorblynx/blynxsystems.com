@@ -5,8 +5,8 @@ publicationDate: 2026-07-12
 author: BLYNX
 category: local-business-systems
 tags: sistema de captación, generación de leads, crecimiento de negocios locales
-heroImage: /public/images/blog/what-is-a-local-lead-system.svg
-heroImageAlt: Diagrama de pasos conectados que muestra cómo un sistema de captación local lleva al cliente desde la búsqueda hasta el seguimiento
+heroImage: /public/images/blog/what-is-a-local-lead-system.jpg
+heroImageAlt: Camino dorado de nodos conectados que cruza una ciudad oscura hacia una puerta abierta e iluminada
 featured: true
 translationKey: what-is-a-local-lead-system
 ---

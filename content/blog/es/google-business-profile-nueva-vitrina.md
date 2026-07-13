@@ -5,8 +5,8 @@ publicationDate: 2026-07-10
 author: BLYNX
 category: get-found
 tags: google business profile, seo local, reseñas
-heroImage: /public/images/blog/google-business-profile-new-storefront.svg
-heroImageAlt: Pin de mapa sobre la ilustración de una vitrina con calificación de reseñas, representando un Google Business Profile
+heroImage: /public/images/blog/google-business-profile-new-storefront.jpg
+heroImageAlt: Pequeña vitrina cálidamente iluminada dentro de un pin de mapa translúcido rodeado de estrellas doradas de reseñas
 featured: false
 translationKey: google-business-profile-new-storefront
 ---

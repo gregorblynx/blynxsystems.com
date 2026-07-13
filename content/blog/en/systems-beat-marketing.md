@@ -5,8 +5,8 @@ publicationDate: 2026-07-11
 author: BLYNX
 category: capture-leads
 tags: lead capture, marketing strategy, business systems
-heroImage: /public/images/blog/systems-beat-marketing.svg
-heroImageAlt: Funnel with leaks being sealed, representing a lead system that keeps opportunities instead of losing them
+heroImage: /public/images/blog/systems-beat-marketing.jpg
+heroImageAlt: Glass funnel channeling streams of golden light into a small radiant vessel without spilling a drop
 featured: false
 ---
 

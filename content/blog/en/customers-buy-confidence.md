@@ -5,8 +5,8 @@ publicationDate: 2026-07-08
 author: BLYNX
 category: build-trust
 tags: trust signals, reviews, local business reputation
-heroImage: /public/images/blog/customers-buy-confidence.svg
-heroImageAlt: Shield with a star and review marks, representing the trust signals customers look for before hiring
+heroImage: /public/images/blog/customers-buy-confidence.jpg
+heroImageAlt: Golden handshake sheltered under a soft protective arc of light with small stars around it
 featured: false
 ---
 
