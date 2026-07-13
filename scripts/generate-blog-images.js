@@ -27,8 +27,14 @@ const IMAGES = {
   "cost-of-slow-lead-response": `A large elegant hourglass with luminous golden sand almost run out, and beside it a paper airplane made of warm glowing light flying away into darkness, leaving a fading gold trail; a subtle clock face ghosted in the dark background. Conveys: opportunity slipping away with time. ${STYLE}`,
   "customers-buy-confidence": `Two hands about to shake, sculpted from warm golden light against deep darkness, with a subtle protective arc of soft gold light above them like a shield; tiny stars drifting around the arc. Conveys: trust and confidence before hiring. ${STYLE}`,
   "systems-beat-marketing": `A large elegant glass funnel glowing with streams of golden water pouring in from above; the funnel channels every drop into a small radiant vessel below without spilling; in the dark background, faint ghostly droplets falling past unused. Conveys: a system that captures everything instead of leaking. ${STYLE}`,
-  "og-image": `A wide cinematic composition: a dark cityscape at night where one small business storefront glows with intense warm golden light, connected by a rising luminous golden thread to a constellation of small lights above it. Premium, aspirational, calm. ${STYLE}`
+  "og-image": `A wide cinematic composition: a dark cityscape at night where one small business storefront glows with intense warm golden light, connected by a rising luminous golden thread to a constellation of small lights above it. Premium, aspirational, calm. ${STYLE}`,
+  "site-path-existing": `A modest small-business storefront on a dark quiet street, its left half still dim and worn, its right half radiating fresh warm golden light as if being restored and polished; fine golden light-lines tracing upgrades around the glowing half. Conveys: improving and strengthening what already exists. ${STYLE}`,
+  "site-path-zero": `Luminous golden architectural blueprint lines rising out of dark empty ground, sketching the glowing wireframe of a small storefront; the entrance portion already solid, warm and lit while the rest is still elegant glowing outline. Conveys: building a digital foundation from zero. ${STYLE}`,
+  "site-services-flow": `An elegant constellation of six small glowing golden spheres, each linked by fine threads of light, converging into one single bright flowing stream that pours toward a warm radiant glow at the right edge. Conveys: separate pieces connected into one working system. ${STYLE}`,
+  "site-nashville": `A very wide panoramic silhouette of the Nashville Tennessee skyline at dusk, deep charcoal buildings with scattered warm golden window lights, a soft amber glow on the horizon behind the skyline, calm and premium. ${STYLE}`
 };
+
+const ASPECTS = { "site-nashville": "21:9" };
 
 async function generate(slug, prompt) {
   const response = await fetch(
@@ -40,7 +46,7 @@ async function generate(slug, prompt) {
         contents: [{ role: "user", parts: [{ text: prompt }] }],
         generationConfig: {
           responseModalities: ["IMAGE"],
-          imageConfig: { aspectRatio: "16:9" }
+          imageConfig: { aspectRatio: ASPECTS[slug] || "16:9" }
         }
       })
     }

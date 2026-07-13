@@ -1390,6 +1390,41 @@ function shell(lang, meta, active, switchPath, body) {
 </html>`;
 }
 
+const SITE_MEDIA_ALTS = {
+  existing: {
+    en: "Storefront half in shadow, half glowing with warm golden light as it is being renewed",
+    es: "Local comercial mitad en sombra, mitad brillando con luz dorada cálida mientras se renueva"
+  },
+  zero: {
+    en: "Golden blueprint wireframe of a small storefront rising from dark ground, its entrance already lit",
+    es: "Plano dorado de un pequeño local surgiendo de la oscuridad, con la entrada ya iluminada"
+  },
+  services: {
+    en: "Six golden spheres connected by threads of light converging into one bright stream",
+    es: "Seis esferas doradas conectadas por hilos de luz que convergen en una sola corriente brillante"
+  },
+  nashville: {
+    en: "Nashville, Tennessee skyline at dusk with warm golden window lights",
+    es: "Skyline de Nashville, Tennessee al atardecer con luces doradas en las ventanas"
+  }
+};
+
+function stageCardMedia(stage) {
+  return `
+              <div class="card-media" aria-hidden="true">
+                <img src="/public/images/site/path-${stage}.jpg" alt="" width="1200" height="630" loading="lazy" decoding="async">
+              </div>`;
+}
+
+function pageMediaBand(src, alt, wide = false) {
+  return `
+      <section class="page-media">
+        <div class="container">
+          <img src="${src}" alt="${alt}" width="1200" height="${wide ? 510 : 630}" loading="lazy" decoding="async"${wide ? ' class="is-wide"' : ""}>
+        </div>
+      </section>`;
+}
+
 function serviceCards(lang, cardClass = "service-card", iconClass = "service-icon") {
   return services[lang]
     .map(
@@ -1555,7 +1590,7 @@ function homePage(lang) {
             ${offerPaths[lang]
               .map(
                 (pathItem, index) => `
-            <article class="offer-path-card">
+            <article class="offer-path-card">${stageCardMedia(pathItem.stage)}
               <div class="feature-icon">${String(index + 1).padStart(2, "0")}</div>
               <h3>${pathItem.title}</h3>
               <p>${pathItem.copy}</p>
@@ -1678,6 +1713,12 @@ function homePage(lang) {
               )
               .join("")}
           </div>
+        </div>
+      </section>
+
+      <section class="scene-band" aria-label="Nashville, Tennessee">
+        <div class="container">
+          <img src="/public/images/site/nashville.jpg" alt="${SITE_MEDIA_ALTS.nashville[lang]}" width="1200" height="510" loading="lazy" decoding="async">
         </div>
       </section>
 
@@ -1829,7 +1870,7 @@ function stageLandingPage(lang, stage) {
           </div>
         </div>
       </section>
-
+${pageMediaBand(`/public/images/site/path-${stage}.jpg`, SITE_MEDIA_ALTS[stage][lang])}
       <section class="section section-tight">
         <div class="container feature-grid">
           ${p.cards
@@ -2022,6 +2063,7 @@ function servicesPage(lang) {
         </div>
       </section>
 
+${pageMediaBand("/public/images/site/services-flow.jpg", SITE_MEDIA_ALTS.services[lang])}
       <section class="section section-tight">
         <div class="container feature-grid">
           ${serviceCards(lang, "feature-card", "feature-icon")}
@@ -2117,6 +2159,12 @@ function aboutPage(lang) {
               .join("")}
             <p class="form-fit-line">${p.founder.support}</p>
           </div>
+        </div>
+      </section>
+
+      <section class="scene-band" aria-label="Nashville, Tennessee">
+        <div class="container">
+          <img src="/public/images/site/nashville.jpg" alt="${SITE_MEDIA_ALTS.nashville[lang]}" width="1200" height="510" loading="lazy" decoding="async">
         </div>
       </section>
 
@@ -2349,7 +2397,7 @@ function stagePage(lang) {
           ${p.cards
             .map(
               (card, index) => `
-          <article class="stage-card">
+          <article class="stage-card">${stageCardMedia(card.value)}
             <div class="feature-icon">${String(index + 1).padStart(2, "0")}</div>
             <h2>${card.title}</h2>
             <p>${card.copy}</p>
