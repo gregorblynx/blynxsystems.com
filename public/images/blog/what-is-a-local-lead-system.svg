@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0d0d"/>
+      <stop offset="1" stop-color="#171512"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f5b849"/>
+      <stop offset="1" stop-color="#c98925"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1050" cy="90" r="220" fill="#f5b849" opacity="0.05"/>
+  <circle cx="120" cy="560" r="180" fill="#c98925" opacity="0.06"/>
+  <g stroke="#f5b849" stroke-opacity="0.35" stroke-width="3" fill="none">
+    <path d="M240 315 H 420 M600 315 H 780 M960 315 h 60"/>
+  </g>
+  <g>
+    <circle cx="180" cy="315" r="52" fill="none" stroke="url(#gold)" stroke-width="4"/>
+    <circle cx="180" cy="315" r="16" fill="#f5b849"/>
+    <circle cx="510" cy="315" r="64" fill="none" stroke="url(#gold)" stroke-width="4"/>
+    <circle cx="510" cy="315" r="22" fill="#f5b849" opacity="0.85"/>
+    <circle cx="870" cy="315" r="76" fill="none" stroke="url(#gold)" stroke-width="5"/>
+    <circle cx="870" cy="315" r="30" fill="url(#gold)"/>
+  </g>
+  <g stroke="#b7afa0" stroke-opacity="0.35" stroke-width="2" fill="none">
+    <path d="M510 379 v 70 h 180"/>
+    <path d="M510 251 v -70 h 180"/>
+  </g>
+  <circle cx="700" cy="449" r="10" fill="#b7afa0" opacity="0.6"/>
+  <circle cx="700" cy="181" r="10" fill="#b7afa0" opacity="0.6"/>
+  <path d="M1035 300 l 34 15 -34 15 8 -15 z" fill="#f5b849"/>
+</svg>

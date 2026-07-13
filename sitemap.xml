@@ -150,4 +150,27 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en"/>
   </url>
+  <url>
+    <loc>https://www.blynxsystems.com/en/blog</loc>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/en/blog/what-is-a-local-lead-system</loc>
+    <lastmod>2026-07-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/en/blog/systems-beat-marketing</loc>
+    <lastmod>2026-07-11</lastmod>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/en/blog/google-business-profile-new-storefront</loc>
+    <lastmod>2026-07-10</lastmod>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/en/blog/cost-of-slow-lead-response</loc>
+    <lastmod>2026-07-09</lastmod>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/en/blog/customers-buy-confidence</loc>
+    <lastmod>2026-07-08</lastmod>
+  </url>
 </urlset>

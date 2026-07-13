@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d0d0d"/>
+      <stop offset="1" stop-color="#171512"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f5b849"/>
+      <stop offset="1" stop-color="#c98925"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1060" cy="110" r="210" fill="#f5b849" opacity="0.05"/>
+  <circle cx="140" cy="540" r="190" fill="#c98925" opacity="0.06"/>
+  <g transform="translate(430 145)">
+    <circle cx="170" cy="170" r="170" fill="none" stroke="url(#gold)" stroke-width="7"/>
+    <circle cx="170" cy="170" r="146" fill="none" stroke="#b7afa0" stroke-opacity="0.25" stroke-width="2"/>
+    <path d="M170 170 V 62" stroke="#f5b849" stroke-width="8" stroke-linecap="round"/>
+    <path d="M170 170 L 252 216" stroke="#f5b849" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="170" cy="170" r="12" fill="#f5b849"/>
+    <g fill="#b7afa0" opacity="0.6">
+      <rect x="164" y="18" width="12" height="26" rx="4"/>
+      <rect x="164" y="296" width="12" height="26" rx="4"/>
+      <rect x="18" y="164" width="26" height="12" rx="4"/>
+      <rect x="296" y="164" width="26" height="12" rx="4"/>
+    </g>
+  </g>
+  <g transform="translate(880 250)">
+    <rect x="0" y="0" width="190" height="110" rx="10" fill="#f5b849" opacity="0.45"/>
+    <rect x="16" y="22" width="120" height="12" rx="6" fill="#0d0d0d" opacity="0.7"/>
+    <rect x="16" y="48" width="158" height="10" rx="5" fill="#0d0d0d" opacity="0.5"/>
+    <rect x="16" y="70" width="140" height="10" rx="5" fill="#0d0d0d" opacity="0.5"/>
+  </g>
+  <g transform="translate(120 250)">
+    <rect x="0" y="0" width="190" height="110" rx="10" fill="none" stroke="#b7afa0" stroke-opacity="0.4" stroke-width="3" stroke-dasharray="10 8"/>
+    <rect x="16" y="22" width="120" height="12" rx="6" fill="#b7afa0" opacity="0.25"/>
+    <rect x="16" y="48" width="158" height="10" rx="5" fill="#b7afa0" opacity="0.18"/>
+    <rect x="16" y="70" width="140" height="10" rx="5" fill="#b7afa0" opacity="0.18"/>
+  </g>
+</svg>

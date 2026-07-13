@@ -182,6 +182,49 @@ function trackEvent(eventName, data = {}) {
   });
 })();
 
+(function () {
+  const article = document.querySelector("[data-blog-article]");
+  if (article) {
+    trackEvent("blog_article_view", {
+      slug: article.dataset.blogArticle,
+      category: article.dataset.blogCategory || ""
+    });
+  }
+
+  document.querySelectorAll("[data-blog-cta]").forEach((cta) => {
+    cta.addEventListener("click", () => {
+      trackEvent("blog_cta_click", {
+        slug: article ? article.dataset.blogArticle : "blog-index"
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-related-article]").forEach((link) => {
+    link.addEventListener("click", () => {
+      trackEvent("related_article_click", {
+        slug: link.dataset.relatedArticle,
+        from: article ? article.dataset.blogArticle : ""
+      });
+    });
+  });
+
+  const filterButtons = document.querySelectorAll("[data-blog-filter]");
+  const blogCards = document.querySelectorAll("[data-blog-card]");
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.dataset.blogFilter;
+      filterButtons.forEach((other) => {
+        other.classList.toggle("is-active", other === button);
+        other.setAttribute("aria-pressed", String(other === button));
+      });
+      blogCards.forEach((card) => {
+        card.hidden = category !== "all" && card.dataset.blogCategory !== category;
+      });
+      trackEvent("blog_category_filter", { category });
+    });
+  });
+})();
+
 // Google Apps Script Web App (see integrations/google-apps-script.gs):
 // appends each lead to the "BLYNX Leads" spreadsheet and emails hello@blynxsystems.com.
 const LEAD_WEBHOOK_URL =

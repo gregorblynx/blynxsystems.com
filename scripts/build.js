@@ -37,6 +37,18 @@ const requiredFiles = [
   "es/privacy/index.html",
   "es/terms/index.html",
   "es/resources/index.html",
+  "en/blog/index.html",
+  "en/blog/what-is-a-local-lead-system/index.html",
+  "en/blog/google-business-profile-new-storefront/index.html",
+  "en/blog/cost-of-slow-lead-response/index.html",
+  "en/blog/customers-buy-confidence/index.html",
+  "en/blog/systems-beat-marketing/index.html",
+  "blog/index.html",
+  "public/images/blog/what-is-a-local-lead-system.svg",
+  "public/images/blog/google-business-profile-new-storefront.svg",
+  "public/images/blog/cost-of-slow-lead-response.svg",
+  "public/images/blog/customers-buy-confidence.svg",
+  "public/images/blog/systems-beat-marketing.svg",
   "free-audit/index.html",
   "services/index.html",
   "about/index.html",
@@ -205,7 +217,33 @@ const requiredSnippets = new Map([
     "noindex",
     "/es/services"
   ]],
+  ["en/blog/index.html", [
+    "Practical Growth Systems for Local Businesses",
+    "data-blog-filter=\"all\"",
+    "Featured article",
+    "min read",
+    "/en/free-audit",
+    "\"@type\":\"Blog\""
+  ]],
+  ["en/blog/what-is-a-local-lead-system/index.html", [
+    "What Is a Local Lead System?",
+    "\"@type\":\"BlogPosting\"",
+    "data-blog-article=\"what-is-a-local-lead-system\"",
+    "Get Your Free Audit",
+    "/en/free-audit",
+    "Keep Reading",
+    "article:published_time"
+  ]],
+  ["sitemap.xml", [
+    "/en/blog</loc>",
+    "/en/blog/what-is-a-local-lead-system</loc>",
+    "/en/blog/systems-beat-marketing</loc>"
+  ]],
   ["assets/site.js", [
+    "blog_article_view",
+    "blog_cta_click",
+    "related_article_click",
+    "blog_category_filter",
     "blynxPreferredLanguage",
     "preferredLanguage",
     "businessStage",
@@ -252,7 +290,7 @@ function copyRecursive(source, target) {
   fs.copyFileSync(source, target);
 }
 
-for (const entry of ["assets", "public", "en", "es", "free-audit", "services", "about", "contact", "privacy", "terms", "resources", "index.html", "404.html", "CNAME", "package.json", "robots.txt", "sitemap.xml"]) {
+for (const entry of ["assets", "public", "en", "es", "blog", "free-audit", "services", "about", "contact", "privacy", "terms", "resources", "index.html", "404.html", "CNAME", "package.json", "robots.txt", "sitemap.xml"]) {
   const sourcePath = path.join(root, entry);
   if (!fs.existsSync(sourcePath)) continue;
   copyRecursive(sourcePath, path.join(dist, entry));

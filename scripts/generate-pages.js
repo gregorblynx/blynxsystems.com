@@ -1,14 +1,22 @@
 const fs = require("fs");
 const path = require("path");
+const { loadArticles, formatDate, CATEGORIES } = require("./blog");
 
 const root = path.resolve(__dirname, "..");
+
+// Spanish articles can be added later under content/blog/es/ — the blog nav link,
+// pages, and sitemap entries for a language only appear once articles exist for it.
+const blogArticles = {
+  en: loadArticles("en"),
+  es: loadArticles("es")
+};
 
 const SITE_URL = "https://www.blynxsystems.com";
 const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 const LEGAL_EFFECTIVE_DATE = "July 9, 2026";
 const BUSINESS = {
   legalName: "BLYNX AIMA AGENCY",
-  displayName: "BLYNX AIMA",
+  displayName: "BLYNX - AIMA",
   shortName: "BLYNX",
   email: "hello@blynxsystems.com",
   phone: "6452469219",
@@ -142,7 +150,7 @@ const copy = {
   en: {
     code: "en",
     htmlLang: "en",
-    titleSuffix: "BLYNX AIMA",
+    titleSuffix: "BLYNX - AIMA",
     skip: "Skip to content",
     brandAria: "BLYNX home",
     navAria: "Primary navigation",
@@ -157,9 +165,32 @@ const copy = {
       about: "About",
       resources: "Resources",
       contact: "Contact",
+      blog: "Blog",
       audit: "Free Audit",
       privacy: "Privacy Policy",
       terms: "Terms of Service"
+    },
+    blogPage: {
+      title: "Practical Growth Systems for Local Businesses | BLYNX Blog",
+      description: "Practical guides on getting found, building trust, capturing leads, and following up faster — written for local service business owners.",
+      eyebrow: "BLYNX Blog",
+      h1: "Practical Growth Systems for Local Businesses",
+      subtitle: "Learn how to get found, build trust, capture more opportunities, and follow up before potential customers choose someone else.",
+      featuredLabel: "Featured article",
+      latestTitle: "Latest Articles",
+      filterLabel: "Filter articles by category",
+      allLabel: "All",
+      minRead: "min read",
+      updatedLabel: "Updated",
+      breadcrumbHome: "Home",
+      breadcrumbBlog: "Blog",
+      relatedTitle: "Keep Reading",
+      aboutTitle: "BLYNX",
+      aboutText: "BLYNX builds practical local lead systems that help service businesses get found, build trust, capture opportunities, and follow up faster.",
+      aboutLink: "Learn more about BLYNX",
+      ctaTitle: "Not sure what your business is missing online?",
+      ctaText: "Get a free digital presence audit and see where your business may be losing visibility, trust, or qualified opportunities.",
+      ctaButton: "Get Your Free Audit"
     },
     cta: {
       audit: "Get a Free Audit",
@@ -169,7 +200,7 @@ const copy = {
       contact: "Contact BLYNX"
     },
     home: {
-      title: "BLYNX AIMA | Local Lead Systems for Service Businesses",
+      title: "BLYNX - AIMA | Local Lead Systems for Service Businesses",
       description: "BLYNX helps local service businesses get found online, capture more qualified leads, follow up faster, and stop losing sales opportunities.",
       eyebrow: "Local Lead System for Service Businesses",
       headline: 'Local Lead Systems for Service Businesses. <span class="text-gold">Stop Losing Sales Opportunities.</span>',
@@ -289,7 +320,7 @@ const copy = {
       error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Local Lead System | BLYNX AIMA",
+      title: "Local Lead System | BLYNX - AIMA",
       description: "A simple local lead system that helps service businesses get found, capture qualified leads, organize every opportunity, and follow up faster.",
       eyebrow: "Local Lead System",
       h1: "One practical lead flow for local service businesses.",
@@ -300,7 +331,7 @@ const copy = {
       ctaSubtitle: "See where your current lead flow is losing opportunities before deciding what to improve."
     },
     aboutPage: {
-      title: "About | BLYNX AIMA",
+      title: "About | BLYNX - AIMA",
       description: "BLYNX helps local service businesses get found, capture qualified leads, organize every opportunity, and follow up faster.",
       eyebrow: "About",
       h1: "Built for service businesses that need a clearer lead flow.",
@@ -339,7 +370,7 @@ const copy = {
       ctaSubtitle: "The free audit is the simplest first step."
     },
     contactPage: {
-      title: "Contact | BLYNX AIMA",
+      title: "Contact | BLYNX - AIMA",
       description: "Contact BLYNX AIMA AGENCY for local lead flow, lead capture, and faster follow-up support.",
       eyebrow: "Contact",
       h1: "Talk with BLYNX about your local lead flow.",
@@ -383,7 +414,7 @@ const copy = {
       error: "Something went wrong sending your message. Please try again, or email us directly at hello@blynxsystems.com."
     },
     resourcesPage: {
-      title: "Resources | BLYNX AIMA",
+      title: "Resources | BLYNX - AIMA",
       description: "Practical resources for local lead flow, lead capture, and follow-up.",
       eyebrow: "Resources",
       h1: "Practical growth resources for local business owners.",
@@ -398,7 +429,7 @@ const copy = {
   es: {
     code: "es",
     htmlLang: "es",
-    titleSuffix: "BLYNX AIMA",
+    titleSuffix: "BLYNX - AIMA",
     skip: "Saltar al contenido",
     brandAria: "Inicio de BLYNX",
     navAria: "Navegación principal",
@@ -413,9 +444,32 @@ const copy = {
       about: "Nosotros",
       resources: "Recursos",
       contact: "Contacto",
+      blog: "Blog",
       audit: "Auditoría Gratis",
       privacy: "Política de Privacidad",
       terms: "Términos de Servicio"
+    },
+    blogPage: {
+      title: "Sistemas Prácticos de Crecimiento para Negocios Locales | Blog BLYNX",
+      description: "Guías prácticas sobre visibilidad, confianza, captación de oportunidades y seguimiento — escritas para dueños de negocios locales.",
+      eyebrow: "Blog de BLYNX",
+      h1: "Sistemas Prácticos de Crecimiento para Negocios Locales",
+      subtitle: "Aprende a ser encontrado, generar confianza, capturar más oportunidades y dar seguimiento antes de que el cliente elija a otro negocio.",
+      featuredLabel: "Artículo destacado",
+      latestTitle: "Últimos Artículos",
+      filterLabel: "Filtrar artículos por categoría",
+      allLabel: "Todos",
+      minRead: "min de lectura",
+      updatedLabel: "Actualizado",
+      breadcrumbHome: "Inicio",
+      breadcrumbBlog: "Blog",
+      relatedTitle: "Sigue Leyendo",
+      aboutTitle: "BLYNX",
+      aboutText: "BLYNX construye sistemas prácticos de captación que ayudan a negocios locales a ser encontrados, generar confianza, capturar oportunidades y dar seguimiento más rápido.",
+      aboutLink: "Conoce más sobre BLYNX",
+      ctaTitle: "¿No sabes qué le falta a tu negocio en internet?",
+      ctaText: "Solicita una auditoría gratis de presencia digital y descubre dónde tu negocio puede estar perdiendo visibilidad, confianza u oportunidades calificadas.",
+      ctaButton: "Solicitar Auditoría Gratis"
     },
     cta: {
       audit: "Solicitar Auditoría Gratis",
@@ -425,7 +479,7 @@ const copy = {
       contact: "Contactar a BLYNX"
     },
     home: {
-      title: "BLYNX AIMA | Sistemas de Captación para Negocios Locales",
+      title: "BLYNX - AIMA | Sistemas de Captación para Negocios Locales",
       description: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar más oportunidades, dar seguimiento más rápido y no perder posibles clientes.",
       eyebrow: "Sistemas de Captación para Negocios Locales",
       headline: 'Sistemas de Captación para Negocios Locales. <span class="text-gold">No Pierdas Posibles Clientes.</span>',
@@ -545,7 +599,7 @@ const copy = {
       error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Sistema de Captación | BLYNX AIMA",
+      title: "Sistema de Captación | BLYNX - AIMA",
       description: "Un sistema de captación que ayuda a negocios locales a ser encontrados, capturar oportunidades, organizar leads y dar seguimiento rápido.",
       eyebrow: "Sistema de Captación",
       h1: "Un flujo práctico de captación para negocios locales.",
@@ -556,7 +610,7 @@ const copy = {
       ctaSubtitle: "Descubre dónde tu flujo actual de captación puede estar perdiendo oportunidades antes de decidir qué mejorar."
     },
     aboutPage: {
-      title: "Nosotros | BLYNX AIMA",
+      title: "Nosotros | BLYNX - AIMA",
       description: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar oportunidades, organizar leads y dar seguimiento más rápido.",
       eyebrow: "Nosotros",
       h1: "Creado para negocios locales que necesitan un flujo de captación más claro.",
@@ -595,7 +649,7 @@ const copy = {
       ctaSubtitle: "La auditoría gratis es el primer paso más simple."
     },
     contactPage: {
-      title: "Contacto | BLYNX AIMA",
+      title: "Contacto | BLYNX - AIMA",
       description: "Contacta a BLYNX AIMA AGENCY para mejorar tu flujo de captación y seguimiento.",
       eyebrow: "Contacto",
       h1: "Habla con BLYNX sobre tu sistema de captación.",
@@ -639,7 +693,7 @@ const copy = {
       error: "Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
     resourcesPage: {
-      title: "Recursos | BLYNX AIMA",
+      title: "Recursos | BLYNX - AIMA",
       description: "Recursos prácticos para captación, organización de leads y seguimiento.",
       eyebrow: "Recursos",
       h1: "Recursos prácticos de crecimiento para dueños de negocios locales.",
@@ -1234,6 +1288,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit") {
           <a href="${home}#process">${t.nav.process}</a>
           <a href="${home}#results">${t.nav.results}</a>
           <a${activeClass("about")} href="${aboutHref}">${t.nav.about}</a>
+          ${blogArticles[lang].length ? `<a${activeClass("blog")} href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
           <a href="${auditHref}">${t.nav.audit}</a>
         </nav>
         <div class="header-actions">
@@ -1266,6 +1321,7 @@ function footer(lang, auditSlug = "free-audit") {
           <a href="${pagePath(lang, "services")}">${t.nav.services}</a>
           <a href="${pagePath(lang, "about")}">${t.nav.about}</a>
           <a href="${pagePath(lang, "contact")}">${t.nav.contact}</a>
+          ${blogArticles[lang].length ? `<a href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
           <a href="${pagePath(lang, auditSlug)}">${t.nav.audit}</a>
         </div>
         <div class="footer-links">
@@ -2317,7 +2373,7 @@ function languageGate() {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BLYNX AIMA | Local Lead Systems in English & Spanish</title>
+    <title>BLYNX - AIMA | Local Lead Systems in English & Spanish</title>
     <meta name="description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
     <link rel="canonical" href="${SITE_URL}/">
     <link rel="alternate" hreflang="en" href="${SITE_URL}/en">
@@ -2335,7 +2391,7 @@ function languageGate() {
     <meta name="twitter:title" content="${BUSINESS.displayName}">
     <meta name="twitter:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
     <meta name="twitter:image" content="${OG_IMAGE}">
-    ${structuredData("en", "BLYNX AIMA | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
+    ${structuredData("en", "BLYNX - AIMA | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
@@ -2447,6 +2503,301 @@ function permanentRedirectPage(targetPath, lang = "en") {
 </html>`;
 }
 
+function blogStructuredData(lang, meta, article = null) {
+  const t = copy[lang];
+  const b = t.blogPage;
+  const blogUrl = `${SITE_URL}${pagePath(lang, "blog")}`;
+  const graph = [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE_URL}/#organization`,
+      name: BUSINESS.legalName,
+      url: `${SITE_URL}/`,
+      email: BUSINESS.email,
+      image: OG_IMAGE,
+      logo: OG_IMAGE
+    },
+    {
+      "@type": "Blog",
+      "@id": `${blogUrl}#blog`,
+      url: blogUrl,
+      name: b.h1,
+      description: b.description,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      inLanguage: lang
+    }
+  ];
+  const breadcrumbItems = [
+    { name: b.breadcrumbHome, url: `${SITE_URL}/${lang}` },
+    { name: b.breadcrumbBlog, url: blogUrl }
+  ];
+
+  if (article) {
+    graph.push({
+      "@type": "BlogPosting",
+      "@id": meta.canonicalUrl,
+      mainEntityOfPage: meta.canonicalUrl,
+      url: meta.canonicalUrl,
+      headline: article.title,
+      description: article.description,
+      image: OG_IMAGE,
+      datePublished: article.publicationDate,
+      dateModified: article.updatedDate || article.publicationDate,
+      author: { "@type": "Organization", name: article.author, url: `${SITE_URL}/` },
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      isPartOf: { "@id": `${blogUrl}#blog` },
+      articleSection: article.categoryLabel,
+      keywords: article.tags.join(", "),
+      wordCount: article.wordCount,
+      inLanguage: lang
+    });
+    breadcrumbItems.push({ name: article.title, url: meta.canonicalUrl });
+  }
+
+  graph.push({
+    "@type": "BreadcrumbList",
+    "@id": `${meta.canonicalUrl}#breadcrumb`,
+    itemListElement: breadcrumbItems.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url
+    }))
+  });
+
+  return `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": graph })}</script>`;
+}
+
+// Blog pages get their own shell: hreflang alternates are only emitted when the same
+// content exists in the other language, and articles use Open Graph "article" metadata.
+function blogShell(lang, meta, body, article = null) {
+  const t = copy[lang];
+  const otherLang = lang === "en" ? "es" : "en";
+  const hasTranslation = article
+    ? blogArticles[otherLang].some((entry) => entry.slug === article.slug)
+    : blogArticles[otherLang].length > 0;
+  const switchPath = hasTranslation ? meta.switchPath : "";
+  const hreflangTags = hasTranslation
+    ? `
+    <link rel="alternate" hreflang="en" href="${SITE_URL}/en/${meta.switchPath}">
+    <link rel="alternate" hreflang="es" href="${SITE_URL}/es/${meta.switchPath}">
+    <link rel="alternate" hreflang="x-default" href="${SITE_URL}/en/${meta.switchPath}">`
+    : "";
+  const articleOgTags = article
+    ? `
+    <meta property="article:published_time" content="${article.publicationDate}">
+    <meta property="article:modified_time" content="${article.updatedDate || article.publicationDate}">
+    <meta property="article:author" content="${article.author}">
+    <meta property="article:section" content="${article.categoryLabel}">
+    ${article.tags.map((tag) => `<meta property="article:tag" content="${tag}">`).join("\n    ")}`
+    : "";
+
+  return `<!doctype html>
+<html lang="${t.htmlLang}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>${meta.title}</title>
+    <meta name="description" content="${meta.description}">
+    <link rel="canonical" href="${meta.canonicalUrl}">${hreflangTags}
+    <meta property="og:type" content="${article ? "article" : "website"}">
+    <meta property="og:site_name" content="${BUSINESS.displayName}">
+    <meta property="og:title" content="${meta.title}">
+    <meta property="og:description" content="${meta.description}">
+    <meta property="og:url" content="${meta.canonicalUrl}">
+    <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
+    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">${articleOgTags}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${meta.title}">
+    <meta name="twitter:description" content="${meta.description}">
+    <meta name="twitter:image" content="${OG_IMAGE}">
+    ${blogStructuredData(lang, meta, article)}
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/site.js" defer></script>
+  </head>
+  <body>
+    ${header(lang, "blog", switchPath)}
+    ${body}
+    ${footer(lang)}
+  </body>
+</html>`;
+}
+
+function blogMetaLine(lang, article, options = {}) {
+  const b = copy[lang].blogPage;
+  const parts = [];
+  if (options.author) parts.push(`<span>${article.author}</span>`);
+  parts.push(`<time datetime="${article.publicationDate}">${formatDate(article.publicationDate, lang)}</time>`);
+  if (article.updatedDate) {
+    parts.push(`<span>${b.updatedLabel} <time datetime="${article.updatedDate}">${formatDate(article.updatedDate, lang)}</time></span>`);
+  }
+  parts.push(`<span>${article.readingTime} ${b.minRead}</span>`);
+  return `<div class="blog-meta">${parts.join('<span aria-hidden="true">·</span>')}</div>`;
+}
+
+function blogCard(lang, article, options = {}) {
+  const href = pagePath(lang, `blog/${article.slug}`);
+  const relatedAttr = options.related ? ` data-related-article="${article.slug}"` : "";
+  const filterAttrs = options.filterable ? ` data-blog-card data-blog-category="${article.category}"` : "";
+  return `
+          <article class="blog-card"${filterAttrs}>
+            <a class="blog-card-media" href="${href}" tabindex="-1" aria-hidden="true"${relatedAttr}>
+              <img src="${article.heroImage}" alt="" width="1200" height="630" loading="lazy" decoding="async">
+            </a>
+            <div class="blog-card-body">
+              <span class="blog-kicker">${article.categoryLabel}</span>
+              <h3><a href="${href}"${relatedAttr}>${article.title}</a></h3>
+              <p>${article.description}</p>
+              ${blogMetaLine(lang, article)}
+            </div>
+          </article>`;
+}
+
+function blogIndexPage(lang) {
+  const t = copy[lang];
+  const b = t.blogPage;
+  const articles = blogArticles[lang];
+  const featured = articles.find((article) => article.featured) || articles[0];
+  const usedCategories = [...new Set(articles.map((article) => article.category))];
+  const featuredHref = pagePath(lang, `blog/${featured.slug}`);
+
+  const body = `
+    <main id="main">
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <p class="eyebrow">${b.eyebrow}</p>
+          <h1>${b.h1}</h1>
+          <p>${b.subtitle}</p>
+        </div>
+      </section>
+
+      <section class="section section-tight">
+        <div class="container">
+          <article class="blog-featured">
+            <a class="blog-featured-media" href="${featuredHref}" tabindex="-1" aria-hidden="true">
+              <img src="${featured.heroImage}" alt="" width="1200" height="630" decoding="async">
+            </a>
+            <div class="blog-featured-body">
+              <span class="blog-kicker">${b.featuredLabel}</span>
+              <h2><a href="${featuredHref}">${featured.title}</a></h2>
+              <p>${featured.description}</p>
+              ${blogMetaLine(lang, featured)}
+            </div>
+          </article>
+
+          <h2 class="visually-hidden">${b.latestTitle}</h2>
+          <div class="blog-filters" role="group" aria-label="${b.filterLabel}">
+            <button class="blog-filter is-active" type="button" data-blog-filter="all" aria-pressed="true">${b.allLabel}</button>
+            ${usedCategories
+              .map(
+                (category) =>
+                  `<button class="blog-filter" type="button" data-blog-filter="${category}" aria-pressed="false">${CATEGORIES[category][lang]}</button>`
+              )
+              .join("\n            ")}
+          </div>
+
+          <div class="blog-grid">
+            ${articles.map((article) => blogCard(lang, article, { filterable: true })).join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section-tight section-soft">
+        <div class="container">
+          <div class="cta-panel">
+            <h2>${b.ctaTitle}</h2>
+            <p>${b.ctaText}</p>
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}" data-blog-cta>${b.ctaButton}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>`;
+
+  const meta = {
+    title: b.title,
+    description: b.description,
+    canonicalUrl: `${SITE_URL}${pagePath(lang, "blog")}`,
+    switchPath: "blog"
+  };
+  return blogShell(lang, meta, body);
+}
+
+function relatedArticles(lang, current) {
+  const others = blogArticles[lang].filter((article) => article.slug !== current.slug);
+  const sameCategory = others.filter((article) => article.category === current.category);
+  const rest = others.filter((article) => article.category !== current.category);
+  return sameCategory.concat(rest).slice(0, 3);
+}
+
+function blogArticlePage(lang, article) {
+  const t = copy[lang];
+  const b = t.blogPage;
+  const canonicalUrl = `${SITE_URL}${pagePath(lang, `blog/${article.slug}`)}`;
+  const related = relatedArticles(lang, article);
+
+  const body = `
+    <main id="main">
+      <article class="article-page" data-blog-article="${article.slug}" data-blog-category="${article.category}">
+        <div class="article-container">
+          <nav class="article-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="${pagePath(lang)}">${b.breadcrumbHome}</a></li>
+              <li><a href="${pagePath(lang, "blog")}">${b.breadcrumbBlog}</a></li>
+              <li aria-current="page">${article.title}</li>
+            </ol>
+          </nav>
+          <header class="article-header">
+            <span class="blog-kicker">${article.categoryLabel}</span>
+            <h1>${article.title}</h1>
+            ${blogMetaLine(lang, article, { author: true })}
+          </header>
+          <figure class="article-hero">
+            <img src="${article.heroImage}" alt="${article.heroImageAlt}" width="1200" height="630" decoding="async">
+          </figure>
+          <div class="article-body">
+            ${article.contentHtml}
+          </div>
+          <aside class="article-cta">
+            <h2>${b.ctaTitle}</h2>
+            <p>${b.ctaText}</p>
+            <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}" data-blog-cta>${b.ctaButton}</a>
+          </aside>
+          <aside class="article-author">
+            <span class="brand-mark" aria-hidden="true">BX</span>
+            <div>
+              <strong>${b.aboutTitle}</strong>
+              <p>${b.aboutText} <a href="${pagePath(lang, "about")}">${b.aboutLink}</a>.</p>
+            </div>
+          </aside>
+        </div>
+        ${
+          related.length
+            ? `
+        <div class="container related-section">
+          <h2>${b.relatedTitle}</h2>
+          <div class="blog-grid">
+            ${related.map((entry) => blogCard(lang, entry, { related: true })).join("")}
+          </div>
+        </div>`
+            : ""
+        }
+      </article>
+    </main>`;
+
+  const meta = {
+    title: `${article.title} | BLYNX`,
+    description: article.description,
+    canonicalUrl,
+    switchPath: `blog/${article.slug}`
+  };
+  return blogShell(lang, meta, body, article);
+}
+
 write("index.html", languageGate());
 
 for (const lang of ["en", "es"]) {
@@ -2463,7 +2814,16 @@ for (const lang of ["en", "es"]) {
   write(`${lang}/privacy/index.html`, legalPage(lang, "privacy"));
   write(`${lang}/terms/index.html`, legalPage(lang, "terms"));
   write(`${lang}/resources/index.html`, permanentRedirectPage(pagePath(lang, "services"), lang));
+
+  if (blogArticles[lang].length) {
+    write(`${lang}/blog/index.html`, blogIndexPage(lang));
+    for (const article of blogArticles[lang]) {
+      write(`${lang}/blog/${article.slug}/index.html`, blogArticlePage(lang, article));
+    }
+  }
 }
+
+write("blog/index.html", permanentRedirectPage("/en/blog", "en"));
 
 for (const slug of ["free-audit", "services", "about", "contact", "privacy", "terms"]) {
   write(`${slug}/index.html`, redirectPage(slug));
@@ -2497,15 +2857,31 @@ const sitemapUrls = sitemapRoutes
   })
   .concat([{ loc: `${SITE_URL}/`, enLoc: `${SITE_URL}/en`, esLoc: `${SITE_URL}/es` }]);
 
+// Blog URLs: no hreflang alternates until the same content exists in both languages.
+for (const lang of ["en", "es"]) {
+  if (!blogArticles[lang].length) continue;
+  sitemapUrls.push({ loc: `${SITE_URL}${pagePath(lang, "blog")}` });
+  for (const article of blogArticles[lang]) {
+    sitemapUrls.push({
+      loc: `${SITE_URL}${pagePath(lang, `blog/${article.slug}`)}`,
+      lastmod: article.updatedDate || article.publicationDate
+    });
+  }
+}
+
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sitemapUrls
   .map(
     (entry) => `  <url>
-    <loc>${entry.loc}</loc>
+    <loc>${entry.loc}</loc>${entry.lastmod ? `\n    <lastmod>${entry.lastmod}</lastmod>` : ""}${
+      entry.enLoc
+        ? `
     <xhtml:link rel="alternate" hreflang="en" href="${entry.enLoc}"/>
     <xhtml:link rel="alternate" hreflang="es" href="${entry.esLoc}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${entry.enLoc}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${entry.enLoc}"/>`
+        : ""
+    }
   </url>`
   )
   .join("\n")}
