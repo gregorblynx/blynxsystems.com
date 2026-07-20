@@ -607,6 +607,58 @@ button {
   content: "";
 }
 
+/* Hero lead-flow image panel */
+.visual-stage-image {
+  display: flex;
+  min-height: 0;
+  padding: 1rem;
+}
+
+.lead-flow-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lead-flow-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.lead-flow-label {
+  position: absolute;
+  right: 5%;
+  z-index: 3;
+  transform: translateY(-50%);
+  border: 1px solid rgba(245, 184, 73, 0.42);
+  border-radius: 999px;
+  background: rgba(7, 7, 7, 0.82);
+  color: var(--gold-soft);
+  padding: 0.32rem 0.72rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.lead-flow-label-1 {
+  top: 21%;
+}
+
+.lead-flow-label-2 {
+  top: 55%;
+}
+
+.lead-flow-label-3 {
+  top: 84%;
+}
+
 .laptop-mockup {
   position: absolute;
   left: 8%;

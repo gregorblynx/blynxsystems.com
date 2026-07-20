@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .DS_Store
+.env
+.env.*
 integrations/apps-script/
 .claude/
 0g image.PNG

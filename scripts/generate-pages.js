@@ -210,18 +210,9 @@ const copy = {
       ],
       trust: ["Get Found", "Build Trust", "Capture Opportunities", "Follow Up Faster"],
       visual: {
-        aria: "Landing page, Google Business Profile, lead capture, and follow-up preview",
-        profile: "Local Business Profile",
-        open: "Open today | Nashville, TN",
-        rating: "4.8 rating | 126 reviews",
-        call: "Call Now",
+        aria: "Local lead flow: get found, capture the lead, and follow up instantly",
         demoLabel: "Example Lead Flow",
-        leadLabel: "Lead System",
-        leadTitle: "New Lead Captured",
-        leadDetail: "Smart form submitted for a service quote.",
-        automationLabel: "Follow-Up",
-        automationTitle: "Automation Started",
-        steps: ["Instant confirmation", "Owner notification", "Lead organized"]
+        flowLabels: ["Get found", "Lead captured", "Instant follow-up"]
       },
       problemEyebrow: "The problem",
       problemTitle: "Most Local Businesses Lose Leads Without Realizing It",
@@ -480,18 +471,9 @@ const copy = {
       ],
       trust: ["Ser Encontrado", "Generar Confianza", "Captar Oportunidades", "Dar Seguimiento Rápido"],
       visual: {
-        aria: "Vista previa de landing page, Google Business Profile, captación y seguimiento",
-        profile: "Perfil de Negocio Local",
-        open: "Abierto hoy | Nashville, TN",
-        rating: "4.8 calificación | 126 reseñas",
-        call: "Llamar Ahora",
+        aria: "Flujo de captación local: te encuentran, captas el lead y das seguimiento al instante",
         demoLabel: "Ejemplo de Flujo de Captación",
-        leadLabel: "Sistema de Captación",
-        leadTitle: "Nueva Oportunidad Capturada",
-        leadDetail: "Formulario enviado para solicitar una cotización.",
-        automationLabel: "Seguimiento",
-        automationTitle: "Seguimiento Iniciado",
-        steps: ["Confirmación inmediata", "Aviso al negocio", "Lead organizado"]
+        flowLabels: ["Te encuentran", "Captas el lead", "Seguimiento al instante"]
       },
       problemEyebrow: "El problema",
       problemTitle: "Muchos Negocios Locales Pierden Oportunidades Sin Darse Cuenta",
@@ -1942,58 +1924,16 @@ function homePage(lang) {
           </div>
 
           <div class="hero-visual" aria-label="${h.visual.aria}">
-            <div class="visual-stage">
-              <img class="stage-backdrop" src="/public/images/site/hero-flow.jpg" alt="" width="1000" height="1000" decoding="async" aria-hidden="true">
+            <div class="visual-stage visual-stage-image">
               <span class="demo-label">${h.visual.demoLabel}</span>
-              <div class="laptop-mockup">
-                <div class="laptop-frame">
-                  <div class="laptop-screen">
-                    <div class="browser-bar" aria-hidden="true">
-                      <span class="browser-dot"></span>
-                      <span class="browser-dot"></span>
-                      <span class="browser-dot"></span>
-                    </div>
-                    <div class="site-preview">
-                      <div class="preview-copy" aria-hidden="true">
-                        <span class="preview-line long"></span>
-                        <span class="preview-line medium"></span>
-                        <span class="preview-line short"></span>
-                        <span class="preview-button"></span>
-                      </div>
-                      <div class="preview-panel" aria-hidden="true">
-                        <span class="preview-tile is-gold"></span>
-                        <span class="preview-tile"></span>
-                        <span class="preview-tile"></span>
-                        <span class="preview-tile is-gold"></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="laptop-base" aria-hidden="true"></div>
-              </div>
-
-              <div class="phone-mockup">
-                <div class="phone-screen">
-                  <div class="gbp-header" aria-hidden="true"></div>
-                  <div class="gbp-title">${h.visual.profile}</div>
-                  <div class="gbp-meta">${h.visual.open}</div>
-                  <div class="gbp-rating">${h.visual.rating}</div>
-                  <div class="gbp-action">${h.visual.call}</div>
-                </div>
-              </div>
-
-              <div class="floating-card">
-                <div class="mini-label">${h.visual.leadLabel}</div>
-                <div class="mini-title">${h.visual.leadTitle}</div>
-                <div class="mini-detail">${h.visual.leadDetail}</div>
-              </div>
-
-              <div class="automation-card">
-                <div class="mini-label">${h.visual.automationLabel}</div>
-                <div class="mini-title">${h.visual.automationTitle}</div>
-                <div class="automation-steps">
-                  ${h.visual.steps.map((step) => `<span class="automation-step">${step}</span>`).join("")}
-                </div>
+              <div class="lead-flow-wrap">
+                <img class="lead-flow-image" src="/public/images/lead-flow.png" alt="${h.visual.aria}" width="896" height="1152" decoding="async">
+                ${h.visual.flowLabels
+                  .map(
+                    (label, index) =>
+                      `<span class="lead-flow-label lead-flow-label-${index + 1}">${label}</span>`
+                  )
+                  .join("")}
               </div>
             </div>
           </div>
