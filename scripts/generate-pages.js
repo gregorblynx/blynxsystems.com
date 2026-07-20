@@ -2078,12 +2078,6 @@ function homePage(lang) {
         </div>
       </section>
 
-      <section class="scene-band" aria-label="Nashville, Tennessee">
-        <div class="container">
-          <img src="/public/images/site/nashville.jpg" alt="${SITE_MEDIA_ALTS.nashville[lang]}" width="1200" height="510" loading="lazy" decoding="async">
-        </div>
-      </section>
-
       <section class="section" id="final-cta">
         <div class="container">
           <div class="cta-panel">
