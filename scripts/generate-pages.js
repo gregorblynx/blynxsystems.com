@@ -15,18 +15,18 @@ const SITE_URL = "https://www.blynxsystems.com";
 const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 const LEGAL_EFFECTIVE_DATE = "July 9, 2026";
 const BUSINESS = {
-  legalName: "BLYNX AIMA AGENCY",
-  displayName: "BLYNX - AIMA",
+  legalName: "BLYNX Systems",
+  displayName: "BLYNX Systems",
   shortName: "BLYNX",
   email: "hello@blynxsystems.com",
-  phone: "6452469219",
+  phone: "",
   location: "Nashville, Tennessee",
   city: "Nashville",
   region: "TN",
   country: "US",
   serviceArea: "United States",
-  instagramHandle: "blynx.ai",
-  instagramUrl: "https://www.instagram.com/blynx.ai/"
+  instagramHandle: "blynxsystems",
+  instagramUrl: "https://www.instagram.com/blynxsystems/"
 };
 
 function phoneDigits() {
@@ -87,8 +87,8 @@ function contactLine(icon, content) {
 function structuredData(lang, title, description, canonicalUrl, breadcrumbs = []) {
   const orgDescription =
     lang === "es"
-      ? "BLYNX ayuda a negocios locales de servicios a aparecer en Google, captar más leads calificados y hacer seguimiento más rápido."
-      : "BLYNX helps local service businesses get found online, capture more qualified leads, and follow up faster.";
+      ? "BLYNX crea sistemas digitales que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades y dar seguimiento más rápido."
+      : "BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, and follow up faster.";
   const data = {
     "@context": "https://schema.org",
     "@graph": [
@@ -150,7 +150,7 @@ const copy = {
   en: {
     code: "en",
     htmlLang: "en",
-    titleSuffix: "BLYNX - AIMA",
+    titleSuffix: "BLYNX Systems",
     skip: "Skip to content",
     brandAria: "BLYNX home",
     navAria: "Primary navigation",
@@ -159,7 +159,7 @@ const copy = {
     footer: "Built for local business growth.",
     nav: {
       home: "Home",
-      services: "System",
+      services: "Systems",
       process: "Process",
       results: "Results",
       about: "About",
@@ -193,19 +193,22 @@ const copy = {
       ctaButton: "Get Your Free Audit"
     },
     cta: {
-      audit: "Get a Free Audit",
-      auditLong: "Get Your Free Audit",
-      auditShort: "Get a Free Audit",
-      services: "See How It Works",
+      audit: "Request a Digital Audit",
+      auditLong: "Request Your Digital Audit",
+      auditShort: "Digital Audit",
+      services: "Explore Our Systems",
       contact: "Contact BLYNX"
     },
     home: {
-      title: "BLYNX - AIMA | Local Lead Systems for Service Businesses",
-      description: "BLYNX helps local service businesses get found online, capture more qualified leads, follow up faster, and stop losing sales opportunities.",
-      eyebrow: "Local Lead System for Service Businesses",
-      headline: 'Local Lead Systems for Service Businesses. <span class="text-gold">Stop Losing Sales Opportunities.</span>',
-      subtitle: "We help local businesses get found online, capture more qualified leads, follow up faster, and keep better control of every opportunity.",
-      trust: ["Get Found", "Capture Leads", "Follow Up Faster", "Track Opportunities"],
+      title: "Digital Systems for Local Businesses | BLYNX Systems",
+      description: "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.",
+      eyebrow: "Digital systems for local businesses",
+      headline: 'Digital systems built to help <span class="text-gold">local businesses grow.</span>',
+      subtitle: [
+        "We help local businesses get found, build trust, capture opportunities, organize leads, and follow up faster.",
+        "Whether you are starting from zero or improving what you already have, we build the system your business needs to turn online attention into real customer opportunities."
+      ],
+      trust: ["Get Found", "Build Trust", "Capture Opportunities", "Follow Up Faster"],
       visual: {
         aria: "Landing page, Google Business Profile, lead capture, and follow-up preview",
         profile: "Local Business Profile",
@@ -223,13 +226,6 @@ const copy = {
       problemEyebrow: "The problem",
       problemTitle: "Most Local Businesses Lose Leads Without Realizing It",
       problemCopy: "People visit your website, Google profile, or landing page — but if there is no clear system to capture, organize, and follow up with them, those opportunities disappear.",
-      servicesEyebrow: "The system",
-      servicesTitle: "The System We Build",
-      servicesSubtitle: "A simple lead flow built to help service businesses get found, capture leads, track opportunities, follow up faster, and build trust.",
-      pathsEyebrow: "Digital Foundation + Lead System",
-      pathsTitle: "Two Ways We Can Help",
-      pathsSubtitle: "Whether you already have an online presence or you are starting from zero, BLYNX builds a simple lead system to help your business get found, capture opportunities, and follow up faster.",
-      pathsSupport: "Not sure where your business stands? Start with a free audit and we\u2019ll show you the clearest next step.",
       stageBanner: {
         existing: "You already have a digital presence. We\u2019ll help you improve visibility, capture more qualified leads, and follow up faster.",
         zero: "Starting from zero? We\u2019ll help you build the digital foundation needed to get found, receive opportunities, and follow up professionally."
@@ -243,7 +239,7 @@ const copy = {
       resultsTitle: "Built to Stop Missed Sales Opportunities",
       aboutEyebrow: "About BLYNX",
       aboutTitle: "Built for Local Service Businesses",
-      aboutCopy: "BLYNX helps local businesses build practical lead systems that are simple, trackable, and focused on real opportunities — not complicated marketing services.",
+      aboutCopy: "BLYNX builds practical digital presence and lead systems focused on visibility, trust, organized opportunities, and faster follow-up — not disconnected marketing services.",
       aboutBullets: [
         "Based in Nashville, Tennessee.",
         "Serving local businesses across the United States.",
@@ -254,23 +250,23 @@ const copy = {
         ["Capture", "A focused landing page, smart forms, and organized lead collection."],
         ["Follow Up", "Simple lead organization and reminders that keep opportunities moving."]
       ],
-      finalTitle: "Ready to Stop Losing Sales Opportunities?",
-      finalSubtitle: "Start with a free audit and see where your business may be missing leads, trust, and follow-up opportunities."
+      finalTitle: "Ready to Build a Clearer Digital System?",
+      finalSubtitle: "Start with a digital audit to see what can be kept, what needs improvement, and what should be built."
     },
     auditPage: {
-      title: "Get Your Free Lead System Audit | BLYNX",
-      description: "Request a free lead system audit from BLYNX for your local business.",
-      eyebrow: "Free audit",
-      h1: "Get Your Free Lead System Audit",
-      subtitle: "See where your business may be losing opportunities and discover how to capture, organize, and follow up with more qualified leads.",
+      title: "Request Your Digital Audit | BLYNX Systems",
+      description: "Request a digital audit to identify what your local business should keep, improve, or build next.",
+      eyebrow: "Digital audit",
+      h1: "Request Your Digital Audit",
+      subtitle: "See what your business can keep, what needs improvement, and which digital system can create the clearest next step.",
       trust: "AI-powered for speed. Human-reviewed for quality.",
-      introTitle: "A simple snapshot of your current lead flow.",
-      introCopy: "This free audit gives you a simple snapshot of your current lead flow. We review your website or landing page, Google presence, lead capture process, reviews, and follow-up opportunities.",
+      introTitle: "A practical snapshot of your digital system.",
+      introCopy: "This audit reviews your website or landing page, Google presence, business information, trust signals, lead capture process, and follow-up opportunities.",
       fitLine: "This audit works whether you already have a digital presence or you are starting from zero.",
       bullets: [
-        "Website or landing page opportunities.",
-        "Google presence, reviews, and local trust signals.",
-        "Lead capture process and follow-up opportunities."
+        "Digital presence, website, and Google opportunities.",
+        "Business information, reviews, and local trust signals.",
+        "Lead capture, organization, and follow-up opportunities."
       ],
       fields: {
         fullName: "Full Name",
@@ -320,30 +316,28 @@ const copy = {
       error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Local Lead System | BLYNX - AIMA",
-      description: "A simple local lead system that helps service businesses get found, capture qualified leads, organize every opportunity, and follow up faster.",
-      eyebrow: "Local Lead System",
-      h1: "One practical lead flow for local service businesses.",
-      subtitle: "BLYNX builds the pieces that help a local business turn online interest into organized opportunities: visibility, trust, capture, follow-up, reviews, and clear reporting.",
-      optionalTitle: "Optional Add-On",
-      optionalCopy: "Social media support can be added only when it supports local trust and follow-up. It is not the main BLYNX service.",
-      ctaTitle: "Start with the free audit.",
-      ctaSubtitle: "See where your current lead flow is losing opportunities before deciding what to improve."
+      title: "Digital Presence and Lead Systems | BLYNX Systems",
+      description: "Compare BLYNX digital presence and local lead systems for local businesses, including implementation scope, starting prices, benefits, and conditions.",
+      eyebrow: "BLYNX Systems",
+      h1: "Choose the digital system your business needs next.",
+      subtitle: "Build a stronger digital foundation or connect visibility, lead capture, organization, and follow-up into one complete system.",
+      ctaTitle: "Not sure which system fits?",
+      ctaSubtitle: "Request a digital audit to determine what can be kept, what needs improvement, and what should be built."
     },
     aboutPage: {
-      title: "About | BLYNX - AIMA",
+      title: "About | BLYNX Systems",
       description: "BLYNX helps local service businesses get found, capture qualified leads, organize every opportunity, and follow up faster.",
       eyebrow: "About",
-      h1: "Built for service businesses that need a clearer lead flow.",
-      subtitle: "BLYNX helps local businesses get found online, capture leads, and follow up faster without adding complicated tools to their day.",
+      h1: "Built for local businesses that need a clearer digital system.",
+      subtitle: "BLYNX builds digital presence and lead systems that improve visibility, trust, opportunity capture, organization, and follow-up.",
       cards: [
         ["Who BLYNX Helps", "BLYNX serves local businesses across the United States that rely on calls, quote requests, bookings, inquiries, and customer trust to grow."],
-        ["What BLYNX Builds", "We build a simple local lead system: get found, capture the lead, organize the opportunity, and follow up faster."],
+        ["What BLYNX Builds", "We build two core systems: a Digital Presence System and a Local Lead System that includes capture, organization, and follow-up."],
         ["Why It Matters", "Local customers compare businesses quickly. A clearer lead flow helps reduce missed calls, forgotten forms, and lost sales opportunities."]
       ],
       positionEyebrow: "Positioning",
-      positionTitle: "One clear outcome: better lead flow.",
-      positionCopy: "BLYNX is based in Nashville, Tennessee and supports local service businesses nationwide. The focus is practical growth infrastructure: clearer local visibility, easier lead capture, better organization, and faster follow-up.",
+      positionTitle: "Two systems built around practical growth.",
+      positionCopy: "BLYNX is based in Nashville, Tennessee and supports local businesses nationwide. The focus is practical digital infrastructure: visibility, trust, clear contact pathways, organized opportunities, and faster follow-up.",
       bullets: [
         "Local visibility improvements that help customers find the business.",
         "Focused landing pages that help visitors take the next step.",
@@ -353,7 +347,7 @@ const copy = {
       stats: [
         ["Nashville", "Based in Tennessee and serving local businesses across the United States."],
         ["Practical", "Clear systems for owners who want outcomes, not technical confusion."],
-        ["Focused", "Not a social media-first agency. Social content is available only as an optional add-on."]
+        ["Focused", "Digital Presence and Local Lead Systems are the core offers. Social media support is available only as an optional add-on."]
       ],
       founder: {
         eyebrow: "Founder-led",
@@ -370,8 +364,8 @@ const copy = {
       ctaSubtitle: "The free audit is the simplest first step."
     },
     contactPage: {
-      title: "Contact | BLYNX - AIMA",
-      description: "Contact BLYNX AIMA AGENCY for local lead flow, lead capture, and faster follow-up support.",
+      title: "Contact | BLYNX Systems",
+      description: "Contact BLYNX Systems about digital presence, lead capture, opportunity organization, and follow-up support.",
       eyebrow: "Contact",
       h1: "Talk with BLYNX about your local lead flow.",
       subtitle: "Use the form below or start with the free audit if you want to see where leads may be getting lost.",
@@ -394,13 +388,10 @@ const copy = {
         message: "Message"
       },
       topics: [
-        "Local lead system",
-        "Google Business Profile",
-        "Focused landing page",
-        "Lead capture",
-        "Follow-up",
-        "Review strategy",
-        "Reporting",
+        "Digital Presence System",
+        "Local Lead System",
+        "Digital audit",
+        "Social Media Add-On",
         "Not sure"
       ],
       languageOptions: ["English", "Spanish"],
@@ -414,7 +405,7 @@ const copy = {
       error: "Something went wrong sending your message. Please try again, or email us directly at hello@blynxsystems.com."
     },
     resourcesPage: {
-      title: "Resources | BLYNX - AIMA",
+      title: "Resources | BLYNX Systems",
       description: "Practical resources for local lead flow, lead capture, and follow-up.",
       eyebrow: "Resources",
       h1: "Practical growth resources for local business owners.",
@@ -429,7 +420,7 @@ const copy = {
   es: {
     code: "es",
     htmlLang: "es",
-    titleSuffix: "BLYNX - AIMA",
+    titleSuffix: "BLYNX Systems",
     skip: "Saltar al contenido",
     brandAria: "Inicio de BLYNX",
     navAria: "Navegación principal",
@@ -438,7 +429,7 @@ const copy = {
     footer: "Creado para el crecimiento de negocios locales.",
     nav: {
       home: "Inicio",
-      services: "Sistema",
+      services: "Sistemas",
       process: "Proceso",
       results: "Resultados",
       about: "Nosotros",
@@ -472,19 +463,22 @@ const copy = {
       ctaButton: "Solicitar Auditoría Gratis"
     },
     cta: {
-      audit: "Solicitar Auditoría Gratis",
-      auditLong: "Solicitar tu Auditoría Gratis",
-      auditShort: "Auditoría Gratis",
-      services: "Ver Cómo Funciona",
+      audit: "Solicitar una Auditoría Digital",
+      auditLong: "Solicita tu Auditoría Digital",
+      auditShort: "Auditoría Digital",
+      services: "Conocer Nuestros Sistemas",
       contact: "Contactar a BLYNX"
     },
     home: {
-      title: "BLYNX - AIMA | Sistemas de Captación para Negocios Locales",
-      description: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar más oportunidades, dar seguimiento más rápido y no perder posibles clientes.",
-      eyebrow: "Sistemas de Captación para Negocios Locales",
-      headline: 'Sistemas de Captación para Negocios Locales. <span class="text-gold">No Pierdas Posibles Clientes.</span>',
-      subtitle: "Ayudamos a negocios locales a ser encontrados en internet, capturar más oportunidades, dar seguimiento más rápido y no perder posibles clientes.",
-      trust: ["Ser Encontrado", "Capturar Oportunidades", "Dar Seguimiento Rápido", "Organizar Leads"],
+      title: "Sistemas digitales para negocios locales | BLYNX Systems",
+      description: "BLYNX crea sistemas de presencia digital y captación que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades y dar seguimiento más rápido.",
+      eyebrow: "Sistemas digitales para negocios locales",
+      headline: 'Sistemas digitales creados para ayudar a crecer a <span class="text-gold">negocios locales.</span>',
+      subtitle: [
+        "Ayudamos a negocios locales a ser encontrados, generar confianza, captar oportunidades, organizar prospectos y dar seguimiento más rápido.",
+        "Ya sea que comiences desde cero o necesites mejorar lo que ya tienes, construimos el sistema que tu negocio necesita para convertir la atención digital en oportunidades reales de clientes."
+      ],
+      trust: ["Ser Encontrado", "Generar Confianza", "Captar Oportunidades", "Dar Seguimiento Rápido"],
       visual: {
         aria: "Vista previa de landing page, Google Business Profile, captación y seguimiento",
         profile: "Perfil de Negocio Local",
@@ -502,13 +496,6 @@ const copy = {
       problemEyebrow: "El problema",
       problemTitle: "Muchos Negocios Locales Pierden Oportunidades Sin Darse Cuenta",
       problemCopy: "Las personas visitan tu sitio, perfil de Google o landing page, pero si no hay un sistema claro para capturar, organizar y dar seguimiento, esas oportunidades desaparecen.",
-      servicesEyebrow: "El sistema",
-      servicesTitle: "El Sistema que Construimos",
-      servicesSubtitle: "Un flujo simple de captación creado para ayudar a negocios locales a ser encontrados, capturar oportunidades, organizar leads, dar seguimiento rápido y generar confianza.",
-      pathsEyebrow: "Base Digital + Sistema de Captación",
-      pathsTitle: "Dos Formas en que Podemos Ayudarte",
-      pathsSubtitle: "Ya sea que tengas presencia en internet o estés empezando desde cero, BLYNX construye un sistema simple de captación para ayudar a tu negocio a ser encontrado, capturar oportunidades y dar seguimiento más rápido.",
-      pathsSupport: "¿No estás seguro en qué punto está tu negocio? Empieza con una auditoría gratis y te mostraremos el siguiente paso más claro.",
       stageBanner: {
         existing: "Ya tienes presencia digital. Te ayudamos a mejorar visibilidad, capturar más oportunidades calificadas y dar seguimiento rápido.",
         zero: "¿Estás empezando desde cero? Te ayudamos a construir la base digital necesaria para ser encontrado, recibir oportunidades y dar seguimiento profesional."
@@ -522,7 +509,7 @@ const copy = {
       resultsTitle: "Creado para Reducir Oportunidades Perdidas",
       aboutEyebrow: "Sobre BLYNX",
       aboutTitle: "Creado para Negocios Locales",
-      aboutCopy: "BLYNX ayuda a negocios locales a crear sistemas prácticos de captación que son simples, medibles y enfocados en oportunidades reales, no en servicios de marketing complicados.",
+      aboutCopy: "BLYNX crea sistemas prácticos de presencia digital y captación enfocados en visibilidad, confianza, oportunidades organizadas y seguimiento más rápido, no en servicios de marketing desconectados.",
       aboutBullets: [
         "Basados en Nashville, Tennessee.",
         "Servimos a negocios locales en todo Estados Unidos.",
@@ -533,23 +520,23 @@ const copy = {
         ["Capturar", "Landing page enfocada, formularios simples y captación organizada."],
         ["Seguimiento", "Organización simple de leads y recordatorios para mover cada oportunidad."]
       ],
-      finalTitle: "¿Listo para Dejar de Perder Posibles Clientes?",
-      finalSubtitle: "Empieza con una auditoría gratis y descubre dónde tu negocio puede estar perdiendo oportunidades, confianza y seguimiento."
+      finalTitle: "¿Listo para Construir un Sistema Digital Más Claro?",
+      finalSubtitle: "Comienza con una auditoría digital para saber qué se puede conservar, qué necesita mejorarse y qué debe construirse."
     },
     auditPage: {
-      title: "Solicitar Auditoría Digital Gratis | BLYNX",
-      description: "Solicita una auditoría gratis del flujo de captación de tu negocio local.",
-      eyebrow: "Auditoría gratis",
-      h1: "Solicita tu Auditoría Gratis del Sistema de Captación",
-      subtitle: "Descubre dónde tu negocio puede estar perdiendo oportunidades y cómo capturar, organizar y dar seguimiento a más posibles clientes.",
+      title: "Solicita tu Auditoría Digital | BLYNX Systems",
+      description: "Solicita una auditoría digital para identificar qué debe conservar, mejorar o construir tu negocio local.",
+      eyebrow: "Auditoría digital",
+      h1: "Solicita tu Auditoría Digital",
+      subtitle: "Descubre qué puede conservar tu negocio, qué necesita mejorarse y cuál sistema digital ofrece el siguiente paso más claro.",
       trust: "Impulsada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
-      introTitle: "Una revisión simple de tu flujo actual de captación.",
-      introCopy: "Esta auditoría gratis te da una revisión simple de tu flujo actual de captación. Revisamos tu sitio o landing page, presencia en Google, proceso para recibir leads, reseñas y oportunidades de seguimiento.",
+      introTitle: "Una revisión práctica de tu sistema digital.",
+      introCopy: "Esta auditoría revisa tu sitio o landing page, presencia en Google, información comercial, señales de confianza, proceso de captación y oportunidades de seguimiento.",
       fitLine: "Esta auditoría funciona tanto si ya tienes presencia digital como si estás empezando desde cero.",
       bullets: [
-        "Oportunidades en tu sitio o landing page.",
-        "Presencia en Google, reseñas y señales de confianza.",
-        "Proceso para recibir leads y oportunidades de seguimiento."
+        "Oportunidades de presencia digital, sitio web y Google.",
+        "Información comercial, reseñas y señales de confianza local.",
+        "Oportunidades de captación, organización y seguimiento."
       ],
       fields: {
         fullName: "Nombre completo",
@@ -599,30 +586,28 @@ const copy = {
       error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Sistema de Captación | BLYNX - AIMA",
-      description: "Un sistema de captación que ayuda a negocios locales a ser encontrados, capturar oportunidades, organizar leads y dar seguimiento rápido.",
-      eyebrow: "Sistema de Captación",
-      h1: "Un flujo práctico de captación para negocios locales.",
-      subtitle: "BLYNX construye las piezas que ayudan a convertir el interés en internet en oportunidades organizadas: visibilidad, confianza, captación, seguimiento, reseñas y reportes claros.",
-      optionalTitle: "Enfoque Simple",
-      optionalCopy: "BLYNX se enfoca en sistemas prácticos de captación y seguimiento para oportunidades reales. Mantenemos el proceso simple, claro y fácil de manejar.",
-      ctaTitle: "Empieza con la auditoría gratis.",
-      ctaSubtitle: "Descubre dónde tu flujo actual de captación puede estar perdiendo oportunidades antes de decidir qué mejorar."
+      title: "Sistemas de Presencia Digital y Captación | BLYNX Systems",
+      description: "Compara los sistemas de presencia digital y captación de BLYNX para negocios locales, incluyendo alcance, precios iniciales, beneficios y condiciones.",
+      eyebrow: "BLYNX Systems",
+      h1: "Elige el sistema digital que tu negocio necesita ahora.",
+      subtitle: "Construye una base digital más sólida o conecta visibilidad, captación, organización y seguimiento en un sistema completo.",
+      ctaTitle: "¿No sabes cuál sistema necesitas?",
+      ctaSubtitle: "Solicita una auditoría digital para determinar qué se puede conservar, qué necesita mejorarse y qué debe construirse."
     },
     aboutPage: {
-      title: "Nosotros | BLYNX - AIMA",
+      title: "Nosotros | BLYNX Systems",
       description: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar oportunidades, organizar leads y dar seguimiento más rápido.",
       eyebrow: "Nosotros",
-      h1: "Creado para negocios locales que necesitan un flujo de captación más claro.",
-      subtitle: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar oportunidades y dar seguimiento rápido sin agregar herramientas complicadas al día a día.",
+      h1: "Creado para negocios locales que necesitan un sistema digital más claro.",
+      subtitle: "BLYNX crea sistemas de presencia digital y captación que mejoran visibilidad, confianza, captación, organización y seguimiento.",
       cards: [
         ["A Quién Ayuda BLYNX", "BLYNX sirve a negocios locales en Estados Unidos que dependen de llamadas, solicitudes de cotización, reservas, consultas y confianza del cliente para crecer."],
-        ["Qué Construye BLYNX", "Construimos un sistema de captación simple: ser encontrado, capturar la oportunidad, organizar el lead y dar seguimiento rápido."],
+        ["Qué Construye BLYNX", "Construimos dos sistemas principales: un Sistema de Presencia Digital y un Sistema Local de Captación con organización y seguimiento."],
         ["Por Qué Importa", "Los clientes locales comparan negocios rápidamente. Un flujo más claro ayuda a reducir llamadas perdidas, formularios olvidados y posibles clientes perdidos."]
       ],
       positionEyebrow: "Posicionamiento",
-      positionTitle: "Un resultado claro: mejor flujo de captación.",
-      positionCopy: "BLYNX está basado en Nashville, Tennessee y apoya a negocios locales en todo Estados Unidos. El enfoque es infraestructura práctica de crecimiento: visibilidad local más clara, captación más fácil, mejor organización y seguimiento más rápido.",
+      positionTitle: "Dos sistemas creados para un crecimiento práctico.",
+      positionCopy: "BLYNX está basado en Nashville, Tennessee y apoya a negocios locales en todo Estados Unidos. El enfoque es infraestructura digital práctica: visibilidad, confianza, rutas claras de contacto, oportunidades organizadas y seguimiento más rápido.",
       bullets: [
         "Mejoras de visibilidad local que ayudan a los clientes a encontrar el negocio.",
         "Landing pages enfocadas que ayudan al visitante a tomar el siguiente paso.",
@@ -632,7 +617,7 @@ const copy = {
       stats: [
         ["Nashville", "Basados en Tennessee y sirviendo a negocios locales en todo Estados Unidos."],
         ["Práctico", "Sistemas claros para dueños que quieren resultados, no confusión técnica."],
-        ["Enfocado", "No somos una agencia general de marketing. Nos enfocamos en captación, organización y seguimiento."]
+        ["Enfocado", "Los Sistemas de Presencia Digital y Captación son las ofertas principales. El apoyo para redes sociales es solo un complemento opcional."]
       ],
       founder: {
         eyebrow: "Dirigido por su fundador",
@@ -649,8 +634,8 @@ const copy = {
       ctaSubtitle: "La auditoría gratis es el primer paso más simple."
     },
     contactPage: {
-      title: "Contacto | BLYNX - AIMA",
-      description: "Contacta a BLYNX AIMA AGENCY para mejorar tu flujo de captación y seguimiento.",
+      title: "Contacto | BLYNX Systems",
+      description: "Contacta a BLYNX Systems sobre presencia digital, captación, organización de oportunidades y seguimiento.",
       eyebrow: "Contacto",
       h1: "Habla con BLYNX sobre tu sistema de captación.",
       subtitle: "Usa el formulario de abajo o empieza con la auditoría gratis si quieres ver dónde se pueden estar perdiendo oportunidades.",
@@ -673,13 +658,10 @@ const copy = {
         message: "Mensaje"
       },
       topics: [
-        "Sistema de captación",
-        "Google Business Profile",
-        "Landing page enfocada",
-        "Captura de oportunidades",
-        "Seguimiento",
-        "Estrategia de reseñas",
-        "Reportes",
+        "Sistema de Presencia Digital",
+        "Sistema Local de Captación y Seguimiento",
+        "Auditoría digital",
+        "Complemento de Redes Sociales",
         "No estoy seguro"
       ],
       languageOptions: ["Inglés", "Español"],
@@ -693,7 +675,7 @@ const copy = {
       error: "Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
     resourcesPage: {
-      title: "Recursos | BLYNX - AIMA",
+      title: "Recursos | BLYNX Systems",
       description: "Recursos prácticos para captación, organización de leads y seguimiento.",
       eyebrow: "Recursos",
       h1: "Recursos prácticos de crecimiento para dueños de negocios locales.",
@@ -707,26 +689,406 @@ const copy = {
   }
 };
 
-const services = {
-  en: [
-    ["Lead Flow Audit", "Review how customers find the business, take action, and move into follow-up."],
-    ["Google Visibility Tune-Up", "Improve local visibility, trust signals, business information, photos, reviews, and call opportunities."],
-    ["Focused Lead Page", "A simple page designed to turn visitors into calls, quote requests, or booked appointments."],
-    ["Lead Capture & Organization", "Smart forms, contact buttons, quote request flow, and organized lead collection."],
-    ["Fast Follow-Up", "Basic email, SMS, or WhatsApp follow-up so qualified leads do not get lost."],
-    ["Review Request Flow", "A simple system to help the business request, organize, and improve customer reviews."],
-    ["Monthly Lead Report", "A clear monthly report showing what improved, what leads came in, and what should be optimized next."]
-  ],
-  es: [
-    ["Auditoría del Flujo de Captación", "Revisión de cómo los clientes encuentran el negocio, toman acción y pasan al seguimiento."],
-    ["Ajuste de Visibilidad en Google", "Mejoras de visibilidad local, confianza, información del negocio, fotos, reseñas y oportunidades de llamada."],
-    ["Página Enfocada en Oportunidades", "Una página simple diseñada para convertir visitantes en llamadas, cotizaciones o citas agendadas."],
-    ["Captura y Organización de Leads", "Formularios simples, botones de contacto, flujo de cotización y captación organizada."],
-    ["Seguimiento Rápido", "Seguimiento básico por email, SMS o WhatsApp para que las oportunidades no se pierdan."],
-    ["Flujo para Pedir Reseñas", "Un sistema simple para pedir, organizar y mejorar las reseñas de clientes."],
-    ["Reporte Mensual de Captación", "Reporte mensual claro sobre qué mejoró, qué oportunidades llegaron y qué se debe optimizar después."]
-  ]
+const commercialOffer = {
+  en: {
+    eyebrow: "Two digital systems",
+    title: "Two systems. One clear goal.",
+    intro:
+      "Every business is at a different stage. Some need a stronger digital foundation. Others need a complete system to capture, organize, and follow up with customer opportunities.",
+    whoTitle: "Who it is for",
+    implementationTitle: "What we implement",
+    resultTitle: "What this system helps you do",
+    detailsLink: "See full implementation scope",
+    systems: [
+      {
+        id: "digital-presence-system",
+        name: "Digital Presence System",
+        startingPrice: 1500,
+        price: "",
+        positioning:
+          "For businesses that need to build, improve, or organize the digital foundation customers use to find and trust them.",
+        ideal: [
+          "Are starting from zero",
+          "Have an outdated website",
+          "Have incomplete business information",
+          "Are difficult to find online",
+          "Have a digital presence that does not clearly explain the service",
+          "Need stronger trust and contact pathways"
+        ],
+        implementationLead: "",
+        implementation: [
+          "Initial digital audit",
+          "New website, landing page, or improvement of the existing website",
+          "Mobile-friendly customer experience",
+          "Clear service and value proposition",
+          "Contact and quote buttons",
+          "Contact or quote form",
+          "Google Business Profile setup or optimization",
+          "Core business information cleanup",
+          "Basic local SEO structure",
+          "Google Analytics and website tracking",
+          "Review-generation foundation",
+          "Connection to the business’s primary communication channels",
+          "Testing and launch"
+        ],
+        benefits: [
+          "Be easier to find",
+          "Look more professional",
+          "Build customer confidence",
+          "Explain your services clearly",
+          "Give customers a simple next step",
+          "Create a stronger foundation for future marketing"
+        ],
+        cta: "Build or Improve My Digital Presence",
+        ctaTarget: "free-audit",
+        pricingNote:
+          "Final pricing depends on the condition of the existing digital presence and the approved project scope."
+      },
+      {
+        id: "local-lead-system",
+        name: "Local Lead System",
+        startingPrice: 2500,
+        price: "",
+        positioning:
+          "For businesses that need more than visibility and want a complete system to capture, organize, and follow up with customer opportunities.",
+        ideal: [
+          "Receive calls, forms, texts, or messages from different channels",
+          "Lose track of potential customers",
+          "Respond too slowly",
+          "Do not have an organized follow-up process",
+          "Need confirmations, reminders, and lead organization",
+          "Want a more scalable customer-acquisition system"
+        ],
+        implementationLead: "Everything included in the Digital Presence System, plus:",
+        implementation: [
+          "Smart contact or quote forms",
+          "Lead qualification fields",
+          "Simple lead-management pipeline",
+          "Centralized opportunity organization",
+          "Automatic confirmation messages",
+          "Internal lead notifications",
+          "Email, SMS, or WhatsApp follow-up workflows when technically available",
+          "Appointment or quote reminders",
+          "Missed-opportunity follow-up",
+          "Review-request workflows",
+          "Customer communication templates",
+          "Basic automation setup",
+          "Workflow documentation",
+          "Team training",
+          "Full system testing"
+        ],
+        benefits: [
+          "Capture more customer opportunities",
+          "Respond faster",
+          "Keep leads organized",
+          "Reduce missed follow-ups",
+          "Create a more consistent customer experience",
+          "Give the team a clearer process",
+          "Prepare the business for future automation and growth"
+        ],
+        cta: "Build My Local Lead System",
+        ctaTarget: "free-audit",
+        pricingNote:
+          "Final pricing depends on the number of workflows, communication channels, integrations, and the approved project scope."
+      }
+    ],
+    comparison: {
+      eyebrow: "System comparison",
+      title: "Which system does your business need?",
+      cards: [
+        {
+          name: "Digital Presence System",
+          label: "Best for",
+          items: ["Visibility", "Trust", "Website", "Google presence", "Clear contact pathway", "Strong digital foundation"]
+        },
+        {
+          name: "Local Lead System",
+          label: "Best for",
+          items: [
+            "Everything in Digital Presence",
+            "Lead capture",
+            "Opportunity organization",
+            "Faster follow-up",
+            "Confirmations and reminders",
+            "Basic automation",
+            "Team workflow"
+          ]
+        }
+      ],
+      recommendationTitle: "Not sure which one fits your business?",
+      recommendation:
+        "We begin with a digital audit to determine what can be kept, what needs improvement, and what should be built.",
+      cta: "Request Your Digital Audit",
+      ctaTarget: "free-audit"
+    },
+    social: {
+      eyebrow: "Optional add-on",
+      title: "Optional Add-On: Social Media Support",
+      copy: [
+        "Social media can support the digital system, but it is not the system itself.",
+        "Businesses that need consistent content and publishing support may add a separate social media service."
+      ],
+      inclusionsTitle: "Potential inclusions",
+      inclusions: [
+        "Monthly content planning",
+        "Branded posts and carousels",
+        "Captions",
+        "Short-form video editing using supplied footage",
+        "Content calendar",
+        "Scheduling and publishing",
+        "Basic monthly performance summary"
+      ],
+      note:
+        "Social media management is quoted separately based on publishing volume, platforms, content-production needs, and management scope.",
+      cta: "Ask About the Social Media Add-On",
+      ctaTarget: "contact"
+    },
+    faq: {
+      eyebrow: "Frequently asked questions",
+      title: "Clear answers before you choose a system",
+      items: [
+        [
+          "Do I need to start from zero?",
+          "No. We begin with a digital audit to identify what can be kept, what needs improvement, and what should be built."
+        ],
+        [
+          "What if I already have a website?",
+          "We evaluate what can be kept, improved, or rebuilt. Existing digital assets do not automatically make the project smaller; correcting an outdated or poorly structured system can require more work than starting clean. Projects begin at the listed starting price, and the final investment depends on the approved scope."
+        ],
+        [
+          "What is the difference between the two systems?",
+          "The Digital Presence System builds or improves the foundation customers use to find and trust the business. The Local Lead System includes that foundation plus lead capture, opportunity organization, follow-up workflows, reminders, and basic automation."
+        ],
+        [
+          "Does social media management come included?",
+          "No. Social media support is an optional add-on quoted separately according to platforms, publishing volume, content needs, and management scope."
+        ],
+        [
+          "Are automation and AI included?",
+          "The Local Lead System includes basic automation and may include practical AI-assisted workflows when they are appropriate, secure, and useful. AI supports the process; it does not replace the business team or make unsupervised operational decisions."
+        ],
+        [
+          "How is the final price determined?",
+          "Final pricing depends on the current digital setup, approved project scope, number of workflows, communication channels, integrations, and any separately approved add-ons."
+        ]
+      ]
+    }
+  },
+  es: {
+    eyebrow: "Dos sistemas digitales",
+    title: "Dos sistemas. Un objetivo claro.",
+    intro:
+      "Cada negocio se encuentra en una etapa diferente. Algunos necesitan una base digital más sólida. Otros necesitan un sistema completo para captar, organizar y dar seguimiento a las oportunidades de clientes.",
+    whoTitle: "Para quién es",
+    implementationTitle: "Qué implementamos",
+    resultTitle: "Qué te ayuda a lograr este sistema",
+    detailsLink: "Ver el alcance completo de implementación",
+    systems: [
+      {
+        id: "sistema-presencia-digital",
+        name: "Sistema de Presencia Digital",
+        startingPrice: 1500,
+        price: "",
+        positioning:
+          "Para negocios que necesitan crear, mejorar u organizar la base digital que los clientes utilizan para encontrarlos y confiar en ellos.",
+        ideal: [
+          "Están comenzando desde cero",
+          "Tienen un sitio web desactualizado",
+          "Tienen información comercial incompleta",
+          "Son difíciles de encontrar en internet",
+          "Tienen una presencia digital que no explica claramente el servicio",
+          "Necesitan generar más confianza y facilitar el contacto"
+        ],
+        implementationLead: "",
+        implementation: [
+          "Auditoría digital inicial",
+          "Nuevo sitio web, landing page o mejora del sitio existente",
+          "Experiencia optimizada para dispositivos móviles",
+          "Presentación clara de los servicios y la propuesta de valor",
+          "Botones de contacto y cotización",
+          "Formulario de contacto o cotización",
+          "Creación u optimización del Perfil de Empresa de Google",
+          "Corrección de la información principal del negocio",
+          "Estructura básica de SEO local",
+          "Google Analytics y medición del sitio",
+          "Base para generar reseñas",
+          "Conexión con los principales canales de comunicación del negocio",
+          "Pruebas y lanzamiento"
+        ],
+        benefits: [
+          "Ser más fácil de encontrar",
+          "Proyectar una imagen más profesional",
+          "Generar confianza",
+          "Explicar claramente tus servicios",
+          "Facilitar el siguiente paso al cliente",
+          "Crear una base más sólida para futuras acciones de marketing"
+        ],
+        cta: "Crear o Mejorar Mi Presencia Digital",
+        ctaTarget: "free-audit",
+        pricingNote:
+          "El precio final depende del estado de la presencia digital existente y del alcance aprobado del proyecto."
+      },
+      {
+        id: "sistema-local-captacion",
+        name: "Sistema Local de Captación y Seguimiento",
+        startingPrice: 2500,
+        price: "",
+        positioning:
+          "Para negocios que necesitan más que visibilidad y quieren un sistema completo para captar, organizar y dar seguimiento a las oportunidades de clientes.",
+        ideal: [
+          "Reciben llamadas, formularios, textos o mensajes desde diferentes canales",
+          "Pierden el control de posibles clientes",
+          "Responden demasiado tarde",
+          "No tienen un proceso organizado de seguimiento",
+          "Necesitan confirmaciones, recordatorios y organización de oportunidades",
+          "Quieren un sistema de captación más escalable"
+        ],
+        implementationLead: "Todo lo incluido en el Sistema de Presencia Digital, más:",
+        implementation: [
+          "Formularios inteligentes de contacto o cotización",
+          "Campos para clasificar oportunidades",
+          "Flujo simple para organizar prospectos",
+          "Organización centralizada de oportunidades",
+          "Mensajes automáticos de confirmación",
+          "Notificaciones internas de nuevos prospectos",
+          "Seguimientos por email, SMS o WhatsApp cuando estén técnicamente disponibles",
+          "Recordatorios de citas o cotizaciones",
+          "Seguimiento de oportunidades no atendidas",
+          "Flujos para solicitar reseñas",
+          "Plantillas de comunicación con clientes",
+          "Configuración básica de automatizaciones",
+          "Documentación del proceso",
+          "Capacitación del equipo",
+          "Pruebas completas del sistema"
+        ],
+        benefits: [
+          "Captar más oportunidades de clientes",
+          "Responder más rápido",
+          "Mantener organizados los prospectos",
+          "Reducir seguimientos olvidados",
+          "Crear una experiencia más consistente",
+          "Darle al equipo un proceso más claro",
+          "Preparar el negocio para futuras automatizaciones y crecimiento"
+        ],
+        cta: "Crear Mi Sistema de Captación",
+        ctaTarget: "free-audit",
+        pricingNote:
+          "El precio final depende de la cantidad de procesos, canales de comunicación, integraciones y del alcance aprobado del proyecto."
+      }
+    ],
+    comparison: {
+      eyebrow: "Comparación de sistemas",
+      title: "¿Qué sistema necesita tu negocio?",
+      cards: [
+        {
+          name: "Sistema de Presencia Digital",
+          label: "Ideal para",
+          items: ["Visibilidad", "Confianza", "Sitio web", "Presencia en Google", "Ruta clara de contacto", "Base digital sólida"]
+        },
+        {
+          name: "Sistema Local de Captación y Seguimiento",
+          label: "Ideal para",
+          items: [
+            "Todo lo incluido en Presencia Digital",
+            "Captación de oportunidades",
+            "Organización de oportunidades",
+            "Seguimiento más rápido",
+            "Confirmaciones y recordatorios",
+            "Automatización básica",
+            "Flujo de trabajo para el equipo"
+          ]
+        }
+      ],
+      recommendationTitle: "¿No sabes cuál necesita tu negocio?",
+      recommendation:
+        "Comenzamos con una auditoría digital para determinar qué se puede conservar, qué necesita mejorarse y qué debe construirse.",
+      cta: "Solicita tu Auditoría Digital",
+      ctaTarget: "free-audit"
+    },
+    social: {
+      eyebrow: "Complemento opcional",
+      title: "Complemento Opcional: Apoyo para Redes Sociales",
+      copy: [
+        "Las redes sociales pueden apoyar el sistema digital, pero no son el sistema completo.",
+        "Los negocios que necesiten contenido constante y apoyo con publicaciones pueden agregar un servicio independiente de redes sociales."
+      ],
+      inclusionsTitle: "Posibles inclusiones",
+      inclusions: [
+        "Planificación mensual de contenido",
+        "Publicaciones y carruseles de marca",
+        "Textos para publicaciones",
+        "Edición de videos cortos utilizando material proporcionado",
+        "Calendario de contenido",
+        "Programación y publicación",
+        "Resumen mensual básico de desempeño"
+      ],
+      note:
+        "El manejo de redes sociales se cotiza por separado según el volumen de publicaciones, las plataformas, las necesidades de producción y el alcance de la gestión.",
+      cta: "Consultar el Complemento de Redes Sociales",
+      ctaTarget: "contact"
+    },
+    faq: {
+      eyebrow: "Preguntas frecuentes",
+      title: "Respuestas claras antes de elegir un sistema",
+      items: [
+        [
+          "¿Necesito comenzar desde cero?",
+          "No. Comenzamos con una auditoría digital para identificar qué se puede conservar, qué necesita mejorarse y qué debe construirse."
+        ],
+        [
+          "¿Qué ocurre si ya tengo un sitio web?",
+          "Evaluamos qué se puede conservar, mejorar o reconstruir. Tener activos digitales no significa automáticamente que el proyecto sea más pequeño; corregir un sistema desactualizado o mal estructurado puede requerir más trabajo que comenzar desde cero. Los proyectos comienzan desde el precio indicado y la inversión final depende del alcance aprobado."
+        ],
+        [
+          "¿Cuál es la diferencia entre los dos sistemas?",
+          "El Sistema de Presencia Digital crea o mejora la base que los clientes usan para encontrar y confiar en el negocio. El Sistema Local de Captación incluye esa base, más captación, organización de oportunidades, flujos de seguimiento, recordatorios y automatización básica."
+        ],
+        [
+          "¿El manejo de redes sociales está incluido?",
+          "No. El apoyo para redes sociales es un complemento opcional que se cotiza por separado según las plataformas, el volumen de publicaciones, las necesidades de contenido y el alcance de la gestión."
+        ],
+        [
+          "¿Las automatizaciones y la inteligencia artificial están incluidas?",
+          "El Sistema Local de Captación incluye automatización básica y puede incluir flujos prácticos apoyados por inteligencia artificial cuando sean apropiados, seguros y útiles. La IA apoya el proceso; no reemplaza al equipo ni toma decisiones operativas sin supervisión."
+        ],
+        [
+          "¿Cómo se determina el precio final?",
+          "El precio final depende de la configuración digital actual, el alcance aprobado, la cantidad de procesos, los canales de comunicación, las integraciones y cualquier complemento aprobado por separado."
+        ]
+      ]
+    }
+  }
 };
+
+function validateCommercialOfferParity() {
+  const en = commercialOffer.en;
+  const es = commercialOffer.es;
+  const sameLength = (left, right, label) => {
+    if (left.length !== right.length) throw new Error(`Bilingual offer mismatch: ${label}`);
+  };
+
+  sameLength(en.systems, es.systems, "systems");
+  en.systems.forEach((system, index) => {
+    const translated = es.systems[index];
+    if (system.startingPrice !== translated.startingPrice || system.ctaTarget !== translated.ctaTarget) {
+      throw new Error(`Bilingual offer mismatch: system ${index + 1} price or CTA`);
+    }
+    sameLength(system.ideal, translated.ideal, `system ${index + 1} audience`);
+    sameLength(system.implementation, translated.implementation, `system ${index + 1} implementation`);
+    sameLength(system.benefits, translated.benefits, `system ${index + 1} benefits`);
+  });
+  sameLength(en.comparison.cards, es.comparison.cards, "comparison cards");
+  en.comparison.cards.forEach((card, index) =>
+    sameLength(card.items, es.comparison.cards[index].items, `comparison card ${index + 1}`)
+  );
+  sameLength(en.social.inclusions, es.social.inclusions, "social add-on");
+  sameLength(en.faq.items, es.faq.items, "FAQ topics");
+  if (en.social.ctaTarget !== es.social.ctaTarget || en.comparison.ctaTarget !== es.comparison.ctaTarget) {
+    throw new Error("Bilingual offer mismatch: shared CTA destinations");
+  }
+}
+
+validateCommercialOfferParity();
 
 const problemCards = {
   en: [
@@ -738,62 +1100,6 @@ const problemCards = {
     ["No Hay un Flujo Claro", "Los visitantes pueden estar interesados, pero no hay un camino simple desde encontrar el negocio hasta contactar y recibir seguimiento."],
     ["Seguimiento Lento", "Cuando la respuesta tarda demasiado, los prospectos calificados siguen buscando y eligen otro negocio."],
     ["Los Leads se Pierden", "Llamadas, formularios, mensajes y notas quedan dispersos cuando no hay un lugar organizado para rastrear oportunidades."]
-  ]
-};
-
-const systemBlocks = {
-  en: [
-    ["Get Found", "Improve the local signals that help qualified customers find and trust your business."],
-    ["Capture Leads", "Give visitors a clear path to call, request a quote, or book the next step."],
-    ["Track Opportunities", "Organize new leads so each opportunity has a place and a next action."],
-    ["Follow Up Faster", "Use simple confirmations, notifications, and reminders to respond while interest is high."],
-    ["Build Trust", "Strengthen reviews, proof, and local credibility so more prospects feel ready to reach out."]
-  ],
-  es: [
-    ["Ser Encontrado", "Mejora las señales locales que ayudan a clientes calificados a encontrar y confiar en tu negocio."],
-    ["Capturar Oportunidades", "Dale a los visitantes un camino claro para llamar, pedir cotización o agendar el siguiente paso."],
-    ["Organizar Leads", "Organiza nuevos leads para que cada oportunidad tenga un lugar y una próxima acción."],
-    ["Dar Seguimiento Rápido", "Usa confirmaciones, notificaciones y recordatorios simples para responder mientras el interés está alto."],
-    ["Generar Confianza", "Fortalece reseñas, prueba social y credibilidad local para que más prospectos se animen a contactarte."]
-  ]
-};
-
-const offerPaths = {
-  en: [
-    {
-      stage: "existing",
-      auditSlug: "free-audit-existing",
-      title: "Improve What You Already Have",
-      copy: "For businesses that already have a website, Google profile, or online presence — but are not getting enough qualified leads or follow-up.",
-      bullets: ["Improve visibility", "Capture more qualified leads", "Organize opportunities", "Follow up faster"],
-      cta: "Get a Free Audit"
-    },
-    {
-      stage: "zero",
-      auditSlug: "free-audit-zero",
-      title: "Start From Zero",
-      copy: "For businesses without a website, Google Business Profile, or lead system. We build the digital foundation needed to get found, receive opportunities, and follow up professionally.",
-      bullets: ["Google Business Profile setup", "Conversion landing page", "Smart lead form", "Basic lead tracking", "Follow-up automation", "Review request system"],
-      cta: "Start With a Free Audit"
-    }
-  ],
-  es: [
-    {
-      stage: "existing",
-      auditSlug: "free-audit-existing",
-      title: "Mejorar lo que Ya Tienes",
-      copy: "Para negocios que ya tienen un sitio, perfil de Google o presencia en internet, pero no reciben suficientes oportunidades calificadas o seguimiento claro.",
-      bullets: ["Mejorar visibilidad", "Capturar más oportunidades calificadas", "Organizar oportunidades", "Dar seguimiento más rápido"],
-      cta: "Solicitar Auditoría Gratis"
-    },
-    {
-      stage: "zero",
-      auditSlug: "free-audit-zero",
-      title: "Empezar Desde Cero",
-      copy: "Para negocios sin sitio web, Google Business Profile o sistema de captación. Construimos la base digital necesaria para ser encontrado, recibir oportunidades y dar seguimiento de forma profesional.",
-      bullets: ["Configuración de Google Business Profile", "Landing page de conversión", "Formulario inteligente", "Seguimiento básico de leads", "Automatización de seguimiento", "Sistema para pedir reseñas"],
-      cta: "Empezar con Auditoría Gratis"
-    }
   ]
 };
 
@@ -1091,7 +1397,7 @@ const connectedInfrastructure = {
       ["Local Visibility", "Google Business Profile, Apple Business Connect, Bing Places, local listings, business information and trust signals."],
       ["Website or Landing Page", "A focused digital experience that clearly explains the service and gives visitors an obvious next step."],
       ["Smart Lead Capture", "Quote forms, contact buttons, booking options and structured information collection."],
-      ["Lead Organization", "A simple CRM or organized pipeline that gives every opportunity a status and next action."],
+      ["Lead Organization", "An organized opportunity pipeline that gives every lead a status and next action."],
       ["Faster Follow-Up", "Confirmations, owner notifications, email, SMS or WhatsApp workflows based on the business needs."],
       ["Review Strategy", "A practical process for requesting reviews, strengthening trust and improving local credibility."]
     ],
@@ -1106,7 +1412,7 @@ const connectedInfrastructure = {
       ["Visibilidad Local", "Google Business Profile, Apple Business Connect, Bing Places, directorios locales, información comercial y señales de confianza."],
       ["Sitio Web o Landing Page", "Una experiencia digital enfocada que explica claramente el servicio y ofrece al visitante un siguiente paso evidente."],
       ["Captura Inteligente", "Formularios de cotización, botones de contacto, opciones de reserva y recopilación organizada de información."],
-      ["Organización de Leads", "Un CRM simple o pipeline organizado que asigna a cada oportunidad un estado y una próxima acción."],
+      ["Organización de Leads", "Un flujo organizado que asigna a cada oportunidad un estado y una próxima acción."],
       ["Seguimiento Más Rápido", "Confirmaciones, notificaciones al negocio y flujos de email, SMS o WhatsApp según las necesidades."],
       ["Estrategia de Reseñas", "Un proceso práctico para solicitar reseñas, aumentar la confianza y mejorar la credibilidad local."]
     ],
@@ -1118,12 +1424,12 @@ const legalPages = {
   en: {
     privacy: {
       title: "Privacy Policy | BLYNX",
-      description: "Privacy Policy for BLYNX AIMA AGENCY.",
+      description: "Privacy Policy for BLYNX Systems.",
       eyebrow: "Privacy",
       h1: "Privacy Policy",
       effective: `Effective date: ${LEGAL_EFFECTIVE_DATE}`,
       sections: [
-        ["Introduction", "This Privacy Policy explains how BLYNX AIMA AGENCY collects, uses and protects information submitted through this website and normal website use. By using the website or submitting a form, you acknowledge the practices described here."],
+        ["Introduction", "This Privacy Policy explains how BLYNX Systems collects, uses and protects information submitted through this website and normal website use. By using the website or submitting a form, you acknowledge the practices described here."],
         ["Information We Collect", "We may collect information you provide directly, including full name, business name, email, phone, website, city and state, business type, Google Business Profile URL, business goals, messages and notes. We may also collect technical information produced by normal website use, such as browser type, device information, pages visited and general performance information."],
         ["Information Submitted Through Forms", "Free audit and contact forms may ask for information needed to understand your business, respond to your request, prepare an audit, route communications and maintain internal records. Some fields may be optional, but submitting incomplete information may limit how useful our response can be."],
         ["How We Use Information", "We use information to respond to requests, prepare free audits, provide services, maintain related communications, improve the website, understand performance and keep operational records."],
@@ -1140,7 +1446,7 @@ const legalPages = {
     },
     terms: {
       title: "Terms of Service | BLYNX",
-      description: "Terms of Service for BLYNX AIMA AGENCY.",
+      description: "Terms of Service for BLYNX Systems.",
       eyebrow: "Terms",
       h1: "Terms of Service",
       effective: `Effective date: ${LEGAL_EFFECTIVE_DATE}`,
@@ -1167,12 +1473,12 @@ const legalPages = {
   es: {
     privacy: {
       title: "Política de Privacidad | BLYNX",
-      description: "Política de Privacidad de BLYNX AIMA AGENCY.",
+      description: "Política de Privacidad de BLYNX Systems.",
       eyebrow: "Privacidad",
       h1: "Política de Privacidad",
       effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
       sections: [
-        ["Introducción", "Esta Política de Privacidad explica cómo BLYNX AIMA AGENCY recopila, utiliza y protege la información enviada a través de este sitio web y la información generada por el uso normal del sitio. Al usar el sitio o enviar un formulario, reconoces las prácticas descritas aquí."],
+        ["Introducción", "Esta Política de Privacidad explica cómo BLYNX Systems recopila, utiliza y protege la información enviada a través de este sitio web y la información generada por el uso normal del sitio. Al usar el sitio o enviar un formulario, reconoces las prácticas descritas aquí."],
         ["Información que Recopilamos", "Podemos recopilar información que proporcionas directamente, incluyendo nombre completo, nombre del negocio, correo, teléfono, sitio web, ciudad y estado, tipo de negocio, URL de Google Business Profile, objetivos del negocio, mensajes y notas. También podemos recopilar información técnica generada por el uso normal del sitio, como tipo de navegador, información del dispositivo, páginas visitadas e información general de rendimiento."],
         ["Información Enviada en Formularios", "Los formularios de auditoría gratis y contacto pueden solicitar información necesaria para entender tu negocio, responder a tu solicitud, preparar una auditoría, dirigir comunicaciones y mantener registros internos. Algunos campos pueden ser opcionales, pero enviar información incompleta puede limitar la utilidad de nuestra respuesta."],
         ["Cómo Usamos la Información", "Usamos la información para responder solicitudes, preparar auditorías gratis, prestar servicios, mantener comunicaciones relacionadas, mejorar el sitio, entender el rendimiento y conservar registros operativos."],
@@ -1189,7 +1495,7 @@ const legalPages = {
     },
     terms: {
       title: "Términos de Servicio | BLYNX",
-      description: "Términos de Servicio de BLYNX AIMA AGENCY.",
+      description: "Términos de Servicio de BLYNX Systems.",
       eyebrow: "Términos",
       h1: "Términos de Servicio",
       effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
@@ -1218,7 +1524,8 @@ const legalPages = {
 function write(file, contents) {
   const target = path.join(root, file);
   fs.mkdirSync(path.dirname(target), { recursive: true });
-  fs.writeFileSync(target, `${contents.trim()}\n`, "utf8");
+  const normalized = contents.replace(/[ \t]+$/gm, "").trim();
+  fs.writeFileSync(target, `${normalized}\n`, "utf8");
 }
 
 function pagePath(lang, slug = "") {
@@ -1267,7 +1574,7 @@ function languageSwitcher(lang, switchPath, switchPaths = null) {
 function header(lang, active, switchPath = "", auditSlug = "free-audit", switchPaths = null) {
   const t = copy[lang];
   const home = pagePath(lang);
-  const systemHref = `${home}#system`;
+  const systemHref = `${pagePath(lang, "services")}#systems`;
   const aboutHref = pagePath(lang, "about");
   const auditHref = pagePath(lang, auditSlug);
 
@@ -1281,6 +1588,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
           <span class="brand-mark" aria-hidden="true">BX</span>
           <span class="brand-text">
             <span class="brand-name">BLYNX</span>
+            <span class="brand-subtitle">Systems</span>
           </span>
         </a>
         <nav class="site-nav" data-site-nav>
@@ -1313,7 +1621,7 @@ function footer(lang, auditSlug = "free-audit") {
         <div class="footer-brand">
           <a class="brand" href="${pagePath(lang)}" aria-label="${t.brandAria}">
             <span class="brand-mark" aria-hidden="true">BX</span>
-            <span class="brand-text"><span class="brand-name">BLYNX</span></span>
+            <span class="brand-text"><span class="brand-name">BLYNX</span><span class="brand-subtitle">Systems</span></span>
           </a>
           <p>${t.footer}</p>
           <span>&copy; 2026 ${BUSINESS.legalName}.</span>
@@ -1425,17 +1733,171 @@ function pageMediaBand(src, alt, wide = false) {
       </section>`;
 }
 
-function serviceCards(lang, cardClass = "service-card", iconClass = "service-icon") {
-  return services[lang]
-    .map(
-      ([title, text], index) => `
-            <article class="${cardClass}">
-              <div class="${iconClass}">${String(index + 1).padStart(2, "0")}</div>
-              <h3>${title}</h3>
-              <p>${text}</p>
+function offerList(items, className = "check-list") {
+  return `<ul class="${className}">${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+}
+
+function systemsOverviewSection(lang) {
+  const offer = commercialOffer[lang];
+  return `
+      <section class="section" id="systems">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${offer.eyebrow}</p>
+            <h2>${offer.title}</h2>
+            <p>${offer.intro}</p>
+          </div>
+          <div class="system-offer-grid system-offer-grid-overview">
+            ${offer.systems
+              .map(
+                (system, index) => `
+            <article class="system-offer-card${index === 1 ? " is-complete" : ""}">
+              <div class="system-offer-topline">
+                <span class="system-number">0${index + 1}</span>
+                ${system.price ? `<span class="system-price">${system.price}</span>` : ""}
+              </div>
+              <h3>${system.name}</h3>
+              <p class="system-positioning">${system.positioning}</p>
+              <div class="system-summary-block">
+                <h4>${offer.whoTitle}</h4>
+                ${offerList(system.ideal.slice(0, 3))}
+              </div>
+              <div class="system-summary-block">
+                <h4>${offer.resultTitle}</h4>
+                ${offerList(system.benefits.slice(0, 4))}
+              </div>
+              <div class="system-card-actions">
+                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
+                <a class="system-details-link" href="${pagePath(lang, "services")}#${system.id}">${offer.detailsLink}</a>
+              </div>
+              <p class="pricing-note">${system.pricingNote}</p>
             </article>`
-    )
-    .join("");
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>`;
+}
+
+function systemsDetailSection(lang) {
+  const offer = commercialOffer[lang];
+  return `
+      <section class="section" id="systems">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${offer.eyebrow}</p>
+            <h2>${offer.title}</h2>
+            <p>${offer.intro}</p>
+          </div>
+          <div class="system-offer-grid">
+            ${offer.systems
+              .map(
+                (system, index) => `
+            <article class="system-offer-card system-offer-card-full${index === 1 ? " is-complete" : ""}" id="${system.id}">
+              <div class="system-offer-topline">
+                <span class="system-number">0${index + 1}</span>
+                ${system.price ? `<span class="system-price">${system.price}</span>` : ""}
+              </div>
+              <h3>${system.name}</h3>
+              <p class="system-positioning">${system.positioning}</p>
+              <section class="system-card-section" aria-labelledby="${system.id}-who">
+                <h4 id="${system.id}-who">${offer.whoTitle}</h4>
+                ${offerList(system.ideal)}
+              </section>
+              <section class="system-card-section" aria-labelledby="${system.id}-implementation">
+                <h4 id="${system.id}-implementation">${offer.implementationTitle}</h4>
+                ${system.implementationLead ? `<p class="implementation-lead">${system.implementationLead}</p>` : ""}
+                ${offerList(system.implementation)}
+              </section>
+              <section class="system-card-section" aria-labelledby="${system.id}-results">
+                <h4 id="${system.id}-results">${offer.resultTitle}</h4>
+                ${offerList(system.benefits)}
+              </section>
+              <div class="system-card-actions">
+                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
+              </div>
+              <p class="pricing-note">${system.pricingNote}</p>
+            </article>`
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>`;
+}
+
+function socialMediaAddOnSection(lang, soft = true) {
+  const social = commercialOffer[lang].social;
+  return `
+      <section class="section${soft ? " section-soft" : ""}" id="social-media-add-on">
+        <div class="container add-on-layout">
+          <div class="add-on-copy">
+            <p class="eyebrow">${social.eyebrow}</p>
+            <h2>${social.title}</h2>
+            ${social.copy.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+            <a class="btn btn-secondary" href="${pagePath(lang, social.ctaTarget)}">${social.cta}</a>
+          </div>
+          <div class="add-on-scope">
+            <h3>${social.inclusionsTitle}</h3>
+            ${offerList(social.inclusions)}
+            <p class="pricing-note">${social.note}</p>
+          </div>
+        </div>
+      </section>`;
+}
+
+function comparisonSection(lang, soft = false) {
+  const comparison = commercialOffer[lang].comparison;
+  return `
+      <section class="section${soft ? " section-soft" : ""}" id="system-comparison">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${comparison.eyebrow}</p>
+            <h2>${comparison.title}</h2>
+          </div>
+          <div class="comparison-grid">
+            ${comparison.cards
+              .map(
+                (card, index) => `
+            <article class="comparison-card${index === 1 ? " is-complete" : ""}">
+              <span class="system-number">0${index + 1}</span>
+              <h3>${card.name}</h3>
+              <p class="comparison-label">${card.label}</p>
+              ${offerList(card.items)}
+            </article>`
+              )
+              .join("")}
+          </div>
+          <div class="system-recommendation">
+            <h3>${comparison.recommendationTitle}</h3>
+            <p>${comparison.recommendation}</p>
+            <a class="btn btn-primary" href="${pagePath(lang, comparison.ctaTarget)}">${comparison.cta}</a>
+          </div>
+        </div>
+      </section>`;
+}
+
+function faqSection(lang) {
+  const faq = commercialOffer[lang].faq;
+  return `
+      <section class="section section-soft" id="faq">
+        <div class="container faq-layout">
+          <div class="faq-heading">
+            <p class="eyebrow">${faq.eyebrow}</p>
+            <h2>${faq.title}</h2>
+          </div>
+          <div class="faq-list">
+            ${faq.items
+              .map(
+                ([question, answer]) => `
+            <details class="faq-item">
+              <summary>${question}</summary>
+              <p>${answer}</p>
+            </details>`
+              )
+              .join("")}
+          </div>
+        </div>
+      </section>`;
 }
 
 function preferredLanguageValue(lang) {
@@ -1466,10 +1928,12 @@ function homePage(lang) {
           <div class="hero-copy">
             <p class="eyebrow">${h.eyebrow}</p>
             <h1>${h.headline}</h1>
-            <p>${h.subtitle}</p>
+            <div class="hero-supporting-copy">
+              ${h.subtitle.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+            </div>
             <div class="hero-actions">
               <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
-              <a class="btn btn-secondary" href="${pagePath(lang)}#process">${t.cta.services}</a>
+              <a class="btn btn-secondary" href="${pagePath(lang, "services")}#systems">${t.cta.services}</a>
             </div>
             <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
             <div class="trust-pills" aria-label="BLYNX benefits">
@@ -1558,54 +2022,11 @@ function homePage(lang) {
         </div>
       </section>
 
-      <section class="section" id="system">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">${h.servicesEyebrow}</p>
-            <h2>${h.servicesTitle}</h2>
-            <p>${h.servicesSubtitle}</p>
-          </div>
-          <div class="card-grid five-card-grid">
-            ${systemBlocks[lang]
-              .map(
-                ([title, text], index) => `
-            <article class="service-card">
-              <div class="service-icon">${String(index + 1).padStart(2, "0")}</div>
-              <h3>${title}</h3>
-              <p>${text}</p>
-            </article>`
-              )
-              .join("")}
-          </div>
-        </div>
-      </section>
+      ${systemsOverviewSection(lang)}
 
-      <section class="section section-soft" id="offer-paths">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">${h.pathsEyebrow}</p>
-            <h2>${h.pathsTitle}</h2>
-            <p>${h.pathsSubtitle}</p>
-          </div>
-          <div class="offer-path-grid">
-            ${offerPaths[lang]
-              .map(
-                (pathItem, index) => `
-            <article class="offer-path-card">${stageCardMedia(pathItem.stage)}
-              <div class="feature-icon">${String(index + 1).padStart(2, "0")}</div>
-              <h3>${pathItem.title}</h3>
-              <p>${pathItem.copy}</p>
-              <ul class="check-list">
-                ${pathItem.bullets.map((item) => `<li>${item}</li>`).join("")}
-              </ul>
-              <a class="btn btn-primary" href="${pagePath(lang, pathItem.auditSlug)}" data-stage-choice="${pathItem.stage}">${pathItem.cta}</a>
-            </article>`
-              )
-              .join("")}
-          </div>
-          <p class="offer-path-support">${h.pathsSupport}</p>
-        </div>
-      </section>
+      ${socialMediaAddOnSection(lang)}
+
+      ${comparisonSection(lang)}
 
       <section class="section" id="free-audit-flow">
         <div class="container">
@@ -2065,16 +2486,13 @@ function servicesPage(lang) {
       </section>
 
 ${pageMediaBand("/public/images/site/services-flow.jpg", SITE_MEDIA_ALTS.services[lang])}
-      <section class="section section-tight">
-        <div class="container feature-grid">
-          ${serviceCards(lang, "feature-card", "feature-icon")}
-          <article class="feature-card">
-            <div class="feature-icon">+</div>
-            <h3>${p.optionalTitle}</h3>
-            <p>${p.optionalCopy}</p>
-          </article>
-        </div>
-      </section>
+      ${systemsDetailSection(lang)}
+
+      ${socialMediaAddOnSection(lang)}
+
+      ${comparisonSection(lang)}
+
+      ${faqSection(lang)}
 
       <section class="section section-soft">
         <div class="container">
@@ -2423,8 +2841,8 @@ function languageGate() {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BLYNX - AIMA | Local Lead Systems in English & Spanish</title>
-    <meta name="description" content="BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.">
+    <title>BLYNX Systems | Digital Systems for Local Businesses</title>
+    <meta name="description" content="BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.">
     <link rel="canonical" href="${SITE_URL}/">
     <link rel="alternate" hreflang="en" href="${SITE_URL}/en">
     <link rel="alternate" hreflang="es" href="${SITE_URL}/es">
@@ -2432,16 +2850,16 @@ function languageGate() {
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="${BUSINESS.displayName}">
     <meta property="og:title" content="${BUSINESS.displayName}">
-    <meta property="og:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
+    <meta property="og:description" content="Digital presence and lead systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
     <meta property="og:url" content="${SITE_URL}/">
     <meta property="og:image" content="${OG_IMAGE}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${BUSINESS.displayName}">
-    <meta name="twitter:description" content="Local lead systems for service businesses: websites, Google Business Profile, automation and AI.">
+    <meta name="twitter:description" content="Digital presence and lead systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
     <meta name="twitter:image" content="${OG_IMAGE}">
-    ${structuredData("en", "BLYNX - AIMA | Local Lead Systems in English & Spanish", "BLYNX builds local lead systems for service businesses: get found on Google, capture qualified leads, and follow up faster. Available in English and Spanish.", `${SITE_URL}/`)}
+    ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
@@ -2467,8 +2885,8 @@ function languageGate() {
             <span class="brand-name">BLYNX</span>
           </span>
         </a>
-        <p class="eyebrow">AIMA</p>
-        <h1>Local Lead Systems for Service Businesses</h1>
+        <p class="eyebrow">BLYNX Systems</p>
+        <h1>Digital Systems for Local Businesses</h1>
         <p>Redirecting you to the best language version. You can choose manually below.</p>
         <div class="language-actions">
           <a class="btn btn-primary" href="/en" data-language-choice="en">English</a>

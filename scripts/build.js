@@ -67,7 +67,8 @@ const requiredFiles = [
 
 const requiredSnippets = new Map([
   ["index.html", [
-    "Local Lead Systems for Service Businesses",
+    "Digital Systems for Local Businesses",
+    "BLYNX Systems",
     "Redirecting you to the best language version.",
     "English and Spanish support for local business growth.",
     "window.location.replace",
@@ -119,35 +120,35 @@ const requiredSnippets = new Map([
     "/es/free-audit-zero"
   ]],
   ["en/index.html", [
-    "Local Lead Systems for Service Businesses",
+    "Digital systems built to help",
     "Most Local Businesses Lose Leads Without Realizing It",
-    "The System We Build",
-    "Two Ways We Can Help",
+    "Two systems. One clear goal.",
+    "Digital Presence System",
+    "Local Lead System",
+    "Optional Add-On: Social Media Support",
+    "Which system does your business need?",
     "What Your Lead System Can Connect",
     "Example Lead Flow",
-    "Digital Foundation",
-    "Start From Zero",
     "data-stage-banner",
-    "Track Opportunities",
     "/en/free-audit",
-    "/en#process"
+    "/en/services#systems"
   ]],
   ["es/index.html", [
-    "Sistemas de Captación para Negocios Locales",
+    "Sistemas digitales creados para ayudar a crecer",
     "Muchos Negocios Locales Pierden Oportunidades Sin Darse Cuenta",
-    "El Sistema que Construimos",
+    "Dos sistemas. Un objetivo claro.",
+    "Sistema de Presencia Digital",
+    "Sistema Local de Captación y Seguimiento",
+    "Complemento Opcional: Apoyo para Redes Sociales",
+    "¿Qué sistema necesita tu negocio?",
     "Lo que Puede Conectar tu Sistema de Captación",
     "Ejemplo de Flujo de Captación",
-    "Base Digital + Sistema de Captación",
-    "Dos Formas en que Podemos Ayudarte",
-    "Empezar Desde Cero",
     "data-stage-banner",
-    "Organizar Leads",
     "/es/free-audit",
-    "/es#process"
+    "/es/services#systems"
   ]],
   ["en/free-audit/index.html", [
-    "Get Your Free Lead System Audit",
+    "Request Your Digital Audit",
     "handleAuditSubmit",
     "This audit works whether you already have a digital presence or you are starting from zero.",
     "Website or Google Business Profile URL",
@@ -171,7 +172,7 @@ const requiredSnippets = new Map([
     "data-business-stage-default=\"zero\""
   ]],
   ["es/free-audit/index.html", [
-    "Solicita tu Auditoría Gratis del Sistema de Captación",
+    "Solicita tu Auditoría Digital",
     "Impulsada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
     "handleAuditSubmit",
     "Esta auditoría funciona tanto si ya tienes presencia digital como si estás empezando desde cero.",
@@ -183,6 +184,26 @@ const requiredSnippets = new Map([
     "Política de Privacidad",
     "Enviar Solicitud de Auditoría Gratis",
     "Gracias. Hemos recibido tu solicitud de auditoría gratis."
+  ]],
+  ["en/services/index.html", [
+    "Digital Presence System",
+    "New website, landing page, or improvement of the existing website",
+    "Local Lead System",
+    "Everything included in the Digital Presence System, plus:",
+    "Optional Add-On: Social Media Support",
+    "Does social media management come included?",
+    "/en/free-audit",
+    "/en/contact"
+  ]],
+  ["es/services/index.html", [
+    "Sistema de Presencia Digital",
+    "Nuevo sitio web, landing page o mejora del sitio existente",
+    "Sistema Local de Captación y Seguimiento",
+    "Todo lo incluido en el Sistema de Presencia Digital, más:",
+    "Complemento Opcional: Apoyo para Redes Sociales",
+    "¿El manejo de redes sociales está incluido?",
+    "/es/free-audit",
+    "/es/contact"
   ]],
   ["es/free-audit-existing/index.html", [
     "Audita tu Presencia Digital Actual",

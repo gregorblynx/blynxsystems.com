@@ -2,7 +2,7 @@
   "name": "blynx-aima-agency-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Official static website for BLYNX AIMA AGENCY.",
+  "description": "Official static website for BLYNX Systems.",
   "scripts": {
     "generate": "node scripts/generate-pages.js",
     "build": "node scripts/generate-pages.js && node scripts/build.js",

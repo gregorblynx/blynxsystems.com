@@ -1,6 +1,6 @@
-# BLYNX AIMA AGENCY — Website
+# BLYNX Systems — Website
 
-Official static website for BLYNX AIMA AGENCY, live at **https://www.blynxsystems.com**.
+Official static website for BLYNX Systems, live at **https://www.blynxsystems.com**.
 
 Bilingual (English / Spanish) site focused on local lead systems for service businesses.
 
