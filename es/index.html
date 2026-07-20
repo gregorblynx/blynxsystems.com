@@ -65,8 +65,8 @@
     </header>
 
     <main id="main">
-      <section class="hero" id="home">
-        <div class="container hero-grid">
+      <section class="hero hero-home" id="home">
+        <div class="container hero-grid hero-grid-solo">
           <div class="hero-copy">
             <p class="eyebrow">Sistemas digitales para negocios locales</p>
             <h1>Sistemas digitales creados para ayudar a crecer a <span class="text-gold">negocios locales.</span></h1>
@@ -83,15 +83,85 @@
             </div>
           </div>
 
-          <div class="hero-visual" aria-label="Flujo de captación local: te encuentran, captas el lead y das seguimiento al instante">
-            <div class="visual-stage visual-stage-image">
-              <span class="demo-label">Ejemplo de Flujo de Captación</span>
-              <div class="lead-flow-wrap">
-                <img class="lead-flow-image" src="/public/images/lead-flow.png" alt="Flujo de captación local: te encuentran, captas el lead y das seguimiento al instante" width="896" height="1152" decoding="async">
-                <span class="lead-flow-label lead-flow-label-1">Te encuentran</span><span class="lead-flow-label lead-flow-label-2">Captas el lead</span><span class="lead-flow-label lead-flow-label-3">Seguimiento al instante</span>
-              </div>
-            </div>
+        </div>
+      </section>
+
+
+      <section class="section capture-flow" id="capture-flow" aria-label="EJEMPLO DE FLUJO DE CAPTACIÓN">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">EJEMPLO DE FLUJO DE CAPTACIÓN</p>
+            <h2>Así se convierte una búsqueda en una oportunidad.</h2>
+            <p>Una persona encuentra el negocio, solicita información o reserva, el sistema registra la oportunidad y activa una respuesta inmediata.</p>
           </div>
+
+          <div class="flow-stages">
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">01</span>
+                <h3 class="flow-stage-label">Te encuentran</h3>
+              </div>
+              <div class="flow-card">
+                <div class="flow-phone">
+                  <div class="flow-search">
+                    <span class="flow-search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                    <span>Barbería cerca de mí</span>
+                  </div>
+                  <ul class="flow-results">
+                    <li class="is-active"><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">Fade & Co Barber</span><span class="flow-stars">★ 4.9</span></li><li class=""><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">Kings Barber Studio</span></li><li class=""><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">Cortes Centro</span></li>
+                  </ul>
+                </div>
+                <div class="flow-chips" aria-label="Encontrado en">
+                  <span class="flow-chip">Google</span><span class="flow-chip">Maps</span><span class="flow-chip">Reseñas</span>
+                </div>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></div>
+
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">02</span>
+                <h3 class="flow-stage-label">Captas la oportunidad</h3>
+              </div>
+              <div class="flow-card">
+                <div class="flow-action"><span class="flow-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg></span>Reservar una cita</div>
+                <div class="request-card">
+                  <span class="request-title">Nueva solicitud de reserva</span>
+                  <dl class="request-fields">
+                    <div class="request-row"><dt>Nombre</dt><dd>Michael</dd></div><div class="request-row"><dt>Servicio</dt><dd>Corte de cabello</dd></div><div class="request-row"><dt>Horario preferido</dt><dd>Viernes · 4:00 PM</dd></div>
+                  </dl>
+                  <span class="request-status">Nueva solicitud</span>
+                </div>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></div>
+
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">03</span>
+                <h3 class="flow-stage-label">Respondes y das seguimiento</h3>
+              </div>
+              <div class="flow-card">
+                <div class="msg-bubble is-customer">
+                  <span class="msg-tag">Cliente · SMS</span>
+                  <p>Gracias, Michael. Recibimos tu solicitud de cita. Un miembro del equipo confirmará tu horario en breve.</p>
+                </div>
+                <div class="msg-bubble is-business">
+                  <span class="msg-tag">Negocio</span>
+                  <p>Nueva solicitud de cita recibida</p>
+                </div>
+                <div class="followup-track">
+                  <span class="followup-step is-done">Nueva solicitud</span><span class="followup-sep" aria-hidden="true"></span><span class="followup-step ">Contactado</span><span class="followup-sep" aria-hidden="true"></span><span class="followup-step ">Confirmado</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <ol class="flow-summary">
+            <li><span class="flow-summary-num">1</span><span>Te encuentran</span></li><li><span class="flow-summary-num">2</span><span>Solicitan o reservan</span></li><li><span class="flow-summary-num">3</span><span>La oportunidad queda registrada</span></li><li><span class="flow-summary-num">4</span><span>Reciben confirmación</span></li><li><span class="flow-summary-num">5</span><span>El negocio da seguimiento</span></li>
+          </ol>
         </div>
       </section>
 

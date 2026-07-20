@@ -65,8 +65,8 @@
     </header>
 
     <main id="main">
-      <section class="hero" id="home">
-        <div class="container hero-grid">
+      <section class="hero hero-home" id="home">
+        <div class="container hero-grid hero-grid-solo">
           <div class="hero-copy">
             <p class="eyebrow">Digital systems for local businesses</p>
             <h1>Digital systems built to help <span class="text-gold">local businesses grow.</span></h1>
@@ -83,15 +83,85 @@
             </div>
           </div>
 
-          <div class="hero-visual" aria-label="Local lead flow: get found, capture the lead, and follow up instantly">
-            <div class="visual-stage visual-stage-image">
-              <span class="demo-label">Example Lead Flow</span>
-              <div class="lead-flow-wrap">
-                <img class="lead-flow-image" src="/public/images/lead-flow.png" alt="Local lead flow: get found, capture the lead, and follow up instantly" width="896" height="1152" decoding="async">
-                <span class="lead-flow-label lead-flow-label-1">Get found</span><span class="lead-flow-label lead-flow-label-2">Lead captured</span><span class="lead-flow-label lead-flow-label-3">Instant follow-up</span>
-              </div>
-            </div>
+        </div>
+      </section>
+
+
+      <section class="section capture-flow" id="capture-flow" aria-label="LEAD CAPTURE FLOW EXAMPLE">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">LEAD CAPTURE FLOW EXAMPLE</p>
+            <h2>How a search becomes a real opportunity.</h2>
+            <p>A customer finds the business, submits a request or booking, the system records the opportunity, and an immediate response is triggered.</p>
           </div>
+
+          <div class="flow-stages">
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">01</span>
+                <h3 class="flow-stage-label">They find you</h3>
+              </div>
+              <div class="flow-card">
+                <div class="flow-phone">
+                  <div class="flow-search">
+                    <span class="flow-search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>
+                    <span>Barber shop near me</span>
+                  </div>
+                  <ul class="flow-results">
+                    <li class="is-active"><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">Fade & Co Barber</span><span class="flow-stars">★ 4.9</span></li><li class=""><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">Kings Barber Studio</span></li><li class=""><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">Downtown Fades</span></li>
+                  </ul>
+                </div>
+                <div class="flow-chips" aria-label="Found on">
+                  <span class="flow-chip">Google</span><span class="flow-chip">Maps</span><span class="flow-chip">Reviews</span>
+                </div>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></div>
+
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">02</span>
+                <h3 class="flow-stage-label">You capture the opportunity</h3>
+              </div>
+              <div class="flow-card">
+                <div class="flow-action"><span class="flow-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg></span>Book an appointment</div>
+                <div class="request-card">
+                  <span class="request-title">New booking request</span>
+                  <dl class="request-fields">
+                    <div class="request-row"><dt>Name</dt><dd>Michael</dd></div><div class="request-row"><dt>Service</dt><dd>Haircut</dd></div><div class="request-row"><dt>Preferred time</dt><dd>Friday · 4:00 PM</dd></div>
+                  </dl>
+                  <span class="request-status">New request</span>
+                </div>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></div>
+
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">03</span>
+                <h3 class="flow-stage-label">You respond and follow up</h3>
+              </div>
+              <div class="flow-card">
+                <div class="msg-bubble is-customer">
+                  <span class="msg-tag">Customer · SMS</span>
+                  <p>Thanks, Michael. We received your appointment request. A team member will confirm your time shortly.</p>
+                </div>
+                <div class="msg-bubble is-business">
+                  <span class="msg-tag">Business</span>
+                  <p>New appointment request received</p>
+                </div>
+                <div class="followup-track">
+                  <span class="followup-step is-done">New request</span><span class="followup-sep" aria-hidden="true"></span><span class="followup-step ">Contacted</span><span class="followup-sep" aria-hidden="true"></span><span class="followup-step ">Confirmed</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <ol class="flow-summary">
+            <li><span class="flow-summary-num">1</span><span>They find you</span></li><li><span class="flow-summary-num">2</span><span>They request or book</span></li><li><span class="flow-summary-num">3</span><span>The opportunity is recorded</span></li><li><span class="flow-summary-num">4</span><span>They receive confirmation</span></li><li><span class="flow-summary-num">5</span><span>The business follows up</span></li>
+          </ol>
         </div>
       </section>
 

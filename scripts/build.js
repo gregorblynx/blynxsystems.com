@@ -128,7 +128,9 @@ const requiredSnippets = new Map([
     "Optional Add-On: Social Media Support",
     "Which system does your business need?",
     "What Your Lead System Can Connect",
-    "Example Lead Flow",
+    "LEAD CAPTURE FLOW EXAMPLE",
+    "How a search becomes a real opportunity.",
+    "They find you",
     "data-stage-banner",
     "/en/free-audit",
     "/en/services#systems"
@@ -142,7 +144,9 @@ const requiredSnippets = new Map([
     "Complemento Opcional: Apoyo para Redes Sociales",
     "¿Qué sistema necesita tu negocio?",
     "Lo que Puede Conectar tu Sistema de Captación",
-    "Ejemplo de Flujo de Captación",
+    "EJEMPLO DE FLUJO DE CAPTACIÓN",
+    "Así se convierte una búsqueda en una oportunidad.",
+    "Te encuentran",
     "data-stage-banner",
     "/es/free-audit",
     "/es/services#systems"

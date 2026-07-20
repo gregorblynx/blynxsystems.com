@@ -209,11 +209,6 @@ const copy = {
         "Whether you are starting from zero or improving what you already have, we build the system your business needs to turn online attention into real customer opportunities."
       ],
       trust: ["Get Found", "Build Trust", "Capture Opportunities", "Follow Up Faster"],
-      visual: {
-        aria: "Local lead flow: get found, capture the lead, and follow up instantly",
-        demoLabel: "Example Lead Flow",
-        flowLabels: ["Get found", "Lead captured", "Instant follow-up"]
-      },
       problemEyebrow: "The problem",
       problemTitle: "Most Local Businesses Lose Leads Without Realizing It",
       problemCopy: "People visit your website, Google profile, or landing page — but if there is no clear system to capture, organize, and follow up with them, those opportunities disappear.",
@@ -470,11 +465,6 @@ const copy = {
         "Ya sea que comiences desde cero o necesites mejorar lo que ya tienes, construimos el sistema que tu negocio necesita para convertir la atención digital en oportunidades reales de clientes."
       ],
       trust: ["Ser Encontrado", "Generar Confianza", "Captar Oportunidades", "Dar Seguimiento Rápido"],
-      visual: {
-        aria: "Flujo de captación local: te encuentran, captas el lead y das seguimiento al instante",
-        demoLabel: "Ejemplo de Flujo de Captación",
-        flowLabels: ["Te encuentran", "Captas el lead", "Seguimiento al instante"]
-      },
       problemEyebrow: "El problema",
       problemTitle: "Muchos Negocios Locales Pierden Oportunidades Sin Darse Cuenta",
       problemCopy: "Las personas visitan tu sitio, perfil de Google o landing page, pero si no hay un sistema claro para capturar, organizar y dar seguimiento, esas oportunidades desaparecen.",
@@ -1900,13 +1890,327 @@ function honeypotField(lang) {
             </div>`;
 }
 
+// Which business example the lead-capture flow renders. Swap this value to
+// "restaurant", "spa", "flower" or "cleaning" to change the whole visual story.
+const ACTIVE_FLOW_EXAMPLE = "barber";
+
+const FLOW_CHANNELS = { en: ["Google", "Maps", "Reviews"], es: ["Google", "Maps", "Reseñas"] };
+const FLOW_FOLLOWUP = {
+  en: ["New request", "Contacted", "Confirmed"],
+  es: ["Nueva solicitud", "Contactado", "Confirmado"]
+};
+const FLOW_CUSTOMER_CHANNEL = { en: "Customer · SMS", es: "Cliente · SMS" };
+const FLOW_BUSINESS_TAG = { en: "Business", es: "Negocio" };
+
+const captureFlowExamples = {
+  barber: {
+    category: { en: "Barber shop", es: "Barbería" },
+    search: { en: "Barber shop near me", es: "Barbería cerca de mí" },
+    rating: "4.9",
+    results: {
+      en: ["Fade & Co Barber", "Kings Barber Studio", "Downtown Fades"],
+      es: ["Fade & Co Barber", "Kings Barber Studio", "Cortes Centro"]
+    },
+    channels: FLOW_CHANNELS,
+    action: { en: "Book an appointment", es: "Reservar una cita" },
+    request: {
+      en: {
+        title: "New booking request",
+        fields: [["Name", "Michael"], ["Service", "Haircut"], ["Preferred time", "Friday · 4:00 PM"]],
+        status: "New request"
+      },
+      es: {
+        title: "Nueva solicitud de reserva",
+        fields: [["Nombre", "Michael"], ["Servicio", "Corte de cabello"], ["Horario preferido", "Viernes · 4:00 PM"]],
+        status: "Nueva solicitud"
+      }
+    },
+    customerChannel: FLOW_CUSTOMER_CHANNEL,
+    customerMsg: {
+      en: "Thanks, Michael. We received your appointment request. A team member will confirm your time shortly.",
+      es: "Gracias, Michael. Recibimos tu solicitud de cita. Un miembro del equipo confirmará tu horario en breve."
+    },
+    businessTag: FLOW_BUSINESS_TAG,
+    businessMsg: { en: "New appointment request received", es: "Nueva solicitud de cita recibida" },
+    followup: FLOW_FOLLOWUP
+  },
+  restaurant: {
+    category: { en: "Restaurant", es: "Restaurante" },
+    search: { en: "Restaurants near me", es: "Restaurantes cerca de mí" },
+    rating: "4.8",
+    results: {
+      en: ["Bella Vita Trattoria", "Harbor Grill", "Sabor Latino"],
+      es: ["Bella Vita Trattoria", "Harbor Grill", "Sabor Latino"]
+    },
+    channels: FLOW_CHANNELS,
+    action: { en: "Reserve a table", es: "Reservar una mesa" },
+    request: {
+      en: {
+        title: "New reservation request",
+        fields: [["Name", "Michael"], ["Guests", "4 people"], ["Preferred time", "Friday · 8:00 PM"]],
+        status: "New request"
+      },
+      es: {
+        title: "Nueva solicitud de reserva",
+        fields: [["Nombre", "Michael"], ["Personas", "4 personas"], ["Horario preferido", "Viernes · 8:00 PM"]],
+        status: "Nueva solicitud"
+      }
+    },
+    customerChannel: FLOW_CUSTOMER_CHANNEL,
+    customerMsg: {
+      en: "Thanks, Michael. We received your table reservation request. We'll confirm your booking shortly.",
+      es: "Gracias, Michael. Recibimos tu solicitud de reserva de mesa. Confirmaremos tu reserva en breve."
+    },
+    businessTag: FLOW_BUSINESS_TAG,
+    businessMsg: { en: "New reservation request received", es: "Nueva solicitud de reserva recibida" },
+    followup: FLOW_FOLLOWUP
+  },
+  spa: {
+    category: { en: "Massage spa", es: "Spa de masajes" },
+    search: { en: "Massage spa near me", es: "Spa de masajes cerca de mí" },
+    rating: "4.9",
+    results: {
+      en: ["Serenity Massage Spa", "Zen Wellness", "Urban Retreat"],
+      es: ["Serenity Spa de Masajes", "Zen Wellness", "Urban Retreat"]
+    },
+    channels: FLOW_CHANNELS,
+    action: { en: "Request an appointment", es: "Solicitar una cita" },
+    request: {
+      en: {
+        title: "New appointment request",
+        fields: [["Name", "Michael"], ["Service", "Deep tissue massage"], ["Preferred time", "Saturday · 11:00 AM"]],
+        status: "New request"
+      },
+      es: {
+        title: "Nueva solicitud de cita",
+        fields: [["Nombre", "Michael"], ["Servicio", "Masaje de tejido profundo"], ["Horario preferido", "Sábado · 11:00 AM"]],
+        status: "Nueva solicitud"
+      }
+    },
+    customerChannel: FLOW_CUSTOMER_CHANNEL,
+    customerMsg: {
+      en: "Thanks, Michael. We received your appointment request. We'll confirm your session time shortly.",
+      es: "Gracias, Michael. Recibimos tu solicitud de cita. Confirmaremos el horario de tu sesión en breve."
+    },
+    businessTag: FLOW_BUSINESS_TAG,
+    businessMsg: { en: "New appointment request received", es: "Nueva solicitud de cita recibida" },
+    followup: FLOW_FOLLOWUP
+  },
+  flower: {
+    category: { en: "Flower shop", es: "Floristería" },
+    search: { en: "Flower delivery near me", es: "Floristería cerca de mí" },
+    rating: "4.9",
+    results: {
+      en: ["Petals & Co Florist", "Bloom Studio", "Rose Garden"],
+      es: ["Petals & Co Floristería", "Bloom Studio", "Jardín de Rosas"]
+    },
+    channels: FLOW_CHANNELS,
+    action: { en: "Request a bouquet or delivery", es: "Solicitar un ramo o entrega" },
+    request: {
+      en: {
+        title: "New order request",
+        fields: [["Name", "Michael"], ["Order", "Birthday bouquet"], ["Delivery", "Friday · Downtown"]],
+        status: "New request"
+      },
+      es: {
+        title: "Nueva solicitud de pedido",
+        fields: [["Nombre", "Michael"], ["Pedido", "Ramo de cumpleaños"], ["Entrega", "Viernes · Centro"]],
+        status: "Nueva solicitud"
+      }
+    },
+    customerChannel: FLOW_CUSTOMER_CHANNEL,
+    customerMsg: {
+      en: "Thanks, Michael. We received your order request. We'll confirm the details and delivery shortly.",
+      es: "Gracias, Michael. Recibimos tu solicitud de pedido. Confirmaremos los detalles y la entrega en breve."
+    },
+    businessTag: FLOW_BUSINESS_TAG,
+    businessMsg: { en: "New order request received", es: "Nuevo pedido recibido" },
+    followup: FLOW_FOLLOWUP
+  },
+  cleaning: {
+    category: { en: "Cleaning company", es: "Empresa de limpieza" },
+    search: { en: "House cleaning near me", es: "Limpieza de casas cerca de mí" },
+    rating: "4.8",
+    results: {
+      en: ["Brightside Cleaning Co", "Sparkle Home", "Fresh Spaces"],
+      es: ["Brightside Limpieza", "Sparkle Home", "Espacios Frescos"]
+    },
+    channels: FLOW_CHANNELS,
+    action: { en: "Request a quote", es: "Solicitar una cotización" },
+    request: {
+      en: {
+        title: "New quote request",
+        fields: [["Name", "Michael"], ["Property", "3-bedroom home"], ["Service", "Move-out cleaning"]],
+        status: "New request"
+      },
+      es: {
+        title: "Nueva solicitud de cotización",
+        fields: [["Nombre", "Michael"], ["Propiedad", "Casa de 3 habitaciones"], ["Servicio", "Limpieza de mudanza"]],
+        status: "Nueva solicitud"
+      }
+    },
+    customerChannel: FLOW_CUSTOMER_CHANNEL,
+    customerMsg: {
+      en: "Thanks, Michael. We received your quote request. We'll send your estimate shortly.",
+      es: "Gracias, Michael. Recibimos tu solicitud de cotización. Te enviaremos tu presupuesto en breve."
+    },
+    businessTag: FLOW_BUSINESS_TAG,
+    businessMsg: { en: "New quote request received", es: "Nueva solicitud de cotización recibida" },
+    followup: FLOW_FOLLOWUP
+  }
+};
+
+const captureFlowCopy = {
+  en: {
+    label: "LEAD CAPTURE FLOW EXAMPLE",
+    headline: "How a search becomes a real opportunity.",
+    supporting:
+      "A customer finds the business, submits a request or booking, the system records the opportunity, and an immediate response is triggered.",
+    stageLabels: ["They find you", "You capture the opportunity", "You respond and follow up"],
+    ui: { foundOn: "Found on", customerReceives: "Customer receives", businessReceives: "Business receives" },
+    summary: [
+      "They find you",
+      "They request or book",
+      "The opportunity is recorded",
+      "They receive confirmation",
+      "The business follows up"
+    ]
+  },
+  es: {
+    label: "EJEMPLO DE FLUJO DE CAPTACIÓN",
+    headline: "Así se convierte una búsqueda en una oportunidad.",
+    supporting:
+      "Una persona encuentra el negocio, solicita información o reserva, el sistema registra la oportunidad y activa una respuesta inmediata.",
+    stageLabels: ["Te encuentran", "Captas la oportunidad", "Respondes y das seguimiento"],
+    ui: { foundOn: "Encontrado en", customerReceives: "El cliente recibe", businessReceives: "El negocio recibe" },
+    summary: [
+      "Te encuentran",
+      "Solicitan o reservan",
+      "La oportunidad queda registrada",
+      "Reciben confirmación",
+      "El negocio da seguimiento"
+    ]
+  }
+};
+
+const FLOW_ICON_SEARCH =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>';
+const FLOW_ICON_ACTION =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>';
+const FLOW_ARROW =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+
+function captureFlowSection(lang) {
+  const c = captureFlowCopy[lang];
+  const ex = captureFlowExamples[ACTIVE_FLOW_EXAMPLE];
+  const results = ex.results[lang];
+  const channels = ex.channels[lang];
+  const req = ex.request[lang];
+  const followup = ex.followup[lang];
+
+  return `
+      <section class="section capture-flow" id="capture-flow" aria-label="${c.label}">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${c.label}</p>
+            <h2>${c.headline}</h2>
+            <p>${c.supporting}</p>
+          </div>
+
+          <div class="flow-stages">
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">01</span>
+                <h3 class="flow-stage-label">${c.stageLabels[0]}</h3>
+              </div>
+              <div class="flow-card">
+                <div class="flow-phone">
+                  <div class="flow-search">
+                    <span class="flow-search-icon">${FLOW_ICON_SEARCH}</span>
+                    <span>${ex.search[lang]}</span>
+                  </div>
+                  <ul class="flow-results">
+                    ${results
+                      .map(
+                        (name, index) =>
+                          `<li class="${index === 0 ? "is-active" : ""}"><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">${name}</span>${
+                            index === 0 ? `<span class="flow-stars">★ ${ex.rating}</span>` : ""
+                          }</li>`
+                      )
+                      .join("")}
+                  </ul>
+                </div>
+                <div class="flow-chips" aria-label="${c.ui.foundOn}">
+                  ${channels.map((ch) => `<span class="flow-chip">${ch}</span>`).join("")}
+                </div>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true">${FLOW_ARROW}</div>
+
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">02</span>
+                <h3 class="flow-stage-label">${c.stageLabels[1]}</h3>
+              </div>
+              <div class="flow-card">
+                <div class="flow-action"><span class="flow-action-icon">${FLOW_ICON_ACTION}</span>${ex.action[lang]}</div>
+                <div class="request-card">
+                  <span class="request-title">${req.title}</span>
+                  <dl class="request-fields">
+                    ${req.fields
+                      .map(([key, value]) => `<div class="request-row"><dt>${key}</dt><dd>${value}</dd></div>`)
+                      .join("")}
+                  </dl>
+                  <span class="request-status">${req.status}</span>
+                </div>
+              </div>
+            </article>
+
+            <div class="flow-arrow" aria-hidden="true">${FLOW_ARROW}</div>
+
+            <article class="flow-stage">
+              <div class="flow-stage-head">
+                <span class="flow-stage-num">03</span>
+                <h3 class="flow-stage-label">${c.stageLabels[2]}</h3>
+              </div>
+              <div class="flow-card">
+                <div class="msg-bubble is-customer">
+                  <span class="msg-tag">${ex.customerChannel[lang]}</span>
+                  <p>${ex.customerMsg[lang]}</p>
+                </div>
+                <div class="msg-bubble is-business">
+                  <span class="msg-tag">${ex.businessTag[lang]}</span>
+                  <p>${ex.businessMsg[lang]}</p>
+                </div>
+                <div class="followup-track">
+                  ${followup
+                    .map(
+                      (step, index) =>
+                        `<span class="followup-step ${index === 0 ? "is-done" : ""}">${step}</span>`
+                    )
+                    .join('<span class="followup-sep" aria-hidden="true"></span>')}
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <ol class="flow-summary">
+            ${c.summary
+              .map((step, index) => `<li><span class="flow-summary-num">${index + 1}</span><span>${step}</span></li>`)
+              .join("")}
+          </ol>
+        </div>
+      </section>`;
+}
+
 function homePage(lang) {
   const t = copy[lang];
   const h = t.home;
   const body = `
     <main id="main">
-      <section class="hero" id="home">
-        <div class="container hero-grid">
+      <section class="hero hero-home" id="home">
+        <div class="container hero-grid hero-grid-solo">
           <div class="hero-copy">
             <p class="eyebrow">${h.eyebrow}</p>
             <h1>${h.headline}</h1>
@@ -1923,22 +2227,10 @@ function homePage(lang) {
             </div>
           </div>
 
-          <div class="hero-visual" aria-label="${h.visual.aria}">
-            <div class="visual-stage visual-stage-image">
-              <span class="demo-label">${h.visual.demoLabel}</span>
-              <div class="lead-flow-wrap">
-                <img class="lead-flow-image" src="/public/images/lead-flow.png" alt="${h.visual.aria}" width="896" height="1152" decoding="async">
-                ${h.visual.flowLabels
-                  .map(
-                    (label, index) =>
-                      `<span class="lead-flow-label lead-flow-label-${index + 1}">${label}</span>`
-                  )
-                  .join("")}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+
+${captureFlowSection(lang)}
 
       <section class="section section-soft" id="problem">
         <div class="container">
