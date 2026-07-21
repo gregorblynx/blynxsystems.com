@@ -163,6 +163,7 @@ const copy = {
       process: "Process",
       results: "Results",
       about: "About",
+      projects: "Projects",
       resources: "Resources",
       contact: "Contact",
       blog: "Blog",
@@ -401,6 +402,31 @@ const copy = {
         ["Lead Capture Readiness", "Check whether your landing page and contact flow make it easy for qualified prospects to reach you.", "Explore the lead system", "/services"],
         ["Follow-Up Basics", "Understand how simple confirmations, reminders, and organization reduce missed opportunities.", "Ask a question", "/contact"]
       ]
+    },
+    projectsPage: {
+      title: "Projects | BLYNX Systems",
+      description: "Explore real BLYNX projects created for local service businesses and e-commerce brands.",
+      eyebrow: "REAL BLYNX PROJECTS",
+      h1: "See the systems we have built.",
+      subtitle:
+        "Explore real projects created to help businesses strengthen their digital presence, communicate their value clearly, and create a better customer journey.",
+      realBadge: "Real Project",
+      industryLabel: "Industry",
+      viewLive: "View Live Project",
+      detailsToggle: "Project details",
+      detail: {
+        business: "The business",
+        need: "The digital need",
+        built: "What BLYNX built",
+        elements: "Main elements implemented",
+        journey: "Customer journey"
+      },
+      homeEntry: {
+        label: "OUR WORK",
+        headline: "Explore real BLYNX projects.",
+        copy: "See how we have built digital experiences for service businesses and e-commerce brands.",
+        cta: "View Projects"
+      }
     }
   },
   es: {
@@ -419,6 +445,7 @@ const copy = {
       process: "Proceso",
       results: "Resultados",
       about: "Nosotros",
+      projects: "Proyectos",
       resources: "Recursos",
       contact: "Contacto",
       blog: "Blog",
@@ -657,6 +684,32 @@ const copy = {
         ["Preparación para Capturar Oportunidades", "Revisa si tu landing page y flujo de contacto hacen fácil que prospectos calificados te contacten.", "Explorar el sistema", "/services"],
         ["Bases de Seguimiento", "Entiende cómo confirmaciones, recordatorios y organización simple reducen oportunidades perdidas.", "Hacer una pregunta", "/contact"]
       ]
+    },
+    projectsPage: {
+      title: "Proyectos | BLYNX Systems",
+      description:
+        "Explora proyectos reales de BLYNX creados para negocios de servicios locales y marcas de comercio electrónico.",
+      eyebrow: "PROYECTOS REALES DE BLYNX",
+      h1: "Descubre los sistemas que hemos construido.",
+      subtitle:
+        "Explora proyectos reales creados para ayudar a negocios a fortalecer su presencia digital, comunicar claramente su valor y construir un mejor recorrido para sus clientes.",
+      realBadge: "Proyecto real",
+      industryLabel: "Industria",
+      viewLive: "Ver proyecto",
+      detailsToggle: "Detalles del proyecto",
+      detail: {
+        business: "El negocio",
+        need: "La necesidad digital",
+        built: "Lo que construyó BLYNX",
+        elements: "Elementos principales implementados",
+        journey: "Recorrido del cliente"
+      },
+      homeEntry: {
+        label: "NUESTRO TRABAJO",
+        headline: "Explora proyectos reales de BLYNX.",
+        copy: "Descubre cómo hemos construido experiencias digitales para negocios de servicios y marcas de comercio electrónico.",
+        cta: "Ver proyectos"
+      }
     }
   }
 };
@@ -1569,6 +1622,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
           <a href="${home}#process">${t.nav.process}</a>
           <a href="${home}#results">${t.nav.results}</a>
           <a${activeClass("about")} href="${aboutHref}">${t.nav.about}</a>
+          <a${activeClass("projects")} href="${pagePath(lang, "projects")}">${t.nav.projects}</a>
           ${blogArticles[lang].length ? `<a${activeClass("blog")} href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
           <a href="${auditHref}">${t.nav.audit}</a>
         </nav>
@@ -1601,6 +1655,7 @@ function footer(lang, auditSlug = "free-audit") {
         <div class="footer-links">
           <a href="${pagePath(lang, "services")}">${t.nav.services}</a>
           <a href="${pagePath(lang, "about")}">${t.nav.about}</a>
+          <a href="${pagePath(lang, "projects")}">${t.nav.projects}</a>
           <a href="${pagePath(lang, "contact")}">${t.nav.contact}</a>
           ${blogArticles[lang].length ? `<a href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
           <a href="${pagePath(lang, auditSlug)}">${t.nav.audit}</a>
@@ -2204,6 +2259,192 @@ function captureFlowSection(lang) {
       </section>`;
 }
 
+// Portfolio data. `type: "real"` publishes now; `type: "demo"` is supported by
+// the structure for the future but is intentionally not rendered yet.
+const portfolioProjects = [
+  {
+    id: "klinner",
+    type: "real",
+    name: "Klinner Cleaning & Maintenance",
+    url: "https://klinnercleaning.com",
+    image: "/public/images/projects/klinner.jpg",
+    imageAlt: {
+      en: "Homepage of the Klinner Cleaning & Maintenance website showing its hero section and main navigation",
+      es: "Página de inicio del sitio web de Klinner Cleaning & Maintenance mostrando su sección principal y su navegación"
+    },
+    industry: { en: "Cleaning & Property Services", es: "Limpieza y servicios para propiedades" },
+    summary: {
+      en: "A professional digital presence created for a Nashville cleaning and property-services company, designed to explain its services clearly, build trust, improve local visibility, and make requesting a quote easier.",
+      es: "Una presencia digital profesional creada para una empresa de limpieza y servicios para propiedades en Nashville, diseñada para explicar sus servicios claramente, generar confianza, mejorar la visibilidad local y facilitar la solicitud de cotizaciones."
+    },
+    business: {
+      en: "A cleaning and property-services company based in Nashville, Tennessee.",
+      es: "Una empresa de limpieza y servicios para propiedades con sede en Nashville, Tennessee."
+    },
+    need: {
+      en: "The company needed a professional way to present its services, build trust with local customers, and make requesting a quote simple on any device.",
+      es: "La empresa necesitaba una forma profesional de presentar sus servicios, generar confianza con clientes locales y facilitar la solicitud de cotizaciones desde cualquier dispositivo."
+    },
+    built: {
+      en: "A responsive website that presents the company clearly, explains its services, provides a direct quote pathway, and lays an SEO foundation for local visibility.",
+      es: "Un sitio web responsive que presenta a la empresa con claridad, explica sus servicios, ofrece una ruta directa para solicitar cotizaciones y establece una base SEO para la visibilidad local."
+    },
+    elements: {
+      en: [
+        "Responsive website",
+        "Service presentation",
+        "Quote & contact pathway",
+        "Mobile optimization",
+        "Local service information",
+        "Trust elements",
+        "SEO foundation"
+      ],
+      es: [
+        "Sitio web responsive",
+        "Presentación de servicios",
+        "Ruta de cotización y contacto",
+        "Optimización móvil",
+        "Información de servicio local",
+        "Elementos de confianza",
+        "Base SEO"
+      ]
+    },
+    journey: {
+      en: ["Find the business", "Review services", "Build trust", "Request a quote", "Business receives the request"],
+      es: ["Encuentra el negocio", "Revisa los servicios", "Genera confianza", "Solicita una cotización", "El negocio recibe la solicitud"]
+    }
+  },
+  {
+    id: "venezuela51",
+    type: "real",
+    name: "Venezuela 51 Collection",
+    url: "https://venezuela51collection.com",
+    image: "/public/images/projects/venezuela51.jpg",
+    imageAlt: {
+      en: "Homepage of the Venezuela 51 Collection online store showing its hero banner and product section",
+      es: "Página de inicio de la tienda en línea Venezuela 51 Collection mostrando su banner principal y su sección de productos"
+    },
+    industry: { en: "E-commerce", es: "Comercio electrónico" },
+    summary: {
+      en: "An e-commerce experience created to present a purpose-driven collection, communicate the mission behind the brand, organize its products, and provide a clear path from discovery to purchase.",
+      es: "Una experiencia de comercio electrónico creada para presentar una colección con propósito, comunicar la misión de la marca, organizar sus productos y ofrecer un recorrido claro desde el descubrimiento hasta la compra."
+    },
+    business: {
+      en: "A purpose-driven e-commerce brand built around a clear social mission.",
+      es: "Una marca de comercio electrónico con propósito, construida en torno a una misión social clara."
+    },
+    need: {
+      en: "The brand needed to present its mission clearly, organize its products and collections, and provide a mobile-friendly path from discovery to checkout.",
+      es: "La marca necesitaba presentar su misión con claridad, organizar sus productos y colecciones, y ofrecer un recorrido móvil desde el descubrimiento hasta la compra."
+    },
+    built: {
+      en: "An online store that tells the brand story, organizes product collections, presents individual products, and provides a clear purchase and checkout pathway.",
+      es: "Una tienda en línea que cuenta la historia de la marca, organiza colecciones de productos, presenta productos individuales y ofrece una ruta clara de compra y pago."
+    },
+    elements: {
+      en: [
+        "E-commerce storefront",
+        "Product collections",
+        "Product pages",
+        "Mobile shopping experience",
+        "Purchase & checkout pathway",
+        "Brand storytelling",
+        "Mission-focused messaging"
+      ],
+      es: [
+        "Tienda en línea",
+        "Colecciones de productos",
+        "Páginas de producto",
+        "Experiencia de compra móvil",
+        "Ruta de compra y pago",
+        "Historia de marca",
+        "Mensaje centrado en la misión"
+      ]
+    },
+    journey: {
+      en: ["Discover the collection", "Understand the mission", "Explore products", "Select a product", "Complete the purchase"],
+      es: ["Descubre la colección", "Comprende la misión", "Explora productos", "Selecciona un producto", "Completa la compra"]
+    }
+  }
+];
+
+function projectCard(lang, project, p) {
+  const elements = project.elements[lang];
+  const journey = project.journey[lang];
+  return `
+          <article class="project-card">
+            <a class="project-shot" href="${project.url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">
+            </a>
+            <div class="project-body">
+              <div class="project-top">
+                <span class="project-badge">${p.realBadge}</span>
+                <span class="project-industry">${project.industry[lang]}</span>
+              </div>
+              <h2 class="project-name">${project.name}</h2>
+              <p class="project-summary">${project.summary[lang]}</p>
+              <ul class="project-tags">
+                ${elements.slice(0, 4).map((item) => `<li>${item}</li>`).join("")}
+              </ul>
+              <details class="project-details">
+                <summary>${p.detailsToggle}</summary>
+                <div class="project-detail-inner">
+                  <div class="project-detail-block">
+                    <h3>${p.detail.business}</h3>
+                    <p>${project.business[lang]}</p>
+                  </div>
+                  <div class="project-detail-block">
+                    <h3>${p.detail.need}</h3>
+                    <p>${project.need[lang]}</p>
+                  </div>
+                  <div class="project-detail-block">
+                    <h3>${p.detail.built}</h3>
+                    <p>${project.built[lang]}</p>
+                  </div>
+                  <div class="project-detail-block">
+                    <h3>${p.detail.elements}</h3>
+                    ${offerList(elements)}
+                  </div>
+                  <div class="project-detail-block">
+                    <h3>${p.detail.journey}</h3>
+                    <div class="project-journey">
+                      ${journey
+                        .map((step) => `<span class="journey-step">${step}</span>`)
+                        .join('<span class="journey-arrow" aria-hidden="true">›</span>')}
+                    </div>
+                  </div>
+                </div>
+              </details>
+              <div class="project-actions">
+                <a class="btn btn-primary" href="${project.url}" target="_blank" rel="noopener noreferrer">${p.viewLive}</a>
+              </div>
+            </div>
+          </article>`;
+}
+
+function projectsPage(lang) {
+  const p = copy[lang].projectsPage;
+  const projects = portfolioProjects.filter((project) => project.type === "real");
+  const body = `
+    <main id="main">
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <p class="eyebrow">${p.eyebrow}</p>
+          <h1>${p.h1}</h1>
+          <p>${p.subtitle}</p>
+        </div>
+      </section>
+
+      <section class="section section-tight">
+        <div class="container project-grid">
+          ${projects.map((project) => projectCard(lang, project, p)).join("")}
+        </div>
+      </section>
+    </main>`;
+
+  return shell(lang, p, "projects", "projects", body);
+}
+
 function homePage(lang) {
   const t = copy[lang];
   const h = t.home;
@@ -2366,6 +2607,19 @@ ${captureFlowSection(lang)}
             </div>`
               )
               .join("")}
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tight our-work" aria-label="${t.projectsPage.homeEntry.label}">
+        <div class="container">
+          <div class="our-work-panel">
+            <div class="our-work-copy">
+              <p class="eyebrow">${t.projectsPage.homeEntry.label}</p>
+              <h2>${t.projectsPage.homeEntry.headline}</h2>
+              <p>${t.projectsPage.homeEntry.copy}</p>
+            </div>
+            <a class="btn btn-primary" href="${pagePath(lang, "projects")}">${t.projectsPage.homeEntry.cta}</a>
           </div>
         </div>
       </section>
@@ -3511,6 +3765,7 @@ for (const lang of ["en", "es"]) {
   write(`${lang}/free-audit-zero/index.html`, stageAuditPage(lang, "zero"));
   write(`${lang}/services/index.html`, servicesPage(lang));
   write(`${lang}/about/index.html`, aboutPage(lang));
+  write(`${lang}/projects/index.html`, projectsPage(lang));
   write(`${lang}/contact/index.html`, contactPage(lang));
   write(`${lang}/privacy/index.html`, legalPage(lang, "privacy"));
   write(`${lang}/terms/index.html`, legalPage(lang, "terms"));
@@ -3526,7 +3781,7 @@ for (const lang of ["en", "es"]) {
 
 write("blog/index.html", redirectPage("blog"));
 
-for (const slug of ["free-audit", "services", "about", "contact", "privacy", "terms"]) {
+for (const slug of ["free-audit", "services", "about", "projects", "contact", "privacy", "terms"]) {
   write(`${slug}/index.html`, redirectPage(slug));
 }
 
@@ -3542,6 +3797,7 @@ const sitemapRoutes = [
   "free-audit-zero",
   "services",
   "about",
+  "projects",
   "contact",
   "privacy",
   "terms"

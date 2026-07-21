@@ -109,6 +109,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/about"/>
   </url>
   <url>
+    <loc>https://www.blynxsystems.com/en/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/projects"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/projects"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/projects"/>
+  </url>
+  <url>
+    <loc>https://www.blynxsystems.com/es/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/projects"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/projects"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.blynxsystems.com/en/projects"/>
+  </url>
+  <url>
     <loc>https://www.blynxsystems.com/en/contact</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.blynxsystems.com/en/contact"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.blynxsystems.com/es/contact"/>

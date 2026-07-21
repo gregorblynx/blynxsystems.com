@@ -24,6 +24,7 @@ const requiredFiles = [
   "en/privacy/index.html",
   "en/terms/index.html",
   "en/resources/index.html",
+  "en/projects/index.html",
   "es/index.html",
   "es/start/index.html",
   "es/existing/index.html",
@@ -37,6 +38,7 @@ const requiredFiles = [
   "es/privacy/index.html",
   "es/terms/index.html",
   "es/resources/index.html",
+  "es/projects/index.html",
   "en/blog/index.html",
   "en/blog/what-is-a-local-lead-system/index.html",
   "en/blog/google-business-profile-new-storefront/index.html",
@@ -56,9 +58,12 @@ const requiredFiles = [
   "public/images/blog/customers-buy-confidence.jpg",
   "public/images/blog/systems-beat-marketing.jpg",
   "public/images/blog/blog-og.jpg",
+  "public/images/projects/klinner.jpg",
+  "public/images/projects/venezuela51.jpg",
   "free-audit/index.html",
   "services/index.html",
   "about/index.html",
+  "projects/index.html",
   "contact/index.html",
   "privacy/index.html",
   "terms/index.html",
@@ -299,6 +304,26 @@ const requiredSnippets = new Map([
     "trackEvent",
     "function handleAuditSubmit",
     "LEAD_WEBHOOK_URL"
+  ]],
+  ["en/projects/index.html", [
+    "REAL BLYNX PROJECTS",
+    "See the systems we have built.",
+    "Klinner Cleaning & Maintenance",
+    "Venezuela 51 Collection",
+    "https://klinnercleaning.com",
+    "https://venezuela51collection.com",
+    "Real Project",
+    "View Live Project"
+  ]],
+  ["es/projects/index.html", [
+    "PROYECTOS REALES DE BLYNX",
+    "Descubre los sistemas que hemos construido.",
+    "Klinner Cleaning & Maintenance",
+    "Venezuela 51 Collection",
+    "https://klinnercleaning.com",
+    "https://venezuela51collection.com",
+    "Proyecto real",
+    "Ver proyecto"
   ]]
 ]);
 
