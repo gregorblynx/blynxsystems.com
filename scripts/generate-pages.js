@@ -1624,7 +1624,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
           <a${activeClass("about")} href="${aboutHref}">${t.nav.about}</a>
           <a${activeClass("projects")} href="${pagePath(lang, "projects")}">${t.nav.projects}</a>
           ${blogArticles[lang].length ? `<a${activeClass("blog")} href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
-          <a href="${auditHref}">${t.nav.audit}</a>
+          <a class="nav-audit-link" href="${auditHref}">${t.nav.audit}</a>
         </nav>
         <div class="header-actions">
           ${languageSwitcher(lang, switchPath, switchPaths)}
