@@ -60,6 +60,12 @@ const requiredFiles = [
   "public/images/blog/blog-og.jpg",
   "public/images/projects/klinner.jpg",
   "public/images/projects/venezuela51.jpg",
+  "public/images/projects/forge-demo.jpg",
+  "public/images/demos/forge-hero.jpg",
+  "public/images/demos/forge-train.jpg",
+  "public/images/demos/forge-results.jpg",
+  "demos/forge/index.html",
+  "demos/forge/es/index.html",
   "free-audit/index.html",
   "services/index.html",
   "about/index.html",
@@ -362,7 +368,7 @@ function copyRecursive(source, target) {
   fs.copyFileSync(source, target);
 }
 
-for (const entry of ["assets", "public", "en", "es", "blog", "free-audit", "services", "about", "contact", "privacy", "terms", "resources", "index.html", "404.html", "CNAME", "package.json", "robots.txt", "sitemap.xml"]) {
+for (const entry of ["assets", "public", "en", "es", "demos", "blog", "free-audit", "services", "about", "contact", "privacy", "terms", "resources", "index.html", "404.html", "CNAME", "package.json", "robots.txt", "sitemap.xml"]) {
   const sourcePath = path.join(root, entry);
   if (!fs.existsSync(sourcePath)) continue;
   copyRecursive(sourcePath, path.join(dist, entry));

@@ -411,8 +411,12 @@ const copy = {
       subtitle:
         "Explore real projects created to help businesses strengthen their digital presence, communicate their value clearly, and create a better customer journey.",
       realBadge: "Real Project",
+      demoBadge: "Demo · Concept",
       industryLabel: "Industry",
       viewLive: "View Live Project",
+      viewDemo: "View live demo",
+      demoSectionTitle: "Concept demos",
+      demoSectionNote: "Concept sites we build to show what's possible — these are demonstrations, not client work. Brands and content are fictional.",
       detailsToggle: "Project details",
       detail: {
         business: "The business",
@@ -694,8 +698,12 @@ const copy = {
       subtitle:
         "Explora proyectos reales creados para ayudar a negocios a fortalecer su presencia digital, comunicar claramente su valor y construir un mejor recorrido para sus clientes.",
       realBadge: "Proyecto real",
+      demoBadge: "Demo · Concepto",
       industryLabel: "Industria",
       viewLive: "Ver proyecto",
+      viewDemo: "Ver demo en vivo",
+      demoSectionTitle: "Demos de concepto",
+      demoSectionNote: "Sitios de concepto que creamos para mostrar lo que es posible — son demostraciones, no trabajo de clientes. Las marcas y el contenido son ficticios.",
       detailsToggle: "Detalles del proyecto",
       detail: {
         business: "El negocio",
@@ -2365,20 +2373,74 @@ const portfolioProjects = [
       en: ["Discover the collection", "Understand the mission", "Explore products", "Select a product", "Complete the purchase"],
       es: ["Descubre la colección", "Comprende la misión", "Explora productos", "Selecciona un producto", "Completa la compra"]
     }
+  },
+  {
+    id: "forge",
+    type: "demo",
+    name: "FORGE Fitness Coaching",
+    url: { en: "/demos/forge", es: "/demos/forge/es" },
+    image: "/public/images/projects/forge-demo.jpg",
+    imageAlt: {
+      en: "Hero of the FORGE Fitness Coaching demo site — a bold 12-week transformation challenge landing page",
+      es: "Portada del sitio demo FORGE Fitness Coaching — una landing potente de reto de transformación de 12 semanas"
+    },
+    industry: { en: "Fitness Coaching (Demo)", es: "Coaching fitness (Demo)" },
+    summary: {
+      en: "A concept landing page for a fitness transformation brand — built to turn attention into applications with a bold offer, a clear program, and a lead-capture flow. Fictional brand, illustrative content.",
+      es: "Una landing de concepto para una marca de transformación fitness — creada para convertir la atención en aplicaciones con una oferta potente, un programa claro y un flujo de captación. Marca ficticia, contenido ilustrativo."
+    },
+    business: {
+      en: "FORGE is a fictional fitness-coaching brand offering a 12-week body-transformation challenge. This is a concept demo, not a real client.",
+      es: "FORGE es una marca ficticia de coaching fitness que ofrece un reto de transformación corporal de 12 semanas. Es un demo de concepto, no un cliente real."
+    },
+    need: {
+      en: "A transformation coach needs a page that sells the program at a glance, builds belief, and captures qualified applicants — not just a link in a bio.",
+      es: "Un coach de transformación necesita una página que venda el programa de un vistazo, genere creencia y capte aplicantes calificados — no solo un link en la bio."
+    },
+    built: {
+      en: "A bold, energetic single-page site: a strong offer, the program broken into pillars and a weekly timeline, sample results and testimonials, clear program tiers, and an application form — bilingual (EN/ES).",
+      es: "Un sitio de una página potente y enérgico: una oferta clara, el programa dividido en pilares y una línea de tiempo semanal, resultados y testimonios de muestra, niveles de programa claros y un formulario de aplicación — bilingüe (EN/ES)."
+    },
+    elements: {
+      en: [
+        "Conversion-focused hero",
+        "Program in 4 pillars",
+        "12-week timeline",
+        "Program tiers",
+        "Application / lead capture",
+        "Bilingual (EN/ES)",
+        "Mobile optimized"
+      ],
+      es: [
+        "Hero enfocado en conversión",
+        "Programa en 4 pilares",
+        "Línea de tiempo de 12 semanas",
+        "Niveles de programa",
+        "Aplicación / captación",
+        "Bilingüe (EN/ES)",
+        "Optimizado para móvil"
+      ]
+    },
+    journey: {
+      en: ["Land on the offer", "Understand the program", "See the results", "Choose a level", "Apply for the challenge"],
+      es: ["Llega a la oferta", "Entiende el programa", "Ve los resultados", "Elige un nivel", "Aplica al reto"]
+    }
   }
 ];
 
 function projectCard(lang, project, p) {
   const elements = project.elements[lang];
   const journey = project.journey[lang];
+  const isDemo = project.type === "demo";
+  const url = typeof project.url === "string" ? project.url : project.url[lang];
   return `
           <article class="project-card">
-            <a class="project-shot" href="${project.url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+            <a class="project-shot" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
               <img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">
             </a>
             <div class="project-body">
               <div class="project-top">
-                <span class="project-badge">${p.realBadge}</span>
+                <span class="project-badge${isDemo ? " is-demo" : ""}">${isDemo ? p.demoBadge : p.realBadge}</span>
                 <span class="project-industry">${project.industry[lang]}</span>
               </div>
               <h2 class="project-name">${project.name}</h2>
@@ -2416,7 +2478,7 @@ function projectCard(lang, project, p) {
                 </div>
               </details>
               <div class="project-actions">
-                <a class="btn btn-primary" href="${project.url}" target="_blank" rel="noopener noreferrer">${p.viewLive}</a>
+                <a class="btn btn-primary" href="${url}" target="_blank" rel="noopener noreferrer">${isDemo ? p.viewDemo : p.viewLive}</a>
               </div>
             </div>
           </article>`;
@@ -2424,7 +2486,22 @@ function projectCard(lang, project, p) {
 
 function projectsPage(lang) {
   const p = copy[lang].projectsPage;
-  const projects = portfolioProjects.filter((project) => project.type === "real");
+  const reals = portfolioProjects.filter((project) => project.type === "real");
+  const demos = portfolioProjects.filter((project) => project.type === "demo");
+  const demoSection = demos.length
+    ? `
+      <section class="section section-tight" id="demos">
+        <div class="container">
+          <div class="section-heading demos-heading">
+            <h2>${p.demoSectionTitle}</h2>
+            <p>${p.demoSectionNote}</p>
+          </div>
+          <div class="project-grid">
+            ${demos.map((project) => projectCard(lang, project, p)).join("")}
+          </div>
+        </div>
+      </section>`
+    : "";
   const body = `
     <main id="main">
       <section class="page-hero">
@@ -2437,9 +2514,10 @@ function projectsPage(lang) {
 
       <section class="section section-tight">
         <div class="container project-grid">
-          ${projects.map((project) => projectCard(lang, project, p)).join("")}
+          ${reals.map((project) => projectCard(lang, project, p)).join("")}
         </div>
       </section>
+${demoSection}
     </main>`;
 
   return shell(lang, p, "projects", "projects", body);

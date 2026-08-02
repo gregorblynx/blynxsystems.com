@@ -5,7 +5,7 @@
   "description": "Official static website for BLYNX Systems.",
   "scripts": {
     "generate": "node scripts/generate-pages.js",
-    "build": "node scripts/generate-pages.js && node scripts/build.js",
+    "build": "node scripts/build-forge-demo.js && node scripts/generate-pages.js && node scripts/build.js",
     "serve": "python3 -m http.server 4173"
   }
 }

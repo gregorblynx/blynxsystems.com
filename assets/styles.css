@@ -1117,6 +1117,23 @@ button {
   content: "";
 }
 
+.project-badge.is-demo {
+  border-color: rgba(124, 176, 255, 0.42);
+  background: rgba(124, 176, 255, 0.12);
+  color: #a9caff;
+}
+
+.project-badge.is-demo::before {
+  background: #7cb0ff;
+  box-shadow: 0 0 10px rgba(124, 176, 255, 0.8);
+}
+
+.demos-heading {
+  margin-top: 1rem;
+  padding-top: 2.6rem;
+  border-top: 1px solid var(--line);
+}
+
 .project-industry {
   color: var(--muted);
   font-size: 0.85rem;
