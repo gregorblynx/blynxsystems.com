@@ -2425,6 +2425,58 @@ const portfolioProjects = [
       en: ["Land on the offer", "Understand the program", "See the results", "Choose a level", "Apply for the challenge"],
       es: ["Llega a la oferta", "Entiende el programa", "Ve los resultados", "Elige un nivel", "Aplica al reto"]
     }
+  },
+  {
+    id: "barber",
+    type: "demo",
+    name: "THE FADE ROOM",
+    url: { en: "/demos/barber", es: "/demos/barber/es" },
+    image: "/public/images/projects/barber-demo.jpg",
+    imageAlt: {
+      en: "Hero of THE FADE ROOM demo site — a classic barbershop landing page with online booking",
+      es: "Portada del sitio demo THE FADE ROOM — una landing de barbería clásica con reserva en línea"
+    },
+    industry: { en: "Barbershop (Demo)", es: "Barbería (Demo)" },
+    summary: {
+      en: "A concept site for a classic barbershop — built so a walk-in-only shop can be found on Google, show its services and prices clearly, and take bookings around the clock. Fictional brand, illustrative content.",
+      es: "Un sitio de concepto para una barbería clásica — creado para que una barbería que solo recibe sin cita sea encontrada en Google, muestre sus servicios y precios con claridad y reciba reservas a toda hora. Marca ficticia, contenido ilustrativo."
+    },
+    business: {
+      en: "THE FADE ROOM is a fictional classic barbershop offering cuts, beard work and hot towel shaves. This is a concept demo, not a real client.",
+      es: "THE FADE ROOM es una barbería clásica ficticia con cortes, trabajo de barba y afeitados con toalla caliente. Es un demo de concepto, no un cliente real."
+    },
+    need: {
+      en: "Most local barbershops live on social media alone: no website, no prices online, and every booking handled by phone or walk-in — so after-hours customers are simply lost.",
+      es: "La mayoría de las barberías locales viven solo en redes: sin web, sin precios en línea y con cada reserva por teléfono o sin cita — así se pierden los clientes que buscan fuera del horario."
+    },
+    built: {
+      en: "A classic, premium single-page site: a clear service and price list, the shop's craft and story, a 60-second booking flow, sample reviews, hours and location — bilingual (EN/ES).",
+      es: "Un sitio de una página clásico y premium: lista clara de servicios y precios, el oficio y la historia de la barbería, un flujo de reserva de 60 segundos, reseñas de muestra, horario y ubicación — bilingüe (EN/ES)."
+    },
+    elements: {
+      en: [
+        "Service & price list",
+        "Online booking flow",
+        "Hours & location",
+        "Reviews section",
+        "Mobile optimized",
+        "Bilingual (EN/ES)",
+        "Local SEO foundation"
+      ],
+      es: [
+        "Lista de servicios y precios",
+        "Flujo de reserva en línea",
+        "Horario y ubicación",
+        "Sección de reseñas",
+        "Optimizado para móvil",
+        "Bilingüe (EN/ES)",
+        "Base de SEO local"
+      ]
+    },
+    journey: {
+      en: ["Search for a barber", "Find the shop", "Check services & prices", "Book a chair", "Shop receives the booking"],
+      es: ["Busca una barbería", "Encuentra el local", "Revisa servicios y precios", "Reserva una silla", "La barbería recibe la reserva"]
+    }
   }
 ];
 
