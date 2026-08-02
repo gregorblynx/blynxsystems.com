@@ -191,7 +191,7 @@ function render(t) {
 :root{--bg:#0a0908;--bg2:#121010;--card:#17130f;--line:rgba(255,255,255,.1);--txt:#f4efe9;--mut:#a89f95;--fire:#ff5a1f;--fire2:#ff8a3d;--ember:#ffb066}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
 .wrap{width:min(100% - 2rem,1160px);margin-inline:auto}
 h1,h2,h3,h4{line-height:1.05;letter-spacing:-.01em}
@@ -347,7 +347,7 @@ footer.f .wrap{padding:2.4rem 0}
 
 <section style="background:var(--bg2)"><div class="wrap">
   <div class="inc">
-    <div class="inc-img"><img src="/public/images/demos/forge-train.jpg" alt="Hands gripping a loaded barbell with chalk dust" width="880" height="1100"></div>
+    <div class="inc-img"><img src="/public/images/demos/forge-train.jpg" alt="Hands gripping a loaded barbell with chalk dust" width="896" height="1152"></div>
     <div>
       <p class="eyebrow">${esc(t.includedTitle)}</p>
       <h2 class="k" style="font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;margin:.5rem 0 1.4rem">${esc(t.includedTitle)}</h2>
@@ -364,7 +364,7 @@ footer.f .wrap{padding:2.4rem 0}
 <section id="results" class="results"><div class="wrap">
   <div class="sec-h"><p class="eyebrow">${esc(t.nav.results)}</p><h2 class="k">${esc(t.resultsTitle)}</h2><p>${esc(t.resultsSub)}</p></div>
   <div class="res-grid">
-    <div class="res-img"><img src="/public/images/demos/forge-results.jpg" alt="Athlete slamming battle ropes in a dark gym" width="880" height="1100"></div>
+    <div class="res-img"><img src="/public/images/demos/forge-results.jpg" alt="Athlete slamming battle ropes in a dark gym" width="896" height="1152"></div>
     <div class="rescards">${t.results.map(res).join("")}</div>
   </div>
   <div class="sec-h" style="margin-top:3.5rem;margin-bottom:1.4rem"><h2 class="k" style="font-size:clamp(1.6rem,3.5vw,2.2rem)">${esc(t.testiTitle)}</h2></div>
