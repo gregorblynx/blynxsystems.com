@@ -52,27 +52,46 @@ function populateAuditContextFields(form) {
   }
 }
 
+// Analytics provider: Google Analytics 4 only (gtag.js is injected in the page <head> by
+// scripts/generate-pages.js when GA4_MEASUREMENT_ID is configured). If no Measurement ID is
+// configured, gtag is simply absent and every trackEvent call is a no-op — nothing else is
+// silently swallowed here.
+//
+// PII guard: analytics parameters are allow-listed, never denied one by one. Anything not on
+// this list is dropped before it can reach GA4, so form values (name, email, phone, message,
+// URLs, free text) can never leak into analytics even if a caller passes them by mistake.
+const ANALYTICS_PARAM_ALLOWLIST = [
+  "formType",
+  "businessStage",
+  "language",
+  "page",
+  "stage",
+  "slug",
+  "from",
+  "category",
+  "cta_name",
+  "cta_target",
+  "project_name",
+  "project_domain"
+];
+
+function analyticsParams(data = {}) {
+  const safeData = {};
+  ANALYTICS_PARAM_ALLOWLIST.forEach((key) => {
+    const value = data[key];
+    if (value === undefined || value === null || value === "") return;
+    safeData[key] = typeof value === "string" ? value.slice(0, 100) : value;
+  });
+  return safeData;
+}
+
 function trackEvent(eventName, data = {}) {
-  const safeData = { ...data };
-  delete safeData.fullName;
-  delete safeData.email;
-  delete safeData.phone;
-  delete safeData.message;
-  delete safeData.websiteUrl;
-  delete safeData.googleBusinessProfileLink;
-
-  if (typeof window.gtag === "function") {
-    window.gtag("event", eventName, safeData);
-  }
-  if (typeof window.fbq === "function") {
-    window.fbq("trackCustom", eventName, safeData);
-  }
-  if (typeof window.plausible === "function") {
-    window.plausible(eventName, { props: safeData });
-  }
-
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: eventName, ...safeData });
+  if (typeof window.gtag !== "function") return;
+  window.gtag("event", eventName, {
+    page: window.location.pathname,
+    language: pageLanguage() || "unknown",
+    ...analyticsParams(data)
+  });
 }
 
 (function () {
@@ -143,9 +162,39 @@ function trackEvent(eventName, data = {}) {
   });
 
   document.querySelectorAll('a[href*="free-audit"]').forEach((link) => {
+    // Skip links that already declare their own event, otherwise they would report twice.
+    if (link.hasAttribute("data-analytics-event")) return;
     link.addEventListener("click", () => {
       trackEvent("free_audit_cta_click");
     });
+  });
+
+  // Primary CTA clicks and outbound project clicks are tracked by delegation so no markup
+  // has to change. A link is reported as exactly one of the two, never both.
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!target || typeof target.closest !== "function") return;
+    const link = target.closest("a[href]");
+    if (!link) return;
+
+    const projectCard = link.closest(".project-card");
+    const isExternal = link.hostname && link.hostname !== window.location.hostname;
+
+    if (projectCard && isExternal) {
+      const projectName = projectCard.querySelector(".project-name");
+      trackEvent("project_outbound_click", {
+        project_name: projectName ? projectName.textContent.trim() : "",
+        project_domain: link.hostname
+      });
+      return;
+    }
+
+    if (link.classList.contains("btn-primary")) {
+      trackEvent("primary_cta_click", {
+        cta_name: link.textContent.trim().replace(/\s+/g, " "),
+        cta_target: link.getAttribute("href") || ""
+      });
+    }
   });
 
   if (savedLanguageNotice && (savedLanguage === "en" || savedLanguage === "es")) {
@@ -225,10 +274,15 @@ function trackEvent(eventName, data = {}) {
   });
 })();
 
-// Google Apps Script Web App (see integrations/google-apps-script.gs):
+// Lead endpoint: Google Apps Script Web App (see integrations/google-apps-script.gs), which
 // appends each lead to the "BLYNX Leads" spreadsheet and emails hello@blynxsystems.com.
-const LEAD_WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycbxQhYyBg_WIMmItlMU_tNusDLgAcpgC0vRtmhzx3ie4kaoR_g044V9nP2bxJm2B0zYp/exec";
+//
+// The URL is NOT hardcoded here. It is injected into every page as window.BLYNX_CONFIG by
+// scripts/generate-pages.js, which reads the LEAD_WEBHOOK_URL environment variable at build
+// time. Redeploying the Apps Script Web App therefore only requires updating one environment
+// variable and rebuilding — no source edit, no risk of the endpoint drifting between files.
+const SITE_CONFIG = window.BLYNX_CONFIG || {};
+const LEAD_WEBHOOK_URL = SITE_CONFIG.leadWebhookUrl || "";
 
 function sanitizeValue(value) {
   if (Array.isArray(value)) return value.map(sanitizeValue);
@@ -316,9 +370,12 @@ function showFormError(form, message) {
 }
 
 async function submitLead(formType, payload) {
+  // Fail closed. A missing endpoint means the lead cannot be stored anywhere, so the visitor
+  // must see the error state (which offers the direct email address) instead of a success
+  // message for a lead that was never captured. Never report success we cannot verify.
   if (!LEAD_WEBHOOK_URL) {
-    console.log(`BLYNX ${formType} request (no webhook configured yet):`, payload);
-    return true;
+    console.error("BLYNX lead endpoint is not configured (window.BLYNX_CONFIG.leadWebhookUrl is empty).");
+    return false;
   }
 
   try {
@@ -331,15 +388,43 @@ async function submitLead(formType, payload) {
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({ formType, submittedAt: new Date().toISOString(), ...payload })
     });
-    return response.ok;
+
+    if (!response.ok) {
+      // Status only — never the payload, which holds the visitor's personal data.
+      console.error(`BLYNX lead submission rejected by the endpoint (HTTP ${response.status}).`);
+      return false;
+    }
+
+    // The Apps Script Web App answers HTTP 200 even when it refuses the submission, returning
+    // {"result":"error"} in the body (missing fields, invalid email, script exception). Trusting
+    // response.ok alone would show a success message for a lead that was never stored.
+    const body = await response.text();
+    let result;
+    try {
+      result = JSON.parse(body);
+    } catch (parseError) {
+      // Endpoint reachable but the body is not the JSON contract we expect (for example an
+      // HTML sign-in or error page from Google). Treat that as a failure, not a success.
+      console.error("BLYNX lead endpoint returned an unexpected non-JSON response.");
+      return false;
+    }
+
+    if (result && result.result === "success") return true;
+
+    console.error(
+      `BLYNX lead endpoint reported an error: ${(result && result.message) || "unknown reason"}`
+    );
+    return false;
   } catch (error) {
-    console.error(`BLYNX ${formType} submission failed:`, error);
+    // Network failure, CORS failure or offline. Log the reason, never the payload.
+    console.error(`BLYNX lead submission failed to reach the endpoint: ${error && error.message}`);
     return false;
   }
 }
 
 async function submitForm(form, formType) {
-  if (form.dataset.submitting === "true") return;
+  // In-flight guard (double click) and post-success guard (already captured).
+  if (form.dataset.submitting === "true" || form.dataset.submitted === "true") return;
   validateFlexibleUrlFields(form);
   if (!form.checkValidity()) {
     form.reportValidity();
@@ -375,11 +460,19 @@ async function submitForm(form, formType) {
       form,
       form.dataset.successMessage || "Thank you. Your request has been received."
     );
-    trackEvent(formType === "contact" ? "contact_form_submit" : "free_audit_form_submit", {
+    // Conversion events fire only here — after the backend has confirmed the lead was stored.
+    trackEvent(formType === "contact" ? "contact_form_submit" : "free_audit_submit", {
       formType,
       businessStage: data.businessStage || ""
     });
     form.reset();
+    // Duplicate protection after a confirmed submission: the lead is already stored, so keep
+    // the submit button disabled instead of letting an impatient second click send it twice.
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-disabled", "true");
+    }
+    form.dataset.submitted = "true";
   } else {
     showFormError(
       form,

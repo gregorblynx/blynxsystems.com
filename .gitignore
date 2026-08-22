@@ -3,6 +3,7 @@ dist/
 .DS_Store
 .env
 .env.*
+!.env.example
 integrations/apps-script/
 .claude/
 0g image.PNG

@@ -350,6 +350,42 @@ for (const file of requiredFiles) {
   assert(fs.existsSync(filePath), `Missing required file: ${file}`);
 }
 
+// Runtime configuration checks. These are warnings, not failures, so a local build without
+// secrets still works — but a production build missing either value is impossible to miss.
+const leadWebhookUrl = (process.env.LEAD_WEBHOOK_URL || "").trim();
+const ga4MeasurementId = (process.env.GA4_MEASUREMENT_ID || "").trim();
+const warnings = [];
+
+if (!leadWebhookUrl) {
+  warnings.push(
+    "LEAD_WEBHOOK_URL is not set. Lead forms will show their error state and NO lead will be captured."
+  );
+}
+if (!ga4MeasurementId) {
+  warnings.push("GA4_MEASUREMENT_ID is not set. Analytics will not be installed on the site.");
+}
+
+// When a value IS configured, prove it actually reached the generated HTML.
+const auditPageHtml = fs.readFileSync(path.join(root, "en/free-audit/index.html"), "utf8");
+assert(
+  auditPageHtml.includes("window.BLYNX_CONFIG"),
+  "Generated pages are missing the window.BLYNX_CONFIG runtime block."
+);
+if (leadWebhookUrl) {
+  assert(
+    auditPageHtml.includes(leadWebhookUrl),
+    "LEAD_WEBHOOK_URL is set but did not reach the generated pages."
+  );
+}
+if (ga4MeasurementId) {
+  assert(
+    auditPageHtml.includes(`googletagmanager.com/gtag/js?id=${ga4MeasurementId}`),
+    "GA4_MEASUREMENT_ID is set but gtag.js did not reach the generated pages."
+  );
+  const gtagConfigCount = (auditPageHtml.match(/gtag\('config'/g) || []).length;
+  assert(gtagConfigCount === 1, `GA4 must be initialised exactly once per page (found ${gtagConfigCount}).`);
+}
+
 for (const [file, snippets] of requiredSnippets.entries()) {
   const contents = fs.readFileSync(path.join(root, file), "utf8");
   for (const snippet of snippets) {
@@ -382,3 +418,9 @@ for (const entry of ["assets", "public", "en", "es", "demos", "blog", "free-audi
 
 console.log("BLYNX static site build complete.");
 console.log(`Output: ${path.relative(root, dist)}`);
+console.log(`Lead endpoint: ${leadWebhookUrl ? "configured" : "MISSING"}`);
+console.log(`GA4 analytics: ${ga4MeasurementId ? `configured (${ga4MeasurementId})` : "MISSING"}`);
+
+for (const warning of warnings) {
+  console.warn(`WARNING: ${warning}`);
+}

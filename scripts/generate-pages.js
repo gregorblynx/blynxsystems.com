@@ -13,6 +13,50 @@ const blogArticles = {
 
 const SITE_URL = "https://www.blynxsystems.com";
 const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
+
+// Runtime configuration, read from the environment at build time so that neither the lead
+// endpoint nor the analytics ID is hardcoded across source files. Set both in the Vercel
+// project (Settings -> Environment Variables) and locally in .env for local builds.
+//
+//   LEAD_WEBHOOK_URL    Google Apps Script Web App /exec URL that stores the leads.
+//   GA4_MEASUREMENT_ID  Google Analytics 4 Measurement ID, format G-XXXXXXXXXX.
+//
+// When a value is absent, the corresponding feature is simply not emitted: no fake endpoint,
+// no fake analytics. assets/site.js then fails closed and shows the form error state.
+const LEAD_WEBHOOK_URL = (process.env.LEAD_WEBHOOK_URL || "").trim();
+const GA4_MEASUREMENT_ID = (process.env.GA4_MEASUREMENT_ID || "").trim();
+
+if (GA4_MEASUREMENT_ID && !/^G-[A-Z0-9]{6,}$/.test(GA4_MEASUREMENT_ID)) {
+  throw new Error(
+    `GA4_MEASUREMENT_ID must look like G-XXXXXXXXXX (received: ${GA4_MEASUREMENT_ID})`
+  );
+}
+
+if (LEAD_WEBHOOK_URL && !/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(LEAD_WEBHOOK_URL)) {
+  throw new Error(
+    "LEAD_WEBHOOK_URL must be a Google Apps Script Web App URL ending in /exec."
+  );
+}
+
+// Emitted in <head> on every real page: the runtime config for assets/site.js, plus gtag.js
+// when — and only when — a GA4 Measurement ID is configured. GA4 is initialised exactly once
+// per page here, so no other file may call gtag('config', ...) again.
+function runtimeHead() {
+  const config = `<script>window.BLYNX_CONFIG={leadWebhookUrl:${JSON.stringify(
+    LEAD_WEBHOOK_URL
+  )},ga4MeasurementId:${JSON.stringify(GA4_MEASUREMENT_ID)}};</script>`;
+
+  if (!GA4_MEASUREMENT_ID) return config;
+
+  return `${config}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GA4_MEASUREMENT_ID}');
+    </script>`;
+}
 const LEGAL_EFFECTIVE_DATE = "July 9, 2026";
 const BUSINESS = {
   legalName: "BLYNX Systems",
@@ -1721,6 +1765,7 @@ function shell(lang, meta, active, switchPath, body) {
     <meta name="twitter:description" content="${meta.description}">
     <meta name="twitter:image" content="${OG_IMAGE}">
     ${structuredData(lang, meta.title, meta.description, canonicalUrl, breadcrumbs)}
+    ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -3406,6 +3451,7 @@ function stagePage(lang) {
     <meta name="twitter:description" content="${p.description}">
     <meta name="twitter:image" content="${OG_IMAGE}">
     ${structuredData(lang, p.title, p.description, lang === "es" ? esUrl : enUrl)}
+    ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
@@ -3470,6 +3516,7 @@ function languageGate() {
     <meta name="twitter:description" content="Digital presence and lead systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
     <meta name="twitter:image" content="${OG_IMAGE}">
     ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
+    ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
@@ -3699,6 +3746,7 @@ function blogShell(lang, meta, body, article = null) {
     <meta name="twitter:description" content="${meta.description}">
     <meta name="twitter:image" content="${ogImage}">
     ${blogStructuredData(lang, meta, article)}
+    ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
