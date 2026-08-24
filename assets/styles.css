@@ -568,11 +568,7 @@ button {
   flex: 0 0 auto;
 }
 
-.hero-visual {
-  position: relative;
-}
-
-/* ============ Shared mini-icon base (hero, pillars, system visuals) ============ */
+/* ============ Shared mini-icon base (pillars, route cards, before/after) ============ */
 
 .mini-icon {
   display: inline-flex;
@@ -585,85 +581,6 @@ button {
 .mini-icon svg {
   width: 100%;
   height: 100%;
-}
-
-/* ============ Hero connected-journey visual ============ */
-
-.hero-home .hero-visual {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(245, 184, 73, 0.08), rgba(255, 255, 255, 0.02));
-  padding: 1.5rem 1rem;
-}
-
-.hero-visual-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  width: 5.4rem;
-}
-
-.hero-visual-icon {
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 1px solid rgba(245, 184, 73, 0.35);
-  border-radius: 999px;
-  background: rgba(245, 184, 73, 0.1);
-  padding: 0.65rem;
-  box-shadow: var(--glow);
-}
-
-.hero-visual-label {
-  font-size: 0.74rem;
-  font-weight: 800;
-  color: var(--muted-strong);
-  text-align: center;
-  overflow-wrap: normal;
-  word-break: normal;
-  hyphens: none;
-  line-height: 1.15;
-}
-
-.hero-visual-arrow {
-  width: 1.1rem;
-  height: 1.1rem;
-  color: var(--line-strong);
-  flex: 0 0 auto;
-  align-self: center;
-  margin-bottom: 1.6rem;
-}
-
-@media (max-width: 560px) {
-  .hero-home .hero-visual {
-    gap: 0.15rem;
-    padding: 1.1rem 0.5rem;
-  }
-
-  .hero-visual-node {
-    width: 4.4rem;
-  }
-
-  .hero-visual-icon {
-    width: 2.2rem;
-    height: 2.2rem;
-    padding: 0.5rem;
-  }
-
-  .hero-visual-label {
-    font-size: 0.66rem;
-  }
-
-  .hero-visual-arrow {
-    width: 0.8rem;
-    height: 0.8rem;
-    margin-bottom: 1.3rem;
-  }
 }
 
 .visual-stage {
@@ -1968,94 +1885,41 @@ button {
   padding: 0.32rem 0.7rem;
 }
 
-/* The chain never wraps: nodes are flexible (flex:1, min-width:0) inside a
-   nowrap row, and a count-driven modifier (below) scales icon/label size
-   down as more steps are added, so a 3-, 4- or 5-step chain always reads
-   as one consistent row instead of some wrapping at certain widths. */
-.system-visual {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-  gap: 0.1rem;
+/* ============ Product visuals (approved BLYNX product photography) ============ */
+/* Shared by the hero and the three system cards. Native asset ratio is
+   1672:941 (~1.78:1); on narrow phones the aspect ratio is opened up to trim
+   the image's own decorative top/bottom margins (logo band, ambient glow)
+   so the actual product UI fills more of the available height, instead of
+   just shrinking the full frame — the width, and every element across it,
+   stays uncropped. */
+.product-visual {
   margin: 1.1rem 0 0;
-  border-top: 1px solid var(--line);
-  padding-top: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0a0a0a;
 }
 
-.system-visual-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  flex: 1 1 0;
-  min-width: 0;
+.product-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1672 / 941;
+  object-fit: cover;
+  object-position: center;
 }
 
-.system-visual-icon {
-  width: 2.1rem;
-  height: 2.1rem;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(245, 184, 73, 0.3);
-  border-radius: 999px;
-  background: rgba(245, 184, 73, 0.08);
-  color: var(--gold-soft);
-  padding: 0.42rem;
-  flex: 0 0 auto;
+.product-visual-hero {
+  margin-top: 2.25rem;
+  border-color: rgba(245, 184, 73, 0.28);
+  box-shadow: var(--shadow), var(--glow);
 }
 
-.system-visual-count-4 .system-visual-icon {
-  width: 1.9rem;
-  height: 1.9rem;
-  padding: 0.38rem;
-}
-
-.system-visual-count-5 .system-visual-icon {
-  width: 1.6rem;
-  height: 1.6rem;
-  padding: 0.32rem;
-}
-
-.system-visual-label {
-  font-size: 0.62rem;
-  font-weight: 800;
-  color: var(--muted);
-  text-align: center;
-  overflow-wrap: normal;
-  word-break: normal;
-  hyphens: none;
-  max-width: 100%;
-  line-height: 1.1;
-}
-
-.system-visual-count-4 .system-visual-label {
-  font-size: 0.58rem;
-}
-
-.system-visual-count-5 .system-visual-label {
-  font-size: 0.53rem;
-  letter-spacing: -0.01em;
-}
-
-.system-visual-arrow {
-  width: 0.8rem;
-  height: 0.8rem;
-  color: var(--line-strong);
-  align-self: center;
-  flex: 0 0 auto;
-  margin-bottom: 1.05rem;
-}
-
-.system-visual-count-4 .system-visual-arrow {
-  width: 0.65rem;
-  height: 0.65rem;
-  margin-bottom: 0.95rem;
-}
-
-.system-visual-count-5 .system-visual-arrow {
-  width: 0.55rem;
-  height: 0.55rem;
-  margin-bottom: 0.8rem;
+@media (max-width: 560px) {
+  .product-visual img {
+    aspect-ratio: 2.05 / 1;
+    object-position: center 40%;
+  }
 }
 
 .system-result-chain {
@@ -2092,6 +1956,7 @@ button {
   align-items: center;
   gap: 0.35rem;
   flex: 1;
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 0.85rem 0.5rem;
@@ -3398,10 +3263,6 @@ fieldset.field {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-  }
-
-  .hero-visual {
-    max-width: 720px;
   }
 
   .audit-flow {
