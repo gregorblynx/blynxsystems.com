@@ -255,7 +255,7 @@ const copy = {
       trust: ["Be Found", "Build Trust", "Capture", "Organize", "Follow Up"],
       problemEyebrow: "The real problem",
       problemTitle: "The opportunity arrives. Then what?",
-      problemCopy: "Most local businesses don’t only have a visibility problem — they have a handoff problem. A call comes in mid-job. A form lands in an inbox nobody checks. A quote goes out and nothing happens next. The work was there. It just wasn’t tracked.",
+      problemCopy: "Most local businesses don’t only have a visibility problem — they have a handoff problem. The work was there. It just wasn’t tracked.",
       beforeAfter: {
         beforeLabel: "Before BLYNX",
         afterLabel: "After BLYNX",
@@ -542,7 +542,7 @@ const copy = {
       trust: ["Ser Encontrado", "Generar Confianza", "Captar", "Organizar", "Dar Seguimiento"],
       problemEyebrow: "El problema real",
       problemTitle: "La oportunidad llega. ¿Y después?",
-      problemCopy: "La mayoría de los negocios locales no solo tiene un problema de visibilidad, sino de continuidad. Entra una llamada en medio de un trabajo. Un formulario cae en un correo que nadie revisa. Mandas un presupuesto y ahí queda. El trabajo estaba; solo faltó darle seguimiento.",
+      problemCopy: "La mayoría de los negocios locales no solo tiene un problema de visibilidad, sino de continuidad. El trabajo estaba; solo faltó darle seguimiento.",
       beforeAfter: {
         beforeLabel: "Antes de BLYNX",
         afterLabel: "Después de BLYNX",
@@ -772,8 +772,7 @@ const commercialOffer = {
   en: {
     eyebrow: "Three digital systems",
     title: "Three systems. Choose how far yours goes.",
-    intro:
-      "Every system includes the digital foundation your business needs to be found and trusted. What changes between them is how much of the work after that first contact we build for you — from receiving it, to organizing it, to following up on it.",
+    intro: "Every system includes the digital foundation. What changes is how much of the work after that first contact we build for you.",
     priceLabel: "Starting at",
     whoTitle: "Choose this if you",
     implementationTitle: "What we implement",
@@ -1042,8 +1041,7 @@ const commercialOffer = {
   es: {
     eyebrow: "Tres sistemas digitales",
     title: "Tres sistemas. Elige hasta dónde llega el tuyo.",
-    intro:
-      "Todos los sistemas incluyen la base digital que tu negocio necesita para que lo encuentren y confíen en él. Lo que cambia entre ellos es cuánto del trabajo posterior a ese primer contacto construimos por ti — desde recibirlo, hasta organizarlo, hasta darle seguimiento.",
+    intro: "Todos los sistemas incluyen la base digital. Lo que cambia es cuánto del trabajo posterior a ese primer contacto construimos por ti.",
     priceLabel: "Desde",
     whoTitle: "Elige este sistema si",
     implementationTitle: "Qué implementamos",
@@ -1481,7 +1479,7 @@ const routes = {
 const implementationPlan = {
   en: {
     eyebrow: "What happens if you say yes",
-    title: "Three steps. A payment milestone attached to each one.",
+    title: "Three steps. One milestone each.",
     steps: [
       {
         label: "Step 1",
@@ -1506,7 +1504,7 @@ const implementationPlan = {
   },
   es: {
     eyebrow: "Qué pasa si dices que sí",
-    title: "Tres pasos. Un hito de pago en cada uno.",
+    title: "Tres pasos. Un hito cada uno.",
     steps: [
       {
         label: "Paso 1",
@@ -2115,30 +2113,70 @@ function legacyAnchor(system) {
   return system.legacyId ? `<span id="${system.legacyId}" aria-hidden="true"></span>` : "";
 }
 
-function systemProgressionMark(system, tierIndex = 0) {
-  // Purpose-built inline SVG progression mark. Length scales strictly with
-  // system tier (0=System1, 1=System2, 2=System3) so the chain is always
-  // visibly longer for a higher system — the length itself is the argument
-  // for the price step, independent of how verbose each system's copy is.
-  const nodeCount = 3 + tierIndex;
-  const nodes = Array.from({ length: nodeCount }, (_, i) => i);
-  const width = 28 + nodeCount * 34;
-  const dots = nodes
-    .map((i) => {
-      const cx = 20 + i * 34;
-      const filled = i < nodeCount;
-      return `<circle cx="${cx}" cy="14" r="5" fill="${filled ? "var(--gold)" : "none"}" stroke="var(--gold)" stroke-width="1.6"/>`;
-    })
-    .join("");
-  const lines = nodes
-    .slice(0, -1)
-    .map((i) => {
-      const x1 = 20 + i * 34 + 6;
-      const x2 = 20 + (i + 1) * 34 - 6;
-      return `<line x1="${x1}" y1="14" x2="${x2}" y2="14" stroke="var(--line-strong)" stroke-width="2"/>`;
-    })
-    .join("");
-  return `<svg class="system-progression" viewBox="0 0 ${width} 28" width="${width}" height="28" aria-hidden="true">${lines}${dots}</svg>`;
+// Per-system mini visual: a short chain of real icons + one-word labels.
+// Chain LENGTH grows 4 -> 3 -> 5 across the tiers not for drama but because
+// each chain literally lists what that system does — System 2's is the
+// shortest because its job (receive + organize) is the most compact to draw;
+// System 3's is the longest because it is the only one that keeps acting
+// after the inquiry (confirm, remind, follow up, request a review).
+const SYSTEM_VISUAL_CHAINS = {
+  en: [
+    [
+      { i: "pin", l: "Discovery" },
+      { i: "monitor", l: "Website" },
+      { i: "star", l: "Reviews" },
+      { i: "inbox", l: "Contact" }
+    ],
+    [
+      { i: "form", l: "Inquiry" },
+      { i: "inbox", l: "Prospect" },
+      { i: "pipeline", l: "Organized" }
+    ],
+    [
+      { i: "inbox", l: "New lead" },
+      { i: "check", l: "Confirmed" },
+      { i: "bell", l: "Reminder" },
+      { i: "calendar", l: "Follow-up" },
+      { i: "star", l: "Review" }
+    ]
+  ],
+  es: [
+    [
+      { i: "pin", l: "Descubrimiento" },
+      { i: "monitor", l: "Sitio web" },
+      { i: "star", l: "Reseñas" },
+      { i: "inbox", l: "Contacto" }
+    ],
+    [
+      { i: "form", l: "Solicitud" },
+      { i: "inbox", l: "Prospecto" },
+      { i: "pipeline", l: "Organizado" }
+    ],
+    [
+      { i: "inbox", l: "Nuevo lead" },
+      { i: "check", l: "Confirmado" },
+      { i: "bell", l: "Recordatorio" },
+      { i: "calendar", l: "Seguimiento" },
+      { i: "star", l: "Reseña" }
+    ]
+  ]
+};
+
+function systemVisual(tierIndex, lang) {
+  const chain = SYSTEM_VISUAL_CHAINS[lang][tierIndex];
+  return `
+              <div class="system-visual" aria-hidden="true">
+                ${chain
+                  .map(
+                    (step, i) => `
+                <span class="system-visual-node">
+                  <span class="system-visual-icon">${icon(step.i)}</span>
+                  <span class="system-visual-label">${step.l}</span>
+                </span>
+                ${i < chain.length - 1 ? `<span class="system-visual-arrow">${icon("arrowRight")}</span>` : ""}`
+                  )
+                  .join("")}
+              </div>`;
 }
 
 function comparisonDetails(lang) {
@@ -2218,23 +2256,24 @@ function systemsOverviewSection(lang) {
                 ${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}
                 <span class="system-price">${systemPriceDisplay(offer, system)}</span>
               </div>
-              ${systemProgressionMark(system, index)}
               <h3>${system.name}</h3>
               <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
+              ${systemVisual(index, lang)}
+              <div class="system-card-actions">
+                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
+              </div>
               <details class="system-summary-toggle">
-                <summary>${offer.resultTitle}</summary>
+                <summary>${offer.detailsLink}</summary>
                 <div class="system-summary-block">
                   <h4>${offer.whoTitle}</h4>
                   ${offerList(system.ideal.slice(0, 2))}
                 </div>
                 <div class="system-summary-block">
+                  <h4>${offer.resultTitle}</h4>
                   ${offerList(system.benefits.slice(0, 3))}
                 </div>
-              </details>
-              <div class="system-card-actions">
-                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
                 <a class="system-details-link" href="${pagePath(lang, "services")}#${system.id}">${offer.detailsLink}</a>
-              </div>
+              </details>
             </article>`
               )
               .join("")}
@@ -2265,9 +2304,9 @@ function systemsDetailSection(lang) {
                 ${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}
                 <span class="system-price">${systemPriceDisplay(offer, system)}</span>
               </div>
-              ${systemProgressionMark(system, index)}
               <h3>${system.name}</h3>
               <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
+              ${systemVisual(index, lang)}
               <p class="system-positioning">${system.positioning}</p>
               <section class="system-card-section" aria-labelledby="${system.id}-who">
                 <h4 id="${system.id}-who">${offer.whoTitle}</h4>
@@ -2299,6 +2338,8 @@ function systemsDetailSection(lang) {
       </section>`;
 }
 
+const PILLAR_ICONS = ["search", "star", "form", "pipeline", "bell"];
+
 function fivePillarsSection(lang) {
   const p = pillars[lang];
   return `
@@ -2313,17 +2354,21 @@ function fivePillarsSection(lang) {
               .map(
                 (item, index) => `
             <div class="pillar-node">
-              <span class="pillar-index">0${index + 1}</span>
-              <h3 class="pillar-label">${item.label}</h3>
-              <p class="pillar-result">${item.result}</p>
+              <span class="pillar-icon">${icon(PILLAR_ICONS[index])}</span>
+              <div class="pillar-text">
+                <h3 class="pillar-label">${item.label}</h3>
+                <p class="pillar-result">${item.result}</p>
+              </div>
             </div>
-            ${index < p.items.length - 1 ? '<div class="pillar-connector" aria-hidden="true"></div>' : ""}`
+            ${index < p.items.length - 1 ? `<span class="pillar-connector" aria-hidden="true">${icon("arrowRight")}</span>` : ""}`
               )
               .join("")}
           </div>
         </div>
       </section>`;
 }
+
+const ROUTE_ICONS = ["route", "monitor"];
 
 function routeSelectorSection(lang) {
   const r = routes[lang];
@@ -2333,24 +2378,26 @@ function routeSelectorSection(lang) {
           <div class="section-heading">
             <p class="eyebrow">${r.eyebrow}</p>
             <h2>${r.title}</h2>
-            <p>${r.intro}</p>
           </div>
           <div class="route-grid">
             ${r.cards
               .map(
-                (card) => `
+                (card, index) => `
             <article class="route-card">
-              <span class="route-label">${card.label}</span>
-              <h3>${card.title}</h3>
+              <div class="route-card-top">
+                <span class="route-icon">${icon(ROUTE_ICONS[index])}</span>
+                <div>
+                  <span class="route-label">${card.label}</span>
+                  <h3>${card.title}</h3>
+                </div>
+              </div>
+              <p>${card.copy}</p>
               <a class="btn btn-secondary" href="${pagePath(lang, card.ctaTarget)}">${card.cta}</a>
             </article>`
               )
               .join("")}
-            <div class="route-outcome" aria-hidden="true">
-              <div class="route-outcome-lines"></div>
-              <p>${r.cards[0].result}</p>
-            </div>
           </div>
+          <p class="route-outcome">${r.intro}</p>
         </div>
       </section>`;
 }
@@ -2367,13 +2414,13 @@ function implementationSection(lang) {
           <div class="impl-timeline">
             ${plan.steps
               .map(
-                (step) => `
-            <article class="impl-step">
-              <span class="impl-step-label">${step.label}</span>
+                (step, index) => `
+            <div class="impl-step">
+              <span class="impl-step-dot">0${index + 1}</span>
               <h3>${step.title}</h3>
-              <p>${step.copy}</p>
               <span class="impl-milestone">${step.milestone}</span>
-            </article>`
+            </div>
+            ${index < plan.steps.length - 1 ? `<span class="impl-arrow">${icon("arrowRight")}</span>` : ""}`
               )
               .join("")}
           </div>
@@ -2670,6 +2717,77 @@ const FLOW_ICON_ACTION =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="2"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg>';
 const FLOW_ARROW =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+
+// Shared compact icon set. Purpose-built line icons (no photography, no stock
+// imagery) reused across the hero visual, the five pillars, and the three
+// per-system mini-diagrams so the whole site speaks one visual language.
+const ICONS = {
+  search:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>',
+  pin:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  monitor:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>',
+  star:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.7-4.3 4.1 1.1 5.9L12 16.7l-5.3 2.9 1.1-5.9-4.3-4.1 5.9-.7z"/></svg>',
+  form:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>',
+  inbox:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12h5l1.5 3h4l1.5-3h5"/><path d="M5 4.5h14L21 12v6a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18v-6z"/></svg>',
+  pipeline:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="6.5" height="15" rx="1.2"/><rect x="9.5" y="4.5" width="6.5" height="9" rx="1.2"/><rect x="16" y="4.5" width="4.5" height="5" rx="1.2"/></svg>',
+  bell:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 3h16z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>',
+  check:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l5 5L19 7"/></svg>',
+  cross:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  clock:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+  calendar:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>',
+  arrowRight:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>',
+  arrowDown:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg>',
+  scale:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10"/><path d="M4 8l4-2 4 2-4 8zM16 8l4-2 4 2-4 8z" transform="translate(-2 0) scale(0.9)"/></svg>',
+  route:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M5 8v3a4 4 0 0 0 4 4h6a4 4 0 0 1 4 3"/></svg>'
+};
+
+function icon(name, cls = "") {
+  return `<span class="mini-icon${cls ? " " + cls : ""}" aria-hidden="true">${ICONS[name]}</span>`;
+}
+
+const heroVisualLabels = {
+  en: ["Discovery", "Website", "Inquiry", "Organized", "Follow-up"],
+  es: ["Descubrimiento", "Sitio web", "Solicitud", "Organizada", "Seguimiento"]
+};
+
+function heroVisual(lang) {
+  const labels = heroVisualLabels[lang];
+  const steps = [
+    { i: "pin", l: labels[0] },
+    { i: "monitor", l: labels[1] },
+    { i: "form", l: labels[2] },
+    { i: "pipeline", l: labels[3] },
+    { i: "bell", l: labels[4] }
+  ];
+  return `
+            <div class="hero-visual" role="img" aria-label="${labels.join(" → ")}">
+              ${steps
+                .map(
+                  (s, i) => `
+              <div class="hero-visual-node">
+                <span class="hero-visual-icon">${icon(s.i)}</span>
+                <span class="hero-visual-label">${s.l}</span>
+              </div>
+              ${i < steps.length - 1 ? `<span class="hero-visual-arrow">${icon("arrowRight")}</span>` : ""}`
+                )
+                .join("")}
+            </div>`;
+}
 
 function captureFlowSection(lang) {
   const c = captureFlowCopy[lang];
@@ -3110,11 +3228,8 @@ function homePage(lang) {
                 .join("")}
             </div>
             <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
-            <div class="trust-pills" aria-label="BLYNX benefits">
-              ${h.trust.map((item) => `<span class="trust-pill">${item}</span>`).join("")}
-            </div>
           </div>
-
+          ${heroVisual(lang)}
         </div>
       </section>
 
@@ -3126,19 +3241,21 @@ function homePage(lang) {
             <p>${h.problemCopy}</p>
           </div>
           <div class="before-after-panel">
-            <div class="before-after-column is-before">
-              <h3>${ba.beforeLabel}</h3>
-              <ul class="before-after-list">
-                ${ba.before.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}
-              </ul>
+            <div class="before-after-heads">
+              <span class="before-after-head is-before">${icon("cross")}${ba.beforeLabel}</span>
+              <span class="before-after-head is-after">${icon("check")}${ba.afterLabel}</span>
             </div>
-            <div class="before-after-arrow" aria-hidden="true"></div>
-            <div class="before-after-column is-after">
-              <h3>${ba.afterLabel}</h3>
-              <ul class="before-after-list">
-                ${ba.after.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}
-              </ul>
-            </div>
+            ${ba.before
+              .slice(0, 3)
+              .map(
+                (item, i) => `
+            <div class="before-after-row">
+              <span class="before-after-item is-before">${icon("cross")}<span>${item}</span></span>
+              <span class="before-after-row-arrow">${icon("arrowRight")}</span>
+              <span class="before-after-item is-after">${icon("check")}<span>${ba.after[i]}</span></span>
+            </div>`
+              )
+              .join("")}
           </div>
         </div>
       </section>
