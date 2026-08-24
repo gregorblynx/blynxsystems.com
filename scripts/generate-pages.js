@@ -2164,8 +2164,12 @@ const SYSTEM_VISUAL_CHAINS = {
 
 function systemVisual(tierIndex, lang) {
   const chain = SYSTEM_VISUAL_CHAINS[lang][tierIndex];
+  // The chain never wraps to a second row regardless of node count (3, 4 or
+  // 5): a count-driven modifier class scales icon/label size down as more
+  // steps are added, so all three systems present as one consistent single
+  // row instead of some wrapping unpredictably at certain viewport widths.
   return `
-              <div class="system-visual" aria-hidden="true">
+              <div class="system-visual system-visual-count-${chain.length}" aria-hidden="true">
                 ${chain
                   .map(
                     (step, i) => `
