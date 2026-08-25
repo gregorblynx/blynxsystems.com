@@ -1099,6 +1099,17 @@ button {
   object-fit: cover;
 }
 
+.project-shot-placeholder {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1200 / 750;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 .project-body {
   display: flex;
   flex-direction: column;

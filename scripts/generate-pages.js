@@ -69,8 +69,8 @@ const BUSINESS = {
   region: "TN",
   country: "US",
   serviceArea: "United States",
-  instagramHandle: "blynxsystems",
-  instagramUrl: "https://www.instagram.com/blynxsystems/"
+  instagramHandle: "",
+  instagramUrl: ""
 };
 
 function phoneDigits() {
@@ -460,6 +460,7 @@ const copy = {
       industryLabel: "Industry",
       viewLive: "View Live Project",
       viewDemo: "View live demo",
+      screenshotPending: "Screenshot pending",
       demoSectionTitle: "Concept demos",
       demoSectionNote: "Concept sites we build to show what's possible — these are demonstrations, not client work. Brands and content are fictional.",
       detailsToggle: "Project details",
@@ -748,6 +749,7 @@ const copy = {
       industryLabel: "Industria",
       viewLive: "Ver proyecto",
       viewDemo: "Ver demo en vivo",
+      screenshotPending: "Captura pendiente",
       demoSectionTitle: "Demos de concepto",
       demoSectionNote: "Sitios de concepto que creamos para mostrar lo que es posible — son demostraciones, no trabajo de clientes. Las marcas y el contenido son ficticios.",
       detailsToggle: "Detalles del proyecto",
@@ -2911,55 +2913,39 @@ const portfolioProjects = [
     }
   },
   {
-    id: "venezuela51",
+    id: "gladiadores",
     type: "real",
-    name: "Venezuela 51 Collection",
-    url: "https://venezuela51collection.com",
-    image: "/public/images/projects/venezuela51.jpg",
+    name: "Gladiadores App",
+    url: null,
+    image: null,
     imageAlt: {
-      en: "Homepage of the Venezuela 51 Collection online store showing its hero banner and product section",
-      es: "Página de inicio de la tienda en línea Venezuela 51 Collection mostrando su banner principal y su sección de productos"
+      en: "Gladiadores App project card — screenshot pending",
+      es: "Tarjeta del proyecto Gladiadores App — captura pendiente"
     },
-    industry: { en: "E-commerce", es: "Comercio electrónico" },
+    industry: { en: "Fitness & Community Platform", es: "Plataforma de Fitness y Comunidad" },
     summary: {
-      en: "An e-commerce experience created to present a purpose-driven collection, communicate the mission behind the brand, organize its products, and provide a clear path from discovery to purchase.",
-      es: "Una experiencia de comercio electrónico creada para presentar una colección con propósito, comunicar la misión de la marca, organizar sus productos y ofrecer un recorrido claro desde el descubrimiento hasta la compra."
+      en: "A digital fitness and community platform built to guide members through training, habits and personal progress in one connected experience.",
+      es: "Una plataforma digital de fitness y comunidad creada para guiar a sus miembros a través del entrenamiento, los hábitos y su progreso personal en una experiencia conectada."
     },
     business: {
-      en: "A purpose-driven e-commerce brand built around a clear social mission.",
-      es: "Una marca de comercio electrónico con propósito, construida en torno a una misión social clara."
+      en: "A fitness and community platform built to keep members engaged through structured training and shared progress.",
+      es: "Una plataforma de fitness y comunidad creada para mantener a sus miembros comprometidos mediante entrenamiento estructurado y progreso compartido."
     },
     need: {
-      en: "The brand needed to present its mission clearly, organize its products and collections, and provide a mobile-friendly path from discovery to checkout.",
-      es: "La marca necesitaba presentar su misión con claridad, organizar sus productos y colecciones, y ofrecer un recorrido móvil desde el descubrimiento hasta la compra."
+      en: "The team needed a connected experience where members could follow guided training, build habits, and track personal progress from their phone.",
+      es: "El equipo necesitaba una experiencia conectada donde los miembros pudieran seguir entrenamiento guiado, construir hábitos y monitorear su progreso personal desde el teléfono."
     },
     built: {
-      en: "An online store that tells the brand story, organizes product collections, presents individual products, and provides a clear purchase and checkout pathway.",
-      es: "Una tienda en línea que cuenta la historia de la marca, organiza colecciones de productos, presenta productos individuales y ofrece una ruta clara de compra y pago."
+      en: "A mobile-first fitness and community platform that guides members through training, habit-building and progress tracking in one connected experience.",
+      es: "Una plataforma de fitness y comunidad mobile-first que guía a los miembros a través del entrenamiento, la construcción de hábitos y el seguimiento de progreso en una experiencia conectada."
     },
     elements: {
-      en: [
-        "E-commerce storefront",
-        "Product collections",
-        "Product pages",
-        "Mobile shopping experience",
-        "Purchase & checkout pathway",
-        "Brand storytelling",
-        "Mission-focused messaging"
-      ],
-      es: [
-        "Tienda en línea",
-        "Colecciones de productos",
-        "Páginas de producto",
-        "Experiencia de compra móvil",
-        "Ruta de compra y pago",
-        "Historia de marca",
-        "Mensaje centrado en la misión"
-      ]
+      en: ["Fitness platform", "Guided training", "Member experience", "Progress system", "Mobile-first experience"],
+      es: ["Plataforma fitness", "Entrenamiento guiado", "Experiencia de miembros", "Sistema de progreso", "Experiencia mobile-first"]
     },
     journey: {
-      en: ["Discover the collection", "Understand the mission", "Explore products", "Select a product", "Complete the purchase"],
-      es: ["Descubre la colección", "Comprende la misión", "Explora productos", "Selecciona un producto", "Completa la compra"]
+      en: ["Join the community", "Start guided training", "Build habits", "Track progress", "Stay engaged"],
+      es: ["Únete a la comunidad", "Comienza el entrenamiento guiado", "Construye hábitos", "Sigue tu progreso", "Mantente conectado"]
     }
   },
   {
@@ -3072,12 +3058,17 @@ function projectCard(lang, project, p) {
   const elements = project.elements[lang];
   const journey = project.journey[lang];
   const isDemo = project.type === "demo";
-  const url = typeof project.url === "string" ? project.url : project.url[lang];
+  const url = project.url ? (typeof project.url === "string" ? project.url : project.url[lang]) : null;
+  const shot = project.image
+    ? `<a class="project-shot" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">
+            </a>`
+    : `<div class="project-shot project-shot-placeholder" aria-hidden="true">
+              <span>${p.screenshotPending}</span>
+            </div>`;
   return `
           <article class="project-card">
-            <a class="project-shot" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-              <img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">
-            </a>
+            ${shot}
             <div class="project-body">
               <div class="project-top">
                 <span class="project-badge${isDemo ? " is-demo" : ""}">${isDemo ? p.demoBadge : p.realBadge}</span>
@@ -3117,9 +3108,13 @@ function projectCard(lang, project, p) {
                   </div>
                 </div>
               </details>
-              <div class="project-actions">
+              ${
+                url
+                  ? `<div class="project-actions">
                 <a class="btn btn-primary" href="${url}" target="_blank" rel="noopener noreferrer">${isDemo ? p.viewDemo : p.viewLive}</a>
-              </div>
+              </div>`
+                  : ""
+              }
             </div>
           </article>`;
 }

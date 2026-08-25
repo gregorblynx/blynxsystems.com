@@ -59,7 +59,6 @@ const requiredFiles = [
   "public/images/blog/systems-beat-marketing.jpg",
   "public/images/blog/blog-og.jpg",
   "public/images/projects/klinner.jpg",
-  "public/images/projects/venezuela51.jpg",
   "public/images/projects/forge-demo.jpg",
   "public/images/demos/forge-hero.jpg",
   "public/images/demos/forge-train.jpg",
@@ -351,21 +350,23 @@ const requiredSnippets = new Map([
     "REAL BLYNX PROJECTS",
     "See the systems we have built.",
     "Klinner Cleaning & Maintenance",
-    "Venezuela 51 Collection",
+    "Gladiadores App",
+    "Fitness & Community Platform",
     "https://klinnercleaning.com",
-    "https://venezuela51collection.com",
     "Real Project",
-    "View Live Project"
+    "View Live Project",
+    "Screenshot pending"
   ]],
   ["es/projects/index.html", [
     "PROYECTOS REALES DE BLYNX",
     "Descubre los sistemas que hemos construido.",
     "Klinner Cleaning & Maintenance",
-    "Venezuela 51 Collection",
+    "Gladiadores App",
+    "Plataforma de Fitness y Comunidad",
     "https://klinnercleaning.com",
-    "https://venezuela51collection.com",
     "Proyecto real",
-    "Ver proyecto"
+    "Ver proyecto",
+    "Captura pendiente"
   ]]
 ]);
 
