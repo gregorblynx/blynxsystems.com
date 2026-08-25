@@ -2225,7 +2225,7 @@ function priceCompareStrip(lang) {
               .map(
                 (system) => `
             <a class="price-compare-cell${system.badge ? " is-complete" : ""}" href="#${system.id}">
-              ${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}
+              <span class="price-compare-badge-slot">${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}</span>
               <span class="price-compare-name">${system.resultChain[system.resultChain.length - 1]}</span>
               <span class="price-compare-value">$${system.startingPrice.toLocaleString("en-US")}</span>
             </a>`
@@ -2917,10 +2917,10 @@ const portfolioProjects = [
     type: "real",
     name: "Gladiadores App",
     url: null,
-    image: null,
+    image: "/public/images/projects/gladiadores.jpg",
     imageAlt: {
-      en: "Gladiadores App project card — screenshot pending",
-      es: "Tarjeta del proyecto Gladiadores App — captura pendiente"
+      en: "Gladiadores Training brand cover — two athletes training, with the tagline \"Your transformation starts today\"",
+      es: "Portada de marca de Gladiadores Training — dos atletas entrenando, con el lema \"Tu transformación empieza hoy\""
     },
     industry: { en: "Fitness & Community Platform", es: "Plataforma de Fitness y Comunidad" },
     summary: {
@@ -3059,12 +3059,15 @@ function projectCard(lang, project, p) {
   const journey = project.journey[lang];
   const isDemo = project.type === "demo";
   const url = project.url ? (typeof project.url === "string" ? project.url : project.url[lang]) : null;
-  const shot = project.image
-    ? `<a class="project-shot" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-              <img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">
+  const shotImg = project.image
+    ? `<img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">`
+    : `<span>${p.screenshotPending}</span>`;
+  const shot = url
+    ? `<a class="project-shot${project.image ? "" : " project-shot-placeholder"}" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              ${shotImg}
             </a>`
-    : `<div class="project-shot project-shot-placeholder" aria-hidden="true">
-              <span>${p.screenshotPending}</span>
+    : `<div class="project-shot${project.image ? "" : " project-shot-placeholder"}" aria-hidden="true">
+              ${shotImg}
             </div>`;
   return `
           <article class="project-card">

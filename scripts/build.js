@@ -59,6 +59,7 @@ const requiredFiles = [
   "public/images/blog/systems-beat-marketing.jpg",
   "public/images/blog/blog-og.jpg",
   "public/images/projects/klinner.jpg",
+  "public/images/projects/gladiadores.jpg",
   "public/images/projects/forge-demo.jpg",
   "public/images/demos/forge-hero.jpg",
   "public/images/demos/forge-train.jpg",
@@ -355,7 +356,7 @@ const requiredSnippets = new Map([
     "https://klinnercleaning.com",
     "Real Project",
     "View Live Project",
-    "Screenshot pending"
+    "/public/images/projects/gladiadores.jpg"
   ]],
   ["es/projects/index.html", [
     "PROYECTOS REALES DE BLYNX",
@@ -366,7 +367,7 @@ const requiredSnippets = new Map([
     "https://klinnercleaning.com",
     "Proyecto real",
     "Ver proyecto",
-    "Captura pendiente"
+    "/public/images/projects/gladiadores.jpg"
   ]]
 ]);
 
