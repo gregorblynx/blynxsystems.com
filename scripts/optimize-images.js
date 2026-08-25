@@ -9,10 +9,20 @@ const DIR = path.join(__dirname, "..", "assets", "images");
 const WIDTHS = [480, 800, 1200, 1672];
 
 const SOURCES = [
+  // v1 (kept as a rollback fallback; no longer referenced by generate-pages.js)
   "blynx-connected-system-hero.png",
   "blynx-system-1-digital-presence.png",
   "blynx-system-2-capture-organization.png",
-  "blynx-system-3-follow-up.png"
+  "blynx-system-3-follow-up.png",
+  // v2 (current, per-language)
+  "blynx-connected-system-hero-en.png",
+  "blynx-connected-system-hero-es.png",
+  "blynx-system-1-digital-presence-en.png",
+  "blynx-system-1-digital-presence-es.png",
+  "blynx-system-2-capture-organization-en.png",
+  "blynx-system-2-capture-organization-es.png",
+  "blynx-system-3-follow-up-en.png",
+  "blynx-system-3-follow-up-es.png"
 ];
 
 async function run() {

@@ -1886,12 +1886,13 @@ button {
 }
 
 /* ============ Product visuals (approved BLYNX product photography) ============ */
-/* Shared by the hero and the three system cards. Native asset ratio is
-   1672:941 (~1.78:1); on narrow phones the aspect ratio is opened up to trim
-   the image's own decorative top/bottom margins (logo band, ambient glow)
-   so the actual product UI fills more of the available height, instead of
-   just shrinking the full frame — the width, and every element across it,
-   stays uncropped. */
+/* Shared by the hero and the three system cards. EN and ES use separate
+   source files with different native dimensions (see PRODUCT_IMAGES in
+   generate-pages.js), so the ratio is intentionally NOT hardcoded here: each
+   <img> carries its own width/height attributes, and the UA derives the
+   correct intrinsic aspect-ratio from those (combined with height:auto)
+   automatically, so the reserved space always matches that asset — no CLS,
+   no distortion, regardless of which language's asset is showing. */
 .product-visual {
   margin: 1.1rem 0 0;
   border: 1px solid var(--line);
@@ -1904,22 +1905,12 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1672 / 941;
-  object-fit: cover;
-  object-position: center;
 }
 
 .product-visual-hero {
   margin-top: 2.25rem;
   border-color: rgba(245, 184, 73, 0.28);
   box-shadow: var(--shadow), var(--glow);
-}
-
-@media (max-width: 560px) {
-  .product-visual img {
-    aspect-ratio: 2.05 / 1;
-    object-position: center 40%;
-  }
 }
 
 .system-result-chain {
