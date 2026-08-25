@@ -2250,13 +2250,11 @@ function systemsOverviewSection(lang) {
                 (system, index) => `
             <article class="system-offer-card${system.badge ? " is-complete" : ""}" id="${system.id}">
               ${legacyAnchor(system)}
-              <div class="system-offer-topline">
-                ${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}
-                <span class="system-price">${systemPriceDisplay(offer, system)}</span>
-              </div>
+              ${system.badge ? `<div class="system-offer-topline"><span class="system-badge">${system.badge}</span></div>` : ""}
               <h3>${system.name}</h3>
               <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
               ${productImage(SYSTEM_IMAGE_KEYS[index], lang, { sizes: "(max-width: 760px) 100vw, 420px" })}
+              <p class="system-price-line"><span class="system-price">${systemPriceDisplay(offer, system)}</span></p>
               <div class="system-card-actions">
                 <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
               </div>
@@ -2298,35 +2296,36 @@ function systemsDetailSection(lang) {
                 (system, index) => `
             <article class="system-offer-card system-offer-card-full${system.badge ? " is-complete" : ""}" id="${system.id}">
               ${legacyAnchor(system)}
-              <div class="system-offer-topline">
-                ${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}
-                <span class="system-price">${systemPriceDisplay(offer, system)}</span>
-              </div>
+              ${system.badge ? `<div class="system-offer-topline"><span class="system-badge">${system.badge}</span></div>` : ""}
               <h3>${system.name}</h3>
               <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
               ${productImage(SYSTEM_IMAGE_KEYS[index], lang, { sizes: "(max-width: 760px) 100vw, 420px" })}
-              <p class="system-positioning">${system.positioning}</p>
-              <section class="system-card-section" aria-labelledby="${system.id}-who">
-                <h4 id="${system.id}-who">${offer.whoTitle}</h4>
-                ${offerList(system.ideal)}
-              </section>
-              <section class="system-card-section" aria-labelledby="${system.id}-implementation">
-                <h4 id="${system.id}-implementation">${offer.implementationTitle}</h4>
-                ${system.implementationLead ? `<p class="implementation-lead">${system.implementationLead}</p>` : ""}
-                ${offerList(system.implementation)}
-              </section>
-              <section class="system-card-section" aria-labelledby="${system.id}-exclusions">
-                <h4 id="${system.id}-exclusions">${offer.exclusionsTitle}</h4>
-                ${offerList(system.exclusions, "exclusion-list")}
-              </section>
-              <section class="system-card-section" aria-labelledby="${system.id}-results">
-                <h4 id="${system.id}-results">${offer.resultTitle}</h4>
-                ${offerList(system.benefits)}
-              </section>
+              <p class="system-price-line"><span class="system-price">${systemPriceDisplay(offer, system)}</span></p>
               <div class="system-card-actions">
                 <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
               </div>
               <p class="pricing-note">${system.pricingNote}</p>
+              <details class="system-full-scope">
+                <summary>${offer.implementationTitle}</summary>
+                <p class="system-positioning">${system.positioning}</p>
+                <section class="system-card-section" aria-labelledby="${system.id}-who">
+                  <h4 id="${system.id}-who">${offer.whoTitle}</h4>
+                  ${offerList(system.ideal)}
+                </section>
+                <section class="system-card-section" aria-labelledby="${system.id}-implementation">
+                  <h4 id="${system.id}-implementation">${offer.implementationTitle}</h4>
+                  ${system.implementationLead ? `<p class="implementation-lead">${system.implementationLead}</p>` : ""}
+                  ${offerList(system.implementation)}
+                </section>
+                <section class="system-card-section" aria-labelledby="${system.id}-exclusions">
+                  <h4 id="${system.id}-exclusions">${offer.exclusionsTitle}</h4>
+                  ${offerList(system.exclusions, "exclusion-list")}
+                </section>
+                <section class="system-card-section" aria-labelledby="${system.id}-results">
+                  <h4 id="${system.id}-results">${offer.resultTitle}</h4>
+                  ${offerList(system.benefits)}
+                </section>
+              </details>
             </article>`
               )
               .join("")}

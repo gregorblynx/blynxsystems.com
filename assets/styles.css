@@ -1761,7 +1761,12 @@ button {
   font-weight: 700;
 }
 
+.system-price-line {
+  margin: 1.1rem 0 0;
+}
+
 .system-price {
+  display: inline-block;
   border: 1px solid rgba(245, 184, 73, 0.3);
   border-radius: 999px;
   background: rgba(245, 184, 73, 0.09);
@@ -1792,17 +1797,23 @@ button {
   padding-top: 1.35rem;
 }
 
-.system-summary-toggle {
+.system-summary-toggle,
+.system-full-scope {
   margin-top: 1.5rem;
   border-top: 1px solid var(--line);
   padding-top: 1.35rem;
 }
 
-.system-summary-toggle summary {
+.system-summary-toggle summary,
+.system-full-scope summary {
   cursor: pointer;
   color: var(--text);
   font-weight: 600;
   font-size: 1rem;
+}
+
+.system-full-scope .system-positioning {
+  margin-top: 1.1rem;
 }
 
 .system-summary-toggle .system-summary-block:first-of-type {
