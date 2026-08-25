@@ -2044,16 +2044,16 @@ button {
 
 @media (max-width: 400px) {
   .price-compare {
-    gap: 0.35rem;
+    gap: 0.25rem;
   }
 
   .price-compare-cell {
-    padding: 0.7rem 0.1rem;
+    padding: 0.7rem 0.05rem;
   }
 
   .price-compare-name {
-    font-size: 0.5rem;
-    letter-spacing: -0.01em;
+    font-size: 0.66rem;
+    letter-spacing: -0.02em;
   }
 
   .price-compare-value {
@@ -2061,8 +2061,8 @@ button {
   }
 
   .price-compare-badge-slot .system-badge {
-    font-size: 0.52rem;
-    padding: 0.18rem 0.4rem;
+    font-size: 0.58rem;
+    padding: 0.16rem 0.36rem;
   }
 }
 

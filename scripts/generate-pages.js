@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { loadArticles, formatDate, CATEGORIES } = require("./blog");
+const { widthsForNative } = require("./lib/responsive-widths");
 
 const root = path.resolve(__dirname, "..");
 
@@ -94,6 +95,18 @@ function phoneHref() {
   const digits = phoneDigits();
   if (!hasConfiguredPhone()) return "";
   return `tel:+${digits.length === 10 ? `1${digits}` : digits}`;
+}
+
+// Centralized escaping for dynamic HTML attribute values (alt text, aria
+// labels, etc.) — anything interpolated straight into a double-quoted
+// attribute must go through this or a literal " in the source string (e.g.
+// a quoted tagline) truncates the attribute and corrupts the markup.
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 function emailLink(label = BUSINESS.email) {
@@ -248,9 +261,9 @@ const copy = {
       title: "Digital Systems for Local Businesses | BLYNX Systems",
       description: "BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, organize them, and follow up. Three systems, starting at $1,500.",
       eyebrow: "Digital systems for local businesses",
-      headline: 'Get found.<br>Get contacted.<br><span class="text-gold">Never lose track of the job.</span>',
+      headline: 'Get found.<br>Get contacted.<br><span class="text-gold">Stay organized.</span>',
       subtitle: [
-        "We connect every part of your business to attract, organize and convert more customers. Three systems. One goal: your growth."
+        "BLYNX connects your digital presence, inquiries and follow-up in one clear system built for local businesses."
       ],
       trust: ["Be Found", "Build Trust", "Capture", "Organize", "Follow Up"],
       problemEyebrow: "The real problem",
@@ -536,9 +549,9 @@ const copy = {
       title: "Sistemas digitales para negocios locales | BLYNX Systems",
       description: "BLYNX construye sistemas digitales que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades, organizarlas y darles seguimiento. Tres sistemas, desde $1,500.",
       eyebrow: "Sistemas digitales para negocios locales",
-      headline: 'Que te encuentren.<br>Que te contacten.<br><span class="text-gold">Sin perder oportunidades.</span>',
+      headline: 'Que te encuentren.<br>Que te contacten.<br><span class="text-gold">Organiza tus oportunidades.</span>',
       subtitle: [
-        "Conectamos cada parte de tu negocio para atraer, organizar y convertir más clientes. Tres sistemas. Un solo objetivo: tu crecimiento."
+        "BLYNX conecta tu presencia digital, tus solicitudes y el seguimiento en un sistema claro para negocios locales."
       ],
       trust: ["Ser Encontrado", "Generar Confianza", "Captar", "Organizar", "Dar Seguimiento"],
       problemEyebrow: "El problema real",
@@ -1912,7 +1925,7 @@ function founderMedia(lang) {
   const alt = copy[lang].aboutPage.founder.alt;
   const image = imageCandidates.find((candidate) => fs.existsSync(path.join(root, candidate.file)));
   if (image) {
-    return `<img src="${image.src}" alt="${alt}" width="520" height="620" loading="lazy" decoding="async">`;
+    return `<img src="${image.src}" alt="${escapeAttr(alt)}" width="520" height="620" loading="lazy" decoding="async">`;
   }
   return `
     <div class="founder-placeholder" role="img" aria-label="${alt}">
@@ -2101,7 +2114,7 @@ function pageMediaBand(src, alt, wide = false) {
   return `
       <section class="page-media">
         <div class="container">
-          <img src="${src}" alt="${alt}" width="1200" height="${wide ? 510 : 630}" loading="lazy" decoding="async"${wide ? ' class="is-wide"' : ""}>
+          <img src="${src}" alt="${escapeAttr(alt)}" width="1200" height="${wide ? 510 : 630}" loading="lazy" decoding="async"${wide ? ' class="is-wide"' : ""}>
         </div>
       </section>`;
 }
@@ -2153,20 +2166,24 @@ const PRODUCT_IMAGES = {
   }
 };
 
-const PRODUCT_IMAGE_WIDTHS = [480, 800, 1200, 1672];
 const SYSTEM_IMAGE_KEYS = ["system1", "system2", "system3"];
 
 function productImage(key, lang, { priority = false, sizes = "(max-width: 760px) 100vw, 800px", className = "" } = {}) {
   const entry = PRODUCT_IMAGES[key];
   const variant = entry[lang];
   const base = `/assets/images/${variant.base}`;
-  const srcset = (ext) => PRODUCT_IMAGE_WIDTHS.map((w) => `${base}-${w}.${ext} ${w}w`).join(", ");
+  // Widths actually generated on disk for THIS asset's native resolution —
+  // never a fixed list. An EN system shot (native 1448px) and an ES one
+  // (native 1672px) get different srcset descriptors, matching what
+  // scripts/optimize-images.js really wrote for each (see lib/responsive-widths).
+  const widths = widthsForNative(variant.width);
+  const srcset = (ext) => widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(", ");
   return `
             <div class="product-visual${className ? " " + className : ""}">
               <picture>
                 <source type="image/avif" srcset="${srcset("avif")}" sizes="${sizes}">
                 <source type="image/webp" srcset="${srcset("webp")}" sizes="${sizes}">
-                <img src="${base}-1200-fallback.png" width="${variant.width}" height="${variant.height}" alt="${entry.alt[lang]}" loading="${priority ? "eager" : "lazy"}" decoding="async"${priority ? ' fetchpriority="high"' : ""}>
+                <img src="${base}-1200-fallback.png" width="${variant.width}" height="${variant.height}" alt="${escapeAttr(entry.alt[lang])}" loading="${priority ? "eager" : "lazy"}" decoding="async"${priority ? ' fetchpriority="high"' : ""}>
               </picture>
             </div>`;
 }
@@ -3066,8 +3083,14 @@ function projectCard(lang, project, p) {
   const journey = project.journey[lang];
   const isDemo = project.type === "demo";
   const url = project.url ? (typeof project.url === "string" ? project.url : project.url[lang]) : null;
+  // The wrapper below is always aria-hidden="true" (the project name/summary
+  // text carries the accessible content), so this image is decorative to
+  // assistive tech regardless of language — alt="" is the correct value, not
+  // a long description that a screen reader will never reach anyway. That
+  // also sidesteps embedding quoted taglines (e.g. Gladiadores') into an
+  // attribute value.
   const shotImg = project.image
-    ? `<img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async"${project.imagePosition ? ` style="object-position: ${project.imagePosition}"` : ""}>`
+    ? `<img src="${project.image}" alt="" width="1200" height="750" loading="lazy" decoding="async"${project.imagePosition ? ` style="object-position: ${project.imagePosition}"` : ""}>`
     : `<span>${p.screenshotPending}</span>`;
   const shot = url
     ? `<a class="project-shot${project.image ? "" : " project-shot-placeholder"}" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
@@ -3240,7 +3263,7 @@ ${captureFlowSection(lang)}
             ${reals.map((project) => projectCard(lang, project, p)).join("")}
           </div>
           <div class="our-work-panel our-work-panel-cta">
-            <a class="btn btn-secondary" href="${pagePath(lang, "projects")}#demos">${p.homeEntry.cta}</a>
+            <a class="btn btn-secondary" href="${pagePath(lang, "projects")}">${p.homeEntry.cta}</a>
           </div>
         </div>
       </section>
@@ -3735,7 +3758,7 @@ function aboutPage(lang) {
 
       <section class="scene-band" aria-label="Nashville, Tennessee">
         <div class="container">
-          <img src="/public/images/site/nashville.jpg" alt="${SITE_MEDIA_ALTS.nashville[lang]}" width="1200" height="510" loading="lazy" decoding="async">
+          <img src="/public/images/site/nashville.jpg" alt="${escapeAttr(SITE_MEDIA_ALTS.nashville[lang])}" width="1200" height="510" loading="lazy" decoding="async">
         </div>
       </section>
 
@@ -4402,7 +4425,7 @@ function blogArticlePage(lang, article) {
             ${blogMetaLine(lang, article, { author: true })}
           </header>
           <figure class="article-hero">
-            <img src="${article.heroImage}" alt="${article.heroImageAlt}" width="1200" height="630" decoding="async">
+            <img src="${article.heroImage}" alt="${escapeAttr(article.heroImageAlt)}" width="1200" height="630" decoding="async">
           </figure>
           <div class="article-body">
             ${article.contentHtml}
