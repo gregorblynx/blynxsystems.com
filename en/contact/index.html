@@ -26,6 +26,9 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.blynxsystems.com/#organization","name":"BLYNX Systems","description":"BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, and follow up faster.","url":"https://www.blynxsystems.com/","email":"hello@blynxsystems.com","image":"https://www.blynxsystems.com/assets/og-image.jpg","logo":"https://www.blynxsystems.com/assets/og-image.jpg","address":{"@type":"PostalAddress","addressLocality":"Nashville","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"},"knowsLanguage":["en","es"]},{"@type":"WebSite","@id":"https://www.blynxsystems.com/#website","url":"https://www.blynxsystems.com/","name":"BLYNX Systems","publisher":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"WebPage","@id":"https://www.blynxsystems.com/en/contact","url":"https://www.blynxsystems.com/en/contact","name":"Contact | BLYNX Systems","description":"Contact BLYNX Systems about digital presence, lead capture, opportunity organization, and follow-up support.","isPartOf":{"@id":"https://www.blynxsystems.com/#website"},"about":{"@id":"https://www.blynxsystems.com/#organization"},"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://www.blynxsystems.com/en/contact#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.blynxsystems.com/en"},{"@type":"ListItem","position":2,"name":"Talk with BLYNX about your local lead flow.","item":"https://www.blynxsystems.com/en/contact"}]}]}</script>
     <script>window.BLYNX_CONFIG={leadWebhookUrl:"",ga4MeasurementId:""};</script>
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
   </head>
@@ -44,8 +47,7 @@
         <nav class="site-nav" data-site-nav>
           <a href="/en">Home</a>
           <a href="/en/services#systems">Systems</a>
-          <a href="/en#process">Process</a>
-          <a href="/en#results">Results</a>
+          <a href="/en#journey">How It Works</a>
           <a href="/en/about">About</a>
           <a href="/en/projects">Projects</a>
           <a href="/en/blog">Blog</a>
@@ -58,7 +60,7 @@
       <span aria-hidden="true">|</span>
       <a class="" href="/es/contact" data-language-switch="es">ES</a>
     </div>
-          <a class="btn btn-primary" href="/en/free-audit">Request a Digital Audit</a>
+          <a class="btn btn-primary" href="/en/contact">Find the Right System</a>
           <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
             <span class="menu-toggle-lines" aria-hidden="true"></span>
           </button>
@@ -85,20 +87,17 @@
 
             <div class="contact-card">
               <h3>Based in</h3>
-              <p><span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Nashville, Tennessee</span></span></p>
+              <p><span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Tennessee, United States</span></span></p>
             </div>
             <div class="contact-card">
               <h3>Service area</h3>
               <p><span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/></svg></span><span>Serving businesses across the United States</span></span></p>
             </div>
-            <div class="contact-card">
-              <h3>Instagram</h3>
-              <p><span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span><span><a href="https://www.instagram.com/blynxsystems/" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">@blynxsystems</a></span></span></p>
-            </div>
+
             <div class="contact-card">
               <h3>Start with an audit</h3>
               <p>Not sure what you need yet? Request a free digital presence audit first.</p>
-              <p><a class="btn btn-secondary" href="/en/free-audit" data-analytics-event="free_audit_cta_click">Request a Digital Audit</a></p>
+              <p><a class="btn btn-secondary" href="/en/free-audit" data-analytics-event="free_audit_cta_click">Request a Free Audit</a></p>
             </div>
           </aside>
 
@@ -130,7 +129,7 @@
                 <label for="contact-topic">What can we help with?</label>
                 <select id="contact-topic" name="topic">
                   <option value="">What can we help with?</option>
-                  <option>Digital Presence System</option><option>Local Lead System</option><option>Digital audit</option><option>Social Media Add-On</option><option>Not sure</option>
+                  <option>System 1 — Digital Presence</option><option>System 2 — Lead Capture & Organization</option><option>System 3 — Lead Capture & Follow-Up</option><option>Free audit</option><option>Monthly maintenance / social media</option><option>Not sure</option>
                 </select>
               </div>
               <div class="field field-full">
@@ -173,9 +172,9 @@
         <div class="footer-contact">
           <span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span><a href="mailto:hello@blynxsystems.com" data-analytics-event="email_click">hello@blynxsystems.com</a></span></span>
 
-          <span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Nashville, Tennessee</span></span>
+          <span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span>Tennessee, United States</span></span>
           <span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/></svg></span><span>Serving businesses across the United States</span></span>
-          <span class="contact-line"><span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span><span><a href="https://www.instagram.com/blynxsystems/" target="_blank" rel="noopener noreferrer" data-analytics-event="instagram_click">@blynxsystems</a></span></span>
+
         </div>
       </div>
     </footer>

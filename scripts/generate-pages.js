@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { loadArticles, formatDate, CATEGORIES } = require("./blog");
+const { widthsForNative } = require("./lib/responsive-widths");
 
 const root = path.resolve(__dirname, "..");
 
@@ -64,13 +65,13 @@ const BUSINESS = {
   shortName: "BLYNX",
   email: "hello@blynxsystems.com",
   phone: "",
-  location: "Nashville, Tennessee",
+  location: "Tennessee, United States",
   city: "Nashville",
   region: "TN",
   country: "US",
   serviceArea: "United States",
-  instagramHandle: "blynxsystems",
-  instagramUrl: "https://www.instagram.com/blynxsystems/"
+  instagramHandle: "",
+  instagramUrl: ""
 };
 
 function phoneDigits() {
@@ -94,6 +95,18 @@ function phoneHref() {
   const digits = phoneDigits();
   if (!hasConfiguredPhone()) return "";
   return `tel:+${digits.length === 10 ? `1${digits}` : digits}`;
+}
+
+// Centralized escaping for dynamic HTML attribute values (alt text, aria
+// labels, etc.) — anything interpolated straight into a double-quoted
+// attribute must go through this or a literal " in the source string (e.g.
+// a quoted tagline) truncates the attribute and corrupts the markup.
+function escapeAttr(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 function emailLink(label = BUSINESS.email) {
@@ -204,8 +217,7 @@ const copy = {
     nav: {
       home: "Home",
       services: "Systems",
-      process: "Process",
-      results: "Results",
+      howItWorks: "How It Works",
       about: "About",
       projects: "Projects",
       resources: "Resources",
@@ -238,59 +250,60 @@ const copy = {
       ctaButton: "Get Your Free Audit"
     },
     cta: {
-      audit: "Request a Digital Audit",
-      auditLong: "Request Your Digital Audit",
-      auditShort: "Digital Audit",
+      audit: "Request a Free Audit",
+      auditLong: "Request Your Free Audit",
+      auditShort: "Free Audit",
+      findSystem: "Find the Right System",
       services: "Explore Our Systems",
       contact: "Contact BLYNX"
     },
     home: {
       title: "Digital Systems for Local Businesses | BLYNX Systems",
-      description: "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.",
+      description: "BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, organize them, and follow up. Three systems, starting at $1,500.",
       eyebrow: "Digital systems for local businesses",
-      headline: 'Digital systems built to help <span class="text-gold">local businesses grow.</span>',
+      headline: 'Get found.<br>Get contacted.<br><span class="text-gold">Stay organized.</span>',
       subtitle: [
-        "We help local businesses get found, build trust, capture opportunities, organize leads, and follow up faster.",
-        "Whether you are starting from zero or improving what you already have, we build the system your business needs to turn online attention into real customer opportunities."
+        "BLYNX connects your digital presence, inquiries and follow-up in one clear system built for local businesses."
       ],
-      trust: ["Get Found", "Build Trust", "Capture Opportunities", "Follow Up Faster"],
-      problemEyebrow: "The problem",
-      problemTitle: "Most Local Businesses Lose Leads Without Realizing It",
-      problemCopy: "People visit your website, Google profile, or landing page — but if there is no clear system to capture, organize, and follow up with them, those opportunities disappear.",
-      stageBanner: {
-        existing: "You already have a digital presence. We\u2019ll help you improve visibility, capture more qualified leads, and follow up faster.",
-        zero: "Starting from zero? We\u2019ll help you build the digital foundation needed to get found, receive opportunities, and follow up professionally."
+      trust: ["Be Found", "Build Trust", "Capture", "Organize", "Follow Up"],
+      problemEyebrow: "The real problem",
+      problemTitle: "The opportunity arrives. Then what?",
+      problemCopy: "Most local businesses don’t only have a visibility problem — they have a handoff problem. The work was there. It just wasn’t tracked.",
+      beforeAfter: {
+        beforeLabel: "Before BLYNX",
+        afterLabel: "After BLYNX",
+        before: ["Scattered inquiries", "Unclear digital presence", "No visible next step", "Missed opportunities", "Inconsistent follow-up"],
+        after: ["Professional presence", "Clear contact path", "Organized opportunities", "Visible status and next step", "Defined follow-up process"]
       },
-      auditEyebrow: "Free audit",
-      auditTitle: "How the Free Audit Works",
-      auditSubtitle: "AI-assisted for speed. Human-reviewed for quality.",
-      processEyebrow: "Process",
-      processTitle: "How the Local Lead System Comes Together",
-      resultsEyebrow: "Results",
-      resultsTitle: "Built to Stop Missed Sales Opportunities",
+      stageBanner: {
+        existing: "You already have a digital presence. Any of our three systems can apply — we’ll help you find the right one.",
+        zero: "Starting from zero? Any of our three systems can apply — we’ll help you find the right one."
+      },
       aboutEyebrow: "About BLYNX",
       aboutTitle: "Built for Local Service Businesses",
-      aboutCopy: "BLYNX builds practical digital presence and lead systems focused on visibility, trust, organized opportunities, and faster follow-up — not disconnected marketing services.",
+      aboutCopy: "BLYNX builds practical digital systems focused on visibility, trust, organized opportunities, and follow-up — not disconnected marketing services.",
       aboutBullets: [
         "Based in Nashville, Tennessee.",
         "Serving local businesses across the United States.",
         "English and Spanish support available."
       ],
       statItems: [
-        ["Get Found", "Google visibility, reviews, local trust signals, and clearer online presence."],
-        ["Capture", "A focused landing page, smart forms, and organized lead collection."],
-        ["Follow Up", "Simple lead organization and reminders that keep opportunities moving."]
+        ["Be Found", "Google visibility, reviews, local trust signals, and clearer online presence."],
+        ["Capture & Organize", "Smart forms and an organized record for every opportunity."],
+        ["Follow Up", "Confirmations, reminders, and review requests that keep opportunities moving."]
       ],
-      finalTitle: "Ready to Build a Clearer Digital System?",
-      finalSubtitle: "Start with a digital audit to see what can be kept, what needs improvement, and what should be built."
+      finalTitle: "Not sure which system fits?",
+      finalSubtitle: "That’s what the first conversation is for. Tell us where your business is today, and we’ll tell you which of the three systems makes sense — and which one doesn’t."
     },
     auditPage: {
-      title: "Request Your Digital Audit | BLYNX Systems",
-      description: "Request a digital audit to identify what your local business should keep, improve, or build next.",
-      eyebrow: "Digital audit",
-      h1: "Request Your Digital Audit",
-      subtitle: "See what your business can keep, what needs improvement, and which digital system can create the clearest next step.",
+      title: "Request Your Free Audit | BLYNX Systems",
+      description: "Request a free audit to identify what your local business should keep, improve, or build next.",
+      eyebrow: "Free audit",
+      h1: "Request Your Free Audit",
+      subtitle: "See what your business can keep, what needs improvement, and which of the three BLYNX systems fits best.",
       trust: "AI-powered for speed. Human-reviewed for quality.",
+      flowTitle: "How the Free Audit Works",
+      flowSubtitle: "AI-assisted for speed. Human-reviewed for quality.",
       introTitle: "A practical snapshot of your digital system.",
       introCopy: "This audit reviews your website or landing page, Google presence, business information, trust signals, lead capture process, and follow-up opportunities.",
       fitLine: "This audit works whether you already have a digital presence or you are starting from zero.",
@@ -347,13 +360,13 @@ const copy = {
       error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Digital Presence and Lead Systems | BLYNX Systems",
-      description: "Compare BLYNX digital presence and local lead systems for local businesses, including implementation scope, starting prices, benefits, and conditions.",
+      title: "Three Digital Systems for Local Businesses | BLYNX Systems",
+      description: "Compare the three BLYNX systems for local businesses — Digital Presence, Lead Capture & Organization, and Lead Capture & Follow-Up — including full implementation scope, starting prices, exclusions, and FAQs.",
       eyebrow: "BLYNX Systems",
-      h1: "Choose the digital system your business needs next.",
-      subtitle: "Build a stronger digital foundation or connect visibility, lead capture, organization, and follow-up into one complete system.",
+      h1: "Choose how far your system goes.",
+      subtitle: "Every system includes the digital foundation your business needs to be found and trusted. What changes is how much of the work after that first contact we build for you.",
       ctaTitle: "Not sure which system fits?",
-      ctaSubtitle: "Request a digital audit to determine what can be kept, what needs improvement, and what should be built."
+      ctaSubtitle: "Tell us where your business is today and we'll help you find the right system."
     },
     aboutPage: {
       title: "About | BLYNX Systems",
@@ -363,12 +376,12 @@ const copy = {
       subtitle: "BLYNX builds digital presence and lead systems that improve visibility, trust, opportunity capture, organization, and follow-up.",
       cards: [
         ["Who BLYNX Helps", "BLYNX serves local businesses across the United States that rely on calls, quote requests, bookings, inquiries, and customer trust to grow."],
-        ["What BLYNX Builds", "We build two core systems: a Digital Presence System and a Local Lead System that includes capture, organization, and follow-up."],
+        ["What BLYNX Builds", "We build three levels of the same connected system: Digital Presence, Lead Capture & Organization, and Lead Capture & Follow-Up."],
         ["Why It Matters", "Local customers compare businesses quickly. A clearer lead flow helps reduce missed calls, forgotten forms, and lost sales opportunities."]
       ],
       positionEyebrow: "Positioning",
-      positionTitle: "Two systems built around practical growth.",
-      positionCopy: "BLYNX is based in Nashville, Tennessee and supports local businesses nationwide. The focus is practical digital infrastructure: visibility, trust, clear contact pathways, organized opportunities, and faster follow-up.",
+      positionTitle: "Three systems built around practical growth.",
+      positionCopy: "BLYNX is based in Nashville, Tennessee and supports local businesses nationwide. The focus is practical digital infrastructure: visibility, trust, clear contact pathways, organized opportunities, and follow-up.",
       bullets: [
         "Local visibility improvements that help customers find the business.",
         "Focused landing pages that help visitors take the next step.",
@@ -378,7 +391,7 @@ const copy = {
       stats: [
         ["Nashville", "Based in Tennessee and serving local businesses across the United States."],
         ["Practical", "Clear systems for owners who want outcomes, not technical confusion."],
-        ["Focused", "Digital Presence and Local Lead Systems are the core offers. Social media support is available only as an optional add-on."]
+        ["Focused", "Three system levels are the core offers. Monthly maintenance and social media support are available only as separate add-ons."]
       ],
       founder: {
         eyebrow: "Founder-led",
@@ -419,10 +432,11 @@ const copy = {
         message: "Message"
       },
       topics: [
-        "Digital Presence System",
-        "Local Lead System",
-        "Digital audit",
-        "Social Media Add-On",
+        "System 1 — Digital Presence",
+        "System 2 — Lead Capture & Organization",
+        "System 3 — Lead Capture & Follow-Up",
+        "Free audit",
+        "Monthly maintenance / social media",
         "Not sure"
       ],
       languageOptions: ["English", "Spanish"],
@@ -459,6 +473,7 @@ const copy = {
       industryLabel: "Industry",
       viewLive: "View Live Project",
       viewDemo: "View live demo",
+      screenshotPending: "Screenshot pending",
       demoSectionTitle: "Concept demos",
       demoSectionNote: "Concept sites we build to show what's possible — these are demonstrations, not client work. Brands and content are fictional.",
       detailsToggle: "Project details",
@@ -490,8 +505,7 @@ const copy = {
     nav: {
       home: "Inicio",
       services: "Sistemas",
-      process: "Proceso",
-      results: "Resultados",
+      howItWorks: "Cómo Funciona",
       about: "Nosotros",
       projects: "Proyectos",
       resources: "Recursos",
@@ -524,39 +538,38 @@ const copy = {
       ctaButton: "Solicitar Auditoría Gratis"
     },
     cta: {
-      audit: "Solicitar una Auditoría Digital",
-      auditLong: "Solicita tu Auditoría Digital",
-      auditShort: "Auditoría Digital",
+      audit: "Solicita una Auditoría Gratis",
+      auditLong: "Solicita tu Auditoría Gratis",
+      auditShort: "Auditoría Gratis",
+      findSystem: "Encuentra tu Sistema",
       services: "Conocer Nuestros Sistemas",
       contact: "Contactar a BLYNX"
     },
     home: {
       title: "Sistemas digitales para negocios locales | BLYNX Systems",
-      description: "BLYNX crea sistemas de presencia digital y captación que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades y dar seguimiento más rápido.",
+      description: "BLYNX construye sistemas digitales que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades, organizarlas y darles seguimiento. Tres sistemas, desde $1,500.",
       eyebrow: "Sistemas digitales para negocios locales",
-      headline: 'Sistemas digitales creados para ayudar a crecer a <span class="text-gold">negocios locales.</span>',
+      headline: 'Que te encuentren.<br>Que te contacten.<br><span class="text-gold">Organiza tus oportunidades.</span>',
       subtitle: [
-        "Ayudamos a negocios locales a ser encontrados, generar confianza, captar oportunidades, organizar prospectos y dar seguimiento más rápido.",
-        "Ya sea que comiences desde cero o necesites mejorar lo que ya tienes, construimos el sistema que tu negocio necesita para convertir la atención digital en oportunidades reales de clientes."
+        "BLYNX conecta tu presencia digital, tus solicitudes y el seguimiento en un sistema claro para negocios locales."
       ],
-      trust: ["Ser Encontrado", "Generar Confianza", "Captar Oportunidades", "Dar Seguimiento Rápido"],
-      problemEyebrow: "El problema",
-      problemTitle: "Muchos Negocios Locales Pierden Oportunidades Sin Darse Cuenta",
-      problemCopy: "Las personas visitan tu sitio, perfil de Google o landing page, pero si no hay un sistema claro para capturar, organizar y dar seguimiento, esas oportunidades desaparecen.",
-      stageBanner: {
-        existing: "Ya tienes presencia digital. Te ayudamos a mejorar visibilidad, capturar más oportunidades calificadas y dar seguimiento rápido.",
-        zero: "¿Estás empezando desde cero? Te ayudamos a construir la base digital necesaria para ser encontrado, recibir oportunidades y dar seguimiento profesional."
+      trust: ["Ser Encontrado", "Generar Confianza", "Captar", "Organizar", "Dar Seguimiento"],
+      problemEyebrow: "El problema real",
+      problemTitle: "La oportunidad llega. ¿Y después?",
+      problemCopy: "La mayoría de los negocios locales no solo tiene un problema de visibilidad, sino de continuidad. El trabajo estaba; solo faltó darle seguimiento.",
+      beforeAfter: {
+        beforeLabel: "Antes de BLYNX",
+        afterLabel: "Después de BLYNX",
+        before: ["Solicitudes dispersas", "Presencia digital poco clara", "Sin siguiente paso visible", "Oportunidades perdidas", "Seguimiento inconsistente"],
+        after: ["Presencia profesional", "Camino de contacto claro", "Oportunidades organizadas", "Estado y siguiente paso visibles", "Proceso de seguimiento definido"]
       },
-      auditEyebrow: "Auditoría gratis",
-      auditTitle: "Cómo Funciona la Auditoría Gratis",
-      auditSubtitle: "Apoyada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
-      processEyebrow: "Proceso",
-      processTitle: "Cómo se Construye tu Sistema de Captación",
-      resultsEyebrow: "Resultados",
-      resultsTitle: "Creado para Reducir Oportunidades Perdidas",
+      stageBanner: {
+        existing: "Ya tienes presencia digital. Cualquiera de nuestros tres sistemas puede aplicar — te ayudamos a encontrar el correcto.",
+        zero: "¿Estás empezando desde cero? Cualquiera de nuestros tres sistemas puede aplicar — te ayudamos a encontrar el correcto."
+      },
       aboutEyebrow: "Sobre BLYNX",
       aboutTitle: "Creado para Negocios Locales",
-      aboutCopy: "BLYNX crea sistemas prácticos de presencia digital y captación enfocados en visibilidad, confianza, oportunidades organizadas y seguimiento más rápido, no en servicios de marketing desconectados.",
+      aboutCopy: "BLYNX crea sistemas digitales prácticos enfocados en visibilidad, confianza, oportunidades organizadas y seguimiento, no en servicios de marketing desconectados.",
       aboutBullets: [
         "Basados en Nashville, Tennessee.",
         "Servimos a negocios locales en todo Estados Unidos.",
@@ -564,19 +577,21 @@ const copy = {
       ],
       statItems: [
         ["Ser Encontrado", "Visibilidad en Google, reseñas, confianza local y presencia en internet más clara."],
-        ["Capturar", "Landing page enfocada, formularios simples y captación organizada."],
-        ["Seguimiento", "Organización simple de leads y recordatorios para mover cada oportunidad."]
+        ["Captar y Organizar", "Formularios inteligentes y un registro organizado para cada oportunidad."],
+        ["Dar Seguimiento", "Confirmaciones, recordatorios y solicitudes de reseña que mueven cada oportunidad."]
       ],
-      finalTitle: "¿Listo para Construir un Sistema Digital Más Claro?",
-      finalSubtitle: "Comienza con una auditoría digital para saber qué se puede conservar, qué necesita mejorarse y qué debe construirse."
+      finalTitle: "¿No sabes cuál sistema te conviene?",
+      finalSubtitle: "Para eso es la primera conversación. Cuéntanos cómo está tu negocio hoy y te decimos cuál de los tres sistemas tiene sentido — y cuál no."
     },
     auditPage: {
-      title: "Solicita tu Auditoría Digital | BLYNX Systems",
-      description: "Solicita una auditoría digital para identificar qué debe conservar, mejorar o construir tu negocio local.",
-      eyebrow: "Auditoría digital",
-      h1: "Solicita tu Auditoría Digital",
-      subtitle: "Descubre qué puede conservar tu negocio, qué necesita mejorarse y cuál sistema digital ofrece el siguiente paso más claro.",
+      title: "Solicita tu Auditoría Gratis | BLYNX Systems",
+      description: "Solicita una auditoría gratis para identificar qué debe conservar, mejorar o construir tu negocio local.",
+      eyebrow: "Auditoría gratis",
+      h1: "Solicita tu Auditoría Gratis",
+      subtitle: "Descubre qué puede conservar tu negocio, qué necesita mejorarse y cuál de los tres sistemas de BLYNX te conviene más.",
       trust: "Impulsada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
+      flowTitle: "Cómo Funciona la Auditoría Gratis",
+      flowSubtitle: "Apoyada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
       introTitle: "Una revisión práctica de tu sistema digital.",
       introCopy: "Esta auditoría revisa tu sitio o landing page, presencia en Google, información comercial, señales de confianza, proceso de captación y oportunidades de seguimiento.",
       fitLine: "Esta auditoría funciona tanto si ya tienes presencia digital como si estás empezando desde cero.",
@@ -633,13 +648,13 @@ const copy = {
       error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
     },
     servicesPage: {
-      title: "Sistemas de Presencia Digital y Captación | BLYNX Systems",
-      description: "Compara los sistemas de presencia digital y captación de BLYNX para negocios locales, incluyendo alcance, precios iniciales, beneficios y condiciones.",
+      title: "Tres Sistemas Digitales para Negocios Locales | BLYNX Systems",
+      description: "Compara los tres sistemas de BLYNX para negocios locales — Presencia Digital, Captación y Organización, y Captación y Seguimiento — con alcance completo, precios iniciales, exclusiones y preguntas frecuentes.",
       eyebrow: "BLYNX Systems",
-      h1: "Elige el sistema digital que tu negocio necesita ahora.",
-      subtitle: "Construye una base digital más sólida o conecta visibilidad, captación, organización y seguimiento en un sistema completo.",
-      ctaTitle: "¿No sabes cuál sistema necesitas?",
-      ctaSubtitle: "Solicita una auditoría digital para determinar qué se puede conservar, qué necesita mejorarse y qué debe construirse."
+      h1: "Elige hasta dónde llega tu sistema.",
+      subtitle: "Todos los sistemas incluyen la base digital que tu negocio necesita para que lo encuentren y confíen en él. Lo que cambia es cuánto del trabajo posterior a ese primer contacto construimos por ti.",
+      ctaTitle: "¿No sabes cuál sistema te conviene?",
+      ctaSubtitle: "Cuéntanos cómo está tu negocio hoy y te ayudamos a encontrar el sistema correcto."
     },
     aboutPage: {
       title: "Nosotros | BLYNX Systems",
@@ -649,12 +664,12 @@ const copy = {
       subtitle: "BLYNX crea sistemas de presencia digital y captación que mejoran visibilidad, confianza, captación, organización y seguimiento.",
       cards: [
         ["A Quién Ayuda BLYNX", "BLYNX sirve a negocios locales en Estados Unidos que dependen de llamadas, solicitudes de cotización, reservas, consultas y confianza del cliente para crecer."],
-        ["Qué Construye BLYNX", "Construimos dos sistemas principales: un Sistema de Presencia Digital y un Sistema Local de Captación con organización y seguimiento."],
+        ["Qué Construye BLYNX", "Construimos tres niveles de un mismo sistema conectado: Presencia Digital, Captación y Organización, y Captación y Seguimiento."],
         ["Por Qué Importa", "Los clientes locales comparan negocios rápidamente. Un flujo más claro ayuda a reducir llamadas perdidas, formularios olvidados y posibles clientes perdidos."]
       ],
       positionEyebrow: "Posicionamiento",
-      positionTitle: "Dos sistemas creados para un crecimiento práctico.",
-      positionCopy: "BLYNX está basado en Nashville, Tennessee y apoya a negocios locales en todo Estados Unidos. El enfoque es infraestructura digital práctica: visibilidad, confianza, rutas claras de contacto, oportunidades organizadas y seguimiento más rápido.",
+      positionTitle: "Tres sistemas creados para un crecimiento práctico.",
+      positionCopy: "BLYNX está basado en Nashville, Tennessee y apoya a negocios locales en todo Estados Unidos. El enfoque es infraestructura digital práctica: visibilidad, confianza, rutas claras de contacto, oportunidades organizadas y seguimiento.",
       bullets: [
         "Mejoras de visibilidad local que ayudan a los clientes a encontrar el negocio.",
         "Landing pages enfocadas que ayudan al visitante a tomar el siguiente paso.",
@@ -664,7 +679,7 @@ const copy = {
       stats: [
         ["Nashville", "Basados en Tennessee y sirviendo a negocios locales en todo Estados Unidos."],
         ["Práctico", "Sistemas claros para dueños que quieren resultados, no confusión técnica."],
-        ["Enfocado", "Los Sistemas de Presencia Digital y Captación son las ofertas principales. El apoyo para redes sociales es solo un complemento opcional."]
+        ["Enfocado", "Los tres niveles de sistema son las ofertas principales. El mantenimiento mensual y el apoyo para redes sociales son complementos aparte."]
       ],
       founder: {
         eyebrow: "Dirigido por su fundador",
@@ -705,10 +720,11 @@ const copy = {
         message: "Mensaje"
       },
       topics: [
-        "Sistema de Presencia Digital",
-        "Sistema Local de Captación y Seguimiento",
-        "Auditoría digital",
-        "Complemento de Redes Sociales",
+        "Sistema 1 — Presencia Digital",
+        "Sistema 2 — Captación y Organización",
+        "Sistema 3 — Captación y Seguimiento",
+        "Auditoría gratis",
+        "Mantenimiento mensual / redes sociales",
         "No estoy seguro"
       ],
       languageOptions: ["Inglés", "Español"],
@@ -746,6 +762,7 @@ const copy = {
       industryLabel: "Industria",
       viewLive: "Ver proyecto",
       viewDemo: "Ver demo en vivo",
+      screenshotPending: "Captura pendiente",
       demoSectionTitle: "Demos de concepto",
       demoSectionNote: "Sitios de concepto que creamos para mostrar lo que es posible — son demostraciones, no trabajo de clientes. Las marcas y el contenido son ficticios.",
       detailsToggle: "Detalles del proyecto",
@@ -768,156 +785,233 @@ const copy = {
 
 const commercialOffer = {
   en: {
-    eyebrow: "Two digital systems",
-    title: "Two systems. One clear goal.",
-    intro:
-      "Every business is at a different stage. Some need a stronger digital foundation. Others need a complete system to capture, organize, and follow up with customer opportunities.",
-    whoTitle: "Who it is for",
+    eyebrow: "Three digital systems",
+    title: "Three systems. Choose how far yours goes.",
+    intro: "Every system includes the digital foundation. What changes is how much of the work after that first contact we build for you.",
+    priceLabel: "Starting at",
+    whoTitle: "Choose this if you",
     implementationTitle: "What we implement",
     resultTitle: "What this system helps you do",
+    exclusionsTitle: "Not included",
     detailsLink: "See full implementation scope",
+    compareLink: "Compare all three systems",
+    leadCaptureDefinition:
+      "“Lead capture” means receiving and organizing the inquiries and opportunities that come from your website, Google, referrals, advertising, prospecting or other channels.",
     systems: [
       {
         id: "digital-presence-system",
         name: "Digital Presence System",
         startingPrice: 1500,
-        price: "",
+        badge: null,
+        resultChain: ["Be found", "Build trust", "Receive inquiries"],
         positioning:
-          "For businesses that need to build, improve, or organize the digital foundation customers use to find and trust them.",
+          "The digital foundation customers use to find your business, understand what you offer, and trust it enough to reach out.",
         ideal: [
-          "Are starting from zero",
-          "Have an outdated website",
-          "Have incomplete business information",
-          "Are difficult to find online",
-          "Have a digital presence that does not clearly explain the service",
-          "Need stronger trust and contact pathways"
+          "Need people to find you online and understand what you offer",
+          "Want a clear, professional way for customers to reach you",
+          "Are comfortable receiving and handling inquiries yourself",
+          "Need stronger trust signals and a simple contact path",
+          "Want a solid digital foundation other marketing can build on"
         ],
         implementationLead: "",
         implementation: [
-          "Initial digital audit",
+          "Brief diagnosis or digital audit, depending on your starting point",
           "New website, landing page, or improvement of the existing website",
           "Mobile-friendly customer experience",
           "Clear service and value proposition",
           "Contact and quote buttons",
-          "Contact or quote form",
+          "Basic contact or quote form",
           "Google Business Profile setup or optimization",
           "Core business information cleanup",
           "Basic local SEO structure",
           "Google Analytics and website tracking",
           "Review-generation foundation",
-          "Connection to the business’s primary communication channels",
+          "Connection to your primary communication channels",
           "Testing and launch"
+        ],
+        exclusions: [
+          "No qualification fields on the contact form",
+          "No opportunity records, stages or owners",
+          "No automated follow-up"
         ],
         benefits: [
           "Be easier to find",
           "Look more professional",
           "Build customer confidence",
           "Explain your services clearly",
-          "Give customers a simple next step",
-          "Create a stronger foundation for future marketing"
+          "Give customers a simple next step"
         ],
-        cta: "Build or Improve My Digital Presence",
-        ctaTarget: "free-audit",
+        cta: "Start with System 1",
+        ctaTarget: "contact",
         pricingNote:
-          "Final pricing depends on the condition of the existing digital presence and the approved project scope."
+          "Investment depends on the condition of the existing digital presence and the approved project scope."
       },
       {
-        id: "local-lead-system",
-        name: "Local Lead System",
-        startingPrice: 2500,
-        price: "",
+        id: "lead-capture-organization",
+        name: "Lead Capture & Organization System",
+        startingPrice: 2250,
+        badge: null,
+        resultChain: ["Receive", "Classify", "Organize"],
         positioning:
-          "For businesses that need more than visibility and want a complete system to capture, organize, and follow up with customer opportunities.",
+          "Everything in the Digital Presence System, plus a way to know exactly who contacted you, what they need, and where every request stands.",
         ideal: [
-          "Receive calls, forms, texts, or messages from different channels",
-          "Lose track of potential customers",
-          "Respond too slowly",
-          "Do not have an organized follow-up process",
-          "Need confirmations, reminders, and lead organization",
-          "Want a more scalable customer-acquisition system"
+          "Already receive inquiries but lose track of who asked for what",
+          "Handle requests from more than one channel: calls, forms, messages",
+          "Need every opportunity classified, staged, and assigned to someone",
+          "Want a confirmation and internal notification the moment a request arrives",
+          "Need real organization, not automated follow-up yet"
         ],
-        implementationLead: "Everything included in the Digital Presence System, plus:",
+        implementationLead: "Everything in the Digital Presence System, plus:",
         implementation: [
-          "Smart contact or quote forms",
-          "Lead qualification fields",
-          "Simple lead-management pipeline",
-          "Centralized opportunity organization",
-          "Automatic confirmation messages",
-          "Internal lead notifications",
-          "Email, SMS, or WhatsApp follow-up workflows when technically available",
-          "Appointment or quote reminders",
-          "Missed-opportunity follow-up",
-          "Review-request workflows",
-          "Customer communication templates",
-          "Basic automation setup",
-          "Workflow documentation",
-          "Team training",
+          "Smart contact and quote forms with qualification fields",
+          "Service, location, urgency, preferred date and budget fields",
+          "Centralized record for every opportunity",
+          "Simple stages: New → Contacted → Quoted → Pending → Won/Lost",
+          "Owner and next action on every opportunity",
+          "Instant confirmation message to the customer",
+          "Internal notification when a new opportunity arrives",
           "Full system testing"
         ],
-        benefits: [
-          "Capture more customer opportunities",
-          "Respond faster",
-          "Keep leads organized",
-          "Reduce missed follow-ups",
-          "Create a more consistent customer experience",
-          "Give the team a clearer process",
-          "Prepare the business for future automation and growth"
+        exclusions: [
+          "No follow-up workflows or reminder sequences",
+          "No message templates or team training",
+          "No unattended-opportunity reminders"
         ],
-        cta: "Build My Local Lead System",
-        ctaTarget: "free-audit",
+        benefits: [
+          "Know who contacted you and what they need",
+          "See the status of every opportunity at a glance",
+          "Give every request an owner and a next step",
+          "Respond with the right context, faster",
+          "Keep the whole team working from the same record"
+        ],
+        cta: "Start with System 2",
+        ctaTarget: "contact",
         pricingNote:
-          "Final pricing depends on the number of workflows, communication channels, integrations, and the approved project scope."
+          "Investment depends on the number of channels, qualification fields, and the approved project scope."
+      },
+      {
+        id: "lead-capture-follow-up",
+        legacyId: "local-lead-system",
+        name: "Lead Capture & Follow-Up System",
+        startingPrice: 2500,
+        badge: "Best Value",
+        resultChain: ["Receive", "Organize", "Follow up"],
+        positioning:
+          "Everything in Systems 1 and 2, plus the follow-up layer that catches the opportunities other systems let go quiet.",
+        ideal: [
+          "Lose opportunities to slow or forgotten follow-up",
+          "Send quotes that go unanswered with no reminder process",
+          "Need appointment confirmations and reminders",
+          "Want review requests sent automatically after the job is done",
+          "Need the complete system: capture, organization and follow-up together"
+        ],
+        implementationLead: "Everything in Systems 1 and 2, plus 5 core automations:",
+        implementation: [
+          "New Inquiry Confirmation — record created, customer confirmed, business notified",
+          "Unattended Opportunity Reminder — alerts the responsible person",
+          "Quote Follow-Up — reminder plus one or two approved customer messages",
+          "Appointment Confirmation / Reminder, when applicable",
+          "Review Request after the service is completed, with a direct link",
+          "Communication, confirmation and follow-up message templates",
+          "Remote training for your team on statuses and next actions",
+          "Simple process documentation",
+          "Full system testing"
+        ],
+        exclusions: [
+          "Not unlimited automation — the 5 workflows above are the approved scope",
+          "Additional workflows require separately approved scope",
+          "Third-party costs (SMS, WhatsApp, paid CRM plans) are separate when applicable"
+        ],
+        benefits: [
+          "Nothing goes quiet after the first message",
+          "Quotes get a real follow-up process, not hope",
+          "Appointments are confirmed and reminded automatically",
+          "Reviews get requested consistently after every job",
+          "Your team knows exactly what happens next, every time"
+        ],
+        cta: "Start with System 3",
+        ctaTarget: "contact",
+        pricingNote:
+          "Investment depends on the number of workflows, communication channels, integrations, and the approved project scope."
       }
     ],
     comparison: {
       eyebrow: "System comparison",
-      title: "Which system does your business need?",
-      cards: [
-        {
-          name: "Digital Presence System",
-          label: "Best for",
-          items: ["Visibility", "Trust", "Website", "Google presence", "Clear contact pathway", "Strong digital foundation"]
-        },
-        {
-          name: "Local Lead System",
-          label: "Best for",
-          items: [
-            "Everything in Digital Presence",
-            "Lead capture",
-            "Opportunity organization",
-            "Faster follow-up",
-            "Confirmations and reminders",
-            "Basic automation",
-            "Team workflow"
-          ]
-        }
+      title: "Compare the three systems",
+      columns: ["Digital Presence", "Capture & Organization", "Capture & Follow-Up"],
+      rows: [
+        { label: "Diagnosis or audit of current presence", values: ["Yes", "Yes", "Yes"] },
+        { label: "Website / landing page built or improved", values: ["Yes", "Yes", "Yes"] },
+        { label: "Mobile optimization", values: ["Yes", "Yes", "Yes"] },
+        { label: "Google Business Profile + basic local SEO", values: ["Yes", "Yes", "Yes"] },
+        { label: "Google Analytics", values: ["Yes", "Yes", "Yes"] },
+        { label: "Review-generation foundation", values: ["Yes", "Yes", "Yes"] },
+        { label: "Contact / quote form", values: ["Basic", "Smart + qualification", "Smart + qualification"] },
+        { label: "Service, location, urgency, date, budget fields", values: ["—", "Yes", "Yes"] },
+        { label: "Centralized opportunity records", values: ["—", "Yes", "Yes"] },
+        { label: "Stages, owner and next action", values: ["—", "Yes", "Yes"] },
+        { label: "Instant confirmation + internal notification", values: ["—", "Yes", "Yes"] },
+        { label: "Unattended-opportunity reminder", values: ["—", "—", "Yes"] },
+        { label: "Quote follow-up reminders", values: ["—", "—", "Yes"] },
+        { label: "Appointment confirmation + reminder", values: ["—", "—", "Yes"] },
+        { label: "Review request after service", values: ["—", "—", "Yes"] },
+        { label: "Message and confirmation templates", values: ["—", "—", "Yes"] },
+        { label: "Remote team training", values: ["—", "—", "Yes"] },
+        { label: "Testing and launch", values: ["Yes", "Yes", "Yes"] }
       ],
       recommendationTitle: "Not sure which one fits your business?",
       recommendation:
-        "We begin with a digital audit to determine what can be kept, what needs improvement, and what should be built.",
-      cta: "Request Your Digital Audit",
-      ctaTarget: "free-audit"
+        "Any of the three systems can be built for a business starting from zero or one that already has a website and a Google profile. Your current setup changes how we diagnose you — not which system fits.",
+      cta: "Find the Right System",
+      ctaTarget: "contact"
     },
-    social: {
-      eyebrow: "Optional add-on",
-      title: "Optional Add-On: Social Media Support",
-      copy: [
-        "Social media can support the digital system, but it is not the system itself.",
-        "Businesses that need consistent content and publishing support may add a separate social media service."
-      ],
-      inclusionsTitle: "Potential inclusions",
-      inclusions: [
-        "Monthly content planning",
-        "Branded posts and carousels",
-        "Captions",
-        "Short-form video editing using supplied footage",
-        "Content calendar",
-        "Scheduling and publishing",
-        "Basic monthly performance summary"
-      ],
-      note:
-        "Social media management is quoted separately based on publishing volume, platforms, content-production needs, and management scope.",
-      cta: "Ask About the Social Media Add-On",
+    monthly: {
+      eyebrow: "After launch",
+      title: "Keep the system running — and, if you want, keep it visible",
+      intro:
+        "Optional, and separate from the project price. Available once your system is live.",
+      maintenance: {
+        name: "Digital System Maintenance",
+        price: "$650",
+        priceUnit: "/month",
+        inclusions: [
+          "Minor website updates (up to 4 per month)",
+          "Business information updates",
+          "Form monitoring",
+          "Automation monitoring",
+          "Analytics review",
+          "Backups and system checks",
+          "Simple monthly summary",
+          "Minor technical corrections"
+        ]
+      },
+      socialAddOn: {
+        name: "Social Media Management Add-On",
+        price: "+$850",
+        priceUnit: "/month",
+        note: "Added to the $650 monthly maintenance.",
+        inclusions: [
+          "Monthly content planning and calendar",
+          "Up to 8 content pieces",
+          "Static designs and carousels",
+          "Up to 2 simple reels using footage you provide",
+          "Captions",
+          "Instagram / Facebook adaptation",
+          "Scheduling and publishing",
+          "Basic monthly report"
+        ],
+        exclusions: [
+          "Unlimited posting or revisions",
+          "Intensive community management or daily DM responses",
+          "Professional photography or videography",
+          "Paid advertising or ad budget"
+        ]
+      },
+      comboPrice: "$1,500",
+      comboPriceUnit: "/month",
+      comboLabel: "Both together",
+      customNote: "Larger social media requirements receive a custom quote.",
+      cta: "Ask About Monthly Support",
       ctaTarget: "contact"
     },
     faq: {
@@ -926,182 +1020,267 @@ const commercialOffer = {
       items: [
         [
           "Do I need to start from zero?",
-          "No. We begin with a digital audit to identify what can be kept, what needs improvement, and what should be built."
+          "No. Any of the three systems can be built for a business starting from zero or one that already has a website and a Google profile. We begin with a short diagnosis or a free audit to see what exists and recommend the right system."
         ],
         [
           "What if I already have a website?",
           "We evaluate what can be kept, improved, or rebuilt. Existing digital assets do not automatically make the project smaller; correcting an outdated or poorly structured system can require more work than starting clean. Projects begin at the listed starting price, and the final investment depends on the approved scope."
         ],
         [
-          "What is the difference between the two systems?",
-          "The Digital Presence System builds or improves the foundation customers use to find and trust the business. The Local Lead System includes that foundation plus lead capture, opportunity organization, follow-up workflows, reminders, and basic automation."
+          "What is the difference between the three systems?",
+          "System 1 builds the digital foundation customers use to find and trust you. System 2 adds smart forms and organizes every opportunity with a status and an owner. System 3 adds the follow-up layer — confirmations, reminders and review requests — so nothing goes quiet."
+        ],
+        [
+          "Does BLYNX guarantee more customers or leads?",
+          "No. BLYNX builds the infrastructure and process that helps your business receive and manage opportunities professionally. Results also depend on market demand, your offer, pricing, competition, reputation, sales ability, response speed, customer service and execution."
         ],
         [
           "Does social media management come included?",
-          "No. Social media support is an optional add-on quoted separately according to platforms, publishing volume, content needs, and management scope."
+          "No. Social media support is a separate monthly add-on to maintenance, quoted at a fixed rate for the scope described, with a custom quote for larger requirements."
         ],
         [
-          "Are automation and AI included?",
-          "The Local Lead System includes basic automation and may include practical AI-assisted workflows when they are appropriate, secure, and useful. AI supports the process; it does not replace the business team or make unsupervised operational decisions."
+          "Are automations included, and are they unlimited?",
+          "System 3 includes 5 core follow-up automations in the approved scope: new inquiry confirmation, unattended opportunity reminders, quote follow-up, appointment confirmation/reminders, and review requests. This is not unlimited automation — additional workflows require separately approved scope."
         ],
         [
           "How is the final price determined?",
           "Final pricing depends on the current digital setup, approved project scope, number of workflows, communication channels, integrations, and any separately approved add-ons."
+        ],
+        [
+          "How does payment work?",
+          "50% to begin, 30% after approval of the build, and 20% before launch. Monthly services are billed in advance."
         ]
       ]
     }
   },
   es: {
-    eyebrow: "Dos sistemas digitales",
-    title: "Dos sistemas. Un objetivo claro.",
-    intro:
-      "Cada negocio se encuentra en una etapa diferente. Algunos necesitan una base digital más sólida. Otros necesitan un sistema completo para captar, organizar y dar seguimiento a las oportunidades de clientes.",
-    whoTitle: "Para quién es",
+    eyebrow: "Tres sistemas digitales",
+    title: "Tres sistemas. Elige hasta dónde llega el tuyo.",
+    intro: "Todos los sistemas incluyen la base digital. Lo que cambia es cuánto del trabajo posterior a ese primer contacto construimos por ti.",
+    priceLabel: "Desde",
+    whoTitle: "Elige este sistema si",
     implementationTitle: "Qué implementamos",
     resultTitle: "Qué te ayuda a lograr este sistema",
+    exclusionsTitle: "No incluye",
     detailsLink: "Ver el alcance completo de implementación",
+    compareLink: "Comparar los tres sistemas",
+    leadCaptureDefinition:
+      "“La captación” se refiere a recibir y organizar las solicitudes y oportunidades que llegan desde el sitio web, Google, referencias, publicidad, prospección u otros canales.",
     systems: [
       {
         id: "sistema-presencia-digital",
         name: "Sistema de Presencia Digital",
         startingPrice: 1500,
-        price: "",
+        badge: null,
+        resultChain: ["Ser encontrado", "Generar confianza", "Recibir solicitudes"],
         positioning:
-          "Para negocios que necesitan crear, mejorar u organizar la base digital que los clientes utilizan para encontrarlos y confiar en ellos.",
+          "La base digital que tus clientes usan para encontrar tu negocio, entender qué ofreces y confiar lo suficiente como para contactarte.",
         ideal: [
-          "Están comenzando desde cero",
-          "Tienen un sitio web desactualizado",
-          "Tienen información comercial incompleta",
-          "Son difíciles de encontrar en internet",
-          "Tienen una presencia digital que no explica claramente el servicio",
-          "Necesitan generar más confianza y facilitar el contacto"
+          "Necesitas que te encuentren en internet y entiendan qué ofreces",
+          "Quieres una forma clara y profesional de que los clientes te contacten",
+          "Te sientes cómodo recibiendo y atendiendo las solicitudes tú mismo",
+          "Necesitas más señales de confianza y un camino simple de contacto",
+          "Quieres una base digital sólida sobre la que construir tu marketing"
         ],
         implementationLead: "",
         implementation: [
-          "Auditoría digital inicial",
+          "Diagnóstico breve o auditoría digital, según tu punto de partida",
           "Nuevo sitio web, landing page o mejora del sitio existente",
           "Experiencia optimizada para dispositivos móviles",
           "Presentación clara de los servicios y la propuesta de valor",
           "Botones de contacto y cotización",
-          "Formulario de contacto o cotización",
+          "Formulario básico de contacto o cotización",
           "Creación u optimización del Perfil de Empresa de Google",
           "Corrección de la información principal del negocio",
           "Estructura básica de SEO local",
           "Google Analytics y medición del sitio",
           "Base para generar reseñas",
-          "Conexión con los principales canales de comunicación del negocio",
+          "Conexión con tus principales canales de comunicación",
           "Pruebas y lanzamiento"
+        ],
+        exclusions: [
+          "El formulario de contacto no incluye campos de clasificación",
+          "No incluye registros de oportunidades, estados ni responsables",
+          "No incluye seguimiento automático"
         ],
         benefits: [
           "Ser más fácil de encontrar",
           "Proyectar una imagen más profesional",
           "Generar confianza",
           "Explicar claramente tus servicios",
-          "Facilitar el siguiente paso al cliente",
-          "Crear una base más sólida para futuras acciones de marketing"
+          "Facilitar el siguiente paso al cliente"
         ],
-        cta: "Crear o Mejorar Mi Presencia Digital",
-        ctaTarget: "free-audit",
+        cta: "Empezar con el Sistema 1",
+        ctaTarget: "contact",
         pricingNote:
-          "El precio final depende del estado de la presencia digital existente y del alcance aprobado del proyecto."
+          "La inversión depende del estado de la presencia digital existente y del alcance aprobado del proyecto."
       },
       {
-        id: "sistema-local-captacion",
-        name: "Sistema Local de Captación y Seguimiento",
-        startingPrice: 2500,
-        price: "",
+        id: "sistema-captacion-organizacion",
+        name: "Sistema de Captación y Organización",
+        startingPrice: 2250,
+        badge: null,
+        resultChain: ["Recibir", "Clasificar", "Organizar"],
         positioning:
-          "Para negocios que necesitan más que visibilidad y quieren un sistema completo para captar, organizar y dar seguimiento a las oportunidades de clientes.",
+          "Todo lo incluido en el Sistema de Presencia Digital, más una forma de saber exactamente quién te contactó, qué necesita y en qué punto está cada solicitud.",
         ideal: [
-          "Reciben llamadas, formularios, textos o mensajes desde diferentes canales",
-          "Pierden el control de posibles clientes",
-          "Responden demasiado tarde",
-          "No tienen un proceso organizado de seguimiento",
-          "Necesitan confirmaciones, recordatorios y organización de oportunidades",
-          "Quieren un sistema de captación más escalable"
+          "Ya recibes solicitudes pero pierdes el control de quién pidió qué",
+          "Atiendes solicitudes de más de un canal: llamadas, formularios, mensajes",
+          "Necesitas que cada oportunidad tenga clasificación, estado y responsable",
+          "Quieres una confirmación y notificación interna apenas llega una solicitud",
+          "Necesitas organización real, todavía no seguimiento automático"
         ],
         implementationLead: "Todo lo incluido en el Sistema de Presencia Digital, más:",
         implementation: [
-          "Formularios inteligentes de contacto o cotización",
-          "Campos para clasificar oportunidades",
-          "Flujo simple para organizar prospectos",
-          "Organización centralizada de oportunidades",
-          "Mensajes automáticos de confirmación",
-          "Notificaciones internas de nuevos prospectos",
-          "Seguimientos por email, SMS o WhatsApp cuando estén técnicamente disponibles",
-          "Recordatorios de citas o cotizaciones",
-          "Seguimiento de oportunidades no atendidas",
-          "Flujos para solicitar reseñas",
-          "Plantillas de comunicación con clientes",
-          "Configuración básica de automatizaciones",
-          "Documentación del proceso",
-          "Capacitación del equipo",
+          "Formularios inteligentes con campos de clasificación",
+          "Campos de servicio, ubicación, urgencia, fecha preferida y presupuesto",
+          "Registro centralizado de cada oportunidad",
+          "Estados simples: Nueva → Contactada → Cotizada → Pendiente → Ganada/Perdida",
+          "Responsable y siguiente acción en cada oportunidad",
+          "Mensaje de confirmación instantánea al cliente",
+          "Notificación interna cuando llega una nueva oportunidad",
           "Pruebas completas del sistema"
         ],
-        benefits: [
-          "Captar más oportunidades de clientes",
-          "Responder más rápido",
-          "Mantener organizados los prospectos",
-          "Reducir seguimientos olvidados",
-          "Crear una experiencia más consistente",
-          "Darle al equipo un proceso más claro",
-          "Preparar el negocio para futuras automatizaciones y crecimiento"
+        exclusions: [
+          "No incluye flujos de seguimiento ni secuencias de recordatorios",
+          "No incluye plantillas de mensajes ni capacitación del equipo",
+          "No incluye recordatorios de oportunidades sin atender"
         ],
-        cta: "Crear Mi Sistema de Captación",
-        ctaTarget: "free-audit",
+        benefits: [
+          "Saber quién te contactó y qué necesita",
+          "Ver el estado de cada oportunidad de un vistazo",
+          "Darle a cada solicitud un responsable y un siguiente paso",
+          "Responder con el contexto correcto, más rápido",
+          "Mantener a todo el equipo trabajando con el mismo registro"
+        ],
+        cta: "Empezar con el Sistema 2",
+        ctaTarget: "contact",
         pricingNote:
-          "El precio final depende de la cantidad de procesos, canales de comunicación, integraciones y del alcance aprobado del proyecto."
+          "La inversión depende de la cantidad de canales, campos de clasificación y del alcance aprobado del proyecto."
+      },
+      {
+        id: "sistema-captacion-seguimiento",
+        legacyId: "sistema-local-captacion",
+        name: "Sistema de Captación y Seguimiento",
+        startingPrice: 2500,
+        badge: "Mejor Valor",
+        resultChain: ["Recibir", "Organizar", "Dar seguimiento"],
+        positioning:
+          "Todo lo incluido en los Sistemas 1 y 2, más la capa de seguimiento que rescata las oportunidades que otros sistemas dejan enfriar.",
+        ideal: [
+          "Pierdes oportunidades por un seguimiento lento u olvidado",
+          "Mandas cotizaciones que quedan sin respuesta y sin recordatorio",
+          "Necesitas confirmaciones y recordatorios de citas",
+          "Quieres que se pidan reseñas automáticamente al terminar el trabajo",
+          "Necesitas el sistema completo: captación, organización y seguimiento juntos"
+        ],
+        implementationLead: "Todo lo incluido en los Sistemas 1 y 2, más 5 automatizaciones principales:",
+        implementation: [
+          "Confirmación de Nueva Solicitud — registro creado, cliente confirmado, negocio notificado",
+          "Recordatorio de Oportunidad sin Atender — alerta al responsable",
+          "Seguimiento de Cotización — recordatorio más uno o dos mensajes aprobados al cliente",
+          "Confirmación y Recordatorio de Cita, cuando aplica",
+          "Solicitud de Reseña al terminar el servicio, con enlace directo",
+          "Plantillas de comunicación, confirmación y seguimiento",
+          "Capacitación remota para tu equipo sobre estados y siguientes acciones",
+          "Documentación simple del proceso",
+          "Pruebas completas del sistema"
+        ],
+        exclusions: [
+          "No es automatización ilimitada — las 5 anteriores son el alcance aprobado",
+          "Flujos adicionales requieren alcance aprobado por separado",
+          "Los costos de terceros (SMS, WhatsApp, planes de CRM pagos) son aparte cuando aplican"
+        ],
+        benefits: [
+          "Nada se queda en el aire después del primer mensaje",
+          "Las cotizaciones tienen un proceso real de seguimiento, no solo esperanza",
+          "Las citas se confirman y recuerdan automáticamente",
+          "Se piden reseñas de forma consistente después de cada trabajo",
+          "Tu equipo sabe exactamente qué sigue, siempre"
+        ],
+        cta: "Empezar con el Sistema 3",
+        ctaTarget: "contact",
+        pricingNote:
+          "La inversión depende de la cantidad de procesos, canales de comunicación, integraciones y del alcance aprobado del proyecto."
       }
     ],
     comparison: {
       eyebrow: "Comparación de sistemas",
-      title: "¿Qué sistema necesita tu negocio?",
-      cards: [
-        {
-          name: "Sistema de Presencia Digital",
-          label: "Ideal para",
-          items: ["Visibilidad", "Confianza", "Sitio web", "Presencia en Google", "Ruta clara de contacto", "Base digital sólida"]
-        },
-        {
-          name: "Sistema Local de Captación y Seguimiento",
-          label: "Ideal para",
-          items: [
-            "Todo lo incluido en Presencia Digital",
-            "Captación de oportunidades",
-            "Organización de oportunidades",
-            "Seguimiento más rápido",
-            "Confirmaciones y recordatorios",
-            "Automatización básica",
-            "Flujo de trabajo para el equipo"
-          ]
-        }
+      title: "Compara los tres sistemas",
+      columns: ["Presencia Digital", "Captación y Organización", "Captación y Seguimiento"],
+      rows: [
+        { label: "Diagnóstico o auditoría de la presencia actual", values: ["Sí", "Sí", "Sí"] },
+        { label: "Sitio web / landing page creado o mejorado", values: ["Sí", "Sí", "Sí"] },
+        { label: "Optimización móvil", values: ["Sí", "Sí", "Sí"] },
+        { label: "Perfil de Empresa de Google + SEO local básico", values: ["Sí", "Sí", "Sí"] },
+        { label: "Google Analytics", values: ["Sí", "Sí", "Sí"] },
+        { label: "Base para generar reseñas", values: ["Sí", "Sí", "Sí"] },
+        { label: "Formulario de contacto o cotización", values: ["Básico", "Inteligente + clasificación", "Inteligente + clasificación"] },
+        { label: "Campos de servicio, ubicación, urgencia, fecha, presupuesto", values: ["—", "Sí", "Sí"] },
+        { label: "Registro centralizado de oportunidades", values: ["—", "Sí", "Sí"] },
+        { label: "Estados, responsable y siguiente acción", values: ["—", "Sí", "Sí"] },
+        { label: "Confirmación instantánea + notificación interna", values: ["—", "Sí", "Sí"] },
+        { label: "Recordatorio de oportunidad sin atender", values: ["—", "—", "Sí"] },
+        { label: "Recordatorios de seguimiento de cotización", values: ["—", "—", "Sí"] },
+        { label: "Confirmación y recordatorio de cita", values: ["—", "—", "Sí"] },
+        { label: "Solicitud de reseña tras el servicio", values: ["—", "—", "Sí"] },
+        { label: "Plantillas de mensajes y confirmación", values: ["—", "—", "Sí"] },
+        { label: "Capacitación remota del equipo", values: ["—", "—", "Sí"] },
+        { label: "Pruebas y lanzamiento", values: ["Sí", "Sí", "Sí"] }
       ],
       recommendationTitle: "¿No sabes cuál necesita tu negocio?",
       recommendation:
-        "Comenzamos con una auditoría digital para determinar qué se puede conservar, qué necesita mejorarse y qué debe construirse.",
-      cta: "Solicita tu Auditoría Digital",
-      ctaTarget: "free-audit"
+        "Cualquiera de los tres sistemas se puede construir para un negocio que empieza de cero o para uno que ya tiene sitio web y perfil de Google. Tu punto de partida cambia cómo te diagnosticamos, no cuál sistema te conviene.",
+      cta: "Encuentra tu Sistema",
+      ctaTarget: "contact"
     },
-    social: {
-      eyebrow: "Complemento opcional",
-      title: "Complemento Opcional: Apoyo para Redes Sociales",
-      copy: [
-        "Las redes sociales pueden apoyar el sistema digital, pero no son el sistema completo.",
-        "Los negocios que necesiten contenido constante y apoyo con publicaciones pueden agregar un servicio independiente de redes sociales."
-      ],
-      inclusionsTitle: "Posibles inclusiones",
-      inclusions: [
-        "Planificación mensual de contenido",
-        "Publicaciones y carruseles de marca",
-        "Textos para publicaciones",
-        "Edición de videos cortos utilizando material proporcionado",
-        "Calendario de contenido",
-        "Programación y publicación",
-        "Resumen mensual básico de desempeño"
-      ],
-      note:
-        "El manejo de redes sociales se cotiza por separado según el volumen de publicaciones, las plataformas, las necesidades de producción y el alcance de la gestión.",
-      cta: "Consultar el Complemento de Redes Sociales",
+    monthly: {
+      eyebrow: "Después del lanzamiento",
+      title: "Mantén el sistema funcionando — y, si quieres, manténlo visible",
+      intro:
+        "Opcional, y aparte del precio del proyecto. Disponible una vez que tu sistema esté en funcionamiento.",
+      maintenance: {
+        name: "Mantenimiento del Sistema Digital",
+        price: "$650",
+        priceUnit: "/mes",
+        inclusions: [
+          "Actualizaciones menores del sitio web (hasta 4 al mes)",
+          "Actualizaciones de información del negocio",
+          "Monitoreo de formularios",
+          "Monitoreo de automatizaciones",
+          "Revisión de Analytics",
+          "Respaldos y revisiones del sistema",
+          "Resumen mensual simple",
+          "Correcciones técnicas menores"
+        ]
+      },
+      socialAddOn: {
+        name: "Complemento de Redes Sociales",
+        price: "+$850",
+        priceUnit: "/mes",
+        note: "Se agrega al mantenimiento mensual de $650.",
+        inclusions: [
+          "Planificación y calendario mensual de contenido",
+          "Hasta 8 piezas de contenido",
+          "Diseños estáticos y carruseles",
+          "Hasta 2 reels simples con material que tú aportes",
+          "Textos para publicaciones",
+          "Adaptación para Instagram / Facebook",
+          "Programación y publicación",
+          "Reporte mensual básico"
+        ],
+        exclusions: [
+          "Publicaciones o revisiones ilimitadas",
+          "Gestión intensiva de comunidad o respuesta diaria de mensajes",
+          "Fotografía o videografía profesional",
+          "Publicidad pagada o presupuesto de anuncios"
+        ]
+      },
+      comboPrice: "$1,500",
+      comboPriceUnit: "/mes",
+      comboLabel: "Los dos juntos",
+      customNote: "Las necesidades más grandes de redes sociales reciben una cotización personalizada.",
+      cta: "Consultar Soporte Mensual",
       ctaTarget: "contact"
     },
     faq: {
@@ -1110,27 +1289,35 @@ const commercialOffer = {
       items: [
         [
           "¿Necesito comenzar desde cero?",
-          "No. Comenzamos con una auditoría digital para identificar qué se puede conservar, qué necesita mejorarse y qué debe construirse."
+          "No. Cualquiera de los tres sistemas se puede construir para un negocio que empieza de cero o para uno que ya tiene sitio web y perfil de Google. Comenzamos con un diagnóstico breve o una auditoría gratis para ver qué existe y recomendarte el sistema correcto."
         ],
         [
           "¿Qué ocurre si ya tengo un sitio web?",
           "Evaluamos qué se puede conservar, mejorar o reconstruir. Tener activos digitales no significa automáticamente que el proyecto sea más pequeño; corregir un sistema desactualizado o mal estructurado puede requerir más trabajo que comenzar desde cero. Los proyectos comienzan desde el precio indicado y la inversión final depende del alcance aprobado."
         ],
         [
-          "¿Cuál es la diferencia entre los dos sistemas?",
-          "El Sistema de Presencia Digital crea o mejora la base que los clientes usan para encontrar y confiar en el negocio. El Sistema Local de Captación incluye esa base, más captación, organización de oportunidades, flujos de seguimiento, recordatorios y automatización básica."
+          "¿Cuál es la diferencia entre los tres sistemas?",
+          "El Sistema 1 construye la base digital que tus clientes usan para encontrarte y confiar en ti. El Sistema 2 agrega formularios inteligentes y organiza cada oportunidad con estado y responsable. El Sistema 3 agrega la capa de seguimiento — confirmaciones, recordatorios y solicitudes de reseña — para que nada se quede en el aire."
+        ],
+        [
+          "¿BLYNX garantiza más clientes o más leads?",
+          "No. BLYNX construye la infraestructura y el proceso que ayuda a tu negocio a recibir y gestionar oportunidades de forma profesional. Los resultados también dependen de la demanda del mercado, tu oferta, tus precios, la competencia, tu reputación, tu capacidad de venta, la velocidad de respuesta, el servicio al cliente y la ejecución."
         ],
         [
           "¿El manejo de redes sociales está incluido?",
-          "No. El apoyo para redes sociales es un complemento opcional que se cotiza por separado según las plataformas, el volumen de publicaciones, las necesidades de contenido y el alcance de la gestión."
+          "No. El apoyo para redes sociales es un complemento mensual aparte del mantenimiento, cotizado a una tarifa fija para el alcance descrito, con cotización personalizada para necesidades mayores."
         ],
         [
-          "¿Las automatizaciones y la inteligencia artificial están incluidas?",
-          "El Sistema Local de Captación incluye automatización básica y puede incluir flujos prácticos apoyados por inteligencia artificial cuando sean apropiados, seguros y útiles. La IA apoya el proceso; no reemplaza al equipo ni toma decisiones operativas sin supervisión."
+          "¿Las automatizaciones están incluidas y son ilimitadas?",
+          "El Sistema 3 incluye 5 automatizaciones principales de seguimiento en el alcance aprobado: confirmación de nueva solicitud, recordatorios de oportunidades sin atender, seguimiento de cotización, confirmación/recordatorio de citas y solicitudes de reseña. No es automatización ilimitada — los flujos adicionales requieren alcance aprobado por separado."
         ],
         [
           "¿Cómo se determina el precio final?",
           "El precio final depende de la configuración digital actual, el alcance aprobado, la cantidad de procesos, los canales de comunicación, las integraciones y cualquier complemento aprobado por separado."
+        ],
+        [
+          "¿Cómo funciona el pago?",
+          "50% para comenzar, 30% después de la aprobación de la construcción y 20% antes del lanzamiento. Los servicios mensuales se pagan por adelantado."
         ]
       ]
     }
@@ -1144,40 +1331,217 @@ function validateCommercialOfferParity() {
     if (left.length !== right.length) throw new Error(`Bilingual offer mismatch: ${label}`);
   };
 
+  // --- Systems: exactly 3, in both languages ---
+  if (en.systems.length !== 3 || es.systems.length !== 3) {
+    throw new Error("Bilingual offer mismatch: expected exactly 3 systems in each language");
+  }
   sameLength(en.systems, es.systems, "systems");
+
+  let badgeIndexEn = -1;
+  let badgeIndexEs = -1;
+  let legacyIndexEn = -1;
+  let legacyIndexEs = -1;
+
   en.systems.forEach((system, index) => {
     const translated = es.systems[index];
     if (system.startingPrice !== translated.startingPrice || system.ctaTarget !== translated.ctaTarget) {
       throw new Error(`Bilingual offer mismatch: system ${index + 1} price or CTA`);
     }
+    if (!system.id || !translated.id) {
+      throw new Error(`Bilingual offer mismatch: system ${index + 1} missing id`);
+    }
     sameLength(system.ideal, translated.ideal, `system ${index + 1} audience`);
     sameLength(system.implementation, translated.implementation, `system ${index + 1} implementation`);
+    sameLength(system.exclusions, translated.exclusions, `system ${index + 1} exclusions`);
     sameLength(system.benefits, translated.benefits, `system ${index + 1} benefits`);
+    sameLength(system.resultChain, translated.resultChain, `system ${index + 1} result chain`);
+    if (system.badge) badgeIndexEn = index;
+    if (translated.badge) badgeIndexEs = index;
+    if (system.legacyId) legacyIndexEn = index;
+    if (translated.legacyId) legacyIndexEs = index;
   });
-  sameLength(en.comparison.cards, es.comparison.cards, "comparison cards");
-  en.comparison.cards.forEach((card, index) =>
-    sameLength(card.items, es.comparison.cards[index].items, `comparison card ${index + 1}`)
-  );
-  sameLength(en.social.inclusions, es.social.inclusions, "social add-on");
-  sameLength(en.faq.items, es.faq.items, "FAQ topics");
-  if (en.social.ctaTarget !== es.social.ctaTarget || en.comparison.ctaTarget !== es.comparison.ctaTarget) {
-    throw new Error("Bilingual offer mismatch: shared CTA destinations");
+
+  // Exactly one system carries the Best Value badge, at the same index in both languages.
+  if (badgeIndexEn === -1 || badgeIndexEn !== badgeIndexEs) {
+    throw new Error("Bilingual offer mismatch: badge must appear on exactly one system, at the same index, in both languages");
   }
+  // Exactly one system (the renamed former Local Lead System) carries a legacy anchor, same index both languages.
+  if (legacyIndexEn === -1 || legacyIndexEn !== legacyIndexEs) {
+    throw new Error("Bilingual offer mismatch: legacyId must appear on exactly one system, at the same index, in both languages");
+  }
+
+  if (!en.priceLabel || !es.priceLabel) {
+    throw new Error("Bilingual offer mismatch: priceLabel missing");
+  }
+
+  // --- Comparison table ---
+  sameLength(en.comparison.columns, es.comparison.columns, "comparison columns");
+  if (en.comparison.columns.length !== 3) {
+    throw new Error("Bilingual offer mismatch: comparison table must have 3 columns");
+  }
+  sameLength(en.comparison.rows, es.comparison.rows, "comparison rows");
+  en.comparison.rows.forEach((row, index) => {
+    sameLength(row.values, es.comparison.rows[index].values, `comparison row ${index + 1} values`);
+    if (row.values.length !== 3 || es.comparison.rows[index].values.length !== 3) {
+      throw new Error(`Bilingual offer mismatch: comparison row ${index + 1} must have 3 values`);
+    }
+  });
+  if (en.comparison.ctaTarget !== es.comparison.ctaTarget) {
+    throw new Error("Bilingual offer mismatch: comparison CTA destination");
+  }
+
+  // --- Monthly services ---
+  // Only the numeric price string must match across languages (e.g. "$650").
+  // The unit suffix ("/month" vs "/mes") is a legitimate translation, not a mismatch.
+  if (en.monthly.maintenance.price !== es.monthly.maintenance.price) {
+    throw new Error("Bilingual offer mismatch: maintenance price");
+  }
+  if (en.monthly.socialAddOn.price !== es.monthly.socialAddOn.price) {
+    throw new Error("Bilingual offer mismatch: social add-on price");
+  }
+  if (en.monthly.comboPrice !== es.monthly.comboPrice) {
+    throw new Error("Bilingual offer mismatch: combo price");
+  }
+  sameLength(en.monthly.maintenance.inclusions, es.monthly.maintenance.inclusions, "maintenance inclusions");
+  sameLength(en.monthly.socialAddOn.inclusions, es.monthly.socialAddOn.inclusions, "social add-on inclusions");
+  sameLength(en.monthly.socialAddOn.exclusions, es.monthly.socialAddOn.exclusions, "social add-on exclusions");
+  if (en.monthly.ctaTarget !== es.monthly.ctaTarget) {
+    throw new Error("Bilingual offer mismatch: monthly CTA destination");
+  }
+
+  // --- FAQ ---
+  sameLength(en.faq.items, es.faq.items, "FAQ topics");
 }
 
 validateCommercialOfferParity();
 
-const problemCards = {
-  en: [
-    ["No Clear Lead Flow", "Visitors may be interested, but there is no simple path from discovery to contact to follow-up."],
-    ["Slow Follow-Up", "When responses take too long, qualified prospects keep searching and choose another business."],
-    ["Leads Get Lost", "Calls, forms, messages, and notes get scattered when there is no organized place to track opportunities."]
-  ],
-  es: [
-    ["No Hay un Flujo Claro", "Los visitantes pueden estar interesados, pero no hay un camino simple desde encontrar el negocio hasta contactar y recibir seguimiento."],
-    ["Seguimiento Lento", "Cuando la respuesta tarda demasiado, los prospectos calificados siguen buscando y eligen otro negocio."],
-    ["Los Leads se Pierden", "Llamadas, formularios, mensajes y notas quedan dispersos cuando no hay un lugar organizado para rastrear oportunidades."]
-  ]
+const pillars = {
+  en: {
+    eyebrow: "What we build",
+    title: "Five parts. One connected system.",
+    items: [
+      { label: "Be found", result: "People searching for your service actually reach you." },
+      { label: "Build trust", result: "What they see makes them comfortable contacting you." },
+      { label: "Capture", result: "The request arrives complete, not as a missed call." },
+      { label: "Organize", result: "Every opportunity has a status, an owner and a next step." },
+      { label: "Follow up", result: "Nothing goes quiet because everyone got busy." }
+    ]
+  },
+  es: {
+    eyebrow: "Lo que construimos",
+    title: "Cinco partes. Un solo sistema conectado.",
+    items: [
+      { label: "Ser encontrado", result: "Quien busca tu servicio llega hasta ti." },
+      { label: "Generar confianza", result: "Lo que ve le da seguridad para contactarte." },
+      { label: "Captar", result: "La solicitud llega completa, no como una llamada perdida." },
+      { label: "Organizar", result: "Cada oportunidad tiene estado, responsable y siguiente paso." },
+      { label: "Dar seguimiento", result: "Nada se queda en el aire porque todos estaban ocupados." }
+    ]
+  }
+};
+
+const routes = {
+  en: {
+    eyebrow: "How we decide together",
+    title: "Find the Right System",
+    intro:
+      "Any of the three systems can be built for a business starting from zero or one that already has a website and a Google profile. Your current setup changes the diagnosis — not the recommendation.",
+    cards: [
+      {
+        label: "Route A",
+        title: "Starting from zero",
+        copy: "A short diagnosis call: what you sell, who you serve, how people reach you today.",
+        result: "We recommend System 1, 2 or 3.",
+        cta: "Start a Diagnosis",
+        ctaTarget: "contact"
+      },
+      {
+        label: "Route B",
+        title: "You already have something",
+        copy: "A free audit of what exists: what works, what's missing, what's disconnected.",
+        result: "We recommend System 1, 2 or 3.",
+        cta: "Request a Free Audit",
+        ctaTarget: "free-audit"
+      }
+    ]
+  },
+  es: {
+    eyebrow: "Cómo lo decidimos juntos",
+    title: "Encuentra tu Sistema",
+    intro:
+      "Cualquiera de los tres sistemas se puede construir para un negocio que empieza de cero o para uno que ya tiene web y perfil de Google. Tu punto de partida cambia el diagnóstico, no la recomendación.",
+    cards: [
+      {
+        label: "Ruta A",
+        title: "Empiezas de cero",
+        copy: "Una llamada corta de diagnóstico: qué vendes, a quién y cómo te contactan hoy.",
+        result: "Te recomendamos el Sistema 1, 2 o 3.",
+        cta: "Iniciar Diagnóstico",
+        ctaTarget: "contact"
+      },
+      {
+        label: "Ruta B",
+        title: "Ya tienes algo armado",
+        copy: "Auditoría gratis de lo que existe: qué funciona, qué falta y qué está desconectado.",
+        result: "Te recomendamos el Sistema 1, 2 o 3.",
+        cta: "Solicitar Auditoría Gratis",
+        ctaTarget: "free-audit"
+      }
+    ]
+  }
+};
+
+const implementationPlan = {
+  en: {
+    eyebrow: "What happens if you say yes",
+    title: "Three steps. One milestone each.",
+    steps: [
+      {
+        label: "Step 1",
+        title: "Diagnosis & Scope",
+        copy: "Short call or free audit. We agree on the system and the scope.",
+        milestone: "50% to begin"
+      },
+      {
+        label: "Step 2",
+        title: "Design, Build & Approval",
+        copy: "Presence, forms, records and workflows for the approved level, reviewed with you.",
+        milestone: "30% after approval"
+      },
+      {
+        label: "Step 3",
+        title: "Testing & Launch",
+        copy: "Everything tested end to end, then launched live.",
+        milestone: "20% before launch"
+      }
+    ],
+    note: "The final 20% is received before production launch. Monthly services are billed in advance. Third-party platform costs are separate when they apply."
+  },
+  es: {
+    eyebrow: "Qué pasa si dices que sí",
+    title: "Tres pasos. Un hito cada uno.",
+    steps: [
+      {
+        label: "Paso 1",
+        title: "Diagnóstico y Alcance",
+        copy: "Llamada corta o auditoría gratis. Acordamos sistema y alcance.",
+        milestone: "50% para comenzar"
+      },
+      {
+        label: "Paso 2",
+        title: "Diseño, Construcción y Aprobación",
+        copy: "Presencia, formularios, registros y flujos del nivel aprobado, revisados contigo.",
+        milestone: "30% después de la aprobación"
+      },
+      {
+        label: "Paso 3",
+        title: "Pruebas y Lanzamiento",
+        copy: "Todo probado de principio a fin y luego puesto en marcha.",
+        milestone: "20% antes del lanzamiento"
+      }
+    ],
+    note: "El 20% final se recibe antes del lanzamiento a producción. Los servicios mensuales se pagan por adelantado. Los costos de plataformas externas son aparte cuando aplican."
+  }
 };
 
 const stagePages = {
@@ -1236,11 +1600,11 @@ const stagePages = {
 const stageLandingPages = {
   en: {
     existing: {
-      title: "Improve Your Local Lead System | BLYNX",
+      title: "Improve What You Already Have | BLYNX",
       description: "Improve visibility, lead capture, follow-up, and lead control for an existing local business presence.",
       eyebrow: "Existing digital presence",
-      h1: "Improve the Lead System You Already Have",
-      subtitle: "For service businesses that already have a website, Google profile, or online presence, but need more qualified opportunities and better follow-up.",
+      h1: "Improve What You Already Have",
+      subtitle: "For businesses that already have a website, Google profile, or online presence. We start with a free audit — any of BLYNX's three systems can apply, depending on what your business needs, not just what you already have.",
       cards: [
         ["Visibility Tune-Up", "Improve local signals that help qualified customers find and trust your business."],
         ["Lead Capture Review", "Make your current website, landing page, or profile easier to turn into calls and requests."],
@@ -1255,11 +1619,11 @@ const stageLandingPages = {
       auditSlug: "free-audit-existing"
     },
     zero: {
-      title: "Digital Foundation + Lead System | BLYNX",
+      title: "Build Your Digital Foundation From Zero | BLYNX",
       description: "Build the digital foundation local service businesses need to get found, receive opportunities, and follow up professionally.",
-      eyebrow: "Digital Foundation + Lead System",
-      h1: "Start From Zero With a Simple Lead System",
-      subtitle: "For service businesses that do not yet have a website, Google Business Profile, or lead capture system. BLYNX builds the foundation needed to look professional, get found, and receive opportunities.",
+      eyebrow: "Starting from zero",
+      h1: "Build Your Digital Foundation From Zero",
+      subtitle: "For businesses that don't yet have a website, Google Business Profile, or a way to organize inquiries. We start with a short diagnosis — any of BLYNX's three systems can apply, depending on what your business needs.",
       cards: [
         ["Google Business Profile Setup", "Create the local presence customers expect to find when they search for your business."],
         ["Conversion Landing Page", "A focused page designed to explain the service and help visitors call, request a quote, or book the next step."],
@@ -1278,11 +1642,11 @@ const stageLandingPages = {
   },
   es: {
     existing: {
-      title: "Mejora tu Sistema de Captación | BLYNX",
+      title: "Mejora lo que Ya Tienes | BLYNX",
       description: "Mejora visibilidad, captación, seguimiento y control de leads para un negocio local que ya tiene presencia digital.",
       eyebrow: "Presencia digital existente",
-      h1: "Mejora el Sistema de Captación que Ya Tienes",
-      subtitle: "Para negocios de servicios que ya tienen sitio web, Google Business Profile o presencia online, pero necesitan más oportunidades calificadas y mejor seguimiento.",
+      h1: "Mejora lo que Ya Tienes",
+      subtitle: "Para negocios que ya tienen sitio web, Google Business Profile o presencia online. Empezamos con una auditoría gratis — cualquiera de los tres sistemas de BLYNX puede aplicar, según lo que tu negocio necesite, no solo lo que ya tengas.",
       cards: [
         ["Mejora de Visibilidad", "Mejoramos señales locales que ayudan a clientes calificados a encontrar y confiar en tu negocio."],
         ["Revisión de Captación", "Hacemos que tu sitio, landing page o perfil actual sea más claro para generar llamadas y solicitudes."],
@@ -1297,11 +1661,11 @@ const stageLandingPages = {
       auditSlug: "free-audit-existing"
     },
     zero: {
-      title: "Base Digital + Sistema de Captación | BLYNX",
+      title: "Construye tu Base Digital Desde Cero | BLYNX",
       description: "Construye la base digital que un negocio local necesita para ser encontrado, recibir oportunidades y dar seguimiento profesional.",
-      eyebrow: "Base Digital + Sistema de Captación",
-      h1: "Empieza Desde Cero con un Sistema Simple de Captación",
-      subtitle: "Para negocios de servicios que todavía no tienen sitio web, Google Business Profile o sistema de captación. BLYNX construye la base necesaria para verse profesional, ser encontrado y recibir oportunidades.",
+      eyebrow: "Empezando desde cero",
+      h1: "Construye tu Base Digital Desde Cero",
+      subtitle: "Para negocios que todavía no tienen sitio web, Google Business Profile o una forma de organizar solicitudes. Empezamos con un diagnóstico breve — cualquiera de los tres sistemas de BLYNX puede aplicar, según lo que tu negocio necesite.",
       cards: [
         ["Configuración de Google Business Profile", "Creamos la presencia local que los clientes esperan encontrar cuando buscan tu negocio."],
         ["Landing Page de Conversión", "Una página enfocada para explicar el servicio y ayudar al visitante a llamar, pedir cotización o agendar el siguiente paso."],
@@ -1434,68 +1798,6 @@ const auditFlow = {
   ]
 };
 
-const processSteps = {
-  en: [
-    ["Audit", "We review where leads currently come from, what happens next, and where opportunities may be getting lost."],
-    ["Build", "We create the focused lead flow: local visibility, lead page, forms, trust signals, and tracking."],
-    ["Connect", "We connect the capture points, notifications, organization, and follow-up steps into one simple system."],
-    ["Improve", "We review what is working, what leads came in, and what should be adjusted next."]
-  ],
-  es: [
-    ["Auditoría", "Revisamos de dónde llegan las oportunidades, qué pasa después y dónde se pueden estar perdiendo posibles clientes."],
-    ["Construcción", "Creamos el flujo de captación: visibilidad local, página enfocada, formularios, confianza y organización."],
-    ["Conexión", "Conectamos los puntos de captación, notificaciones, organización y seguimiento en un sistema simple."],
-    ["Mejora", "Revisamos qué está funcionando, qué oportunidades llegaron y qué se debe ajustar después."]
-  ]
-};
-
-const results = {
-  en: [
-    ["More Qualified Opportunities", "A clearer lead flow can help more of the right prospects take the next step.", "More qualified opportunities"],
-    ["Faster Response Time", "Notifications and reminders help the business respond while interest is still high.", "Faster response time"],
-    ["Better Lead Organization", "Each opportunity has a clearer place, status, and next action.", "Better lead organization"],
-    ["Improved Online Trust", "Reviews, local visibility, and focused proof help prospects feel safer reaching out.", "Improved online trust"]
-  ],
-  es: [
-    ["Más Oportunidades Calificadas", "Un flujo de captación más claro puede ayudar a que más prospectos correctos tomen el siguiente paso.", "Más oportunidades calificadas"],
-    ["Respuesta Más Rápida", "Notificaciones y recordatorios ayudan al negocio a responder mientras el interés sigue alto.", "Respuesta más rápida"],
-    ["Mejor Organización de Leads", "Cada oportunidad tiene un lugar, estado y próxima acción más claros.", "Mejor organización de leads"],
-    ["Más Confianza en Internet", "Reseñas, visibilidad local y prueba enfocada ayudan a que los prospectos se sientan más seguros al contactar.", "Más confianza en internet"]
-  ]
-};
-
-const connectedInfrastructure = {
-  en: {
-    eyebrow: "Connected infrastructure",
-    title: "What Your Lead System Can Connect",
-    intro:
-      "Every business starts from a different place. BLYNX connects the pieces needed to create a clearer path from online discovery to organized follow-up.",
-    cards: [
-      ["Local Visibility", "Google Business Profile, Apple Business Connect, Bing Places, local listings, business information and trust signals."],
-      ["Website or Landing Page", "A focused digital experience that clearly explains the service and gives visitors an obvious next step."],
-      ["Smart Lead Capture", "Quote forms, contact buttons, booking options and structured information collection."],
-      ["Lead Organization", "An organized opportunity pipeline that gives every lead a status and next action."],
-      ["Faster Follow-Up", "Confirmations, owner notifications, email, SMS or WhatsApp workflows based on the business needs."],
-      ["Review Strategy", "A practical process for requesting reviews, strengthening trust and improving local credibility."]
-    ],
-    disclaimer: "The final system depends on the needs, current setup and approved scope of each business."
-  },
-  es: {
-    eyebrow: "Infraestructura conectada",
-    title: "Lo que Puede Conectar tu Sistema de Captación",
-    intro:
-      "Cada negocio comienza desde un punto diferente. BLYNX conecta las piezas necesarias para crear un camino más claro desde que un cliente encuentra el negocio hasta que recibe seguimiento.",
-    cards: [
-      ["Visibilidad Local", "Google Business Profile, Apple Business Connect, Bing Places, directorios locales, información comercial y señales de confianza."],
-      ["Sitio Web o Landing Page", "Una experiencia digital enfocada que explica claramente el servicio y ofrece al visitante un siguiente paso evidente."],
-      ["Captura Inteligente", "Formularios de cotización, botones de contacto, opciones de reserva y recopilación organizada de información."],
-      ["Organización de Leads", "Un flujo organizado que asigna a cada oportunidad un estado y una próxima acción."],
-      ["Seguimiento Más Rápido", "Confirmaciones, notificaciones al negocio y flujos de email, SMS o WhatsApp según las necesidades."],
-      ["Estrategia de Reseñas", "Un proceso práctico para solicitar reseñas, aumentar la confianza y mejorar la credibilidad local."]
-    ],
-    disclaimer: "El sistema final depende de las necesidades, configuración actual y alcance aprobado de cada negocio."
-  }
-};
 
 const legalPages = {
   en: {
@@ -1623,7 +1925,7 @@ function founderMedia(lang) {
   const alt = copy[lang].aboutPage.founder.alt;
   const image = imageCandidates.find((candidate) => fs.existsSync(path.join(root, candidate.file)));
   if (image) {
-    return `<img src="${image.src}" alt="${alt}" width="520" height="620" loading="lazy" decoding="async">`;
+    return `<img src="${image.src}" alt="${escapeAttr(alt)}" width="520" height="620" loading="lazy" decoding="async">`;
   }
   return `
     <div class="founder-placeholder" role="img" aria-label="${alt}">
@@ -1652,8 +1954,10 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
   const t = copy[lang];
   const home = pagePath(lang);
   const systemHref = `${pagePath(lang, "services")}#systems`;
+  const journeyHref = `${home}#journey`;
   const aboutHref = pagePath(lang, "about");
   const auditHref = pagePath(lang, auditSlug);
+  const contactHref = pagePath(lang, "contact");
 
   const activeClass = (name) => (active === name ? ' class="is-active"' : "");
 
@@ -1671,8 +1975,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
         <nav class="site-nav" data-site-nav>
           <a${activeClass("home")} href="${home}">${t.nav.home}</a>
           <a href="${systemHref}">${t.nav.services}</a>
-          <a href="${home}#process">${t.nav.process}</a>
-          <a href="${home}#results">${t.nav.results}</a>
+          <a href="${journeyHref}">${t.nav.howItWorks}</a>
           <a${activeClass("about")} href="${aboutHref}">${t.nav.about}</a>
           <a${activeClass("projects")} href="${pagePath(lang, "projects")}">${t.nav.projects}</a>
           ${blogArticles[lang].length ? `<a${activeClass("blog")} href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
@@ -1680,7 +1983,7 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
         </nav>
         <div class="header-actions">
           ${languageSwitcher(lang, switchPath, switchPaths)}
-          <a class="btn btn-primary" href="${auditHref}">${t.cta.audit}</a>
+          <a class="btn btn-primary" href="${contactHref}">${t.cta.findSystem}</a>
           <button class="menu-toggle" type="button" aria-label="${t.openMenu}" aria-expanded="false" data-menu-toggle>
             <span class="menu-toggle-lines" aria-hidden="true"></span>
           </button>
@@ -1767,6 +2070,9 @@ function shell(lang, meta, active, switchPath, body) {
     ${structuredData(lang, meta.title, meta.description, canonicalUrl, breadcrumbs)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
   </head>
@@ -1808,13 +2114,141 @@ function pageMediaBand(src, alt, wide = false) {
   return `
       <section class="page-media">
         <div class="container">
-          <img src="${src}" alt="${alt}" width="1200" height="${wide ? 510 : 630}" loading="lazy" decoding="async"${wide ? ' class="is-wide"' : ""}>
+          <img src="${src}" alt="${escapeAttr(alt)}" width="1200" height="${wide ? 510 : 630}" loading="lazy" decoding="async"${wide ? ' class="is-wide"' : ""}>
         </div>
       </section>`;
 }
 
 function offerList(items, className = "check-list") {
   return `<ul class="${className}">${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+}
+
+// Approved product photography (see docs/plans/blynx-homepage-restructure.md).
+// v2 assets are per-language (each language's screenshot has its own baked-in
+// UI text, so EN and ES use different source files and — since they were
+// produced separately — different native dimensions). Source PNGs live in
+// assets/images/; responsive AVIF/WebP/PNG derivatives at 480/800/1200/1672w
+// are generated by scripts/optimize-images.js and are not regenerated by the
+// page build. The v1 (single-file, language-neutral-ish) assets are kept on
+// disk as a rollback fallback but are no longer referenced here.
+const PRODUCT_IMAGES = {
+  hero: {
+    en: { base: "blynx-connected-system-hero-en", width: 1672, height: 941 },
+    es: { base: "blynx-connected-system-hero-es", width: 1672, height: 941 },
+    alt: {
+      en: "The BLYNX connected system: discovery, website, reviews, inquiry, CRM and follow-up shown as one flow for an example business.",
+      es: "El sistema conectado BLYNX: descubrimiento, sitio web, reseñas, solicitud, CRM y seguimiento mostrados como un solo flujo para un negocio de ejemplo."
+    }
+  },
+  system1: {
+    en: { base: "blynx-system-1-digital-presence-en", width: 1448, height: 1086 },
+    es: { base: "blynx-system-1-digital-presence-es", width: 1672, height: 941 },
+    alt: {
+      en: "System 1 in action: a mobile business listing, a business website, a customer review, and a contact form.",
+      es: "Sistema 1 en acción: una ficha de negocio en el móvil, un sitio web de negocio, una reseña de cliente y un formulario de contacto."
+    }
+  },
+  system2: {
+    en: { base: "blynx-system-2-capture-organization-en", width: 1448, height: 1086 },
+    es: { base: "blynx-system-2-capture-organization-es", width: 1672, height: 941 },
+    alt: {
+      en: "System 2 in action: a new contact request captured and organized into lead cards and a sales pipeline board.",
+      es: "Sistema 2 en acción: una nueva solicitud de contacto captada y organizada en tarjetas de lead y un tablero de pipeline de ventas."
+    }
+  },
+  system3: {
+    en: { base: "blynx-system-3-follow-up-en", width: 1448, height: 1086 },
+    es: { base: "blynx-system-3-follow-up-es", width: 1672, height: 941 },
+    alt: {
+      en: "System 3 in action: automatic reply, reminder, quote follow-up, appointment reminder, review request and confirmed booking.",
+      es: "Sistema 3 en acción: respuesta automática, recordatorio, seguimiento de cotización, recordatorio de cita, solicitud de reseña y reserva confirmada."
+    }
+  }
+};
+
+const SYSTEM_IMAGE_KEYS = ["system1", "system2", "system3"];
+
+function productImage(key, lang, { priority = false, sizes = "(max-width: 760px) 100vw, 800px", className = "" } = {}) {
+  const entry = PRODUCT_IMAGES[key];
+  const variant = entry[lang];
+  const base = `/assets/images/${variant.base}`;
+  // Widths actually generated on disk for THIS asset's native resolution —
+  // never a fixed list. An EN system shot (native 1448px) and an ES one
+  // (native 1672px) get different srcset descriptors, matching what
+  // scripts/optimize-images.js really wrote for each (see lib/responsive-widths).
+  const widths = widthsForNative(variant.width);
+  const srcset = (ext) => widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(", ");
+  return `
+            <div class="product-visual${className ? " " + className : ""}">
+              <picture>
+                <source type="image/avif" srcset="${srcset("avif")}" sizes="${sizes}">
+                <source type="image/webp" srcset="${srcset("webp")}" sizes="${sizes}">
+                <img src="${base}-1200-fallback.png" width="${variant.width}" height="${variant.height}" alt="${escapeAttr(entry.alt[lang])}" loading="${priority ? "eager" : "lazy"}" decoding="async"${priority ? ' fetchpriority="high"' : ""}>
+              </picture>
+            </div>`;
+}
+
+function systemPriceDisplay(offer, system) {
+  return `${offer.priceLabel} $${system.startingPrice.toLocaleString("en-US")}`;
+}
+
+function legacyAnchor(system) {
+  return system.legacyId ? `<span id="${system.legacyId}" aria-hidden="true"></span>` : "";
+}
+
+function comparisonDetails(lang) {
+  const offer = commercialOffer[lang];
+  const comparison = offer.comparison;
+  return `
+          <details class="comparison-details" id="compare">
+            <summary>${offer.compareLink}</summary>
+            <div class="comparison-scroller">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    ${comparison.columns.map((name) => `<th scope="col">${name}</th>`).join("")}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${comparison.rows
+                    .map(
+                      (row) => `
+                  <tr>
+                    <th scope="row">${row.label}</th>
+                    ${row.values.map((value) => `<td${value === "—" ? ' class="is-empty"' : ""}>${value}</td>`).join("")}
+                  </tr>`
+                    )
+                    .join("")}
+                </tbody>
+              </table>
+            </div>
+          </details>
+          <div class="system-recommendation">
+            <h3>${comparison.recommendationTitle}</h3>
+            <p>${comparison.recommendation}</p>
+            <a class="btn btn-primary" href="${pagePath(lang, comparison.ctaTarget)}">${comparison.cta}</a>
+          </div>`;
+}
+
+function priceCompareStrip(lang) {
+  // Mobile-only, non-sticky compact comparison shown immediately before the
+  // stacked system cards. Scrolls away normally like any other section — no
+  // position:sticky, no fixed overlay.
+  const offer = commercialOffer[lang];
+  return `
+          <div class="price-compare" aria-label="${offer.title}">
+            ${offer.systems
+              .map(
+                (system) => `
+            <a class="price-compare-cell${system.badge ? " is-complete" : ""}" href="#${system.id}">
+              <span class="price-compare-badge-slot">${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}</span>
+              <span class="price-compare-name">${system.resultChain[system.resultChain.length - 1]}</span>
+              <span class="price-compare-value">$${system.startingPrice.toLocaleString("en-US")}</span>
+            </a>`
+              )
+              .join("")}
+          </div>`;
 }
 
 function systemsOverviewSection(lang) {
@@ -1826,35 +2260,40 @@ function systemsOverviewSection(lang) {
             <p class="eyebrow">${offer.eyebrow}</p>
             <h2>${offer.title}</h2>
             <p>${offer.intro}</p>
+            <p class="lead-capture-definition">${offer.leadCaptureDefinition}</p>
           </div>
+          ${priceCompareStrip(lang)}
           <div class="system-offer-grid system-offer-grid-overview">
             ${offer.systems
               .map(
                 (system, index) => `
-            <article class="system-offer-card${index === 1 ? " is-complete" : ""}">
-              <div class="system-offer-topline">
-                <span class="system-number">0${index + 1}</span>
-                ${system.price ? `<span class="system-price">${system.price}</span>` : ""}
-              </div>
+            <article class="system-offer-card${system.badge ? " is-complete" : ""}" id="${system.id}">
+              ${legacyAnchor(system)}
+              ${system.badge ? `<div class="system-offer-topline"><span class="system-badge">${system.badge}</span></div>` : ""}
               <h3>${system.name}</h3>
-              <p class="system-positioning">${system.positioning}</p>
-              <div class="system-summary-block">
-                <h4>${offer.whoTitle}</h4>
-                ${offerList(system.ideal.slice(0, 3))}
-              </div>
-              <div class="system-summary-block">
-                <h4>${offer.resultTitle}</h4>
-                ${offerList(system.benefits.slice(0, 4))}
-              </div>
+              <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
+              ${productImage(SYSTEM_IMAGE_KEYS[index], lang, { sizes: "(max-width: 760px) 100vw, 420px" })}
+              <p class="system-price-line"><span class="system-price">${systemPriceDisplay(offer, system)}</span></p>
               <div class="system-card-actions">
                 <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
-                <a class="system-details-link" href="${pagePath(lang, "services")}#${system.id}">${offer.detailsLink}</a>
               </div>
-              <p class="pricing-note">${system.pricingNote}</p>
+              <details class="system-summary-toggle">
+                <summary>${offer.detailsLink}</summary>
+                <div class="system-summary-block">
+                  <h4>${offer.whoTitle}</h4>
+                  ${offerList(system.ideal.slice(0, 2))}
+                </div>
+                <div class="system-summary-block">
+                  <h4>${offer.resultTitle}</h4>
+                  ${offerList(system.benefits.slice(0, 3))}
+                </div>
+                <a class="system-details-link" href="${pagePath(lang, "services")}#${system.id}">${offer.detailsLink}</a>
+              </details>
             </article>`
               )
               .join("")}
           </div>
+          <p class="compare-link-line"><a class="system-details-link" href="${pagePath(lang, "services")}#compare">${offer.compareLink}</a></p>
         </div>
       </section>`;
 }
@@ -1868,96 +2307,183 @@ function systemsDetailSection(lang) {
             <p class="eyebrow">${offer.eyebrow}</p>
             <h2>${offer.title}</h2>
             <p>${offer.intro}</p>
+            <p class="lead-capture-definition">${offer.leadCaptureDefinition}</p>
           </div>
           <div class="system-offer-grid">
             ${offer.systems
               .map(
                 (system, index) => `
-            <article class="system-offer-card system-offer-card-full${index === 1 ? " is-complete" : ""}" id="${system.id}">
-              <div class="system-offer-topline">
-                <span class="system-number">0${index + 1}</span>
-                ${system.price ? `<span class="system-price">${system.price}</span>` : ""}
-              </div>
+            <article class="system-offer-card system-offer-card-full${system.badge ? " is-complete" : ""}" id="${system.id}">
+              ${legacyAnchor(system)}
+              ${system.badge ? `<div class="system-offer-topline"><span class="system-badge">${system.badge}</span></div>` : ""}
               <h3>${system.name}</h3>
-              <p class="system-positioning">${system.positioning}</p>
-              <section class="system-card-section" aria-labelledby="${system.id}-who">
-                <h4 id="${system.id}-who">${offer.whoTitle}</h4>
-                ${offerList(system.ideal)}
-              </section>
-              <section class="system-card-section" aria-labelledby="${system.id}-implementation">
-                <h4 id="${system.id}-implementation">${offer.implementationTitle}</h4>
-                ${system.implementationLead ? `<p class="implementation-lead">${system.implementationLead}</p>` : ""}
-                ${offerList(system.implementation)}
-              </section>
-              <section class="system-card-section" aria-labelledby="${system.id}-results">
-                <h4 id="${system.id}-results">${offer.resultTitle}</h4>
-                ${offerList(system.benefits)}
-              </section>
+              <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
+              ${productImage(SYSTEM_IMAGE_KEYS[index], lang, { sizes: "(max-width: 760px) 100vw, 420px" })}
+              <p class="system-price-line"><span class="system-price">${systemPriceDisplay(offer, system)}</span></p>
               <div class="system-card-actions">
                 <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
               </div>
               <p class="pricing-note">${system.pricingNote}</p>
+              <details class="system-full-scope">
+                <summary>${offer.implementationTitle}</summary>
+                <p class="system-positioning">${system.positioning}</p>
+                <section class="system-card-section" aria-labelledby="${system.id}-who">
+                  <h4 id="${system.id}-who">${offer.whoTitle}</h4>
+                  ${offerList(system.ideal)}
+                </section>
+                <section class="system-card-section" aria-labelledby="${system.id}-implementation">
+                  <h4 id="${system.id}-implementation">${offer.implementationTitle}</h4>
+                  ${system.implementationLead ? `<p class="implementation-lead">${system.implementationLead}</p>` : ""}
+                  ${offerList(system.implementation)}
+                </section>
+                <section class="system-card-section" aria-labelledby="${system.id}-exclusions">
+                  <h4 id="${system.id}-exclusions">${offer.exclusionsTitle}</h4>
+                  ${offerList(system.exclusions, "exclusion-list")}
+                </section>
+                <section class="system-card-section" aria-labelledby="${system.id}-results">
+                  <h4 id="${system.id}-results">${offer.resultTitle}</h4>
+                  ${offerList(system.benefits)}
+                </section>
+              </details>
             </article>`
               )
               .join("")}
           </div>
+          ${comparisonDetails(lang)}
         </div>
       </section>`;
 }
 
-function socialMediaAddOnSection(lang, soft = true) {
-  const social = commercialOffer[lang].social;
-  return `
-      <section class="section${soft ? " section-soft" : ""}" id="social-media-add-on">
-        <div class="container add-on-layout">
-          <div class="add-on-copy">
-            <p class="eyebrow">${social.eyebrow}</p>
-            <h2>${social.title}</h2>
-            ${social.copy.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-            <a class="btn btn-secondary" href="${pagePath(lang, social.ctaTarget)}">${social.cta}</a>
-          </div>
-          <div class="add-on-scope">
-            <h3>${social.inclusionsTitle}</h3>
-            ${offerList(social.inclusions)}
-            <p class="pricing-note">${social.note}</p>
-          </div>
-        </div>
-      </section>`;
-}
+const PILLAR_ICONS = ["search", "star", "form", "pipeline", "bell"];
 
-function comparisonSection(lang, soft = false) {
-  const comparison = commercialOffer[lang].comparison;
+function fivePillarsSection(lang) {
+  const p = pillars[lang];
   return `
-      <section class="section${soft ? " section-soft" : ""}" id="system-comparison">
+      <section class="section section-soft" id="pillars">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">${comparison.eyebrow}</p>
-            <h2>${comparison.title}</h2>
+            <p class="eyebrow">${p.eyebrow}</p>
+            <h2>${p.title}</h2>
           </div>
-          <div class="comparison-grid">
-            ${comparison.cards
+          <div class="pillars-strip">
+            ${p.items
               .map(
-                (card, index) => `
-            <article class="comparison-card${index === 1 ? " is-complete" : ""}">
-              <span class="system-number">0${index + 1}</span>
-              <h3>${card.name}</h3>
-              <p class="comparison-label">${card.label}</p>
-              ${offerList(card.items)}
-            </article>`
+                (item, index) => `
+            <div class="pillar-node">
+              <span class="pillar-icon">${icon(PILLAR_ICONS[index])}</span>
+              <div class="pillar-text">
+                <h3 class="pillar-label">${item.label}</h3>
+                <p class="pillar-result">${item.result}</p>
+              </div>
+            </div>
+            ${index < p.items.length - 1 ? `<span class="pillar-connector" aria-hidden="true">${icon("arrowRight")}</span>` : ""}`
               )
               .join("")}
-          </div>
-          <div class="system-recommendation">
-            <h3>${comparison.recommendationTitle}</h3>
-            <p>${comparison.recommendation}</p>
-            <a class="btn btn-primary" href="${pagePath(lang, comparison.ctaTarget)}">${comparison.cta}</a>
           </div>
         </div>
       </section>`;
 }
 
-function faqSection(lang) {
+const ROUTE_ICONS = ["route", "monitor"];
+
+function routeSelectorSection(lang) {
+  const r = routes[lang];
+  return `
+      <section class="section" id="choose">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${r.eyebrow}</p>
+            <h2>${r.title}</h2>
+          </div>
+          <div class="route-grid">
+            ${r.cards
+              .map(
+                (card, index) => `
+            <article class="route-card">
+              <div class="route-card-top">
+                <span class="route-icon">${icon(ROUTE_ICONS[index])}</span>
+                <div>
+                  <span class="route-label">${card.label}</span>
+                  <h3>${card.title}</h3>
+                </div>
+              </div>
+              <p>${card.copy}</p>
+              <a class="btn btn-secondary" href="${pagePath(lang, card.ctaTarget)}">${card.cta}</a>
+            </article>`
+              )
+              .join("")}
+          </div>
+          <p class="route-outcome">${r.intro}</p>
+        </div>
+      </section>`;
+}
+
+function implementationSection(lang) {
+  const plan = implementationPlan[lang];
+  return `
+      <section class="section section-soft" id="implementation">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${plan.eyebrow}</p>
+            <h2>${plan.title}</h2>
+          </div>
+          <div class="impl-timeline">
+            ${plan.steps
+              .map(
+                (step, index) => `
+            <div class="impl-step">
+              <span class="impl-step-dot">0${index + 1}</span>
+              <h3>${step.title}</h3>
+              <span class="impl-milestone">${step.milestone}</span>
+            </div>
+            ${index < plan.steps.length - 1 ? `<span class="impl-arrow">${icon("arrowRight")}</span>` : ""}`
+              )
+              .join("")}
+          </div>
+          <p class="section-disclaimer">${plan.note}</p>
+        </div>
+      </section>`;
+}
+
+function monthlyServicesSection(lang, soft = true, compact = false) {
+  const m = commercialOffer[lang].monthly;
+  const maintenanceItems = compact ? m.maintenance.inclusions.slice(0, 3) : m.maintenance.inclusions;
+  const socialItems = compact ? m.socialAddOn.inclusions.slice(0, 3) : m.socialAddOn.inclusions;
+  return `
+      <section class="section${soft ? " section-soft" : ""}" id="monthly">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${m.eyebrow}</p>
+            <h2>${m.title}</h2>
+            ${compact ? "" : `<p>${m.intro}</p>`}
+          </div>
+          <div class="monthly-grid">
+            <article class="monthly-card">
+              <h3>${m.maintenance.name}</h3>
+              <p class="monthly-price">${m.maintenance.price}<span class="monthly-unit">${m.maintenance.priceUnit}</span></p>
+              ${offerList(maintenanceItems)}
+            </article>
+            <article class="monthly-card">
+              <h3>${m.socialAddOn.name}</h3>
+              <p class="monthly-price">${m.socialAddOn.price}<span class="monthly-unit">${m.socialAddOn.priceUnit}</span></p>
+              ${compact ? "" : `<p class="monthly-note">${m.socialAddOn.note}</p>`}
+              ${offerList(socialItems)}
+              ${compact ? "" : offerList(m.socialAddOn.exclusions, "exclusion-list")}
+            </article>
+            <article class="monthly-card monthly-card-combo">
+              <h3>${m.comboLabel}</h3>
+              <p class="monthly-price">${m.comboPrice}<span class="monthly-unit">${m.comboPriceUnit}</span></p>
+              <p class="monthly-note">${m.customNote}</p>
+              <a class="btn btn-secondary" href="${pagePath(lang, m.ctaTarget)}">${m.cta}</a>
+            </article>
+          </div>
+        </div>
+      </section>`;
+}
+
+function faqSection(lang, limit = null) {
   const faq = commercialOffer[lang].faq;
+  const items = limit ? faq.items.slice(0, limit) : faq.items;
   return `
       <section class="section section-soft" id="faq">
         <div class="container faq-layout">
@@ -1966,7 +2492,7 @@ function faqSection(lang) {
             <h2>${faq.title}</h2>
           </div>
           <div class="faq-list">
-            ${faq.items
+            ${items
               .map(
                 ([question, answer]) => `
             <details class="faq-item">
@@ -2170,8 +2696,8 @@ const captureFlowExamples = {
 
 const captureFlowCopy = {
   en: {
-    label: "LEAD CAPTURE FLOW EXAMPLE",
-    headline: "How a search becomes a real opportunity.",
+    label: "HOW IT WORKS — CUSTOMER JOURNEY",
+    headline: "From a search to an organized opportunity.",
     supporting:
       "A customer finds the business, submits a request or booking, the system records the opportunity, and an immediate response is triggered.",
     stageLabels: ["They find you", "You capture the opportunity", "You respond and follow up"],
@@ -2185,8 +2711,8 @@ const captureFlowCopy = {
     ]
   },
   es: {
-    label: "EJEMPLO DE FLUJO DE CAPTACIÓN",
-    headline: "Así se convierte una búsqueda en una oportunidad.",
+    label: "CÓMO FUNCIONA — RECORRIDO DEL CLIENTE",
+    headline: "De una búsqueda a una oportunidad organizada.",
     supporting:
       "Una persona encuentra el negocio, solicita información o reserva, el sistema registra la oportunidad y activa una respuesta inmediata.",
     stageLabels: ["Te encuentran", "Captas la oportunidad", "Respondes y das seguimiento"],
@@ -2208,6 +2734,48 @@ const FLOW_ICON_ACTION =
 const FLOW_ARROW =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
 
+// Shared compact icon set. Purpose-built line icons (no photography, no stock
+// imagery) reused across the hero visual, the five pillars, and the three
+// per-system mini-diagrams so the whole site speaks one visual language.
+const ICONS = {
+  search:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>',
+  pin:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  monitor:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>',
+  star:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.7-4.3 4.1 1.1 5.9L12 16.7l-5.3 2.9 1.1-5.9-4.3-4.1 5.9-.7z"/></svg>',
+  form:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>',
+  inbox:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12h5l1.5 3h4l1.5-3h5"/><path d="M5 4.5h14L21 12v6a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18v-6z"/></svg>',
+  pipeline:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="6.5" height="15" rx="1.2"/><rect x="9.5" y="4.5" width="6.5" height="9" rx="1.2"/><rect x="16" y="4.5" width="4.5" height="5" rx="1.2"/></svg>',
+  bell:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 16v-5a6 6 0 1 0-12 0v5l-2 3h16z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>',
+  check:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l5 5L19 7"/></svg>',
+  cross:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  clock:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+  calendar:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>',
+  arrowRight:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>',
+  arrowDown:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg>',
+  scale:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10"/><path d="M4 8l4-2 4 2-4 8zM16 8l4-2 4 2-4 8z" transform="translate(-2 0) scale(0.9)"/></svg>',
+  route:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M5 8v3a4 4 0 0 0 4 4h6a4 4 0 0 1 4 3"/></svg>'
+};
+
+function icon(name, cls = "") {
+  return `<span class="mini-icon${cls ? " " + cls : ""}" aria-hidden="true">${ICONS[name]}</span>`;
+}
+
 function captureFlowSection(lang) {
   const c = captureFlowCopy[lang];
   const ex = captureFlowExamples[ACTIVE_FLOW_EXAMPLE];
@@ -2217,7 +2785,7 @@ function captureFlowSection(lang) {
   const followup = ex.followup[lang];
 
   return `
-      <section class="section capture-flow" id="capture-flow" aria-label="${c.label}">
+      <section class="section capture-flow" id="journey" aria-label="${c.label}">
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">${c.label}</p>
@@ -2302,12 +2870,6 @@ function captureFlowSection(lang) {
               </div>
             </article>
           </div>
-
-          <ol class="flow-summary">
-            ${c.summary
-              .map((step, index) => `<li><span class="flow-summary-num">${index + 1}</span><span>${step}</span></li>`)
-              .join("")}
-          </ol>
         </div>
       </section>`;
 }
@@ -2368,55 +2930,46 @@ const portfolioProjects = [
     }
   },
   {
-    id: "venezuela51",
+    id: "gladiadores",
     type: "real",
-    name: "Venezuela 51 Collection",
-    url: "https://venezuela51collection.com",
-    image: "/public/images/projects/venezuela51.jpg",
+    name: "Gladiadores App",
+    url: null,
+    image: "/public/images/projects/gladiadores.jpg",
+    // The source cover is 1280x720 (16:9); the shared project-shot box is
+    // 1200x750 (1.6:1), which is narrower than the source — object-fit:cover
+    // crops horizontally. Centered (the default for every other project
+    // card) clips the leading "G" of "GLADIADORES". Pin the crop to the
+    // left edge so the wordmark stays fully intact; the only thing lost off
+    // the right is background gym equipment, not a subject or text.
+    imagePosition: "left center",
     imageAlt: {
-      en: "Homepage of the Venezuela 51 Collection online store showing its hero banner and product section",
-      es: "Página de inicio de la tienda en línea Venezuela 51 Collection mostrando su banner principal y su sección de productos"
+      en: "Gladiadores Training brand cover — two athletes training, with the tagline \"Your transformation starts today\"",
+      es: "Portada de marca de Gladiadores Training — dos atletas entrenando, con el lema \"Tu transformación empieza hoy\""
     },
-    industry: { en: "E-commerce", es: "Comercio electrónico" },
+    industry: { en: "Fitness & Community Platform", es: "Plataforma de Fitness y Comunidad" },
     summary: {
-      en: "An e-commerce experience created to present a purpose-driven collection, communicate the mission behind the brand, organize its products, and provide a clear path from discovery to purchase.",
-      es: "Una experiencia de comercio electrónico creada para presentar una colección con propósito, comunicar la misión de la marca, organizar sus productos y ofrecer un recorrido claro desde el descubrimiento hasta la compra."
+      en: "A digital fitness and community platform built to guide members through training, habits and personal progress in one connected experience.",
+      es: "Una plataforma digital de fitness y comunidad creada para guiar a sus miembros a través del entrenamiento, los hábitos y su progreso personal en una experiencia conectada."
     },
     business: {
-      en: "A purpose-driven e-commerce brand built around a clear social mission.",
-      es: "Una marca de comercio electrónico con propósito, construida en torno a una misión social clara."
+      en: "A fitness and community platform built to keep members engaged through structured training and shared progress.",
+      es: "Una plataforma de fitness y comunidad creada para mantener a sus miembros comprometidos mediante entrenamiento estructurado y progreso compartido."
     },
     need: {
-      en: "The brand needed to present its mission clearly, organize its products and collections, and provide a mobile-friendly path from discovery to checkout.",
-      es: "La marca necesitaba presentar su misión con claridad, organizar sus productos y colecciones, y ofrecer un recorrido móvil desde el descubrimiento hasta la compra."
+      en: "The team needed a connected experience where members could follow guided training, build habits, and track personal progress from their phone.",
+      es: "El equipo necesitaba una experiencia conectada donde los miembros pudieran seguir entrenamiento guiado, construir hábitos y monitorear su progreso personal desde el teléfono."
     },
     built: {
-      en: "An online store that tells the brand story, organizes product collections, presents individual products, and provides a clear purchase and checkout pathway.",
-      es: "Una tienda en línea que cuenta la historia de la marca, organiza colecciones de productos, presenta productos individuales y ofrece una ruta clara de compra y pago."
+      en: "A mobile-first fitness and community platform that guides members through training, habit-building and progress tracking in one connected experience.",
+      es: "Una plataforma de fitness y comunidad mobile-first que guía a los miembros a través del entrenamiento, la construcción de hábitos y el seguimiento de progreso en una experiencia conectada."
     },
     elements: {
-      en: [
-        "E-commerce storefront",
-        "Product collections",
-        "Product pages",
-        "Mobile shopping experience",
-        "Purchase & checkout pathway",
-        "Brand storytelling",
-        "Mission-focused messaging"
-      ],
-      es: [
-        "Tienda en línea",
-        "Colecciones de productos",
-        "Páginas de producto",
-        "Experiencia de compra móvil",
-        "Ruta de compra y pago",
-        "Historia de marca",
-        "Mensaje centrado en la misión"
-      ]
+      en: ["Fitness platform", "Guided training", "Member experience", "Progress system", "Mobile-first experience"],
+      es: ["Plataforma fitness", "Entrenamiento guiado", "Experiencia de miembros", "Sistema de progreso", "Experiencia mobile-first"]
     },
     journey: {
-      en: ["Discover the collection", "Understand the mission", "Explore products", "Select a product", "Complete the purchase"],
-      es: ["Descubre la colección", "Comprende la misión", "Explora productos", "Selecciona un producto", "Completa la compra"]
+      en: ["Join the community", "Start guided training", "Build habits", "Track progress", "Stay engaged"],
+      es: ["Únete a la comunidad", "Comienza el entrenamiento guiado", "Construye hábitos", "Sigue tu progreso", "Mantente conectado"]
     }
   },
   {
@@ -2529,12 +3082,26 @@ function projectCard(lang, project, p) {
   const elements = project.elements[lang];
   const journey = project.journey[lang];
   const isDemo = project.type === "demo";
-  const url = typeof project.url === "string" ? project.url : project.url[lang];
+  const url = project.url ? (typeof project.url === "string" ? project.url : project.url[lang]) : null;
+  // The wrapper below is always aria-hidden="true" (the project name/summary
+  // text carries the accessible content), so this image is decorative to
+  // assistive tech regardless of language — alt="" is the correct value, not
+  // a long description that a screen reader will never reach anyway. That
+  // also sidesteps embedding quoted taglines (e.g. Gladiadores') into an
+  // attribute value.
+  const shotImg = project.image
+    ? `<img src="${project.image}" alt="" width="1200" height="750" loading="lazy" decoding="async"${project.imagePosition ? ` style="object-position: ${project.imagePosition}"` : ""}>`
+    : `<span>${p.screenshotPending}</span>`;
+  const shot = url
+    ? `<a class="project-shot${project.image ? "" : " project-shot-placeholder"}" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              ${shotImg}
+            </a>`
+    : `<div class="project-shot${project.image ? "" : " project-shot-placeholder"}" aria-hidden="true">
+              ${shotImg}
+            </div>`;
   return `
           <article class="project-card">
-            <a class="project-shot" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-              <img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">
-            </a>
+            ${shot}
             <div class="project-body">
               <div class="project-top">
                 <span class="project-badge${isDemo ? " is-demo" : ""}">${isDemo ? p.demoBadge : p.realBadge}</span>
@@ -2543,7 +3110,7 @@ function projectCard(lang, project, p) {
               <h2 class="project-name">${project.name}</h2>
               <p class="project-summary">${project.summary[lang]}</p>
               <ul class="project-tags">
-                ${elements.slice(0, 4).map((item) => `<li>${item}</li>`).join("")}
+                ${elements.slice(0, 3).map((item) => `<li>${item}</li>`).join("")}
               </ul>
               <details class="project-details">
                 <summary>${p.detailsToggle}</summary>
@@ -2574,9 +3141,13 @@ function projectCard(lang, project, p) {
                   </div>
                 </div>
               </details>
-              <div class="project-actions">
+              ${
+                url
+                  ? `<div class="project-actions">
                 <a class="btn btn-primary" href="${url}" target="_blank" rel="noopener noreferrer">${isDemo ? p.viewDemo : p.viewLive}</a>
-              </div>
+              </div>`
+                  : ""
+              }
             </div>
           </article>`;
 }
@@ -2623,30 +3194,28 @@ ${demoSection}
 function homePage(lang) {
   const t = copy[lang];
   const h = t.home;
+  const ba = h.beforeAfter;
+  const reals = portfolioProjects.filter((project) => project.type === "real");
+  const p = t.projectsPage;
   const body = `
     <main id="main">
       <section class="hero hero-home" id="home">
         <div class="container hero-grid hero-grid-solo">
+          ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
           <div class="hero-copy">
             <p class="eyebrow">${h.eyebrow}</p>
             <h1>${h.headline}</h1>
             <div class="hero-supporting-copy">
               ${h.subtitle.map((paragraph) => `<p>${paragraph}</p>`).join("")}
             </div>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
-              <a class="btn btn-secondary" href="${pagePath(lang, "services")}#systems">${t.cta.services}</a>
+            <div class="hero-actions hero-actions-stacked">
+              <a class="btn btn-primary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
+              <a class="btn btn-secondary btn-full" href="${pagePath(lang, "free-audit")}">${t.cta.audit} <span aria-hidden="true">&rarr;</span></a>
             </div>
             <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
-            <div class="trust-pills" aria-label="BLYNX benefits">
-              ${h.trust.map((item) => `<span class="trust-pill">${item}</span>`).join("")}
-            </div>
           </div>
-
         </div>
       </section>
-
-${captureFlowSection(lang)}
 
       <section class="section section-soft" id="problem">
         <div class="container">
@@ -2655,112 +3224,53 @@ ${captureFlowSection(lang)}
             <h2>${h.problemTitle}</h2>
             <p>${h.problemCopy}</p>
           </div>
-          <div class="results-grid problem-grid">
-            ${problemCards[lang]
+          <div class="before-after-panel">
+            <div class="before-after-heads">
+              <span class="before-after-head is-before">${icon("cross")}${ba.beforeLabel}</span>
+              <span class="before-after-head is-after">${icon("check")}${ba.afterLabel}</span>
+            </div>
+            ${ba.before
+              .slice(0, 3)
               .map(
-                ([title, text], index) => `
-            <article class="result-card">
-              <div class="result-icon">${String(index + 1).padStart(2, "0")}</div>
-              <h3>${title}</h3>
-              <p>${text}</p>
-            </article>`
+                (item, i) => `
+            <div class="before-after-row">
+              <span class="before-after-item is-before">${icon("cross")}<span>${item}</span></span>
+              <span class="before-after-row-arrow">${icon("arrowRight")}</span>
+              <span class="before-after-item is-after">${icon("check")}<span>${ba.after[i]}</span></span>
+            </div>`
               )
               .join("")}
           </div>
         </div>
       </section>
+
+      ${fivePillarsSection(lang)}
 
       ${systemsOverviewSection(lang)}
 
-      ${socialMediaAddOnSection(lang)}
+      ${routeSelectorSection(lang)}
 
-      ${comparisonSection(lang)}
+${captureFlowSection(lang)}
 
-      <section class="section" id="free-audit-flow">
+      <section class="section section-tight our-work" aria-label="${p.homeEntry.label}">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">${h.auditEyebrow}</p>
-            <h2>${h.auditTitle}</h2>
-            <p>${h.auditSubtitle}</p>
+            <p class="eyebrow">${p.homeEntry.label}</p>
+            <h2>${p.homeEntry.headline}</h2>
+            <p>${p.homeEntry.copy}</p>
           </div>
-          <div class="audit-flow" aria-label="Free audit flow">
-            ${auditFlow[lang]
-              .map(
-                ([title, text], index) => `
-            <article class="audit-step">
-              <div class="step-number">${index + 1}</div>
-              <h3>${title}</h3>
-              <p>${text}</p>
-            </article>`
-              )
-              .join("")}
+          <div class="project-grid">
+            ${reals.map((project) => projectCard(lang, project, p)).join("")}
+          </div>
+          <div class="our-work-panel our-work-panel-cta">
+            <a class="btn btn-secondary" href="${pagePath(lang, "projects")}">${p.homeEntry.cta}</a>
           </div>
         </div>
       </section>
 
-      <section class="section section-soft" id="process">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">${h.processEyebrow}</p>
-            <h2>${h.processTitle}</h2>
-          </div>
-          <div class="process-grid">
-            ${processSteps[lang]
-              .map(
-                ([title, text], index) => `
-            <article class="process-card">
-              <div class="step-number">${index + 1}</div>
-              <h3>${title}</h3>
-              <p>${text}</p>
-            </article>`
-              )
-              .join("")}
-          </div>
-        </div>
-      </section>
+      ${implementationSection(lang)}
 
-      <section class="section" id="results">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">${h.resultsEyebrow}</p>
-            <h2>${h.resultsTitle}</h2>
-          </div>
-          <div class="results-grid">
-            ${results[lang]
-              .map(
-                ([title, text, metric], index) => `
-            <article class="result-card">
-              <div class="result-icon">${String(index + 1).padStart(2, "0")}</div>
-              <h3>${title}</h3>
-              <p>${text}</p>
-              <div class="metric">${metric}</div>
-            </article>`
-              )
-              .join("")}
-          </div>
-
-          <div class="connected-system">
-            <div class="section-heading">
-              <p class="eyebrow">${connectedInfrastructure[lang].eyebrow}</p>
-              <h2>${connectedInfrastructure[lang].title}</h2>
-              <p>${connectedInfrastructure[lang].intro}</p>
-            </div>
-            <div class="feature-grid">
-              ${connectedInfrastructure[lang].cards
-                .map(
-                  ([title, text], index) => `
-              <article class="feature-card">
-                <div class="feature-icon">${String(index + 1).padStart(2, "0")}</div>
-                <h3>${title}</h3>
-                <p>${text}</p>
-              </article>`
-                )
-                .join("")}
-            </div>
-            <p class="section-disclaimer">${connectedInfrastructure[lang].disclaimer}</p>
-          </div>
-        </div>
-      </section>
+      ${monthlyServicesSection(lang, true, true)}
 
       <section class="section section-soft" id="about-preview">
         <div class="container about-band">
@@ -2786,18 +3296,7 @@ ${captureFlowSection(lang)}
         </div>
       </section>
 
-      <section class="section section-tight our-work" aria-label="${t.projectsPage.homeEntry.label}">
-        <div class="container">
-          <div class="our-work-panel">
-            <div class="our-work-copy">
-              <p class="eyebrow">${t.projectsPage.homeEntry.label}</p>
-              <h2>${t.projectsPage.homeEntry.headline}</h2>
-              <p>${t.projectsPage.homeEntry.copy}</p>
-            </div>
-            <a class="btn btn-primary" href="${pagePath(lang, "projects")}">${t.projectsPage.homeEntry.cta}</a>
-          </div>
-        </div>
-      </section>
+      ${faqSection(lang, 4)}
 
       <section class="section" id="final-cta">
         <div class="container">
@@ -2805,7 +3304,8 @@ ${captureFlowSection(lang)}
             <h2>${h.finalTitle}</h2>
             <p>${h.finalSubtitle}</p>
             <div class="cta-actions">
-              <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}">${t.cta.auditLong}</a>
+              <a class="btn btn-primary" href="${pagePath(lang, "contact")}">${t.cta.findSystem}</a>
+              <a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
             </div>
           </div>
         </div>
@@ -2828,6 +3328,28 @@ function auditPage(lang) {
           <h1>${p.h1}</h1>
           <p>${p.subtitle}</p>
           <span class="trust-line">${p.trust}</span>
+        </div>
+      </section>
+
+      <section class="section section-soft" id="audit-flow">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${p.eyebrow}</p>
+            <h2>${p.flowTitle}</h2>
+            <p>${p.flowSubtitle}</p>
+          </div>
+          <div class="audit-flow" aria-label="Free audit flow">
+            ${auditFlow[lang]
+              .map(
+                ([title, text], index) => `
+            <article class="audit-step">
+              <div class="step-number">${index + 1}</div>
+              <h3>${title}</h3>
+              <p>${text}</p>
+            </article>`
+              )
+              .join("")}
+          </div>
         </div>
       </section>
 
@@ -3143,9 +3665,7 @@ function servicesPage(lang) {
 ${pageMediaBand("/public/images/site/services-flow.jpg", SITE_MEDIA_ALTS.services[lang])}
       ${systemsDetailSection(lang)}
 
-      ${socialMediaAddOnSection(lang)}
-
-      ${comparisonSection(lang)}
+      ${monthlyServicesSection(lang)}
 
       ${faqSection(lang)}
 
@@ -3155,8 +3675,8 @@ ${pageMediaBand("/public/images/site/services-flow.jpg", SITE_MEDIA_ALTS.service
             <h2>${p.ctaTitle}</h2>
             <p>${p.ctaSubtitle}</p>
             <div class="cta-actions">
-              <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
-              <a class="btn btn-secondary" href="${pagePath(lang, "contact")}">${t.cta.contact}</a>
+              <a class="btn btn-primary" href="${pagePath(lang, "contact")}">${t.cta.findSystem}</a>
+              <a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
             </div>
           </div>
         </div>
@@ -3238,7 +3758,7 @@ function aboutPage(lang) {
 
       <section class="scene-band" aria-label="Nashville, Tennessee">
         <div class="container">
-          <img src="/public/images/site/nashville.jpg" alt="${SITE_MEDIA_ALTS.nashville[lang]}" width="1200" height="510" loading="lazy" decoding="async">
+          <img src="/public/images/site/nashville.jpg" alt="${escapeAttr(SITE_MEDIA_ALTS.nashville[lang])}" width="1200" height="510" loading="lazy" decoding="async">
         </div>
       </section>
 
@@ -3453,6 +3973,9 @@ function stagePage(lang) {
     ${structuredData(lang, p.title, p.description, lang === "es" ? esUrl : enUrl)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
   </head>
@@ -3518,6 +4041,9 @@ function languageGate() {
     ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
       (function () {
@@ -3568,6 +4094,9 @@ function redirectPage(slug) {
     <title>BLYNX | Redirecting</title>
     <meta name="robots" content="noindex">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
       (function () {
@@ -3614,6 +4143,9 @@ function permanentRedirectPage(targetPath, lang = "en") {
     <meta http-equiv="refresh" content="0; url=${targetPath}">
     <link rel="canonical" href="${SITE_URL}${targetPath}">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>window.location.replace("${targetPath}");</script>
   </head>
@@ -3748,6 +4280,9 @@ function blogShell(lang, meta, body, article = null) {
     ${blogStructuredData(lang, meta, article)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
   </head>
@@ -3890,7 +4425,7 @@ function blogArticlePage(lang, article) {
             ${blogMetaLine(lang, article, { author: true })}
           </header>
           <figure class="article-hero">
-            <img src="${article.heroImage}" alt="${article.heroImageAlt}" width="1200" height="630" decoding="async">
+            <img src="${article.heroImage}" alt="${escapeAttr(article.heroImageAlt)}" width="1200" height="630" decoding="async">
           </figure>
           <div class="article-body">
             ${article.contentHtml}
