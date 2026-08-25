@@ -3200,19 +3200,21 @@ function homePage(lang) {
   const body = `
     <main id="main">
       <section class="hero hero-home" id="home">
-        <div class="container hero-grid hero-grid-solo">
-          ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
-          <div class="hero-copy">
-            <p class="eyebrow">${h.eyebrow}</p>
-            <h1>${h.headline}</h1>
-            <div class="hero-supporting-copy">
-              ${h.subtitle.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+        <div class="container">
+          <p class="eyebrow hero-eyebrow-top">${h.eyebrow}</p>
+          <div class="hero-grid hero-grid-solo">
+            ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
+            <div class="hero-copy">
+              <h1>${h.headline}</h1>
+              <div class="hero-supporting-copy">
+                ${h.subtitle.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+              </div>
+              <div class="hero-actions hero-actions-stacked">
+                <a class="btn btn-primary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
+                <a class="btn btn-secondary btn-full" href="${pagePath(lang, "free-audit")}">${t.cta.audit} <span aria-hidden="true">&rarr;</span></a>
+              </div>
+              <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
             </div>
-            <div class="hero-actions hero-actions-stacked">
-              <a class="btn btn-primary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
-              <a class="btn btn-secondary btn-full" href="${pagePath(lang, "free-audit")}">${t.cta.audit} <span aria-hidden="true">&rarr;</span></a>
-            </div>
-            <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
           </div>
         </div>
       </section>

@@ -346,6 +346,13 @@ button {
   letter-spacing: 0.04em;
 }
 
+/* Hero-only: the eyebrow now sits above the hero image (nav -> eyebrow ->
+   image -> h1), so it needs its own bottom margin instead of the one it
+   used to inherit from sitting directly above the H1 inside .hero-copy. */
+.hero-eyebrow-top {
+  margin-bottom: 1.25rem;
+}
+
 .eyebrow::before {
   width: 1.8rem;
   height: 1px;
