@@ -1906,24 +1906,34 @@ button {
    <img> carries its own width/height attributes, and the UA derives the
    correct intrinsic aspect-ratio from those (combined with height:auto)
    automatically, so the reserved space always matches that asset — no CLS,
-   no distortion, regardless of which language's asset is showing. */
+   no distortion, regardless of which language's asset is showing.
+
+   No border, no boxed background, no hard-edged clip: the asset itself is
+   already a UI composition floating on a near-black canvas, so a radial
+   mask that fades to transparent well inside each edge lets that canvas
+   dissolve into the page's own dark background instead of reading as a
+   pasted-in rectangle. closest-side sizing means the fade actually reaches
+   every edge (not just the corners), and corners — being farther than the
+   closest side — are already fully transparent before the fade math gets
+   there. The UI content itself lives comfortably inside the fade radius,
+   so nothing legible is dimmed. */
 .product-visual {
   margin: 1.1rem 0 0;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
-  background: #0a0a0a;
 }
 
 .product-visual img {
   display: block;
   width: 100%;
   height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.4));
 }
 
-.product-visual-hero {
-  border-color: var(--line-strong);
-  box-shadow: var(--shadow);
+.product-visual-hero img {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.45));
 }
 
 .system-result-chain {
