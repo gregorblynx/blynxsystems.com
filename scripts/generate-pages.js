@@ -248,9 +248,9 @@ const copy = {
       title: "Digital Systems for Local Businesses | BLYNX Systems",
       description: "BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, organize them, and follow up. Three systems, starting at $1,500.",
       eyebrow: "Digital systems for local businesses",
-      headline: 'Get found. Get contacted. <span class="text-gold">Never lose track of the job.</span>',
+      headline: 'Get found.<br>Get contacted.<br><span class="text-gold">Never lose track of the job.</span>',
       subtitle: [
-        "BLYNX builds the connected system your business runs on — from a professional digital presence to full capture, organization and follow-up. Three levels of implementation, starting at $1,500."
+        "We connect every part of your business to attract, organize and convert more customers. Three systems. One goal: your growth."
       ],
       trust: ["Be Found", "Build Trust", "Capture", "Organize", "Follow Up"],
       problemEyebrow: "The real problem",
@@ -535,9 +535,9 @@ const copy = {
       title: "Sistemas digitales para negocios locales | BLYNX Systems",
       description: "BLYNX construye sistemas digitales que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades, organizarlas y darles seguimiento. Tres sistemas, desde $1,500.",
       eyebrow: "Sistemas digitales para negocios locales",
-      headline: 'Que te encuentren. Que te contacten. <span class="text-gold">Que no se te escape ningún trabajo.</span>',
+      headline: 'Que te encuentren.<br>Que te contacten.<br><span class="text-gold">Sin perder oportunidades.</span>',
       subtitle: [
-        "BLYNX construye el sistema conectado con el que funciona tu negocio: desde una presencia digital profesional hasta la captación, organización y seguimiento completos. Tres niveles de implementación, desde $1,500."
+        "Conectamos cada parte de tu negocio para atraer, organizar y convertir más clientes. Tres sistemas. Un solo objetivo: tu crecimiento."
       ],
       trust: ["Ser Encontrado", "Generar Confianza", "Captar", "Organizar", "Dar Seguimiento"],
       problemEyebrow: "El problema real",
@@ -2055,6 +2055,9 @@ function shell(lang, meta, active, switchPath, body) {
     ${structuredData(lang, meta.title, meta.description, canonicalUrl, breadcrumbs)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
   </head>
@@ -3164,7 +3167,6 @@ ${demoSection}
 function homePage(lang) {
   const t = copy[lang];
   const h = t.home;
-  const offer = commercialOffer[lang];
   const ba = h.beforeAfter;
   const reals = portfolioProjects.filter((project) => project.type === "real");
   const p = t.projectsPage;
@@ -3172,30 +3174,19 @@ function homePage(lang) {
     <main id="main">
       <section class="hero hero-home" id="home">
         <div class="container hero-grid hero-grid-solo">
+          ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
           <div class="hero-copy">
             <p class="eyebrow">${h.eyebrow}</p>
             <h1>${h.headline}</h1>
             <div class="hero-supporting-copy">
               ${h.subtitle.map((paragraph) => `<p>${paragraph}</p>`).join("")}
             </div>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="${pagePath(lang, "contact")}">${t.cta.findSystem}</a>
-              <a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
-            </div>
-            <div class="hero-price-strip" aria-label="${offer.title}">
-              ${offer.systems
-                .map(
-                  (system) => `
-              <a class="hero-price-item${system.badge ? " is-complete" : ""}" href="${pagePath(lang, "services")}#${system.id}">
-                <span class="hero-price-value">$${system.startingPrice.toLocaleString("en-US")}</span>
-                ${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}
-              </a>`
-                )
-                .join("")}
+            <div class="hero-actions hero-actions-stacked">
+              <a class="btn btn-primary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
+              <a class="btn btn-secondary btn-full" href="${pagePath(lang, "free-audit")}">${t.cta.audit} <span aria-hidden="true">&rarr;</span></a>
             </div>
             <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
           </div>
-          ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
         </div>
       </section>
 
@@ -3955,6 +3946,9 @@ function stagePage(lang) {
     ${structuredData(lang, p.title, p.description, lang === "es" ? esUrl : enUrl)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
   </head>
@@ -4020,6 +4014,9 @@ function languageGate() {
     ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
       (function () {
@@ -4070,6 +4067,9 @@ function redirectPage(slug) {
     <title>BLYNX | Redirecting</title>
     <meta name="robots" content="noindex">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>
       (function () {
@@ -4116,6 +4116,9 @@ function permanentRedirectPage(targetPath, lang = "en") {
     <meta http-equiv="refresh" content="0; url=${targetPath}">
     <link rel="canonical" href="${SITE_URL}${targetPath}">
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script>window.location.replace("${targetPath}");</script>
   </head>
@@ -4250,6 +4253,9 @@ function blogShell(lang, meta, body, article = null) {
     ${blogStructuredData(lang, meta, article)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/site.js" defer></script>
   </head>

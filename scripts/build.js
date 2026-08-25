@@ -137,7 +137,8 @@ const requiredSnippets = new Map([
     "/es/free-audit-zero"
   ]],
   ["en/index.html", [
-    "Get found. Get contacted.",
+    "Get found.",
+    "Get contacted.",
     "The opportunity arrives. Then what?",
     "Three systems. Choose how far yours goes.",
     "Digital Presence System",
@@ -163,7 +164,8 @@ const requiredSnippets = new Map([
     "/en/services#systems"
   ]],
   ["es/index.html", [
-    "Que te encuentren. Que te contacten.",
+    "Que te encuentren.",
+    "Que te contacten.",
     "La oportunidad llega. ¿Y después?",
     "Tres sistemas. Elige hasta dónde llega el tuyo.",
     "Sistema de Presencia Digital",
