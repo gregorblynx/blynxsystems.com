@@ -64,7 +64,7 @@ const BUSINESS = {
   shortName: "BLYNX",
   email: "hello@blynxsystems.com",
   phone: "",
-  location: "Nashville, Tennessee",
+  location: "Tennessee, United States",
   city: "Nashville",
   region: "TN",
   country: "US",
@@ -2918,6 +2918,13 @@ const portfolioProjects = [
     name: "Gladiadores App",
     url: null,
     image: "/public/images/projects/gladiadores.jpg",
+    // The source cover is 1280x720 (16:9); the shared project-shot box is
+    // 1200x750 (1.6:1), which is narrower than the source — object-fit:cover
+    // crops horizontally. Centered (the default for every other project
+    // card) clips the leading "G" of "GLADIADORES". Pin the crop to the
+    // left edge so the wordmark stays fully intact; the only thing lost off
+    // the right is background gym equipment, not a subject or text.
+    imagePosition: "left center",
     imageAlt: {
       en: "Gladiadores Training brand cover — two athletes training, with the tagline \"Your transformation starts today\"",
       es: "Portada de marca de Gladiadores Training — dos atletas entrenando, con el lema \"Tu transformación empieza hoy\""
@@ -3060,7 +3067,7 @@ function projectCard(lang, project, p) {
   const isDemo = project.type === "demo";
   const url = project.url ? (typeof project.url === "string" ? project.url : project.url[lang]) : null;
   const shotImg = project.image
-    ? `<img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async">`
+    ? `<img src="${project.image}" alt="${project.imageAlt[lang]}" width="1200" height="750" loading="lazy" decoding="async"${project.imagePosition ? ` style="object-position: ${project.imagePosition}"` : ""}>`
     : `<span>${p.screenshotPending}</span>`;
   const shot = url
     ? `<a class="project-shot${project.image ? "" : " project-shot-placeholder"}" href="${url}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
