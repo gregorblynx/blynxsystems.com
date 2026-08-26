@@ -14,6 +14,12 @@ const blogArticles = {
 
 const SITE_URL = "https://www.blynxsystems.com";
 const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
+// Approved per-language social share cards for the two homepages (and the
+// root language-gate, which defaults to the EN card since it's the
+// x-default/English-flavored entry point). Not used elsewhere — every other
+// page keeps the generic OG_IMAGE above.
+const OG_IMAGE_EN = `${SITE_URL}/assets/og-image-en.png`;
+const OG_IMAGE_ES = `${SITE_URL}/assets/og-image-es.png`;
 
 // Runtime configuration, read from the environment at build time so that neither the lead
 // endpoint nor the analytics ID is hardcoded across source files. Set both in the Vercel
@@ -260,6 +266,12 @@ const copy = {
     home: {
       title: "Digital Systems for Local Businesses | BLYNX Systems",
       description: "BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, organize them, and follow up. Three systems, starting at $1,500.",
+      ogTitle: "Digital Systems for Local Businesses | BLYNX",
+      ogDescription: "BLYNX connects digital presence, inquiries, organization and follow-up in one clear system for local businesses.",
+      ogImage: OG_IMAGE_EN,
+      ogImageWidth: 1774,
+      ogImageHeight: 887,
+      ogImageAlt: "BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.",
       eyebrow: "Digital systems for local businesses",
       headline: 'Get found.<br>Get contacted.<br><span class="text-gold">Stay organized.</span>',
       subtitle: [
@@ -548,6 +560,12 @@ const copy = {
     home: {
       title: "Sistemas digitales para negocios locales | BLYNX Systems",
       description: "BLYNX construye sistemas digitales que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades, organizarlas y darles seguimiento. Tres sistemas, desde $1,500.",
+      ogTitle: "Sistemas Digitales para Negocios Locales | BLYNX",
+      ogDescription: "BLYNX conecta presencia digital, contactos, organización y seguimiento en un sistema claro para negocios locales.",
+      ogImage: OG_IMAGE_ES,
+      ogImageWidth: 1774,
+      ogImageHeight: 887,
+      ogImageAlt: "Sistema de cinco pasos de BLYNX: Te encuentran, Generas confianza, Recibes contactos, Organizas oportunidades, Das seguimiento.",
       eyebrow: "Sistemas digitales para negocios locales",
       headline: 'Que te encuentren.<br>Que te contacten.<br><span class="text-gold">Organiza tus oportunidades.</span>',
       subtitle: [
@@ -2042,6 +2060,16 @@ function shell(lang, meta, active, switchPath, body) {
         { name: meta.h1 || meta.title, url: canonicalUrl }
       ]
     : [];
+  // Optional per-page overrides for the social-share card only — everything
+  // else (the <title> tag, meta description used for SEO) keeps using
+  // meta.title/meta.description untouched. Falls back to the generic
+  // sitewide card when a page (nearly all of them) doesn't set these.
+  const ogTitle = meta.ogTitle || meta.title;
+  const ogDescription = meta.ogDescription || meta.description;
+  const ogImage = meta.ogImage || OG_IMAGE;
+  const ogImageWidth = meta.ogImageWidth || 1200;
+  const ogImageHeight = meta.ogImageHeight || 630;
+  const ogImageAlt = meta.ogImageAlt || ogTitle;
   return `<!doctype html>
 <html lang="${t.htmlLang}">
   <head>
@@ -2055,18 +2083,20 @@ function shell(lang, meta, active, switchPath, body) {
     <link rel="alternate" hreflang="x-default" href="${enUrl}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="${BUSINESS.displayName}">
-    <meta property="og:title" content="${meta.title}">
-    <meta property="og:description" content="${meta.description}">
+    <meta property="og:title" content="${ogTitle}">
+    <meta property="og:description" content="${ogDescription}">
     <meta property="og:url" content="${canonicalUrl}">
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
     <meta property="og:locale:alternate" content="${lang === "es" ? "en_US" : "es_ES"}">
-    <meta property="og:image" content="${OG_IMAGE}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="${ogImage}">
+    <meta property="og:image:width" content="${ogImageWidth}">
+    <meta property="og:image:height" content="${ogImageHeight}">
+    <meta property="og:image:alt" content="${ogImageAlt}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${meta.title}">
-    <meta name="twitter:description" content="${meta.description}">
-    <meta name="twitter:image" content="${OG_IMAGE}">
+    <meta name="twitter:title" content="${ogTitle}">
+    <meta name="twitter:description" content="${ogDescription}">
+    <meta name="twitter:image" content="${ogImage}">
+    <meta name="twitter:image:alt" content="${ogImageAlt}">
     ${structuredData(lang, meta.title, meta.description, canonicalUrl, breadcrumbs)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -2933,7 +2963,8 @@ const portfolioProjects = [
     id: "gladiadores",
     type: "real",
     name: "Gladiadores App",
-    url: null,
+    url: "https://gladiadores.app",
+    ctaLabel: { en: "View Live Project", es: "Ver Proyecto en Vivo" },
     image: "/public/images/projects/gladiadores.jpg",
     // The source cover is 1280x720 (16:9); the shared project-shot box is
     // 1200x750 (1.6:1), which is narrower than the source — object-fit:cover
@@ -3083,6 +3114,10 @@ function projectCard(lang, project, p) {
   const journey = project.journey[lang];
   const isDemo = project.type === "demo";
   const url = project.url ? (typeof project.url === "string" ? project.url : project.url[lang]) : null;
+  // Falls back to the shared viewLive/viewDemo copy every other project
+  // uses (unchanged); only set project.ctaLabel when a project needs its
+  // own exact wording.
+  const ctaLabel = project.ctaLabel ? project.ctaLabel[lang] : isDemo ? p.viewDemo : p.viewLive;
   // The wrapper below is always aria-hidden="true" (the project name/summary
   // text carries the accessible content), so this image is decorative to
   // assistive tech regardless of language — alt="" is the correct value, not
@@ -3144,7 +3179,7 @@ function projectCard(lang, project, p) {
               ${
                 url
                   ? `<div class="project-actions">
-                <a class="btn btn-primary" href="${url}" target="_blank" rel="noopener noreferrer">${isDemo ? p.viewDemo : p.viewLive}</a>
+                <a class="btn btn-primary" href="${url}" target="_blank" rel="noopener noreferrer">${ctaLabel}</a>
               </div>`
                   : ""
               }
@@ -3201,7 +3236,9 @@ function homePage(lang) {
     <main id="main">
       <section class="hero hero-home" id="home">
         <div class="container">
-          <p class="eyebrow hero-eyebrow-top">${h.eyebrow}</p>
+          <div class="hero-eyebrow-top">
+            <p class="eyebrow">${h.eyebrow}</p>
+          </div>
           <div class="hero-grid hero-grid-solo">
             ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
             <div class="hero-copy">
@@ -4033,13 +4070,15 @@ function languageGate() {
     <meta property="og:title" content="${BUSINESS.displayName}">
     <meta property="og:description" content="Digital presence and lead systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
     <meta property="og:url" content="${SITE_URL}/">
-    <meta property="og:image" content="${OG_IMAGE}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="${OG_IMAGE_EN}">
+    <meta property="og:image:width" content="1774">
+    <meta property="og:image:height" content="887">
+    <meta property="og:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${BUSINESS.displayName}">
     <meta name="twitter:description" content="Digital presence and lead systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
-    <meta name="twitter:image" content="${OG_IMAGE}">
+    <meta name="twitter:image" content="${OG_IMAGE_EN}">
+    <meta name="twitter:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
     ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">

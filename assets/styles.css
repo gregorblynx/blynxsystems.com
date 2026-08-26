@@ -348,9 +348,22 @@ button {
 
 /* Hero-only: the eyebrow now sits above the hero image (nav -> eyebrow ->
    image -> h1), so it needs its own bottom margin instead of the one it
-   used to inherit from sitting directly above the H1 inside .hero-copy. */
+   used to inherit from sitting directly above the H1 inside .hero-copy.
+   It's a block-level wrapper around the (inline-flex, shrink-to-fit)
+   .eyebrow specifically so this box can carry its own width/centering below
+   — an inline-flex element ignores margin:auto centering on its own. */
 .hero-eyebrow-top {
   margin-bottom: 1.25rem;
+}
+
+/* The one-sided dash before the label read as unbalanced sitting alone
+   above the hero image (nothing else in the hero uses that motif). Scoped
+   to the hero only — every other section's eyebrow keeps its dash
+   unchanged. Removed rather than mirrored on the right: a label this short
+   doesn't need a divider on either side to read clearly, and dropping it
+   is the more minimal of the two options. */
+.hero-eyebrow-top .eyebrow::before {
+  display: none;
 }
 
 .eyebrow::before {
@@ -647,7 +660,37 @@ button {
 
 .hero-grid-solo {
   grid-template-columns: minmax(0, 1fr);
+}
+
+/* .hero-eyebrow-top shares this max-width rule with .hero-grid-solo (not a
+   matching copy of it) so the eyebrow and the hero image can never drift
+   apart again — one width/centering rule, two boxes that are structurally
+   identical at every breakpoint, instead of two selectors kept in sync by
+   hand. */
+.hero-grid-solo,
+.hero-eyebrow-top {
   max-width: 900px;
+}
+
+/* Desktop/laptop only: the 900px column sat flush against the container's
+   left edge, leaving a large empty gap on the right at wide viewports
+   (container caps at 1180px) and reading as left-heavy. Widen it a bit and
+   center it instead — min(...,100%) means it can never exceed the actual
+   container width, so this can't overflow at any size in between. The H1
+   (max-width 760px) and body copy (max-width 670px) already have their own
+   tighter caps independent of this column, so widening it doesn't stretch
+   the text — it only gives the hero image more room and better balance.
+   Applying the same rule to .hero-eyebrow-top keeps its box identical to the
+   image's box here too. No extra text-align or padding on top of this: the
+   image's own artwork already sits close to this box's left edge (verified
+   against the source asset), so a flush-left eyebrow inside the same box
+   reads as aligned with the image's visual content, not just its box. */
+@media (min-width: 1024px) {
+  .hero-grid-solo,
+  .hero-eyebrow-top {
+    max-width: min(1060px, 100%);
+    margin-inline: auto;
+  }
 }
 
 /* Lead capture flow section */
