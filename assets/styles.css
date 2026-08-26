@@ -1812,6 +1812,20 @@ button {
   min-height: calc(1.6em * 2);
 }
 
+/* The "What's included" checklist itself is the one block above that can't
+   be reserved the same way — its real height depends on how many of the 6
+   bullets happen to wrap to a second line, which varies per card/language
+   and isn't worth pinning to a guessed line count. Anchoring the price
+   line (and, since margin:auto on a flex child pulls everything after it
+   along for free, the CTA and the scope-toggle footer with it) to the
+   bottom of the card sidesteps that: whatever height the checklist ends up
+   at, price/CTA/footer still land on the same row across all three cards,
+   since .system-offer-grid-overview already stretches them to equal
+   height. */
+.system-offer-grid-overview .system-price-line {
+  margin-top: auto;
+}
+
 .system-number {
   display: inline-grid;
   place-items: center;
