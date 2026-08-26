@@ -346,26 +346,6 @@ button {
   letter-spacing: 0.04em;
 }
 
-/* Hero-only: the eyebrow now sits above the hero image (nav -> eyebrow ->
-   image -> h1), so it needs its own bottom margin instead of the one it
-   used to inherit from sitting directly above the H1 inside .hero-copy.
-   It's a block-level wrapper around the (inline-flex, shrink-to-fit)
-   .eyebrow specifically so this box can carry its own width/centering below
-   — an inline-flex element ignores margin:auto centering on its own. */
-.hero-eyebrow-top {
-  margin-bottom: 1.25rem;
-}
-
-/* The one-sided dash before the label read as unbalanced sitting alone
-   above the hero image (nothing else in the hero uses that motif). Scoped
-   to the hero only — every other section's eyebrow keeps its dash
-   unchanged. Removed rather than mirrored on the right: a label this short
-   doesn't need a divider on either side to read clearly, and dropping it
-   is the more minimal of the two options. */
-.hero-eyebrow-top .eyebrow::before {
-  display: none;
-}
-
 .eyebrow::before {
   width: 1.8rem;
   height: 1px;
@@ -658,44 +638,13 @@ button {
   padding: 2.75rem 0 3.5rem;
 }
 
+/* No max-width here on purpose: the eyebrow that used to live above the
+   image (and shared a matching max-width with it) is gone, and the hero
+   image is meant to be as large as the page's own container allows — it
+   fills 100% of .container (capped by the sitewide --max: 1180px) at every
+   breakpoint instead of sitting in an artificially narrower column. */
 .hero-grid-solo {
   grid-template-columns: minmax(0, 1fr);
-}
-
-/* .hero-eyebrow-top shares this max-width rule with .hero-grid-solo (not a
-   matching copy of it) so the eyebrow and the hero image can never drift
-   apart again — one width/centering rule, two boxes that are structurally
-   identical at every breakpoint, instead of two selectors kept in sync by
-   hand. Centered (not flush-left) within that shared box, at every
-   breakpoint, so it reads as centered over the image below it rather than
-   left-heavy — this is a short standalone line, not body copy, so centering
-   it doesn't hurt readability the way it would for a paragraph. */
-.hero-grid-solo,
-.hero-eyebrow-top {
-  max-width: 900px;
-}
-
-.hero-eyebrow-top {
-  text-align: center;
-}
-
-/* Desktop/laptop only: the 900px column sat flush against the container's
-   left edge, leaving a large empty gap on the right at wide viewports
-   (container caps at 1180px) and reading as left-heavy. Widen it a bit and
-   center it instead — min(...,100%) means it can never exceed the actual
-   container width, so this can't overflow at any size in between. The H1
-   (max-width 760px) and body copy (max-width 670px) already have their own
-   tighter caps independent of this column, so widening it doesn't stretch
-   the text — it only gives the hero image more room and better balance.
-   Applying the same rule to .hero-eyebrow-top keeps its box identical to the
-   image's box here too, so centering the text inside it also centers it
-   over the image. */
-@media (min-width: 1024px) {
-  .hero-grid-solo,
-  .hero-eyebrow-top {
-    max-width: min(1060px, 100%);
-    margin-inline: auto;
-  }
 }
 
 /* Lead capture flow section */
@@ -1996,9 +1945,16 @@ button {
   filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.4));
 }
 
+/* v3 hero assets (5-pillar, no CRM) are composed almost edge-to-edge — the
+   pillar cards sit within ~2-4% of every side, far tighter than the old
+   asset's margins — so unlike the vertical-only fade above, this uses a
+   single radial vignette sized to that measured safe zone on all four
+   sides at once (closest-side keeps it symmetric even though the two
+   language assets aren't pixel-identical in size). Going softer than this
+   would start dimming the outermost pillar cards themselves. */
 .product-visual-hero img {
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 96%, transparent 100%);
+  mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 96%, transparent 100%);
   filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.45));
 }
 

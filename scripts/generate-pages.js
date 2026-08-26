@@ -2163,11 +2163,14 @@ function offerList(items, className = "check-list") {
 // disk as a rollback fallback but are no longer referenced here.
 const PRODUCT_IMAGES = {
   hero: {
+    // Approved final v3 assets (5 pillars, no "CRM"). Native dimensions differ
+    // slightly between languages (real on-disk sizes, not upscaled/matched) —
+    // width/height here must stay in sync with the actual files for 0 CLS.
     en: { base: "blynx-connected-system-hero-en", width: 1672, height: 941 },
-    es: { base: "blynx-connected-system-hero-es", width: 1672, height: 941 },
+    es: { base: "blynx-connected-system-hero-es", width: 1659, height: 948 },
     alt: {
-      en: "The BLYNX connected system: discovery, website, reviews, inquiry, CRM and follow-up shown as one flow for an example business.",
-      es: "El sistema conectado BLYNX: descubrimiento, sitio web, reseñas, solicitud, CRM y seguimiento mostrados como un solo flujo para un negocio de ejemplo."
+      en: "The BLYNX system in five steps: Be Found, Website, Reviews, Inquiries and Follow-Up, shown as one flow for an example business.",
+      es: "El sistema BLYNX en cinco pasos: Te encuentran, Sitio web, Reseñas, Contactos y Seguimiento, mostrados como un solo flujo para un negocio de ejemplo."
     }
   },
   system1: {
@@ -3236,11 +3239,8 @@ function homePage(lang) {
     <main id="main">
       <section class="hero hero-home" id="home">
         <div class="container">
-          <div class="hero-eyebrow-top">
-            <p class="eyebrow">${h.eyebrow}</p>
-          </div>
           <div class="hero-grid hero-grid-solo">
-            ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
+            ${productImage("hero", lang, { priority: true, sizes: "(max-width: 1024px) 100vw, 1180px", className: "product-visual-hero" })}
             <div class="hero-copy">
               <h1>${h.headline}</h1>
               <div class="hero-supporting-copy">
