@@ -235,7 +235,7 @@ const copy = {
     },
     blogPage: {
       title: "Practical Growth Systems for Local Businesses | BLYNX Blog",
-      description: "Practical guides on getting found, building trust, capturing leads, and following up faster — written for local service business owners.",
+      description: "Practical guides on getting found, building trust, capturing opportunities, and following up faster — written for local service business owners.",
       eyebrow: "BLYNX Blog",
       h1: "Practical Growth Systems for Local Businesses",
       subtitle: "Learn how to get found, build trust, capture more opportunities, and follow up before potential customers choose someone else.",
@@ -249,7 +249,7 @@ const copy = {
       breadcrumbBlog: "Blog",
       relatedTitle: "Keep Reading",
       aboutTitle: "BLYNX",
-      aboutText: "BLYNX builds practical local lead systems that help service businesses get found, build trust, capture opportunities, and follow up faster.",
+      aboutText: "BLYNX builds practical digital systems for local businesses that help them get found, build trust, capture opportunities, and follow up faster.",
       aboutLink: "Learn more about BLYNX",
       ctaTitle: "Not sure what your business is missing online?",
       ctaText: "Get a free digital presence audit and see where your business may be losing visibility, trust, or qualified opportunities.",
@@ -317,12 +317,12 @@ const copy = {
       flowTitle: "How the Free Audit Works",
       flowSubtitle: "AI-assisted for speed. Human-reviewed for quality.",
       introTitle: "A practical snapshot of your digital system.",
-      introCopy: "This audit reviews your website or landing page, Google presence, business information, trust signals, lead capture process, and follow-up opportunities.",
+      introCopy: "This audit reviews your website or landing page, Google presence, business information, trust signals, customer request process, and follow-up opportunities.",
       fitLine: "This audit works whether you already have a digital presence or you are starting from zero.",
       bullets: [
         "Digital presence, website, and Google opportunities.",
         "Business information, reviews, and local trust signals.",
-        "Lead capture, organization, and follow-up opportunities."
+        "Customer requests, organization, and follow-up opportunities."
       ],
       fields: {
         fullName: "Full Name",
@@ -349,7 +349,7 @@ const copy = {
       },
       improvements: [
         "More calls",
-        "More website leads",
+        "More website inquiries",
         "Better Google visibility",
         "More reviews",
         "Better landing page",
@@ -373,7 +373,7 @@ const copy = {
     },
     servicesPage: {
       title: "Three Digital Systems for Local Businesses | BLYNX Systems",
-      description: "Compare the three BLYNX systems for local businesses — Digital Presence, Lead Capture & Organization, and Lead Capture & Follow-Up — including full implementation scope, starting prices, exclusions, and FAQs.",
+      description: "Compare the three BLYNX systems for local businesses — Digital Presence, Customer Requests & Organization, and Customer Requests & Follow-Up — including full implementation scope, starting prices, exclusions, and FAQs.",
       eyebrow: "BLYNX Systems",
       h1: "Choose how far your system goes.",
       subtitle: "Every system includes the digital foundation your business needs to be found and trusted. What changes is how much of the work after that first contact we build for you.",
@@ -382,14 +382,14 @@ const copy = {
     },
     aboutPage: {
       title: "About | BLYNX Systems",
-      description: "BLYNX helps local service businesses get found, capture qualified leads, organize every opportunity, and follow up faster.",
+      description: "BLYNX helps local service businesses get found, turn interest into customer requests, organize every opportunity, and follow up faster.",
       eyebrow: "About",
       h1: "Built for local businesses that need a clearer digital system.",
-      subtitle: "BLYNX builds digital presence and lead systems that improve visibility, trust, opportunity capture, organization, and follow-up.",
+      subtitle: "BLYNX builds digital presence and customer systems that improve visibility, trust, opportunity capture, organization, and follow-up.",
       cards: [
         ["Who BLYNX Helps", "BLYNX serves local businesses across the United States that rely on calls, quote requests, bookings, inquiries, and customer trust to grow."],
-        ["What BLYNX Builds", "We build three levels of the same connected system: Digital Presence, Lead Capture & Organization, and Lead Capture & Follow-Up."],
-        ["Why It Matters", "Local customers compare businesses quickly. A clearer lead flow helps reduce missed calls, forgotten forms, and lost sales opportunities."]
+        ["What BLYNX Builds", "We build three levels of the same connected system: Digital Presence, Customer Requests & Organization, and Customer Requests & Follow-Up."],
+        ["Why It Matters", "Local customers compare businesses quickly. A clearer request process helps reduce missed calls, forgotten forms, and lost sales opportunities."]
       ],
       positionEyebrow: "Positioning",
       positionTitle: "Three systems built around practical growth.",
@@ -397,7 +397,7 @@ const copy = {
       bullets: [
         "Local visibility improvements that help customers find the business.",
         "Focused landing pages that help visitors take the next step.",
-        "Lead organization that keeps every opportunity in one clear flow.",
+        "Customer request organization that keeps every opportunity in one clear flow.",
         "Simple follow-up support that helps owners respond faster."
       ],
       stats: [
@@ -411,7 +411,7 @@ const copy = {
         name: "Gregor Silva",
         role: "Founder of BLYNX",
         body:
-          "BLYNX was created from firsthand experience with the digital problems local service businesses face: incomplete online profiles, websites that do not generate clear actions, scattered leads and slow follow-up.\n\nGregor works directly on strategy and implementation, combining practical digital systems with AI-assisted workflows to help business owners operate with more clarity, consistency and speed.",
+          "BLYNX was created from firsthand experience with the digital problems local service businesses face: incomplete online profiles, websites that do not generate clear actions, scattered customer requests and slow follow-up.\n\nGregor works directly on strategy and implementation, combining practical digital systems with AI-assisted processes to help business owners operate with more clarity, consistency and speed.",
         support:
           "You work directly with the person responsible for the strategy — without being passed between departments.",
         alt: "Gregor Silva, founder of BLYNX"
@@ -421,10 +421,10 @@ const copy = {
     },
     contactPage: {
       title: "Contact | BLYNX Systems",
-      description: "Contact BLYNX Systems about digital presence, lead capture, opportunity organization, and follow-up support.",
+      description: "Contact BLYNX Systems about digital presence, customer requests, opportunity organization, and follow-up support.",
       eyebrow: "Contact",
-      h1: "Talk with BLYNX about your local lead flow.",
-      subtitle: "Use the form below or start with the free audit if you want to see where leads may be getting lost.",
+      h1: "Talk with BLYNX about your local business systems.",
+      subtitle: "Use the form below or start with the free audit if you want to see where customer requests may be getting lost.",
       emailTitle: "Email",
       phoneTitle: "Phone",
       locationTitle: "Based in",
@@ -433,7 +433,7 @@ const copy = {
       auditTitle: "Start with an audit",
       auditCopy: "Not sure what you need yet? Request a free digital presence audit first.",
       languageTitle: "Language support",
-      languageCopy: "English and Spanish lead support can be requested through the audit or contact process.",
+      languageCopy: "English and Spanish support can be requested through the audit or contact process.",
       fields: {
         name: "Full Name",
         business: "Business Name",
@@ -445,8 +445,8 @@ const copy = {
       },
       topics: [
         "System 1 — Digital Presence",
-        "System 2 — Lead Capture & Organization",
-        "System 3 — Lead Capture & Follow-Up",
+        "System 2 — Customer Requests & Organization",
+        "System 3 — Customer Requests & Follow-Up",
         "Free audit",
         "Monthly maintenance / social media",
         "Not sure"
@@ -463,13 +463,13 @@ const copy = {
     },
     resourcesPage: {
       title: "Resources | BLYNX Systems",
-      description: "Practical resources for local lead flow, lead capture, and follow-up.",
+      description: "Practical resources for handling customer requests, staying organized, and following up.",
       eyebrow: "Resources",
       h1: "Practical growth resources for local business owners.",
       subtitle: "Use these starting points to think through how customers find you, contact you, and receive follow-up before your free audit.",
       cards: [
-        ["Local Lead Flow Checklist", "Review the basics that help customers find your business, trust it, and take the next step.", "Request a free audit", "/free-audit"],
-        ["Lead Capture Readiness", "Check whether your landing page and contact flow make it easy for qualified prospects to reach you.", "Explore the lead system", "/services"],
+        ["Customer Request Process Checklist", "Review the basics that help customers find your business, trust it, and take the next step.", "Request a free audit", "/free-audit"],
+        ["Customer Request Readiness", "Check whether your landing page and contact flow make it easy for qualified prospects to reach you.", "Explore the systems", "/services"],
         ["Follow-Up Basics", "Understand how simple confirmations, reminders, and organization reduce missed opportunities.", "Ask a question", "/contact"]
       ]
     },
@@ -543,7 +543,7 @@ const copy = {
       breadcrumbBlog: "Blog",
       relatedTitle: "Sigue Leyendo",
       aboutTitle: "BLYNX",
-      aboutText: "BLYNX construye sistemas prácticos de captación que ayudan a negocios locales a ser encontrados, generar confianza, capturar oportunidades y dar seguimiento más rápido.",
+      aboutText: "BLYNX construye sistemas digitales prácticos para negocios locales que los ayudan a ser encontrados, generar confianza, captar oportunidades y dar seguimiento más rápido.",
       aboutLink: "Conoce más sobre BLYNX",
       ctaTitle: "¿No sabes qué le falta a tu negocio en internet?",
       ctaText: "Solicita una auditoría gratis de presencia digital y descubre dónde tu negocio puede estar perdiendo visibilidad, confianza u oportunidades calificadas.",
@@ -611,12 +611,12 @@ const copy = {
       flowTitle: "Cómo Funciona la Auditoría Gratis",
       flowSubtitle: "Apoyada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
       introTitle: "Una revisión práctica de tu sistema digital.",
-      introCopy: "Esta auditoría revisa tu sitio o landing page, presencia en Google, información comercial, señales de confianza, proceso de captación y oportunidades de seguimiento.",
+      introCopy: "Esta auditoría revisa tu sitio o landing page, presencia en Google, información comercial, señales de confianza, proceso de solicitudes de clientes y oportunidades de seguimiento.",
       fitLine: "Esta auditoría funciona tanto si ya tienes presencia digital como si estás empezando desde cero.",
       bullets: [
         "Oportunidades de presencia digital, sitio web y Google.",
         "Información comercial, reseñas y señales de confianza local.",
-        "Oportunidades de captación, organización y seguimiento."
+        "Solicitudes de clientes, organización y seguimiento."
       ],
       fields: {
         fullName: "Nombre completo",
@@ -667,7 +667,7 @@ const copy = {
     },
     servicesPage: {
       title: "Tres Sistemas Digitales para Negocios Locales | BLYNX Systems",
-      description: "Compara los tres sistemas de BLYNX para negocios locales — Presencia Digital, Captación y Organización, y Captación y Seguimiento — con alcance completo, precios iniciales, exclusiones y preguntas frecuentes.",
+      description: "Compara los tres sistemas de BLYNX para negocios locales — Presencia Digital, Solicitudes y Organización, y Solicitudes y Seguimiento — con alcance completo, precios iniciales, exclusiones y preguntas frecuentes.",
       eyebrow: "BLYNX Systems",
       h1: "Elige hasta dónde llega tu sistema.",
       subtitle: "Todos los sistemas incluyen la base digital que tu negocio necesita para que lo encuentren y confíen en él. Lo que cambia es cuánto del trabajo posterior a ese primer contacto construimos por ti.",
@@ -676,14 +676,14 @@ const copy = {
     },
     aboutPage: {
       title: "Nosotros | BLYNX Systems",
-      description: "BLYNX ayuda a negocios locales a ser encontrados en internet, capturar oportunidades, organizar leads y dar seguimiento más rápido.",
+      description: "BLYNX ayuda a negocios locales a ser encontrados en internet, convertir el interés en solicitudes de clientes, organizar cada oportunidad y dar seguimiento más rápido.",
       eyebrow: "Nosotros",
       h1: "Creado para negocios locales que necesitan un sistema digital más claro.",
-      subtitle: "BLYNX crea sistemas de presencia digital y captación que mejoran visibilidad, confianza, captación, organización y seguimiento.",
+      subtitle: "BLYNX crea sistemas de presencia digital y de atención a clientes que mejoran visibilidad, confianza, captación de oportunidades, organización y seguimiento.",
       cards: [
         ["A Quién Ayuda BLYNX", "BLYNX sirve a negocios locales en Estados Unidos que dependen de llamadas, solicitudes de cotización, reservas, consultas y confianza del cliente para crecer."],
-        ["Qué Construye BLYNX", "Construimos tres niveles de un mismo sistema conectado: Presencia Digital, Captación y Organización, y Captación y Seguimiento."],
-        ["Por Qué Importa", "Los clientes locales comparan negocios rápidamente. Un flujo más claro ayuda a reducir llamadas perdidas, formularios olvidados y posibles clientes perdidos."]
+        ["Qué Construye BLYNX", "Construimos tres niveles de un mismo sistema conectado: Presencia Digital, Solicitudes y Organización, y Solicitudes y Seguimiento."],
+        ["Por Qué Importa", "Los clientes locales comparan negocios rápidamente. Un proceso más claro de solicitudes ayuda a reducir llamadas perdidas, formularios olvidados y posibles clientes perdidos."]
       ],
       positionEyebrow: "Posicionamiento",
       positionTitle: "Tres sistemas creados para un crecimiento práctico.",
@@ -691,7 +691,7 @@ const copy = {
       bullets: [
         "Mejoras de visibilidad local que ayudan a los clientes a encontrar el negocio.",
         "Landing pages enfocadas que ayudan al visitante a tomar el siguiente paso.",
-        "Organización de leads que mantiene cada oportunidad en un flujo claro.",
+        "Organización de solicitudes que mantiene cada oportunidad en un flujo claro.",
         "Soporte simple de seguimiento que ayuda a responder más rápido."
       ],
       stats: [
@@ -705,7 +705,7 @@ const copy = {
         name: "Gregor Silva",
         role: "Fundador de BLYNX",
         body:
-          "BLYNX nació de la experiencia directa con los problemas digitales que enfrentan los negocios locales: perfiles incompletos, sitios web sin acciones claras, leads dispersos y seguimiento lento.\n\nGregor trabaja directamente en la estrategia y la implementación, combinando sistemas digitales prácticos con procesos apoyados por inteligencia artificial para ayudar a los dueños a operar con mayor claridad, consistencia y rapidez.",
+          "BLYNX nació de la experiencia directa con los problemas digitales que enfrentan los negocios locales: perfiles incompletos, sitios web sin acciones claras, solicitudes dispersas y seguimiento lento.\n\nGregor trabaja directamente en la estrategia y la implementación, combinando sistemas digitales prácticos con procesos apoyados por inteligencia artificial para ayudar a los dueños a operar con mayor claridad, consistencia y rapidez.",
         support:
           "Trabajas directamente con la persona responsable de la estrategia, sin pasar entre diferentes departamentos.",
         alt: "Gregor Silva, fundador de BLYNX"
@@ -715,9 +715,9 @@ const copy = {
     },
     contactPage: {
       title: "Contacto | BLYNX Systems",
-      description: "Contacta a BLYNX Systems sobre presencia digital, captación, organización de oportunidades y seguimiento.",
+      description: "Contacta a BLYNX Systems sobre presencia digital, solicitudes de clientes, organización de oportunidades y seguimiento.",
       eyebrow: "Contacto",
-      h1: "Habla con BLYNX sobre tu sistema de captación.",
+      h1: "Habla con BLYNX sobre tu sistema para negocio local.",
       subtitle: "Usa el formulario de abajo o empieza con la auditoría gratis si quieres ver dónde se pueden estar perdiendo oportunidades.",
       emailTitle: "Correo",
       phoneTitle: "Teléfono",
@@ -727,7 +727,7 @@ const copy = {
       auditTitle: "Empieza con una auditoría",
       auditCopy: "¿No estás seguro de qué necesitas? Solicita primero una auditoría gratis de presencia digital.",
       languageTitle: "Soporte de idioma",
-      languageCopy: "El soporte para leads en inglés y español puede solicitarse durante el proceso de auditoría o contacto.",
+      languageCopy: "El soporte en inglés y español puede solicitarse durante el proceso de auditoría o contacto.",
       fields: {
         name: "Nombre completo",
         business: "Nombre del negocio",
@@ -739,8 +739,8 @@ const copy = {
       },
       topics: [
         "Sistema 1 — Presencia Digital",
-        "Sistema 2 — Captación y Organización",
-        "Sistema 3 — Captación y Seguimiento",
+        "Sistema 2 — Solicitudes y Organización",
+        "Sistema 3 — Solicitudes y Seguimiento",
         "Auditoría gratis",
         "Mantenimiento mensual / redes sociales",
         "No estoy seguro"
@@ -757,13 +757,13 @@ const copy = {
     },
     resourcesPage: {
       title: "Recursos | BLYNX Systems",
-      description: "Recursos prácticos para captación, organización de leads y seguimiento.",
+      description: "Recursos prácticos para recibir solicitudes, mantenerlas organizadas y dar seguimiento.",
       eyebrow: "Recursos",
       h1: "Recursos prácticos de crecimiento para dueños de negocios locales.",
       subtitle: "Usa estos puntos de partida para revisar cómo los clientes te encuentran, te contactan y reciben seguimiento antes de tu auditoría gratis.",
       cards: [
-        ["Checklist de Captación Local", "Revisa lo básico que ayuda a los clientes a encontrar tu negocio, confiar y tomar el siguiente paso.", "Solicitar auditoría gratis", "/free-audit"],
-        ["Preparación para Capturar Oportunidades", "Revisa si tu landing page y flujo de contacto hacen fácil que prospectos calificados te contacten.", "Explorar el sistema", "/services"],
+        ["Checklist del Proceso de Solicitudes", "Revisa lo básico que ayuda a los clientes a encontrar tu negocio, confiar y tomar el siguiente paso.", "Solicitar auditoría gratis", "/free-audit"],
+        ["Preparación para Recibir Solicitudes", "Revisa si tu landing page y flujo de contacto hacen fácil que prospectos calificados te contacten.", "Explorar el sistema", "/services"],
         ["Bases de Seguimiento", "Entiende cómo confirmaciones, recordatorios y organización simple reducen oportunidades perdidas.", "Hacer una pregunta", "/contact"]
       ]
     },
@@ -918,7 +918,7 @@ const commercialOffer = {
           "Full system testing"
         ],
         exclusions: [
-          "No follow-up workflows or reminder sequences",
+          "No follow-up automations or reminder sequences",
           "No message templates or team training",
           "No unattended-opportunity reminders"
         ],
@@ -974,9 +974,9 @@ const commercialOffer = {
           "Full system testing"
         ],
         exclusions: [
-          "Not unlimited automation — the 5 workflows above are the approved scope",
-          "Additional workflows require separately approved scope",
-          "Third-party costs (SMS, WhatsApp, paid CRM plans) are separate when applicable"
+          "Not unlimited automation — the 5 automations above are the approved scope",
+          "Additional automations require separately approved scope",
+          "Third-party costs (SMS, WhatsApp, other paid business software) are separate when applicable"
         ],
         benefits: [
           "Nothing goes quiet after the first message",
@@ -988,7 +988,7 @@ const commercialOffer = {
         cta: "Start with System 3",
         ctaTarget: "contact",
         pricingNote:
-          "Investment depends on the number of workflows, communication channels, integrations, and the approved project scope."
+          "Investment depends on the number of automations, communication channels, integrations, and the approved project scope."
       }
     ],
     comparison: {
@@ -1087,7 +1087,7 @@ const commercialOffer = {
           "System 1 builds the digital foundation customers use to find and trust you. System 2 adds smart forms and organizes every opportunity with a status and an owner. System 3 adds the follow-up layer — confirmations, reminders and review requests — so nothing goes quiet."
         ],
         [
-          "Does BLYNX guarantee more customers or leads?",
+          "Does BLYNX guarantee more customers or opportunities?",
           "No. BLYNX builds the infrastructure and process that helps your business receive and manage opportunities professionally. Results also depend on market demand, your offer, pricing, competition, reputation, sales ability, response speed, customer service and execution."
         ],
         [
@@ -1096,11 +1096,11 @@ const commercialOffer = {
         ],
         [
           "Are automations included, and are they unlimited?",
-          "System 3 includes 5 core follow-up automations in the approved scope: new inquiry confirmation, unattended opportunity reminders, quote follow-up, appointment confirmation/reminders, and review requests. This is not unlimited automation — additional workflows require separately approved scope."
+          "System 3 includes 5 core follow-up automations in the approved scope: new inquiry confirmation, unattended opportunity reminders, quote follow-up, appointment confirmation/reminders, and review requests. This is not unlimited automation — additional automations require separately approved scope."
         ],
         [
           "How is the final price determined?",
-          "Final pricing depends on the current digital setup, approved project scope, number of workflows, communication channels, integrations, and any separately approved add-ons."
+          "Final pricing depends on the current digital setup, approved project scope, number of automations, communication channels, integrations, and any separately approved add-ons."
         ],
         [
           "How does payment work?",
@@ -1221,7 +1221,7 @@ const commercialOffer = {
           "Pruebas completas del sistema"
         ],
         exclusions: [
-          "No incluye flujos de seguimiento ni secuencias de recordatorios",
+          "No incluye automatizaciones de seguimiento ni secuencias de recordatorios",
           "No incluye plantillas de mensajes ni capacitación del equipo",
           "No incluye recordatorios de oportunidades sin atender"
         ],
@@ -1278,8 +1278,8 @@ const commercialOffer = {
         ],
         exclusions: [
           "No es automatización ilimitada — las 5 anteriores son el alcance aprobado",
-          "Flujos adicionales requieren alcance aprobado por separado",
-          "Los costos de terceros (SMS, WhatsApp, planes de CRM pagos) son aparte cuando aplican"
+          "Automatizaciones adicionales requieren alcance aprobado por separado",
+          "Los costos de terceros (SMS, WhatsApp, otro software de pago que ya uses) son aparte cuando aplican"
         ],
         benefits: [
           "Nada se queda en el aire después del primer mensaje",
@@ -1390,7 +1390,7 @@ const commercialOffer = {
           "El Sistema 1 construye la base digital que tus clientes usan para encontrarte y confiar en ti. El Sistema 2 agrega formularios inteligentes y organiza cada oportunidad con estado y responsable. El Sistema 3 agrega la capa de seguimiento — confirmaciones, recordatorios y solicitudes de reseña — para que nada se quede en el aire."
         ],
         [
-          "¿BLYNX garantiza más clientes o más leads?",
+          "¿BLYNX garantiza más clientes o más oportunidades?",
           "No. BLYNX construye la infraestructura y el proceso que ayuda a tu negocio a recibir y gestionar oportunidades de forma profesional. Los resultados también dependen de la demanda del mercado, tu oferta, tus precios, la competencia, tu reputación, tu capacidad de venta, la velocidad de respuesta, el servicio al cliente y la ejecución."
         ],
         [
@@ -1399,7 +1399,7 @@ const commercialOffer = {
         ],
         [
           "¿Las automatizaciones están incluidas y son ilimitadas?",
-          "El Sistema 3 incluye 5 automatizaciones principales de seguimiento en el alcance aprobado: confirmación de nueva solicitud, recordatorios de oportunidades sin atender, seguimiento de cotización, confirmación/recordatorio de citas y solicitudes de reseña. No es automatización ilimitada — los flujos adicionales requieren alcance aprobado por separado."
+          "El Sistema 3 incluye 5 automatizaciones principales de seguimiento en el alcance aprobado: confirmación de nueva solicitud, recordatorios de oportunidades sin atender, seguimiento de cotización, confirmación/recordatorio de citas y solicitudes de reseña. No es automatización ilimitada — las automatizaciones adicionales requieren alcance aprobado por separado."
         ],
         [
           "¿Cómo se determina el precio final?",
@@ -1595,7 +1595,7 @@ const implementationPlan = {
       {
         label: "Step 2",
         title: "Design, Build & Approval",
-        copy: "Presence, forms, records and workflows for the approved level, reviewed with you.",
+        copy: "Presence, forms, records and follow-up steps for the approved level, reviewed with you.",
         milestone: "30% after approval"
       },
       {
@@ -1639,7 +1639,7 @@ const stagePages = {
     title: "Choose Your Starting Point | BLYNX",
     description: "Choose whether your business already has a digital presence or is starting from zero.",
     aria: "Choose business stage",
-    eyebrow: "Local Lead System for Service Businesses",
+    eyebrow: "Digital Systems for Service Businesses",
     h1: "What best describes your business?",
     subtitle: "Choose where your business is today so we can show you the clearest next step.",
     skip: "Skip for now",
@@ -1647,15 +1647,15 @@ const stagePages = {
       {
         value: "existing",
         title: "I already have a digital presence",
-        copy: "You already have a website, Google profile, or some online presence — but you need better visibility, more qualified leads, faster follow-up, and better control.",
-        bullets: ["Improve visibility", "Capture more qualified leads", "Organize opportunities", "Follow up faster"],
+        copy: "You already have a website, Google profile, or some online presence — but you need better visibility, more qualified requests, faster follow-up, and better control.",
+        bullets: ["Improve visibility", "Capture more qualified opportunities", "Organize opportunities", "Follow up faster"],
         cta: "Continue"
       },
       {
         value: "zero",
         title: "I’m starting from zero",
-        copy: "You do not have a website, Google Business Profile, or lead system yet. BLYNX can build the digital foundation needed to get found, receive opportunities, and follow up professionally.",
-        bullets: ["Google Business Profile setup", "Conversion landing page", "Smart lead form", "Basic lead tracking", "Follow-up automation"],
+        copy: "You do not have a website, Google Business Profile, or customer request system yet. BLYNX can build the digital foundation needed to get found, receive opportunities, and follow up professionally.",
+        bullets: ["Google Business Profile setup", "Contact-focused landing page", "Smart contact form", "Basic request tracking", "Follow-up automation"],
         cta: "Continue"
       }
     ]
@@ -1664,7 +1664,7 @@ const stagePages = {
     title: "Elige tu Punto de Partida | BLYNX",
     description: "Elige si tu negocio ya tiene presencia digital o está empezando desde cero.",
     aria: "Elegir etapa del negocio",
-    eyebrow: "Sistema de Captación para Negocios Locales",
+    eyebrow: "Sistemas Digitales para Negocios de Servicios",
     h1: "¿Qué describe mejor tu negocio?",
     subtitle: "Elige en qué punto está tu negocio para mostrarte el siguiente paso más claro.",
     skip: "Saltar por ahora",
@@ -1673,14 +1673,14 @@ const stagePages = {
         value: "existing",
         title: "Ya tengo presencia digital",
         copy: "Ya tienes sitio web, Google Business Profile o alguna presencia online — pero necesitas mejor visibilidad, más oportunidades calificadas, seguimiento más rápido y mayor control.",
-        bullets: ["Mejorar visibilidad", "Capturar más oportunidades calificadas", "Organizar leads", "Dar seguimiento rápido"],
+        bullets: ["Mejorar visibilidad", "Capturar más oportunidades calificadas", "Organizar solicitudes", "Dar seguimiento rápido"],
         cta: "Continuar"
       },
       {
         value: "zero",
         title: "Estoy empezando desde cero",
-        copy: "Todavía no tienes sitio web, Google Business Profile o sistema de captación. BLYNX puede construir la base digital necesaria para ser encontrado, recibir oportunidades y dar seguimiento profesional.",
-        bullets: ["Configuración de Google Business Profile", "Landing page de conversión", "Formulario inteligente", "Control básico de leads", "Automatización de seguimiento"],
+        copy: "Todavía no tienes sitio web, Google Business Profile o un sistema para recibir solicitudes. BLYNX puede construir la base digital necesaria para ser encontrado, recibir oportunidades y dar seguimiento profesional.",
+        bullets: ["Configuración de Google Business Profile", "Landing page enfocada en contacto", "Formulario inteligente", "Control básico de solicitudes", "Automatización de seguimiento"],
         cta: "Continuar"
       }
     ]
@@ -1691,18 +1691,18 @@ const stageLandingPages = {
   en: {
     existing: {
       title: "Improve What You Already Have | BLYNX",
-      description: "Improve visibility, lead capture, follow-up, and lead control for an existing local business presence.",
+      description: "Improve visibility, customer requests, follow-up, and organization for an existing local business presence.",
       eyebrow: "Existing digital presence",
       h1: "Improve What You Already Have",
       subtitle: "For businesses that already have a website, Google profile, or online presence. We start with a free audit — any of BLYNX's three systems can apply, depending on what your business needs, not just what you already have.",
       cards: [
         ["Visibility Tune-Up", "Improve local signals that help qualified customers find and trust your business."],
-        ["Lead Capture Review", "Make your current website, landing page, or profile easier to turn into calls and requests."],
-        ["Opportunity Tracking", "Organize incoming leads so every inquiry has a clear place and next action."],
-        ["Faster Follow-Up", "Add simple confirmations, alerts, and reminders so fewer leads get missed."]
+        ["Customer Request Review", "Make your current website, landing page, or profile easier to turn into calls and requests."],
+        ["Opportunity Tracking", "Organize incoming requests so every inquiry has a clear place and next action."],
+        ["Faster Follow-Up", "Add simple confirmations, alerts, and reminders so fewer requests get missed."]
       ],
       processTitle: "What BLYNX Improves",
-      steps: ["Audit current presence", "Find lead flow gaps", "Improve capture points", "Connect follow-up"],
+      steps: ["Audit current presence", "Find request gaps", "Improve capture points", "Connect follow-up"],
       ctaTitle: "Ready to improve what you already have?",
       ctaSubtitle: "Start with a free audit and see where your current presence may be losing opportunities.",
       cta: "Get a Free Audit",
@@ -1716,14 +1716,14 @@ const stageLandingPages = {
       subtitle: "For businesses that don't yet have a website, Google Business Profile, or a way to organize inquiries. We start with a short diagnosis — any of BLYNX's three systems can apply, depending on what your business needs.",
       cards: [
         ["Google Business Profile Setup", "Create the local presence customers expect to find when they search for your business."],
-        ["Conversion Landing Page", "A focused page designed to explain the service and help visitors call, request a quote, or book the next step."],
-        ["Smart Lead Form", "A clean form that collects the right information without making the process complicated."],
-        ["Basic Lead Tracking", "A simple place to organize new opportunities and keep track of next steps."],
+        ["Contact-Focused Landing Page", "A focused page designed to explain the service and help visitors call, request a quote, or book the next step."],
+        ["Smart Contact Form", "A clean form that collects the right information without making the process complicated."],
+        ["Basic Request Tracking", "A simple place to organize new opportunities and keep track of next steps."],
         ["Follow-Up Automation", "Basic email, SMS, or WhatsApp follow-up so new opportunities do not get lost."],
         ["Review Request System", "A simple flow to start requesting and organizing customer reviews."]
       ],
       processTitle: "What BLYNX Builds First",
-      steps: ["Set up local visibility", "Create a conversion landing page", "Connect lead capture", "Add follow-up"],
+      steps: ["Set up local visibility", "Create a contact-focused landing page", "Connect customer requests", "Add follow-up"],
       ctaTitle: "Starting from zero?",
       ctaSubtitle: "Start with a free audit so we can map the clearest digital foundation for your business.",
       cta: "Start With a Free Audit",
@@ -1733,18 +1733,18 @@ const stageLandingPages = {
   es: {
     existing: {
       title: "Mejora lo que Ya Tienes | BLYNX",
-      description: "Mejora visibilidad, captación, seguimiento y control de leads para un negocio local que ya tiene presencia digital.",
+      description: "Mejora visibilidad, solicitudes de clientes, seguimiento y organización para un negocio local que ya tiene presencia digital.",
       eyebrow: "Presencia digital existente",
       h1: "Mejora lo que Ya Tienes",
       subtitle: "Para negocios que ya tienen sitio web, Google Business Profile o presencia online. Empezamos con una auditoría gratis — cualquiera de los tres sistemas de BLYNX puede aplicar, según lo que tu negocio necesite, no solo lo que ya tengas.",
       cards: [
         ["Mejora de Visibilidad", "Mejoramos señales locales que ayudan a clientes calificados a encontrar y confiar en tu negocio."],
-        ["Revisión de Captación", "Hacemos que tu sitio, landing page o perfil actual sea más claro para generar llamadas y solicitudes."],
-        ["Organización de Oportunidades", "Ordenamos los leads entrantes para que cada solicitud tenga un lugar y una próxima acción."],
+        ["Revisión de Solicitudes", "Hacemos que tu sitio, landing page o perfil actual sea más claro para generar llamadas y solicitudes."],
+        ["Organización de Oportunidades", "Ordenamos las solicitudes entrantes para que cada una tenga un lugar y una próxima acción."],
         ["Seguimiento Más Rápido", "Agregamos confirmaciones, avisos y recordatorios simples para que menos oportunidades se pierdan."]
       ],
       processTitle: "Qué Mejora BLYNX",
-      steps: ["Auditar presencia actual", "Encontrar fallos en el flujo", "Mejorar puntos de captación", "Conectar seguimiento"],
+      steps: ["Auditar presencia actual", "Encontrar fallos en el proceso", "Mejorar puntos de captación", "Conectar seguimiento"],
       ctaTitle: "¿Listo para mejorar lo que ya tienes?",
       ctaSubtitle: "Empieza con una auditoría gratis y descubre dónde tu presencia actual puede estar perdiendo oportunidades.",
       cta: "Solicitar Auditoría Gratis",
@@ -1758,14 +1758,14 @@ const stageLandingPages = {
       subtitle: "Para negocios que todavía no tienen sitio web, Google Business Profile o una forma de organizar solicitudes. Empezamos con un diagnóstico breve — cualquiera de los tres sistemas de BLYNX puede aplicar, según lo que tu negocio necesite.",
       cards: [
         ["Configuración de Google Business Profile", "Creamos la presencia local que los clientes esperan encontrar cuando buscan tu negocio."],
-        ["Landing Page de Conversión", "Una página enfocada para explicar el servicio y ayudar al visitante a llamar, pedir cotización o agendar el siguiente paso."],
+        ["Landing Page Enfocada en Contacto", "Una página enfocada para explicar el servicio y ayudar al visitante a llamar, pedir cotización o agendar el siguiente paso."],
         ["Formulario Inteligente", "Un formulario claro que recoge la información correcta sin complicar el proceso."],
-        ["Control Básico de Leads", "Un lugar simple para organizar nuevas oportunidades y dar seguimiento a los próximos pasos."],
+        ["Control Básico de Solicitudes", "Un lugar simple para organizar nuevas oportunidades y dar seguimiento a los próximos pasos."],
         ["Automatización de Seguimiento", "Seguimiento básico por email, SMS o WhatsApp para que las nuevas oportunidades no se pierdan."],
         ["Sistema para Pedir Reseñas", "Un flujo simple para empezar a pedir y organizar reseñas de clientes."]
       ],
       processTitle: "Qué Construye BLYNX Primero",
-      steps: ["Configurar visibilidad local", "Crear landing page de conversión", "Conectar captura de leads", "Agregar seguimiento"],
+      steps: ["Configurar visibilidad local", "Crear landing page enfocada en contacto", "Conectar solicitudes de clientes", "Agregar seguimiento"],
       ctaTitle: "¿Estás empezando desde cero?",
       ctaSubtitle: "Empieza con una auditoría gratis para mapear la base digital más clara para tu negocio.",
       cta: "Empezar con Auditoría Gratis",
@@ -1778,13 +1778,13 @@ const stageAuditPages = {
   en: {
     existing: {
       title: "Free Audit for Existing Digital Presence | BLYNX",
-      description: "Request a free audit for your existing local digital presence and lead flow.",
+      description: "Request a free audit for your existing local digital presence and customer request process.",
       eyebrow: "Free audit",
       h1: "Audit Your Current Digital Presence",
-      subtitle: "Show us what you already have and we’ll look for ways to improve visibility, capture more qualified leads, and follow up faster.",
+      subtitle: "Show us what you already have and we’ll look for ways to improve visibility, capture more qualified opportunities, and follow up faster.",
       introTitle: "For businesses that already have something online.",
-      introCopy: "This audit reviews your current website or landing page, Google presence, lead capture points, reviews, and follow-up flow.",
-      bullets: ["Visibility and trust gaps.", "Lead capture and conversion opportunities.", "Follow-up and organization improvements."],
+      introCopy: "This audit reviews your current website or landing page, Google presence, contact points, reviews, and follow-up flow.",
+      bullets: ["Visibility and trust gaps.", "Contact points and missed opportunities.", "Follow-up and organization improvements."],
       fields: {
         website: "Website URL",
         gbp: "Google Business Profile Link",
@@ -1792,7 +1792,7 @@ const stageAuditPages = {
         timeline: "How soon do you want to improve this?",
         message: "Message / Notes"
       },
-      improvements: ["More calls", "More website leads", "Better Google visibility", "More reviews", "Better landing page", "Follow-up automation", "Not sure"],
+      improvements: ["More calls", "More website inquiries", "Better Google visibility", "More reviews", "Better landing page", "Follow-up automation", "Not sure"],
       timelines: ["Immediately", "This month", "Next 2–3 months", "Just researching"],
       submit: "Submit My Free Audit Request",
       hiddenLanguage: "English",
@@ -1806,14 +1806,14 @@ const stageAuditPages = {
       h1: "Plan Your Digital Foundation",
       subtitle: "Tell us about your business and we’ll map the clearest first steps to get found, receive opportunities, and follow up professionally.",
       introTitle: "For businesses starting from zero.",
-      introCopy: "This audit does not assume you already have a website or Google profile. We review what your business needs first to create a practical digital foundation and lead system.",
-      bullets: ["Google Business Profile setup path.", "Conversion landing page needs.", "Lead capture, tracking, follow-up, and review basics."],
+      introCopy: "This audit does not assume you already have a website or Google profile. We review what your business needs first to create a practical digital foundation and customer request system.",
+      bullets: ["Google Business Profile setup path.", "Contact-focused landing page needs.", "Customer request capture, tracking, follow-up, and review basics."],
       fields: {
         needs: "What do you need help setting up?",
         timeline: "How soon do you want to launch this?",
         message: "Message / Notes"
       },
-      needs: ["Google Business Profile setup", "Conversion landing page", "Smart lead form", "Basic lead tracking", "Follow-up automation", "Review request system", "Not sure"],
+      needs: ["Google Business Profile setup", "Contact-focused landing page", "Smart contact form", "Basic request tracking", "Follow-up automation", "Review request system", "Not sure"],
       timelines: ["Immediately", "This month", "Next 2–3 months", "Just researching"],
       submit: "Start My Free Audit",
       hiddenLanguage: "English",
@@ -1824,13 +1824,13 @@ const stageAuditPages = {
   es: {
     existing: {
       title: "Auditoría Gratis para Presencia Digital Existente | BLYNX",
-      description: "Solicita una auditoría gratis para mejorar tu presencia digital y flujo de captación actual.",
+      description: "Solicita una auditoría gratis para mejorar tu presencia digital y tu proceso de solicitudes actual.",
       eyebrow: "Auditoría gratis",
       h1: "Audita tu Presencia Digital Actual",
       subtitle: "Muéstranos lo que ya tienes y revisaremos formas de mejorar visibilidad, capturar más oportunidades calificadas y dar seguimiento más rápido.",
       introTitle: "Para negocios que ya tienen algo en internet.",
-      introCopy: "Esta auditoría revisa tu sitio o landing page actual, presencia en Google, puntos de captación, reseñas y flujo de seguimiento.",
-      bullets: ["Brechas de visibilidad y confianza.", "Oportunidades de captación y conversión.", "Mejoras de seguimiento y organización."],
+      introCopy: "Esta auditoría revisa tu sitio o landing page actual, presencia en Google, puntos de contacto, reseñas y flujo de seguimiento.",
+      bullets: ["Brechas de visibilidad y confianza.", "Puntos de contacto y oportunidades perdidas.", "Mejoras de seguimiento y organización."],
       fields: {
         website: "Sitio web",
         gbp: "Link de Google Business Profile",
@@ -1852,14 +1852,14 @@ const stageAuditPages = {
       h1: "Planifica tu Base Digital",
       subtitle: "Cuéntanos sobre tu negocio y trazaremos los primeros pasos más claros para ser encontrado, recibir oportunidades y dar seguimiento profesional.",
       introTitle: "Para negocios que empiezan desde cero.",
-      introCopy: "Esta auditoría no asume que ya tienes sitio web o perfil de Google. Revisamos qué necesita primero tu negocio para crear una base digital práctica y un sistema de captación.",
-      bullets: ["Ruta para configurar Google Business Profile.", "Necesidades de landing page de conversión.", "Bases de captura, control, seguimiento y reseñas."],
+      introCopy: "Esta auditoría no asume que ya tienes sitio web o perfil de Google. Revisamos qué necesita primero tu negocio para crear una base digital práctica y un sistema para recibir solicitudes.",
+      bullets: ["Ruta para configurar Google Business Profile.", "Necesidades de landing page enfocada en contacto.", "Bases de recepción de solicitudes, control, seguimiento y reseñas."],
       fields: {
         needs: "¿Qué necesitas configurar?",
         timeline: "¿Qué tan pronto quieres lanzar esto?",
         message: "Mensaje / Notas"
       },
-      needs: ["Configuración de Google Business Profile", "Landing page de conversión", "Formulario inteligente", "Control básico de leads", "Automatización de seguimiento", "Sistema para pedir reseñas", "No estoy seguro"],
+      needs: ["Configuración de Google Business Profile", "Landing page enfocada en contacto", "Formulario inteligente", "Control básico de solicitudes", "Automatización de seguimiento", "Sistema para pedir reseñas", "No estoy seguro"],
       timelines: ["Inmediatamente", "Este mes", "En los próximos 2–3 meses", "Solo estoy investigando"],
       submit: "Empezar mi Auditoría Gratis",
       hiddenLanguage: "Spanish",
@@ -1874,7 +1874,7 @@ const auditFlow = {
     ["Click Free Audit", "Start your free audit request on our website."],
     ["Choose Language", "English or Spanish support available."],
     ["Answer Smart Form", "Share your business, goals, contact information, and current online presence."],
-    ["Initial Digital Snapshot", "Your current presence and lead flow details are organized for review."],
+    ["Initial Digital Snapshot", "Your current presence and customer request details are organized for review."],
     ["Human Review", "BLYNX reviews the findings and adds personalized recommendations."],
     ["Audit Delivered + Book a Call", "You receive your audit summary and can book a strategy call."]
   ],
@@ -1882,7 +1882,7 @@ const auditFlow = {
     ["Haz clic en Auditoría Gratis", "Inicia tu solicitud de auditoría gratis en nuestro sitio."],
     ["Elige Idioma", "Soporte disponible en inglés o español."],
     ["Responde el Formulario", "Comparte tu negocio, metas, contacto y presencia actual en internet."],
-    ["Revisión Digital Inicial", "La información de tu presencia actual y flujo de captación se organiza para revisión."],
+    ["Revisión Digital Inicial", "La información de tu presencia actual y de tus solicitudes se organiza para revisión."],
     ["Revisión de BLYNX", "BLYNX revisa los hallazgos y agrega recomendaciones personalizadas."],
     ["Auditoría Entregada + Agenda una Llamada", "Recibes el resumen de tu auditoría y puedes agendar una llamada estratégica."]
   ]
@@ -2257,8 +2257,8 @@ const PRODUCT_IMAGES = {
     en: { base: "blynx-system-2-capture-organization-en", width: 1448, height: 1086 },
     es: { base: "blynx-system-2-capture-organization-es", width: 1672, height: 941 },
     alt: {
-      en: "System 2 in action: a new contact request captured and organized into lead cards and a sales pipeline board.",
-      es: "Sistema 2 en acción: una nueva solicitud de contacto captada y organizada en tarjetas de lead y un tablero de pipeline de ventas."
+      en: "System 2 in action: a new contact request organized by status and priority on a simple opportunity board.",
+      es: "Sistema 2 en acción: una nueva solicitud de contacto organizada por estado y prioridad en un tablero simple de oportunidades."
     }
   },
   system3: {
@@ -3093,8 +3093,8 @@ const portfolioProjects = [
     },
     industry: { en: "Fitness Coaching (Demo)", es: "Coaching fitness (Demo)" },
     summary: {
-      en: "A concept landing page for a fitness transformation brand — built to turn attention into applications with a bold offer, a clear program, and a lead-capture flow. Fictional brand, illustrative content.",
-      es: "Una landing de concepto para una marca de transformación fitness — creada para convertir la atención en aplicaciones con una oferta potente, un programa claro y un flujo de captación. Marca ficticia, contenido ilustrativo."
+      en: "A concept landing page for a fitness transformation brand — built to turn attention into applications with a bold offer, a clear program, and an application flow. Fictional brand, illustrative content.",
+      es: "Una landing de concepto para una marca de transformación fitness — creada para convertir la atención en aplicaciones con una oferta potente, un programa claro y un flujo de aplicación. Marca ficticia, contenido ilustrativo."
     },
     business: {
       en: "FORGE is a fictional fitness-coaching brand offering a 12-week body-transformation challenge. This is a concept demo, not a real client.",
@@ -3110,20 +3110,20 @@ const portfolioProjects = [
     },
     elements: {
       en: [
-        "Conversion-focused hero",
+        "Application-focused hero",
         "Program in 4 pillars",
         "12-week timeline",
         "Program tiers",
-        "Application / lead capture",
+        "Application form",
         "Bilingual (EN/ES)",
         "Mobile optimized"
       ],
       es: [
-        "Hero enfocado en conversión",
+        "Hero enfocado en aplicaciones",
         "Programa en 4 pilares",
         "Línea de tiempo de 12 semanas",
         "Niveles de programa",
-        "Aplicación / captación",
+        "Formulario de aplicación",
         "Bilingüe (EN/ES)",
         "Optimizado para móvil"
       ]
@@ -4135,7 +4135,7 @@ function languageGate() {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BLYNX Systems | Digital Systems for Local Businesses</title>
-    <meta name="description" content="BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.">
+    <meta name="description" content="BLYNX builds digital presence and customer systems that help local businesses get found, build trust, capture opportunities, and follow up faster.">
     <link rel="canonical" href="${SITE_URL}/">
     <link rel="alternate" hreflang="en" href="${SITE_URL}/en">
     <link rel="alternate" hreflang="es" href="${SITE_URL}/es">
@@ -4143,7 +4143,7 @@ function languageGate() {
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="${BUSINESS.displayName}">
     <meta property="og:title" content="${BUSINESS.displayName}">
-    <meta property="og:description" content="Digital presence and lead systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
+    <meta property="og:description" content="Digital presence and customer systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
     <meta property="og:url" content="${SITE_URL}/">
     <meta property="og:image" content="${OG_IMAGE_EN}">
     <meta property="og:image:width" content="1774">
@@ -4151,10 +4151,10 @@ function languageGate() {
     <meta property="og:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${BUSINESS.displayName}">
-    <meta name="twitter:description" content="Digital presence and lead systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
+    <meta name="twitter:description" content="Digital presence and customer systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
     <meta name="twitter:image" content="${OG_IMAGE_EN}">
     <meta name="twitter:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
-    ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and lead systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
+    ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and customer systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">

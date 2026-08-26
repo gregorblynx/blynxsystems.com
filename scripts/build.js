@@ -115,25 +115,25 @@ const requiredSnippets = new Map([
   ["en/existing/index.html", [
     "Improve What You Already Have",
     "Visibility Tune-Up",
-    "Lead Capture Review",
+    "Customer Request Review",
     "/en/free-audit-existing"
   ]],
   ["en/zero/index.html", [
     "Build Your Digital Foundation From Zero",
     "Google Business Profile Setup",
-    "Conversion Landing Page",
+    "Contact-Focused Landing Page",
     "/en/free-audit-zero"
   ]],
   ["es/existing/index.html", [
     "Mejora lo que Ya Tienes",
     "Mejora de Visibilidad",
-    "Revisión de Captación",
+    "Revisión de Solicitudes",
     "/es/free-audit-existing"
   ]],
   ["es/zero/index.html", [
     "Construye tu Base Digital Desde Cero",
     "Configuración de Google Business Profile",
-    "Landing Page de Conversión",
+    "Landing Page Enfocada en Contacto",
     "/es/free-audit-zero"
   ]],
   ["en/index.html", [
