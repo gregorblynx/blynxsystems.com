@@ -3236,7 +3236,9 @@ function homePage(lang) {
     <main id="main">
       <section class="hero hero-home" id="home">
         <div class="container">
-          <p class="eyebrow hero-eyebrow-top">${h.eyebrow}</p>
+          <div class="hero-eyebrow-top">
+            <p class="eyebrow">${h.eyebrow}</p>
+          </div>
           <div class="hero-grid hero-grid-solo">
             ${productImage("hero", lang, { priority: true, sizes: "(max-width: 900px) 100vw, 900px", className: "product-visual-hero" })}
             <div class="hero-copy">

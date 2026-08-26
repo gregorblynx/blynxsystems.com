@@ -348,7 +348,10 @@ button {
 
 /* Hero-only: the eyebrow now sits above the hero image (nav -> eyebrow ->
    image -> h1), so it needs its own bottom margin instead of the one it
-   used to inherit from sitting directly above the H1 inside .hero-copy. */
+   used to inherit from sitting directly above the H1 inside .hero-copy.
+   It's a block-level wrapper around the (inline-flex, shrink-to-fit)
+   .eyebrow specifically so this box can carry its own width/centering below
+   — an inline-flex element ignores margin:auto centering on its own. */
 .hero-eyebrow-top {
   margin-bottom: 1.25rem;
 }
@@ -659,7 +662,8 @@ button {
    tighter caps independent of this column, so widening it doesn't stretch
    the text — it only gives the hero image more room and better balance. */
 @media (min-width: 1024px) {
-  .hero-grid-solo {
+  .hero-grid-solo,
+  .hero-eyebrow-top {
     max-width: min(1060px, 100%);
     margin-inline: auto;
   }
