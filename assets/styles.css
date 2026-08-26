@@ -632,10 +632,18 @@ button {
 }
 
 /* Hero single-column (home) */
+/* Solid black, not the sitewide body gradient (which includes a warm radial
+   glow around 82% 10% — roughly where this section's top-right corner
+   falls). The hero image's own canvas is pure #000 at its edges, and its
+   mask fades those edges to transparent, revealing whatever sits behind
+   it. Against the body's gradient/glow that showed as a visible rectangle
+   (the image's true-black edge against a slightly warmer/lighter page
+   background); flat black behind it removes that seam entirely. */
 .hero-home {
   min-height: auto;
   align-items: start;
   padding: 2.75rem 0 3.5rem;
+  background: #000;
 }
 
 /* No max-width here on purpose: the eyebrow that used to live above the
@@ -1717,6 +1725,16 @@ button {
   align-items: start;
 }
 
+/* Home overview only: the text checklist now varies in wrapped height per
+   card (unlike the fixed-aspect image it replaced), so without this the
+   three cards no longer line up. Grid's default row-stretch (removing the
+   base rule's align-items:start for this specific grid) makes all three
+   match the tallest card at each breakpoint; .system-card-actions already
+   has margin-top:auto, so the CTA still sits flush at the bottom of each. */
+.system-offer-grid-overview {
+  align-items: stretch;
+}
+
 @media (max-width: 1120px) and (min-width: 761px) {
   .system-offer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1762,6 +1780,61 @@ button {
   justify-content: space-between;
   gap: 0.75rem;
   align-items: center;
+}
+
+/* Home overview cards only: the badge slot is now always rendered (empty on
+   System 1/2), so this reserves its height on every card instead of only
+   existing where a badge does — otherwise System 3's badge pushed its title
+   down relative to the other two, misaligning the "What's included" boxes
+   below even though the cards were the same overall height. Sized to the
+   real rendered height of a .system-badge (font-size 0.72rem line-height 1.6
+   + 0.32rem top/bottom padding). */
+.system-offer-grid-overview .system-offer-topline {
+  min-height: 1.9rem;
+}
+
+/* Same idea for the title: the longest titles ("Customer Requests &
+   Organization/Follow-Up System" in EN) wrap to 4 lines in this column
+   width while the shortest ("Digital Presence System") wraps to 2, so
+   without this the included-box/price/CTA rows started at different
+   heights per card. Reserves the worst case across both languages. */
+.system-offer-grid-overview .system-offer-card h3 {
+  min-height: calc(1.08em * 4);
+}
+
+/* Same reasoning again, one level down: "Get found → Build trust → Get
+   contacted" fits on one line at this column width, but the longer EN/ES
+   result chains ("Receive requests → Sort them → Stay organized") wrap to
+   two — measured, not assumed, after the title fix above still left a
+   residual gap here. No explicit line-height is set, so it inherits the
+   sitewide 1.6. */
+.system-offer-grid-overview .system-result-chain {
+  min-height: calc(1.6em * 2);
+}
+
+/* The "What's included" checklist itself is the one block above that can't
+   be reserved the same way — its real height depends on how many of the 6
+   bullets happen to wrap to a second line, which varies per card/language
+   and isn't worth pinning to a guessed line count. Anchoring the price
+   line (and, since margin:auto on a flex child pulls everything after it
+   along for free, the CTA and the scope-toggle footer with it) to the
+   bottom of the card sidesteps that: whatever height the checklist ends up
+   at, price/CTA/footer still land on the same row across all three cards,
+   since .system-offer-grid-overview already stretches them to equal
+   height. */
+.system-offer-grid-overview .system-price-line {
+  margin-top: auto;
+}
+
+/* .system-card-actions has its own margin-top:auto (needed on the Services
+   page, where cards aren't stretched to equal height). Here that would
+   compete with the price line's auto margin above — flexbox splits free
+   space evenly between multiple auto margins in the same axis, which is
+   exactly what left the price pill itself still landing at slightly
+   different heights per card even after CTA/toggle lined up. Only the
+   price line should absorb the leftover space in this grid. */
+.system-offer-grid-overview .system-card-actions {
+  margin-top: 0;
 }
 
 .system-number {
@@ -1858,6 +1931,38 @@ button {
 .add-on-scope .check-list li {
   font-size: 0.94rem;
   line-height: 1.45;
+}
+
+/* Replaces the old product-screenshot image in the home overview cards: a
+   plain-language "what's included" checklist, using the same .check-list
+   look already used elsewhere in this card (the collapsed summary below).
+   Charcoal panel (not pure black, not the card's own translucent white
+   gradient) so the list reads as a distinct content block without adding
+   another border or a heavier visual layer. */
+.system-included {
+  margin-top: 1.35rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.32);
+  padding: 1.1rem 1.2rem;
+}
+
+.system-included-title {
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.system-included .check-list {
+  margin-top: 0.85rem;
+  gap: 0.6rem;
+}
+
+.system-included .check-list li {
+  font-size: 0.93rem;
+  line-height: 1.4;
 }
 
 .implementation-lead {
@@ -1966,6 +2071,25 @@ button {
   filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.45));
 }
 
+/* Before/After comparison graphic (replaces the old text-only "problem"
+   section). Same per-axis fade approach as the hero above, tuned to this
+   asset's own measured content margins (~1.85-2% horizontal, ~2.1-2.8%
+   vertical) rather than reused wholesale — a wider fade here would clip
+   the "Before/After BLYNX" labels and the stat row along the bottom edge.
+   No extra width/centering rule needed: the direct parent is .container,
+   so this already fills the sitewide max-width and stays centered on its
+   own. */
+.before-after-visual {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 1.5%, #000 98.5%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 1.5%, #000 98.5%, transparent 100%);
+}
+
+.before-after-visual img {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 1.8%, #000 98.2%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 1.8%, #000 98.2%, transparent 100%);
+  filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.45));
+}
+
 .system-result-chain {
   margin: 0.6rem 0 0;
   color: var(--muted-strong);
@@ -1984,105 +2108,6 @@ button {
 
 .exclusion-list li {
   color: var(--muted);
-}
-
-/* ============ Mobile compact price comparison — non-sticky ============ */
-
-.price-compare {
-  display: none;
-  align-items: stretch;
-  gap: 0.5rem;
-  margin: 0 0 1.5rem;
-}
-
-.price-compare-cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  flex: 1 1 0;
-  min-width: 0;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 0.85rem 0.3rem;
-  text-align: center;
-  color: var(--text);
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.price-compare-cell.is-complete {
-  border-color: rgba(245, 184, 73, 0.35);
-}
-
-/* Always rendered (empty on cells with no badge) so every cell reserves the
-   same amount of vertical space above its label — the Best Value badge on
-   System 3 must not push that cell's label/price lower than System 1/2's. */
-.price-compare-badge-slot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 1.6rem;
-  overflow: hidden;
-}
-
-/* Scoped to this strip only — the badge needs to shrink to fit a ~90-120px
-   cell without wrapping ("MEJOR VALOR"/"BEST VALUE" wrap at the default
-   system-badge size), independent of how the badge looks everywhere else
-   (system cards, hero) where it has plenty of room. */
-.price-compare-badge-slot .system-badge {
-  white-space: nowrap;
-  font-size: 0.6rem;
-  padding: 0.22rem 0.5rem;
-}
-
-.price-compare-name {
-  display: block;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  color: var(--muted-strong);
-}
-
-.price-compare-value {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--gold-soft);
-}
-
-@media (max-width: 760px) {
-  .price-compare {
-    display: flex;
-  }
-}
-
-@media (max-width: 400px) {
-  .price-compare {
-    gap: 0.25rem;
-  }
-
-  .price-compare-cell {
-    padding: 0.7rem 0.05rem;
-  }
-
-  .price-compare-name {
-    font-size: 0.66rem;
-    letter-spacing: -0.02em;
-  }
-
-  .price-compare-value {
-    font-size: 1rem;
-  }
-
-  .price-compare-badge-slot .system-badge {
-    font-size: 0.58rem;
-    padding: 0.16rem 0.36rem;
-  }
 }
 
 /* ============ Comparison table (native <details>) ============ */
