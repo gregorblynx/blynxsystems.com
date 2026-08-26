@@ -356,6 +356,16 @@ button {
   margin-bottom: 1.25rem;
 }
 
+/* The one-sided dash before the label read as unbalanced sitting alone
+   above the hero image (nothing else in the hero uses that motif). Scoped
+   to the hero only — every other section's eyebrow keeps its dash
+   unchanged. Removed rather than mirrored on the right: a label this short
+   doesn't need a divider on either side to read clearly, and dropping it
+   is the more minimal of the two options. */
+.hero-eyebrow-top .eyebrow::before {
+  display: none;
+}
+
 .eyebrow::before {
   width: 1.8rem;
   height: 1px;
