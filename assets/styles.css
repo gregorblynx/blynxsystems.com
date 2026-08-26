@@ -632,10 +632,18 @@ button {
 }
 
 /* Hero single-column (home) */
+/* Solid black, not the sitewide body gradient (which includes a warm radial
+   glow around 82% 10% — roughly where this section's top-right corner
+   falls). The hero image's own canvas is pure #000 at its edges, and its
+   mask fades those edges to transparent, revealing whatever sits behind
+   it. Against the body's gradient/glow that showed as a visible rectangle
+   (the image's true-black edge against a slightly warmer/lighter page
+   background); flat black behind it removes that seam entirely. */
 .hero-home {
   min-height: auto;
   align-items: start;
   padding: 2.75rem 0 3.5rem;
+  background: #000;
 }
 
 /* No max-width here on purpose: the eyebrow that used to live above the
