@@ -2963,7 +2963,8 @@ const portfolioProjects = [
     id: "gladiadores",
     type: "real",
     name: "Gladiadores App",
-    url: null,
+    url: "https://gladiadores.app",
+    ctaLabel: { en: "View Live Project", es: "Ver Proyecto en Vivo" },
     image: "/public/images/projects/gladiadores.jpg",
     // The source cover is 1280x720 (16:9); the shared project-shot box is
     // 1200x750 (1.6:1), which is narrower than the source — object-fit:cover
@@ -3113,6 +3114,10 @@ function projectCard(lang, project, p) {
   const journey = project.journey[lang];
   const isDemo = project.type === "demo";
   const url = project.url ? (typeof project.url === "string" ? project.url : project.url[lang]) : null;
+  // Falls back to the shared viewLive/viewDemo copy every other project
+  // uses (unchanged); only set project.ctaLabel when a project needs its
+  // own exact wording.
+  const ctaLabel = project.ctaLabel ? project.ctaLabel[lang] : isDemo ? p.viewDemo : p.viewLive;
   // The wrapper below is always aria-hidden="true" (the project name/summary
   // text carries the accessible content), so this image is decorative to
   // assistive tech regardless of language — alt="" is the correct value, not
@@ -3174,7 +3179,7 @@ function projectCard(lang, project, p) {
               ${
                 url
                   ? `<div class="project-actions">
-                <a class="btn btn-primary" href="${url}" target="_blank" rel="noopener noreferrer">${isDemo ? p.viewDemo : p.viewLive}</a>
+                <a class="btn btn-primary" href="${url}" target="_blank" rel="noopener noreferrer">${ctaLabel}</a>
               </div>`
                   : ""
               }

@@ -650,6 +650,21 @@ button {
   max-width: 900px;
 }
 
+/* Desktop/laptop only: the 900px column sat flush against the container's
+   left edge, leaving a large empty gap on the right at wide viewports
+   (container caps at 1180px) and reading as left-heavy. Widen it a bit and
+   center it instead — min(...,100%) means it can never exceed the actual
+   container width, so this can't overflow at any size in between. The H1
+   (max-width 760px) and body copy (max-width 670px) already have their own
+   tighter caps independent of this column, so widening it doesn't stretch
+   the text — it only gives the hero image more room and better balance. */
+@media (min-width: 1024px) {
+  .hero-grid-solo {
+    max-width: min(1060px, 100%);
+    margin-inline: auto;
+  }
+}
+
 /* Lead capture flow section */
 .flow-stages {
   display: grid;
