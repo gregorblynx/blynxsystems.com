@@ -677,6 +677,17 @@ button {
     max-width: min(1060px, 100%);
     margin-inline: auto;
   }
+
+  /* max-width + margin-inline:auto above only centers the .hero-eyebrow-top
+     BOX to match the image's box — it doesn't center the (inline-flex,
+     shrink-to-fit) text inside it, which was still sitting flush left
+     within that box. text-align centers inline-level content within its
+     container, so this centers the label itself over the now-centered
+     image. H1/copy/CTAs below stay in normal left-aligned flow — only the
+     eyebrow is text-align:center, and only at this breakpoint. */
+  .hero-eyebrow-top {
+    text-align: center;
+  }
 }
 
 /* Lead capture flow section */
