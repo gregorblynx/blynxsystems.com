@@ -1717,6 +1717,16 @@ button {
   align-items: start;
 }
 
+/* Home overview only: the text checklist now varies in wrapped height per
+   card (unlike the fixed-aspect image it replaced), so without this the
+   three cards no longer line up. Grid's default row-stretch (removing the
+   base rule's align-items:start for this specific grid) makes all three
+   match the tallest card at each breakpoint; .system-card-actions already
+   has margin-top:auto, so the CTA still sits flush at the bottom of each. */
+.system-offer-grid-overview {
+  align-items: stretch;
+}
+
 @media (max-width: 1120px) and (min-width: 761px) {
   .system-offer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
