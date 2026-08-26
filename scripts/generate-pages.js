@@ -813,6 +813,11 @@ const commercialOffer = {
     exclusionsTitle: "Not included",
     detailsLink: "See full implementation scope",
     compareLink: "Compare all three systems",
+    // Home overview cards only (systemsOverviewSection) — plain-language title/
+    // result-chain/CTA/checklist shown on the card itself. Kept separate from
+    // name/resultChain/cta above (which the Services page detail cards also
+    // read) so this simpler home copy can't drift that page's wording.
+    whatsIncludedTitle: "What's included",
     leadCaptureDefinition:
       "“Lead capture” means receiving and organizing the inquiries and opportunities that come from your website, Google, referrals, advertising, prospecting or other channels.",
     systems: [
@@ -822,6 +827,17 @@ const commercialOffer = {
         startingPrice: 1500,
         badge: null,
         resultChain: ["Be found", "Build trust", "Receive inquiries"],
+        cardTitle: "Digital Presence System",
+        cardResultChain: ["Get found", "Build trust", "Get contacted"],
+        cardCta: "Start with System 1",
+        whatsIncluded: [
+          "A professional website",
+          "A better Google Business presence",
+          "Clear service pages",
+          "An easy way for people to contact you",
+          "Trust-building reviews",
+          "A mobile-friendly experience"
+        ],
         positioning:
           "The digital foundation customers use to find your business, understand what you offer, and trust it enough to reach out.",
         ideal: [
@@ -870,6 +886,17 @@ const commercialOffer = {
         startingPrice: 2250,
         badge: null,
         resultChain: ["Receive", "Classify", "Organize"],
+        cardTitle: "Inquiry & Organization System",
+        cardResultChain: ["Receive inquiries", "Sort them", "Stay organized"],
+        cardCta: "Start with System 2",
+        whatsIncluded: [
+          "Everything in System 1",
+          "A clear way to receive new inquiries",
+          "All customer inquiries in one place",
+          "Better organization by service or urgency",
+          "A simple view of open opportunities",
+          "A better process to manage incoming requests"
+        ],
         positioning:
           "Everything in the Digital Presence System, plus a way to know exactly who contacted you, what they need, and where every request stands.",
         ideal: [
@@ -914,6 +941,17 @@ const commercialOffer = {
         startingPrice: 2500,
         badge: "Best Value",
         resultChain: ["Receive", "Organize", "Follow up"],
+        cardTitle: "Inquiry & Follow-Up System",
+        cardResultChain: ["Receive inquiries", "Stay organized", "Follow up"],
+        cardCta: "Start with System 3",
+        whatsIncluded: [
+          "Everything in System 2",
+          "Follow-up reminders",
+          "Quote follow-up",
+          "Review request reminders",
+          "Appointment reminders",
+          "A better system to keep up with opportunities"
+        ],
         positioning:
           "Everything in Systems 1 and 2, plus the follow-up layer that catches the opportunities other systems let go quiet.",
         ideal: [
@@ -1080,8 +1118,9 @@ const commercialOffer = {
     implementationTitle: "Qué implementamos",
     resultTitle: "Qué te ayuda a lograr este sistema",
     exclusionsTitle: "No incluye",
-    detailsLink: "Ver el alcance completo de implementación",
+    detailsLink: "Ver alcance completo de implementación",
     compareLink: "Comparar los tres sistemas",
+    whatsIncludedTitle: "Qué incluye",
     leadCaptureDefinition:
       "“La captación” se refiere a recibir y organizar las solicitudes y oportunidades que llegan desde el sitio web, Google, referencias, publicidad, prospección u otros canales.",
     systems: [
@@ -1091,6 +1130,17 @@ const commercialOffer = {
         startingPrice: 1500,
         badge: null,
         resultChain: ["Ser encontrado", "Generar confianza", "Recibir solicitudes"],
+        cardTitle: "Sistema de Presencia Digital",
+        cardResultChain: ["Te encuentran", "Generas confianza", "Te contactan"],
+        cardCta: "Comienza con Sistema 1",
+        whatsIncluded: [
+          "Un sitio web profesional",
+          "Una mejor presencia en Google Business",
+          "Páginas claras para tus servicios",
+          "Una forma fácil para que te contacten",
+          "Reseñas que generan confianza",
+          "Una experiencia optimizada para celular"
+        ],
         positioning:
           "La base digital que tus clientes usan para encontrar tu negocio, entender qué ofreces y confiar lo suficiente como para contactarte.",
         ideal: [
@@ -1139,6 +1189,17 @@ const commercialOffer = {
         startingPrice: 2250,
         badge: null,
         resultChain: ["Recibir", "Clasificar", "Organizar"],
+        cardTitle: "Sistema de Solicitudes y Organización",
+        cardResultChain: ["Recibes solicitudes", "Las ordenas", "Mantienes todo organizado"],
+        cardCta: "Comienza con Sistema 2",
+        whatsIncluded: [
+          "Todo lo del Sistema 1",
+          "Una forma clara de recibir nuevas solicitudes",
+          "Todas las solicitudes en un solo lugar",
+          "Mejor organización por servicio o urgencia",
+          "Una vista simple de oportunidades abiertas",
+          "Un mejor proceso para manejar los contactos que llegan"
+        ],
         positioning:
           "Todo lo incluido en el Sistema de Presencia Digital, más una forma de saber exactamente quién te contactó, qué necesita y en qué punto está cada solicitud.",
         ideal: [
@@ -1183,6 +1244,17 @@ const commercialOffer = {
         startingPrice: 2500,
         badge: "Mejor Valor",
         resultChain: ["Recibir", "Organizar", "Dar seguimiento"],
+        cardTitle: "Sistema de Solicitudes y Seguimiento",
+        cardResultChain: ["Recibes solicitudes", "Mantienes orden", "Das seguimiento"],
+        cardCta: "Comienza con Sistema 3",
+        whatsIncluded: [
+          "Todo lo del Sistema 2",
+          "Recordatorios de seguimiento",
+          "Seguimiento de cotizaciones",
+          "Recordatorios para pedir reseñas",
+          "Recordatorios de citas",
+          "Un mejor sistema para no descuidar oportunidades"
+        ],
         positioning:
           "Todo lo incluido en los Sistemas 1 y 2, más la capa de seguimiento que rescata las oportunidades que otros sistemas dejan enfriar.",
         ideal: [
@@ -2299,16 +2371,19 @@ function systemsOverviewSection(lang) {
           <div class="system-offer-grid system-offer-grid-overview">
             ${offer.systems
               .map(
-                (system, index) => `
+                (system) => `
             <article class="system-offer-card${system.badge ? " is-complete" : ""}" id="${system.id}">
               ${legacyAnchor(system)}
               ${system.badge ? `<div class="system-offer-topline"><span class="system-badge">${system.badge}</span></div>` : ""}
-              <h3>${system.name}</h3>
-              <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
-              ${productImage(SYSTEM_IMAGE_KEYS[index], lang, { sizes: "(max-width: 760px) 100vw, 420px" })}
+              <h3>${system.cardTitle}</h3>
+              <p class="system-result-chain">${system.cardResultChain.join(" → ")}</p>
+              <div class="system-included">
+                <h4 class="system-included-title">${offer.whatsIncludedTitle}</h4>
+                ${offerList(system.whatsIncluded)}
+              </div>
               <p class="system-price-line"><span class="system-price">${systemPriceDisplay(offer, system)}</span></p>
               <div class="system-card-actions">
-                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
+                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cardCta}</a>
               </div>
               <details class="system-summary-toggle">
                 <summary>${offer.detailsLink}</summary>

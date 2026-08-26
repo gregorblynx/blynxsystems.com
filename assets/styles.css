@@ -1860,6 +1860,38 @@ button {
   line-height: 1.45;
 }
 
+/* Replaces the old product-screenshot image in the home overview cards: a
+   plain-language "what's included" checklist, using the same .check-list
+   look already used elsewhere in this card (the collapsed summary below).
+   Charcoal panel (not pure black, not the card's own translucent white
+   gradient) so the list reads as a distinct content block without adding
+   another border or a heavier visual layer. */
+.system-included {
+  margin-top: 1.35rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.32);
+  padding: 1.1rem 1.2rem;
+}
+
+.system-included-title {
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.system-included .check-list {
+  margin-top: 0.85rem;
+  gap: 0.6rem;
+}
+
+.system-included .check-list li {
+  font-size: 0.93rem;
+  line-height: 1.4;
+}
+
 .implementation-lead {
   margin: 0.75rem 0 0;
   color: var(--text);
