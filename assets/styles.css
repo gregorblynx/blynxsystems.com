@@ -1946,15 +1946,23 @@ button {
 }
 
 /* v3 hero assets (5-pillar, no CRM) are composed almost edge-to-edge — the
-   pillar cards sit within ~2-4% of every side, far tighter than the old
-   asset's margins — so unlike the vertical-only fade above, this uses a
-   single radial vignette sized to that measured safe zone on all four
-   sides at once (closest-side keeps it symmetric even though the two
-   language assets aren't pixel-identical in size). Going softer than this
-   would start dimming the outermost pillar cards themselves. */
+   title row and the outermost pillar cards sit within ~1.5-3% of every
+   side, far tighter than the old asset's margins. A single radial vignette
+   (tried first) clips real content here: near the top/bottom of an ellipse
+   the safe horizontal extent shrinks toward zero, so it cut into the title
+   text and the outer cards even though the same content is untouched at
+   the vertical center. Fading each axis independently avoids that: the
+   left/right fade lives on this wrapper, the top/bottom fade stays on the
+   img below, and the two compose naturally (no mask-composite needed) —
+   corners get the product of both, a mild not aggressive darkening. */
+.product-visual-hero {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 1.5%, #000 98.5%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 1.5%, #000 98.5%, transparent 100%);
+}
+
 .product-visual-hero img {
-  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 96%, transparent 100%);
-  mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 2.5%, #000 97.5%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 2.5%, #000 97.5%, transparent 100%);
   filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.45));
 }
 
