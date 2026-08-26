@@ -678,15 +678,17 @@ button {
     margin-inline: auto;
   }
 
-  /* max-width + margin-inline:auto above only centers the .hero-eyebrow-top
-     BOX to match the image's box — it doesn't center the (inline-flex,
-     shrink-to-fit) text inside it, which was still sitting flush left
-     within that box. text-align centers inline-level content within its
-     container, so this centers the label itself over the now-centered
-     image. H1/copy/CTAs below stay in normal left-aligned flow — only the
-     eyebrow is text-align:center, and only at this breakpoint. */
+  /* Full text-align:center (tried previously) planted the label dead-center
+     of the whole 1060px image width, which read as a generic standalone
+     centered title floating over empty space — disconnected from the image
+     rather than part of it. Flush-left (the position before that) read as
+     too far over to the edge. This nudges it inward from the image's own
+     left edge without centering it outright, so it still reads as this
+     image's caption/kicker — anchored to the same block, not a floating
+     independent headline. The box itself (width + left/right edges) still
+     matches the image's box exactly; only the text's start point shifts. */
   .hero-eyebrow-top {
-    text-align: center;
+    padding-left: 15%;
   }
 }
 
