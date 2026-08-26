@@ -14,10 +14,15 @@
  *    assets/site.js.
  *
  * Every submission is appended as a new row to a "Leads" sheet (created automatically, with
- * columns added automatically if the form ever changes) and triggers an email notification.
+ * columns added automatically if the form ever changes), triggers an internal notification
+ * email to NOTIFY_EMAIL, and — once the row is confirmed saved — a separate confirmation
+ * email to the submitter themselves (see sendConfirmationEmailSafely). The confirmation step
+ * never throws: a failure there is logged and swallowed so it can never turn an already-saved
+ * lead into a reported submission failure.
  */
 
 const NOTIFY_EMAIL = "hello@blynxsystems.com";
+const REPLY_TO_EMAIL = "hello@blynxsystems.com";
 const SHEET_NAME = "Leads";
 
 function doPost(e) {
@@ -37,6 +42,9 @@ function doPost(e) {
     const sheet = getOrCreateSheet();
     appendRow(sheet, data);
     sendNotificationEmail(data);
+    // Only ever called after the row above is confirmed appended. Never throws — see the
+    // function itself — so it cannot turn a successfully saved lead into a reported failure.
+    sendConfirmationEmailSafely(data);
     return ContentService.createTextOutput(JSON.stringify({ result: "success" })).setMimeType(
       ContentService.MimeType.JSON
     );
@@ -134,4 +142,142 @@ function sendNotificationEmail(data) {
     subject: `New BLYNX ${formType} lead: ${business} (${name})`,
     body: body
   });
+}
+
+/**
+ * Customer-facing confirmation, sent after the lead row is already saved and the internal
+ * notification has already gone out. This is purely additive — it never affects whether the
+ * submission itself is reported as a success or an error to the frontend. Any failure here
+ * (MailApp quota, transient Gmail error, anything) is caught, logged to the Apps Script
+ * execution log (Extensions -> Apps Script -> Executions), and swallowed. The lead the visitor
+ * already has stored in the sheet must never be undone by a problem sending this email.
+ */
+function sendConfirmationEmailSafely(data) {
+  try {
+    if (!data || !data.email) return;
+    const locale = resolveLocale(data);
+    const copy = CONFIRMATION_COPY[locale];
+    const greetingName = extractFirstName(data.fullName);
+    const greeting = greetingName ? `${copy.hi} ${greetingName},` : copy.hiFallback;
+
+    MailApp.sendEmail({
+      to: data.email,
+      subject: copy.subject,
+      name: "BLYNX",
+      replyTo: REPLY_TO_EMAIL,
+      body: confirmationPlainText(copy, greeting),
+      htmlBody: confirmationHtml(copy, greeting)
+    });
+  } catch (error) {
+    console.error(`BLYNX confirmation email failed to send: ${error}`);
+  }
+}
+
+/**
+ * The only reliable, already-existing signal for the submitter's language: every form (Contact
+ * and all three Free Audit variants, EN and ES) already carries a hidden preferredLanguage
+ * field, set at build time to the literal string "English" or "Spanish" for the page it's
+ * rendered on (scripts/generate-pages.js -> preferredLanguageValue()). No new field was needed.
+ * Unrecognized/missing values fail safe to "en" (also the site's own root-language default) —
+ * this keeps old or unexpected payload shapes from ever throwing here.
+ */
+function resolveLocale(data) {
+  const value = String((data && data.preferredLanguage) || "")
+    .trim()
+    .toLowerCase();
+  if (value === "spanish" || value === "español" || value === "espanol") return "es";
+  return "en";
+}
+
+// Only the first token of fullName, never the raw value — keeps the greeting from breaking on
+// a full "First Last" name and never throws on a missing/empty value.
+function extractFirstName(fullName) {
+  const trimmed = String(fullName || "").trim();
+  if (!trimmed) return "";
+  return trimmed.split(/\s+/)[0];
+}
+
+const CONFIRMATION_COPY = {
+  en: {
+    subject: "We received your request | BLYNX",
+    hi: "Hi",
+    hiFallback: "Hi there,",
+    thanks: "Thanks for contacting BLYNX.",
+    body: "We’ve received your request and will review the information you sent. We’ll be in touch soon to learn more about your business and see how we can help.",
+    meanwhile: "In the meantime, you can learn more about our digital systems at:",
+    link: "https://www.blynxsystems.com",
+    tagline: "Digital Systems for Local Businesses"
+  },
+  es: {
+    subject: "Recibimos tu solicitud | BLYNX",
+    hi: "Hola",
+    hiFallback: "Hola,",
+    thanks: "Gracias por contactar a BLYNX.",
+    body: "Hemos recibido tu solicitud y revisaremos la información que nos enviaste. Pronto nos pondremos en contacto contigo para conocer mejor tu negocio y ver cómo podemos ayudarte.",
+    meanwhile: "Mientras tanto, puedes conocer más sobre nuestros sistemas digitales en:",
+    link: "https://www.blynxsystems.com/es/",
+    tagline: "Sistemas Digitales para Negocios Locales"
+  }
+};
+
+function confirmationPlainText(copy, greeting) {
+  return [
+    greeting,
+    "",
+    copy.thanks,
+    "",
+    copy.body,
+    "",
+    copy.meanwhile,
+    "",
+    copy.link,
+    "",
+    "BLYNX",
+    copy.tagline
+  ].join("\n");
+}
+
+// Simple, single-column, inline-styled HTML — no remote images, no tracking pixel, no
+// animation. Dark charcoal background with a single gold accent (the BLYNX wordmark and the
+// link), matching the site's own black-first/gold-accent palette without pulling in any of
+// the site's real CSS or assets.
+function confirmationHtml(copy, greeting) {
+  return `<!doctype html>
+<html>
+  <body style="margin:0;padding:0;background-color:#0b0b0b;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0b0b0b;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background-color:#111111;border:1px solid rgba(255,255,255,0.12);border-radius:8px;">
+            <tr>
+              <td style="padding:32px 28px;font-family:Arial,Helvetica,sans-serif;">
+                <p style="margin:0 0 24px;font-size:20px;font-weight:bold;letter-spacing:0.04em;color:#f5b849;">BLYNX</p>
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#f7f2e8;">${escapeHtml(greeting)}</p>
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#f7f2e8;">${escapeHtml(copy.thanks)}</p>
+                <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#f7f2e8;">${escapeHtml(copy.body)}</p>
+                <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#b7afa0;">${escapeHtml(copy.meanwhile)}</p>
+                <p style="margin:0 0 28px;font-size:16px;line-height:1.6;"><a href="${copy.link}" style="color:#f5b849;text-decoration:underline;">${copy.link}</a></p>
+                <p style="margin:0;font-size:13px;line-height:1.5;color:#8b8478;">BLYNX<br>${escapeHtml(copy.tagline)}</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+// Applied to every piece of copy interpolated into the HTML body (greeting includes the
+// customer's own first name). CONFIRMATION_COPY strings are static and already safe, but the
+// greeting is the one value built from submitted data, so this stays defense-in-depth rather
+// than assuming sanitizeText() upstream is enough for HTML specifically (it strips <> but not
+// &, ", or ').
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
