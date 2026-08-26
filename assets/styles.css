@@ -666,10 +666,17 @@ button {
    matching copy of it) so the eyebrow and the hero image can never drift
    apart again — one width/centering rule, two boxes that are structurally
    identical at every breakpoint, instead of two selectors kept in sync by
-   hand. */
+   hand. Centered (not flush-left) within that shared box, at every
+   breakpoint, so it reads as centered over the image below it rather than
+   left-heavy — this is a short standalone line, not body copy, so centering
+   it doesn't hurt readability the way it would for a paragraph. */
 .hero-grid-solo,
 .hero-eyebrow-top {
   max-width: 900px;
+}
+
+.hero-eyebrow-top {
+  text-align: center;
 }
 
 /* Desktop/laptop only: the 900px column sat flush against the container's
@@ -681,10 +688,8 @@ button {
    tighter caps independent of this column, so widening it doesn't stretch
    the text — it only gives the hero image more room and better balance.
    Applying the same rule to .hero-eyebrow-top keeps its box identical to the
-   image's box here too. No extra text-align or padding on top of this: the
-   image's own artwork already sits close to this box's left edge (verified
-   against the source asset), so a flush-left eyebrow inside the same box
-   reads as aligned with the image's visual content, not just its box. */
+   image's box here too, so centering the text inside it also centers it
+   over the image. */
 @media (min-width: 1024px) {
   .hero-grid-solo,
   .hero-eyebrow-top {
