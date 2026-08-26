@@ -1826,6 +1826,17 @@ button {
   margin-top: auto;
 }
 
+/* .system-card-actions has its own margin-top:auto (needed on the Services
+   page, where cards aren't stretched to equal height). Here that would
+   compete with the price line's auto margin above — flexbox splits free
+   space evenly between multiple auto margins in the same axis, which is
+   exactly what left the price pill itself still landing at slightly
+   different heights per card even after CTA/toggle lined up. Only the
+   price line should absorb the leftover space in this grid. */
+.system-offer-grid-overview .system-card-actions {
+  margin-top: 0;
+}
+
 .system-number {
   display: inline-grid;
   place-items: center;
