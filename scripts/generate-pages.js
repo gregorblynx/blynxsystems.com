@@ -2268,6 +2268,17 @@ const PRODUCT_IMAGES = {
       en: "System 3 in action: automatic reply, reminder, quote follow-up, appointment reminder, review request and confirmed booking.",
       es: "Sistema 3 en acción: respuesta automática, recordatorio, seguimiento de cotización, recordatorio de cita, solicitud de reseña y reserva confirmada."
     }
+  },
+  // Approved final before/after comparison graphic replacing the old
+  // text-only "problem" section. Both languages happen to share the same
+  // native size, but each has its own source file (own baked-in text).
+  beforeAfter: {
+    en: { base: "blynx-before-after-en", width: 1672, height: 941 },
+    es: { base: "blynx-before-after-es", width: 1672, height: 941 },
+    alt: {
+      en: "Before BLYNX: requests get lost across phone calls, unread emails, forgotten texts and website forms with no follow-up. After BLYNX: every request lands in one place, gets contacted, followed up on time, and turns into more customers and growth — 35% more jobs won, 70% less time spent chasing, 4.9-star reviews, month-over-month growth.",
+      es: "Antes de BLYNX: las solicitudes se pierden entre llamadas, correos sin leer, mensajes de texto sin responder y formularios web sin seguimiento. Después de BLYNX: cada solicitud queda en un solo lugar, recibe contacto, seguimiento a tiempo, y se convierte en más clientes y crecimiento — 35% más trabajos ganados, 70% menos tiempo persiguiendo, reseñas de 4.9 estrellas, crecimiento mes tras mes."
+    }
   }
 };
 
@@ -3307,7 +3318,6 @@ ${demoSection}
 function homePage(lang) {
   const t = copy[lang];
   const h = t.home;
-  const ba = h.beforeAfter;
   const reals = portfolioProjects.filter((project) => project.type === "real");
   const p = t.projectsPage;
   const body = `
@@ -3331,30 +3341,9 @@ function homePage(lang) {
         </div>
       </section>
 
-      <section class="section section-soft" id="problem">
+      <section class="section" id="problem">
         <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">${h.problemEyebrow}</p>
-            <h2>${h.problemTitle}</h2>
-            <p>${h.problemCopy}</p>
-          </div>
-          <div class="before-after-panel">
-            <div class="before-after-heads">
-              <span class="before-after-head is-before">${icon("cross")}${ba.beforeLabel}</span>
-              <span class="before-after-head is-after">${icon("check")}${ba.afterLabel}</span>
-            </div>
-            ${ba.before
-              .slice(0, 3)
-              .map(
-                (item, i) => `
-            <div class="before-after-row">
-              <span class="before-after-item is-before">${icon("cross")}<span>${item}</span></span>
-              <span class="before-after-row-arrow">${icon("arrowRight")}</span>
-              <span class="before-after-item is-after">${icon("check")}<span>${ba.after[i]}</span></span>
-            </div>`
-              )
-              .join("")}
-          </div>
+          ${productImage("beforeAfter", lang, { sizes: "(max-width: 1024px) 100vw, 1180px", className: "before-after-visual" })}
         </div>
       </section>
 

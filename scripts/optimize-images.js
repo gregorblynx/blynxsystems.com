@@ -19,7 +19,9 @@ const SOURCES = [
   "blynx-system-2-capture-organization-en.png",
   "blynx-system-2-capture-organization-es.png",
   "blynx-system-3-follow-up-en.png",
-  "blynx-system-3-follow-up-es.png"
+  "blynx-system-3-follow-up-es.png",
+  "blynx-before-after-en.png",
+  "blynx-before-after-es.png"
 ];
 
 async function run() {

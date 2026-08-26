@@ -2071,6 +2071,25 @@ button {
   filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.45));
 }
 
+/* Before/After comparison graphic (replaces the old text-only "problem"
+   section). Same per-axis fade approach as the hero above, tuned to this
+   asset's own measured content margins (~1.85-2% horizontal, ~2.1-2.8%
+   vertical) rather than reused wholesale — a wider fade here would clip
+   the "Before/After BLYNX" labels and the stat row along the bottom edge.
+   No extra width/centering rule needed: the direct parent is .container,
+   so this already fills the sitewide max-width and stays centered on its
+   own. */
+.before-after-visual {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 1.5%, #000 98.5%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 1.5%, #000 98.5%, transparent 100%);
+}
+
+.before-after-visual img {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 1.8%, #000 98.2%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 1.8%, #000 98.2%, transparent 100%);
+  filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.45));
+}
+
 .system-result-chain {
   margin: 0.6rem 0 0;
   color: var(--muted-strong);
