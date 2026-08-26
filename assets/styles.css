@@ -660,6 +660,15 @@ button {
 
 .hero-grid-solo {
   grid-template-columns: minmax(0, 1fr);
+}
+
+/* .hero-eyebrow-top shares this max-width rule with .hero-grid-solo (not a
+   matching copy of it) so the eyebrow and the hero image can never drift
+   apart again — one width/centering rule, two boxes that are structurally
+   identical at every breakpoint, instead of two selectors kept in sync by
+   hand. */
+.hero-grid-solo,
+.hero-eyebrow-top {
   max-width: 900px;
 }
 
@@ -670,25 +679,17 @@ button {
    container width, so this can't overflow at any size in between. The H1
    (max-width 760px) and body copy (max-width 670px) already have their own
    tighter caps independent of this column, so widening it doesn't stretch
-   the text — it only gives the hero image more room and better balance. */
+   the text — it only gives the hero image more room and better balance.
+   Applying the same rule to .hero-eyebrow-top keeps its box identical to the
+   image's box here too. No extra text-align or padding on top of this: the
+   image's own artwork already sits close to this box's left edge (verified
+   against the source asset), so a flush-left eyebrow inside the same box
+   reads as aligned with the image's visual content, not just its box. */
 @media (min-width: 1024px) {
   .hero-grid-solo,
   .hero-eyebrow-top {
     max-width: min(1060px, 100%);
     margin-inline: auto;
-  }
-
-  /* Full text-align:center (tried previously) planted the label dead-center
-     of the whole 1060px image width, which read as a generic standalone
-     centered title floating over empty space — disconnected from the image
-     rather than part of it. Flush-left (the position before that) read as
-     too far over to the edge. This nudges it inward from the image's own
-     left edge without centering it outright, so it still reads as this
-     image's caption/kicker — anchored to the same block, not a floating
-     independent headline. The box itself (width + left/right edges) still
-     matches the image's box exactly; only the text's start point shifts. */
-  .hero-eyebrow-top {
-    padding-left: 15%;
   }
 }
 
