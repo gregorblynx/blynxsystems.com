@@ -2347,26 +2347,6 @@ function comparisonDetails(lang) {
           </div>`;
 }
 
-function priceCompareStrip(lang) {
-  // Mobile-only, non-sticky compact comparison shown immediately before the
-  // stacked system cards. Scrolls away normally like any other section — no
-  // position:sticky, no fixed overlay.
-  const offer = commercialOffer[lang];
-  return `
-          <div class="price-compare" aria-label="${offer.title}">
-            ${offer.systems
-              .map(
-                (system) => `
-            <a class="price-compare-cell${system.badge ? " is-complete" : ""}" href="#${system.id}">
-              <span class="price-compare-badge-slot">${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}</span>
-              <span class="price-compare-name">${system.resultChain[system.resultChain.length - 1]}</span>
-              <span class="price-compare-value">$${system.startingPrice.toLocaleString("en-US")}</span>
-            </a>`
-              )
-              .join("")}
-          </div>`;
-}
-
 function systemsOverviewSection(lang) {
   const offer = commercialOffer[lang];
   return `
@@ -2378,7 +2358,6 @@ function systemsOverviewSection(lang) {
             <p>${offer.intro}</p>
             <p class="lead-capture-definition">${offer.leadCaptureDefinition}</p>
           </div>
-          ${priceCompareStrip(lang)}
           <div class="system-offer-grid system-offer-grid-overview">
             ${offer.systems
               .map(
