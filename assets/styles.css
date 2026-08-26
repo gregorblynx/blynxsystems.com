@@ -1782,6 +1782,24 @@ button {
   align-items: center;
 }
 
+/* Home overview cards only: the badge slot is now always rendered (empty on
+   System 1/2), so this reserves its height on every card instead of only
+   existing where a badge does — otherwise System 3's badge pushed its title
+   down relative to the other two, misaligning the "What's included" boxes
+   below even though the cards were the same overall height. Sized to the
+   real rendered height of a .system-badge (font-size 0.72rem line-height 1.6
+   + 0.32rem top/bottom padding). */
+.system-offer-grid-overview .system-offer-topline {
+  min-height: 1.9rem;
+}
+
+/* Same idea for the title: "Sistema de Solicitudes y Organización" wraps to
+   3 lines while the other two cards' titles wrap to 2, so without this the
+   included-box/price/CTA rows started at different heights per card. */
+.system-offer-grid-overview .system-offer-card h3 {
+  min-height: calc(1.08em * 3);
+}
+
 .system-number {
   display: inline-grid;
   place-items: center;

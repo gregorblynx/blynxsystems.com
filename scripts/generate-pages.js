@@ -2374,7 +2374,7 @@ function systemsOverviewSection(lang) {
                 (system) => `
             <article class="system-offer-card${system.badge ? " is-complete" : ""}" id="${system.id}">
               ${legacyAnchor(system)}
-              ${system.badge ? `<div class="system-offer-topline"><span class="system-badge">${system.badge}</span></div>` : ""}
+              <div class="system-offer-topline">${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}</div>
               <h3>${system.cardTitle}</h3>
               <p class="system-result-chain">${system.cardResultChain.join(" → ")}</p>
               <div class="system-included">
