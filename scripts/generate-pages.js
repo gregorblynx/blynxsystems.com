@@ -819,7 +819,7 @@ const commercialOffer = {
     // read) so this simpler home copy can't drift that page's wording.
     whatsIncludedTitle: "What's included",
     leadCaptureDefinition:
-      "“Lead capture” means receiving and organizing the inquiries and opportunities that come from your website, Google, referrals, advertising, prospecting or other channels.",
+      "BLYNX helps you receive new customer requests, keep them organized, and follow up from one clear system.",
     systems: [
       {
         id: "digital-presence-system",
@@ -882,12 +882,12 @@ const commercialOffer = {
       },
       {
         id: "lead-capture-organization",
-        name: "Lead Capture & Organization System",
+        name: "Customer Requests & Organization System",
         startingPrice: 2250,
         badge: null,
         resultChain: ["Receive", "Classify", "Organize"],
-        cardTitle: "Inquiry & Organization System",
-        cardResultChain: ["Receive inquiries", "Sort them", "Stay organized"],
+        cardTitle: "Customer Requests & Organization System",
+        cardResultChain: ["Receive requests", "Sort them", "Stay organized"],
         cardCta: "Start with System 2",
         whatsIncluded: [
           "Everything in System 1",
@@ -937,12 +937,12 @@ const commercialOffer = {
       {
         id: "lead-capture-follow-up",
         legacyId: "local-lead-system",
-        name: "Lead Capture & Follow-Up System",
+        name: "Customer Requests & Follow-Up System",
         startingPrice: 2500,
         badge: "Best Value",
         resultChain: ["Receive", "Organize", "Follow up"],
-        cardTitle: "Inquiry & Follow-Up System",
-        cardResultChain: ["Receive inquiries", "Stay organized", "Follow up"],
+        cardTitle: "Customer Requests & Follow-Up System",
+        cardResultChain: ["Receive requests", "Stay organized", "Follow up"],
         cardCta: "Start with System 3",
         whatsIncluded: [
           "Everything in System 2",
@@ -994,7 +994,7 @@ const commercialOffer = {
     comparison: {
       eyebrow: "System comparison",
       title: "Compare the three systems",
-      columns: ["Digital Presence", "Capture & Organization", "Capture & Follow-Up"],
+      columns: ["Digital Presence", "Requests & Organization", "Requests & Follow-Up"],
       rows: [
         { label: "Diagnosis or audit of current presence", values: ["Yes", "Yes", "Yes"] },
         { label: "Website / landing page built or improved", values: ["Yes", "Yes", "Yes"] },
@@ -1122,7 +1122,7 @@ const commercialOffer = {
     compareLink: "Comparar los tres sistemas",
     whatsIncludedTitle: "Qué incluye",
     leadCaptureDefinition:
-      "“La captación” se refiere a recibir y organizar las solicitudes y oportunidades que llegan desde el sitio web, Google, referencias, publicidad, prospección u otros canales.",
+      "BLYNX te ayuda a recibir nuevas solicitudes, mantenerlas organizadas y darles seguimiento desde un sistema claro.",
     systems: [
       {
         id: "sistema-presencia-digital",
@@ -1185,7 +1185,7 @@ const commercialOffer = {
       },
       {
         id: "sistema-captacion-organizacion",
-        name: "Sistema de Captación y Organización",
+        name: "Sistema de Solicitudes y Organización",
         startingPrice: 2250,
         badge: null,
         resultChain: ["Recibir", "Clasificar", "Organizar"],
@@ -1240,7 +1240,7 @@ const commercialOffer = {
       {
         id: "sistema-captacion-seguimiento",
         legacyId: "sistema-local-captacion",
-        name: "Sistema de Captación y Seguimiento",
+        name: "Sistema de Solicitudes y Seguimiento",
         startingPrice: 2500,
         badge: "Mejor Valor",
         resultChain: ["Recibir", "Organizar", "Dar seguimiento"],
@@ -1297,7 +1297,7 @@ const commercialOffer = {
     comparison: {
       eyebrow: "Comparación de sistemas",
       title: "Compara los tres sistemas",
-      columns: ["Presencia Digital", "Captación y Organización", "Captación y Seguimiento"],
+      columns: ["Presencia Digital", "Solicitudes y Organización", "Solicitudes y Seguimiento"],
       rows: [
         { label: "Diagnóstico o auditoría de la presencia actual", values: ["Sí", "Sí", "Sí"] },
         { label: "Sitio web / landing page creado o mejorado", values: ["Sí", "Sí", "Sí"] },
