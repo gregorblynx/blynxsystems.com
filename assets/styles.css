@@ -1802,6 +1802,16 @@ button {
   min-height: calc(1.08em * 4);
 }
 
+/* Same reasoning again, one level down: "Get found → Build trust → Get
+   contacted" fits on one line at this column width, but the longer EN/ES
+   result chains ("Receive requests → Sort them → Stay organized") wrap to
+   two — measured, not assumed, after the title fix above still left a
+   residual gap here. No explicit line-height is set, so it inherits the
+   sitewide 1.6. */
+.system-offer-grid-overview .system-result-chain {
+  min-height: calc(1.6em * 2);
+}
+
 .system-number {
   display: inline-grid;
   place-items: center;
