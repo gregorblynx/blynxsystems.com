@@ -927,9 +927,9 @@ const commercialOffer = {
             name: "Content Videos",
             price: 600,
             publishingPrice: 700,
-            summary: "4 short videos",
+            summary: "6 short videos",
             items: [
-              "4 short videos monthly, up to 30 seconds each",
+              "6 short videos monthly, up to 30 seconds each",
               "Creative ideas and scripts",
               "AI-assisted editing and production",
               "Captions",
@@ -940,10 +940,10 @@ const commercialOffer = {
             name: "Content Complete",
             price: 750,
             publishingPrice: 850,
-            summary: "12 images + 4 videos",
+            summary: "12 images + 6 videos",
             items: [
               "12 branded images",
-              "4 short videos, up to 30 seconds each",
+              "6 short videos, up to 30 seconds each",
               "Scripts, captions and monthly content calendar",
               "One consolidated revision round"
             ]
@@ -970,7 +970,7 @@ const commercialOffer = {
       summary: "We schedule and publish your approved content on Instagram and Facebook.",
       includedTitle: "Included",
       included: [
-        "Scheduling and publishing up to 16 unique content pieces per month",
+        "Scheduling and publishing up to 18 unique content pieces per month",
         "Publishing approved pieces on Instagram and Facebook",
         "Client approval before publication",
         "Basic monthly publishing calendar",
@@ -981,7 +981,7 @@ const commercialOffer = {
       limitsTitle: "Limits",
       limits: [
         "Each unique content piece may be published on both platforms.",
-        "Publishing cannot exceed the content included in your plan: up to 12 images, up to 4 videos, or up to 16 pieces with Content Complete."
+        "Publishing cannot exceed the content included in your plan: up to 12 images, up to 6 videos, or up to 18 pieces with Content Complete."
       ],
       notIncludedTitle: "Not included",
       notIncluded: [
@@ -1040,7 +1040,7 @@ const commercialOffer = {
         ],
         [
           "What does Instagram & Facebook publishing include?",
-          "For +$100/month we schedule and publish up to 16 unique pieces per month on Instagram and Facebook, after you approve each one. Publishing cannot exceed the content in your plan: up to 12 images, up to 4 videos, or up to 16 pieces with Content Complete. It does not include responding to comments, answering messages, daily account management, advertising campaigns or community management."
+          "For +$100/month we schedule and publish up to 18 unique pieces per month on Instagram and Facebook, after you approve each one. Publishing cannot exceed the content in your plan: up to 12 images, up to 6 videos, or up to 18 pieces with Content Complete. It does not include responding to comments, answering messages, daily account management, advertising campaigns or community management."
         ],
         [
           "Are there ongoing costs after my website is built?",
@@ -1192,9 +1192,9 @@ const commercialOffer = {
             name: "Content Videos",
             price: 600,
             publishingPrice: 700,
-            summary: "4 videos cortos",
+            summary: "6 videos cortos",
             items: [
-              "4 videos cortos al mes, de hasta 30 segundos cada uno",
+              "6 videos cortos al mes, de hasta 30 segundos cada uno",
               "Ideas creativas y guiones",
               "Edición y producción asistidas por IA",
               "Textos para publicaciones",
@@ -1205,10 +1205,10 @@ const commercialOffer = {
             name: "Content Complete",
             price: 750,
             publishingPrice: 850,
-            summary: "12 imágenes + 4 videos",
+            summary: "12 imágenes + 6 videos",
             items: [
               "12 imágenes con tu marca",
-              "4 videos cortos, de hasta 30 segundos cada uno",
+              "6 videos cortos, de hasta 30 segundos cada uno",
               "Guiones, textos para publicaciones y calendario mensual de contenido",
               "Una ronda de revisión consolidada"
             ]
@@ -1235,7 +1235,7 @@ const commercialOffer = {
       summary: "Programamos y publicamos tu contenido aprobado en Instagram y Facebook.",
       includedTitle: "Incluye",
       included: [
-        "Programación y publicación de hasta 16 piezas de contenido únicas por mes",
+        "Programación y publicación de hasta 18 piezas de contenido únicas por mes",
         "Publicación de las piezas aprobadas en Instagram y Facebook",
         "Aprobación del cliente antes de publicar",
         "Calendario mensual básico de publicación",
@@ -1246,7 +1246,7 @@ const commercialOffer = {
       limitsTitle: "Límites",
       limits: [
         "Cada pieza de contenido única puede publicarse en ambas plataformas.",
-        "La publicación no puede superar el contenido incluido en tu plan: hasta 12 imágenes, hasta 4 videos, o hasta 16 piezas con Content Complete."
+        "La publicación no puede superar el contenido incluido en tu plan: hasta 12 imágenes, hasta 6 videos, o hasta 18 piezas con Content Complete."
       ],
       notIncludedTitle: "No incluye",
       notIncluded: [
@@ -1305,7 +1305,7 @@ const commercialOffer = {
         ],
         [
           "¿Qué incluye la publicación en Instagram y Facebook?",
-          "Por +$100/mes programamos y publicamos hasta 16 piezas únicas por mes en Instagram y Facebook, después de que apruebes cada una. La publicación no puede superar el contenido de tu plan: hasta 12 imágenes, hasta 4 videos, o hasta 16 piezas con Content Complete. No incluye responder comentarios, contestar mensajes, gestión diaria de cuentas, campañas publicitarias ni gestión de comunidad."
+          "Por +$100/mes programamos y publicamos hasta 18 piezas únicas por mes en Instagram y Facebook, después de que apruebes cada una. La publicación no puede superar el contenido de tu plan: hasta 12 imágenes, hasta 6 videos, o hasta 18 piezas con Content Complete. No incluye responder comentarios, contestar mensajes, gestión diaria de cuentas, campañas publicitarias ni gestión de comunidad."
         ],
         [
           "¿Hay costos continuos después de construir mi sitio web?",
@@ -2109,50 +2109,65 @@ function legacyAnchors(service) {
   return (service.legacyIds || []).map((id) => `<span id="${id}" class="legacy-anchor" aria-hidden="true"></span>`).join("");
 }
 
-// Lightweight inline-SVG illustrations for the three service cards. They are
-// plain line drawings (no screenshots, no invented results) and replace the old
-// "System 1/2/3" product images, whose baked-in labels no longer match the
-// BLYNX Presence / Complete / Content naming — and whose third image depicted
-// automation, which would misrepresent Content.
-function serviceVisual(service) {
-  const open =
-    '<svg viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">';
-  let shapes = "";
-  if (service.id === "blynx-presence") {
-    shapes = `
-      <rect x="18" y="14" width="190" height="112" rx="10"/>
-      <path d="M18 40h190"/>
-      <circle cx="34" cy="27" r="3" fill="currentColor" stroke="none"/><circle cx="46" cy="27" r="3" fill="currentColor" stroke="none"/><circle cx="58" cy="27" r="3" fill="currentColor" stroke="none"/>
-      <path d="M36 62h92M36 78h130M36 94h74"/>
-      <rect x="140" y="92" width="52" height="22" rx="6"/>
-      <rect x="226" y="30" width="78" height="84" rx="10"/>
-      <path d="M265 50c-9 0-15 6-15 14 0 10 15 24 15 24s15-14 15-24c0-8-6-14-15-14z"/>
-      <circle cx="265" cy="64" r="5"/>
-      <path d="M244 102h42"/>`;
-  } else if (service.id === "blynx-complete") {
-    shapes = `
-      <rect x="18" y="14" width="284" height="112" rx="10"/>
-      <path d="M18 42h284"/>
-      <path d="M36 28h60"/>
-      <circle cx="44" cy="62" r="7"/><path d="M62 62h110"/><rect x="214" y="54" width="70" height="16" rx="8"/>
-      <circle cx="44" cy="86" r="7"/><path d="M62 86h90"/><rect x="214" y="78" width="70" height="16" rx="8"/>
-      <circle cx="44" cy="110" r="7"/><path d="M62 110h124"/><rect x="214" y="102" width="70" height="16" rx="8"/>
-      <path d="M232 62h34M232 86h34M232 110h34" stroke-width="1.5"/>`;
-  } else {
-    const tiles = [];
-    for (let row = 0; row < 3; row += 1) {
-      for (let col = 0; col < 4; col += 1) {
-        tiles.push(`<rect x="${18 + col * 38}" y="${14 + row * 38}" width="30" height="30" rx="5"/>`);
+// Approved commercial images: one per service and language. Each one
+// illustrates the service with a fictional business (Riverstone Cleaning Co.)
+// and is captioned on the page as an illustrative example, never as a real
+// client or a verified result. EN and ES are separate files chosen from the
+// page language at build time, so an English image can never appear on a
+// Spanish page (or the reverse). The originals live in the owner's Drive;
+// scripts/optimize-service-images.js writes the AVIF/WebP/PNG derivatives.
+// All six are natively 1448x1086, so width/height here must match the files.
+const SERVICE_IMAGES = {
+  width: 1448,
+  height: 1086,
+  items: {
+    "blynx-presence": {
+      base: { en: "blynx-service-presence-en", es: "blynx-service-presence-es" },
+      alt: {
+        en: "BLYNX Presence shown with a fictional cleaning company, Riverstone Cleaning Co.: a professional website on a laptop, its Google Business Profile on a phone, and a quote request form.",
+        es: "BLYNX Presence mostrado con una empresa de limpieza ficticia, Riverstone Cleaning Co.: un sitio web profesional en una laptop, su Perfil de Empresa de Google en un teléfono y un formulario para solicitar un presupuesto."
+      }
+    },
+    "blynx-complete": {
+      base: { en: "blynx-service-complete-en", es: "blynx-service-complete-es" },
+      alt: {
+        en: "BLYNX Complete shown with a fictional cleaning company, Riverstone Cleaning Co.: a quote request website, a list of customer requests with their status on a phone, and a panel of follow-up reminders.",
+        es: "BLYNX Complete mostrado con una empresa de limpieza ficticia, Riverstone Cleaning Co.: un sitio web para solicitar cotizaciones, una lista de solicitudes de clientes con su estado en un teléfono y un panel de recordatorios de seguimiento."
+      }
+    },
+    "blynx-content": {
+      base: { en: "blynx-service-content-en", es: "blynx-service-content-es" },
+      alt: {
+        en: "BLYNX Content shown with a fictional cleaning company, Riverstone Cleaning Co.: a monthly content calendar on a laptop, a social media profile on a phone, and cards for 12 branded images and 6 short videos.",
+        es: "BLYNX Content mostrado con una empresa de limpieza ficticia, Riverstone Cleaning Co.: un calendario mensual de contenido en una laptop, un perfil de redes sociales en un teléfono y tarjetas con 12 imágenes de marca y 6 videos cortos."
       }
     }
-    shapes = `
-      ${tiles.join("")}
-      <rect x="184" y="14" width="118" height="54" rx="8"/>
-      <path d="M232 28l24 13-24 13z"/>
-      <rect x="184" y="72" width="118" height="54" rx="8"/>
-      <path d="M232 86l24 13-24 13z"/>`;
-  }
-  return `<div class="service-visual" aria-hidden="true">${open}${shapes}</svg></div>`;
+  },
+  caption: {
+    en: "Illustrative example with a fictional business (Riverstone Cleaning Co.). Not a real client or a verified result. Click or tap to enlarge.",
+    es: "Ejemplo ilustrativo con una empresa ficticia (Riverstone Cleaning Co.). No es un cliente real ni un resultado comprobado. Haz clic o toca para ampliar."
+  },
+  enlarge: { en: "View larger image", es: "Ver imagen ampliada" }
+};
+
+function serviceImage(service, lang, sizes = "(max-width: 760px) 100vw, (max-width: 1120px) 50vw, 380px") {
+  const entry = SERVICE_IMAGES.items[service.id];
+  if (!entry) throw new Error("No approved image for service " + service.id);
+  const base = `/assets/images/${entry.base[lang]}`;
+  const widths = widthsForNative(SERVICE_IMAGES.width);
+  const srcset = (ext) => widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(", ");
+  const alt = escapeAttr(entry.alt[lang]);
+  return `
+              <figure class="service-figure">
+                <a class="service-figure-link" href="${base}-${SERVICE_IMAGES.width}.webp" target="_blank" rel="noopener" aria-label="${escapeAttr(SERVICE_IMAGES.enlarge[lang])}: ${escapeAttr(service.name)}">
+                  <picture>
+                    <source type="image/avif" srcset="${srcset("avif")}" sizes="${sizes}">
+                    <source type="image/webp" srcset="${srcset("webp")}" sizes="${sizes}">
+                    <img src="${base}-1200-fallback.png" width="${SERVICE_IMAGES.width}" height="${SERVICE_IMAGES.height}" alt="${alt}" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+                <figcaption>${SERVICE_IMAGES.caption[lang]}</figcaption>
+              </figure>`;
 }
 
 function servicePriceHtml(offer, service) {
@@ -2190,6 +2205,7 @@ function systemsOverviewSection(lang) {
               <div class="system-offer-topline"><span class="service-number">${service.number}</span></div>
               <h3>${service.name}</h3>
               <p class="service-headline">${service.headline}</p>
+              ${serviceImage(service, lang)}
               <p class="service-description">${service.description}</p>
               <div class="system-included">
                 ${
@@ -2225,7 +2241,7 @@ function serviceDetailCard(lang, offer, service) {
               <div class="system-offer-topline"><span class="service-number">${service.number}</span></div>
               <h3>${service.name}</h3>
               <p class="service-headline">${service.headline}</p>
-              ${serviceVisual(service)}
+              ${serviceImage(service, lang)}
               <p class="service-description">${service.description}</p>
               <p class="system-price-line">${servicePriceHtml(offer, service)}</p>
               <p class="service-bestfor"><strong>${offer.bestForLabel}:</strong> ${service.bestFor}</p>

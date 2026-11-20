@@ -4203,12 +4203,12 @@ fieldset.field {
 @supports (grid-template-rows: subgrid) {
   @media (min-width: 1121px) {
     .system-offer-grid-overview {
-      grid-template-rows: auto auto auto auto 1fr auto auto auto;
+      grid-template-rows: auto auto auto auto auto 1fr auto auto auto;
     }
 
     .system-offer-grid-overview .system-offer-card {
       display: grid;
-      grid-row: span 8;
+      grid-row: span 9;
       grid-template-rows: subgrid;
       row-gap: 0;
     }
@@ -4238,21 +4238,49 @@ fieldset.field {
   }
 }
 
-/* Services page detail cards */
-.service-visual {
+/* Approved service images (Home overview cards + Services detail cards). The
+   img keeps its intrinsic 1448x1086 ratio via width/height + aspect-ratio, so
+   nothing shifts while it loads. No text is ever laid over the image. */
+.service-figure {
   margin: 1.1rem 0 0;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.28);
-  padding: 0.9rem 1rem;
-  color: var(--gold);
 }
 
-.service-visual svg {
+.service-figure-link {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0a0908;
+  cursor: zoom-in;
+}
+
+.service-figure-link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.service-figure img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 150px;
+  aspect-ratio: 1448 / 1086;
+}
+
+.service-figure figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+/* Phones: let the image use the full card width so its text stays as large as
+   it can be (tapping it opens the full-size version). */
+@media (max-width: 760px) {
+  .service-figure-link {
+    margin-inline: calc(-1 * clamp(1.4rem, 3vw, 2.25rem));
+    border-inline: 0;
+    border-radius: 0;
+  }
 }
 
 .plan-stack {

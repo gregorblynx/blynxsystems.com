@@ -509,7 +509,18 @@ const obsoleteSnippets = [
   "Sistema 2",
   "Sistema 3",
   "35% more jobs",
-  "Social Media Management"
+  "Social Media Management",
+  // Content now includes 6 short videos/month and publishing is capped at 18 unique pieces.
+  "4 short videos",
+  "4 videos cortos",
+  "up to 4 videos",
+  "hasta 4 videos",
+  "12 images + 4",
+  "12 imágenes + 4",
+  "up to 16",
+  "hasta 16 piezas",
+  "16 unique",
+  "16 piezas únicas"
 ];
 function listHtml(dir) {
   const out = [];
@@ -527,6 +538,36 @@ for (const file of [...listHtml("en"), ...listHtml("es"), "index.html"]) {
   for (const snippet of obsoleteSnippets) {
     assert(!contents.includes(snippet), `Obsolete content "${snippet}" found in ${file}`);
   }
+}
+
+// Approved service images: each language page must reference only its own three
+// files (never the other language's), and every derivative must exist on disk.
+for (const [lang, other] of [["en", "es"], ["es", "en"]]) {
+  for (const page of [`${lang}/index.html`, `${lang}/services/index.html`]) {
+    const contents = fs.readFileSync(path.join(root, page), "utf8");
+    for (const service of ["presence", "complete", "content"]) {
+      const own = `blynx-service-${service}-${lang}`;
+      assert(contents.includes(`/assets/images/${own}-1200-fallback.png`), `${page} must show ${own}`);
+      assert(contents.includes(`/assets/images/${own}-1448.webp`), `${page} must link the enlarged ${own}`);
+      assert(!contents.includes(`blynx-service-${service}-${other}`), `${page} must not reference the ${other.toUpperCase()} ${service} image`);
+      for (const width of [480, 800, 1200, 1448]) {
+        for (const ext of ["avif", "webp"]) {
+          assert(fs.existsSync(path.join(root, "assets", "images", `${own}-${width}.${ext}`)), `Missing ${own}-${width}.${ext}`);
+        }
+      }
+      assert(fs.existsSync(path.join(root, "assets", "images", `${own}-1200-fallback.png`)), `Missing ${own}-1200-fallback.png`);
+    }
+  }
+}
+// Content plan quantities: 6 videos / 18 unique pieces must read the same everywhere.
+for (const [file, snippets] of [
+  ["en/services/index.html", ["6 short videos monthly, up to 30 seconds each", "6 short videos, up to 30 seconds each", "up to 18 unique content pieces per month", "up to 12 images, up to 6 videos, or up to 18 pieces"]],
+  ["es/services/index.html", ["6 videos cortos al mes, de hasta 30 segundos cada uno", "6 videos cortos, de hasta 30 segundos cada uno", "hasta 18 piezas de contenido únicas por mes", "hasta 12 imágenes, hasta 6 videos, o hasta 18 piezas"]],
+  ["en/index.html", ["6 short videos", "12 images + 6 videos", "up to 18 unique pieces per month"]],
+  ["es/index.html", ["6 videos cortos", "12 imágenes + 6 videos", "hasta 18 piezas únicas por mes"]]
+]) {
+  const contents = fs.readFileSync(path.join(root, file), "utf8");
+  for (const snippet of snippets) assert(contents.includes(snippet), `Content quantities: missing "${snippet}" in ${file}`);
 }
 
 fs.rmSync(dist, { recursive: true, force: true });
