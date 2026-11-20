@@ -5,6 +5,8 @@ const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
 
 const requiredFiles = [
+  "assets/og-offer-en.png",
+  "assets/og-offer-es.png",
   "index.html",
   "assets/styles.css",
   "assets/site.js",

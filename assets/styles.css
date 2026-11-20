@@ -4445,3 +4445,18 @@ fieldset.field {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Honest labelling of example visuals (hero mock-up and customer journey use a sample business). */
+.visual-caption,
+.flow-example-note {
+  max-width: 62ch;
+  margin: 0.75rem auto 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.flow-example-note {
+  margin-top: 1.5rem;
+}

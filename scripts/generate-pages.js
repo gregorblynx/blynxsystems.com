@@ -18,8 +18,8 @@ const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 // root language-gate, which defaults to the EN card since it's the
 // x-default/English-flavored entry point). Not used elsewhere — every other
 // page keeps the generic OG_IMAGE above.
-const OG_IMAGE_EN = `${SITE_URL}/assets/og-image-en.png`;
-const OG_IMAGE_ES = `${SITE_URL}/assets/og-image-es.png`;
+const OG_IMAGE_EN = `${SITE_URL}/assets/og-offer-en.png`;
+const OG_IMAGE_ES = `${SITE_URL}/assets/og-offer-es.png`;
 
 // Runtime configuration, read from the environment at build time so that neither the lead
 // endpoint nor the analytics ID is hardcoded across source files. Set both in the Vercel
@@ -65,6 +65,7 @@ function runtimeHead() {
     </script>`;
 }
 const LEGAL_EFFECTIVE_DATE = "November 19, 2026";
+const LEGAL_EFFECTIVE_DATE_ES = "19 de noviembre de 2026";
 const BUSINESS = {
   legalName: "BLYNX Systems",
   displayName: "BLYNX Systems",
@@ -162,7 +163,7 @@ function structuredData(lang, title, description, canonicalUrl, breadcrumbs = []
         description: orgDescription,
         url: `${SITE_URL}/`,
         email: BUSINESS.email,
-        image: OG_IMAGE,
+        image: lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN,
         logo: OG_IMAGE,
         ...(hasConfiguredPhone() ? { telephone: phoneHref().replace("tel:", "") } : {}),
         address: {
@@ -269,9 +270,9 @@ const copy = {
       ogTitle: "Your Business. Stronger Online. Smarter with AI. | BLYNX",
       ogDescription: "Professional websites, automated customer follow-ups, and AI-powered content for local businesses.",
       ogImage: OG_IMAGE_EN,
-      ogImageWidth: 1774,
-      ogImageHeight: 887,
-      ogImageAlt: "BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.",
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: "BLYNX Systems: Your Business. Stronger Online. Smarter with AI. BLYNX Presence, BLYNX Complete and BLYNX Content.",
       eyebrow: "Digital solutions for local businesses",
       headline: 'Your Business.<br>Stronger Online.<br><span class="text-gold">Smarter with AI.</span>',
       subtitle: [
@@ -282,6 +283,7 @@ const copy = {
         existing: "You already have a digital presence? We can improve it or build on it — request a quote and tell us what you need.",
         zero: "Starting from zero? We can build your website and Google presence — request a quote and tell us what you need."
       },
+      heroCaption: "Illustration: a sample business shown for demonstration. Names, ratings and reviews are examples, not real customers.",
       aboutEyebrow: "About BLYNX",
       aboutTitle: "Built for Local Businesses",
       aboutCopy: "BLYNX builds practical digital solutions for local businesses: professional websites, organized customer follow-up and monthly AI-powered content — explained in plain language.",
@@ -556,9 +558,9 @@ const copy = {
       ogTitle: "Tu negocio. Más fuerte en línea. Más inteligente con IA. | BLYNX",
       ogDescription: "Sitios web profesionales, seguimiento automático de clientes y contenido creado con IA para negocios locales.",
       ogImage: OG_IMAGE_ES,
-      ogImageWidth: 1774,
-      ogImageHeight: 887,
-      ogImageAlt: "Sistema de cinco pasos de BLYNX: Te encuentran, Generas confianza, Recibes contactos, Organizas oportunidades, Das seguimiento.",
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: "BLYNX Systems: Tu negocio. Más fuerte en línea. Más inteligente con IA. BLYNX Presence, BLYNX Complete y BLYNX Content.",
       eyebrow: "Soluciones digitales para negocios locales",
       headline: 'Tu negocio.<br>Más fuerte en línea.<br><span class="text-gold">Más inteligente con IA.</span>',
       subtitle: [
@@ -569,6 +571,7 @@ const copy = {
         existing: "¿Ya tienes presencia digital? Podemos mejorarla o construir sobre ella — solicita una cotización y cuéntanos qué necesitas.",
         zero: "¿Empiezas desde cero? Podemos construir tu sitio web y tu presencia en Google — solicita una cotización y cuéntanos qué necesitas."
       },
+      heroCaption: "Ilustración: un negocio de ejemplo con fines demostrativos. Los nombres, calificaciones y reseñas son ejemplos, no clientes reales.",
       aboutEyebrow: "Sobre BLYNX",
       aboutTitle: "Creado para Negocios Locales",
       aboutCopy: "BLYNX crea soluciones digitales prácticas para negocios locales: sitios web profesionales, seguimiento organizado de clientes y contenido mensual creado con IA — explicado en lenguaje sencillo.",
@@ -1776,7 +1779,7 @@ const legalPages = {
       description: "Política de Privacidad de BLYNX Systems.",
       eyebrow: "Privacidad",
       h1: "Política de Privacidad",
-      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
+      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE_ES}`,
       sections: [
         ["Introducción", "Esta Política de Privacidad explica cómo BLYNX Systems recopila, utiliza y protege la información enviada a través de este sitio web y la información generada por el uso normal del sitio. Al usar el sitio o enviar un formulario, reconoces las prácticas descritas aquí."],
         ["Información que Recopilamos", "Podemos recopilar información que proporcionas directamente, incluyendo nombre completo, nombre del negocio, correo, teléfono, sitio web, ciudad y estado, tipo de negocio, URL de Google Business Profile, objetivos del negocio, mensajes y notas. También podemos recopilar información técnica generada por el uso normal del sitio, como tipo de navegador, información del dispositivo, páginas visitadas e información general de rendimiento."],
@@ -1798,7 +1801,7 @@ const legalPages = {
       description: "Términos de Servicio de BLYNX Systems.",
       eyebrow: "Términos",
       h1: "Términos de Servicio",
-      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
+      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE_ES}`,
       sections: [
         ["Aceptación de los Términos", "Al acceder a este sitio, enviar un formulario o usar materiales de BLYNX, aceptas estos Términos de Servicio. Si no estás de acuerdo, no uses el sitio."],
         ["Descripción de los Servicios", "BLYNX ofrece sitios web profesionales y configuración de presencia en Google, sistemas de organización y seguimiento de solicitudes de clientes, creación mensual de contenido con IA, y soluciones digitales a medida relacionadas para negocios locales."],
@@ -1966,7 +1969,7 @@ function shell(lang, meta, active, switchPath, body) {
   // sitewide card when a page (nearly all of them) doesn't set these.
   const ogTitle = meta.ogTitle || meta.title;
   const ogDescription = meta.ogDescription || meta.description;
-  const ogImage = meta.ogImage || OG_IMAGE;
+  const ogImage = meta.ogImage || (lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN);
   const ogImageWidth = meta.ogImageWidth || 1200;
   const ogImageHeight = meta.ogImageHeight || 630;
   const ogImageAlt = meta.ogImageAlt || ogTitle;
@@ -2611,6 +2614,7 @@ const captureFlowCopy = {
     supporting:
       "With BLYNX Presence and BLYNX Complete, a customer finds your business, sends a request, receives an automatic response, and your team follows up from one place.",
     stageLabels: ["They find you", "You capture the opportunity", "You respond and follow up"],
+    exampleNote: "Example business shown for illustration only.",
     ui: { foundOn: "Found on", customerReceives: "Customer receives", businessReceives: "Business receives" },
     summary: [
       "They find you",
@@ -2626,6 +2630,7 @@ const captureFlowCopy = {
     supporting:
       "Con BLYNX Presence y BLYNX Complete, un cliente encuentra tu negocio, envía una solicitud, recibe una respuesta automática y tu equipo da seguimiento desde un solo lugar.",
     stageLabels: ["Te encuentran", "Captas la oportunidad", "Respondes y das seguimiento"],
+    exampleNote: "Negocio de ejemplo mostrado solo a modo de ilustración.",
     ui: { foundOn: "Encontrado en", customerReceives: "El cliente recibe", businessReceives: "El negocio recibe" },
     summary: [
       "Te encuentran",
@@ -2719,9 +2724,7 @@ function captureFlowSection(lang) {
                     ${results
                       .map(
                         (name, index) =>
-                          `<li class="${index === 0 ? "is-active" : ""}"><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">${name}</span>${
-                            index === 0 ? `<span class="flow-stars">★ ${ex.rating}</span>` : ""
-                          }</li>`
+                          `<li class="${index === 0 ? "is-active" : ""}"><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">${name}</span></li>`
                       )
                       .join("")}
                   </ul>
@@ -2780,6 +2783,7 @@ function captureFlowSection(lang) {
               </div>
             </article>
           </div>
+          <p class="flow-example-note">${c.exampleNote}</p>
         </div>
       </section>`;
 }
@@ -2792,6 +2796,7 @@ const portfolioProjects = [
     type: "real",
     name: "Klinner Cleaning & Maintenance",
     url: "https://klinnercleaning.com",
+    badgeLabel: { en: "Real Project · Operated by BLYNX", es: "Proyecto real · Operado por BLYNX" },
     image: "/public/images/projects/klinner.jpg",
     imageAlt: {
       en: "Homepage of the Klinner Cleaning & Maintenance website showing its hero section and main navigation",
@@ -2799,16 +2804,16 @@ const portfolioProjects = [
     },
     industry: { en: "Cleaning & Property Services", es: "Limpieza y servicios para propiedades" },
     summary: {
-      en: "A professional digital presence created for a Nashville cleaning and property-services company, designed to explain its services clearly, build trust, improve local visibility, and make requesting a quote easier.",
-      es: "Una presencia digital profesional creada para una empresa de limpieza y servicios para propiedades en Nashville, diseñada para explicar sus servicios claramente, generar confianza, mejorar la visibilidad local y facilitar la solicitud de cotizaciones."
+      en: "A professional digital presence for Klinner Cleaning & Maintenance, a Nashville cleaning and property-services business operated by BLYNX, designed to explain its services clearly, build trust, improve local visibility, and make requesting a quote easier.",
+      es: "Una presencia digital profesional para Klinner Cleaning & Maintenance, un negocio de limpieza y servicios para propiedades en Nashville operado por BLYNX, diseñada para explicar sus servicios claramente, generar confianza, mejorar la visibilidad local y facilitar la solicitud de cotizaciones."
     },
     business: {
-      en: "A cleaning and property-services company based in Nashville, Tennessee.",
-      es: "Una empresa de limpieza y servicios para propiedades con sede en Nashville, Tennessee."
+      en: "A cleaning and property-services business based in Nashville, Tennessee, operated internally by BLYNX.",
+      es: "Un negocio de limpieza y servicios para propiedades con sede en Nashville, Tennessee, operado internamente por BLYNX."
     },
     need: {
-      en: "The company needed a professional way to present its services, build trust with local customers, and make requesting a quote simple on any device.",
-      es: "La empresa necesitaba una forma profesional de presentar sus servicios, generar confianza con clientes locales y facilitar la solicitud de cotizaciones desde cualquier dispositivo."
+      en: "As an internally operated business, it needed a professional way to present its services, build trust with local customers, and make requesting a quote simple on any device.",
+      es: "Como negocio operado internamente, necesitaba una forma profesional de presentar sus servicios, generar confianza con clientes locales y facilitar la solicitud de cotizaciones desde cualquier dispositivo."
     },
     built: {
       en: "A responsive website that presents the company clearly, explains its services, provides a direct quote pathway, and lays an SEO foundation for local visibility.",
@@ -3019,7 +3024,7 @@ function projectCard(lang, project, p) {
             ${shot}
             <div class="project-body">
               <div class="project-top">
-                <span class="project-badge${isDemo ? " is-demo" : ""}">${isDemo ? p.demoBadge : p.realBadge}</span>
+                <span class="project-badge${isDemo ? " is-demo" : ""}">${isDemo ? p.demoBadge : project.badgeLabel ? project.badgeLabel[lang] : p.realBadge}</span>
                 <span class="project-industry">${project.industry[lang]}</span>
               </div>
               <h2 class="project-name">${project.name}</h2>
@@ -3117,6 +3122,7 @@ function homePage(lang) {
         <div class="container">
           <div class="hero-grid hero-grid-solo">
             ${productImage("hero", lang, { priority: true, sizes: "(max-width: 1024px) 100vw, 1180px", className: "product-visual-hero" })}
+            <p class="visual-caption">${h.heroCaption}</p>
             <div class="hero-copy">
               <h1>${h.headline}</h1>
               <div class="hero-supporting-copy">
@@ -3917,14 +3923,14 @@ function languageGate() {
     <meta property="og:description" content="Professional websites, automated customer follow-ups, and AI-powered content for local businesses.">
     <meta property="og:url" content="${SITE_URL}/">
     <meta property="og:image" content="${OG_IMAGE_EN}">
-    <meta property="og:image:width" content="1774">
-    <meta property="og:image:height" content="887">
-    <meta property="og:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="BLYNX Systems: Your Business. Stronger Online. Smarter with AI. BLYNX Presence, BLYNX Complete and BLYNX Content.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${BUSINESS.displayName}">
     <meta name="twitter:description" content="Professional websites, automated customer follow-ups, and AI-powered content for local businesses.">
     <meta name="twitter:image" content="${OG_IMAGE_EN}">
-    <meta name="twitter:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
+    <meta name="twitter:image:alt" content="BLYNX Systems: Your Business. Stronger Online. Smarter with AI. BLYNX Presence, BLYNX Complete and BLYNX Content.">
     ${structuredData("en", "BLYNX Systems | Websites, Follow-Up & AI Content for Local Businesses", "Professional websites, automated customer follow-ups, and AI-powered content for local businesses.", `${SITE_URL}/`)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">

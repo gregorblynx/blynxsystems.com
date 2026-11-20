@@ -28,7 +28,7 @@ either value means changing one environment variable and rebuilding — never ed
 
 | Variable | Required for | Format | Where to set it |
 |----------|--------------|--------|-----------------|
-| `LEAD_WEBHOOK_URL` | Free Audit + Contact forms | `https://script.google.com/macros/s/.../exec` | Vercel → project → Settings → Environment Variables, and local `.env` |
+| `LEAD_WEBHOOK_URL` | Quote request (`/free-audit*`) + Contact forms | `https://script.google.com/macros/s/.../exec` | Vercel → project → Settings → Environment Variables, and local `.env` |
 | `GA4_MEASUREMENT_ID` | Google Analytics 4 | `G-XXXXXXXXXX` | Same |
 
 The build fails fast if either value is malformed, and prints a loud `WARNING` (without failing)
@@ -54,7 +54,7 @@ Events sent from `assets/site.js`:
 
 | Event | Fires when |
 |-------|-----------|
-| `free_audit_submit` | Free Audit form, **only after** the backend confirms `{"result":"success"}` |
+| `free_audit_submit` | Quote request form (`/free-audit*`; event name kept for analytics continuity), **only after** the backend confirms `{"result":"success"}` |
 | `contact_form_submit` | Contact form, same confirmation rule |
 | `primary_cta_click` | Click on any internal `.btn-primary` CTA |
 | `project_outbound_click` | Click on an external link inside a `.project-card` |
