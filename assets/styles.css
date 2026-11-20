@@ -4460,3 +4460,8 @@ fieldset.field {
 .flow-example-note {
   margin-top: 1.5rem;
 }
+
+/* Hero caption sits right under the (bottom-faded) hero illustration instead of a full grid gap below it. */
+.hero-grid .visual-caption {
+  margin-top: -1.1rem;
+}

@@ -13,7 +13,7 @@ const blogArticles = {
 };
 
 const SITE_URL = "https://www.blynxsystems.com";
-const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
+const OG_IMAGE = `${SITE_URL}/assets/og-offer-en.png`;
 // Approved per-language social share cards for the two homepages (and the
 // root language-gate, which defaults to the EN card since it's the
 // x-default/English-flavored entry point). Not used elsewhere — every other
@@ -283,7 +283,7 @@ const copy = {
         existing: "You already have a digital presence? We can improve it or build on it — request a quote and tell us what you need.",
         zero: "Starting from zero? We can build your website and Google presence — request a quote and tell us what you need."
       },
-      heroCaption: "Illustration: a sample business shown for demonstration. Names, ratings and reviews are examples, not real customers.",
+      heroCaption: "Illustration: a sample business shown for demonstration.",
       aboutEyebrow: "About BLYNX",
       aboutTitle: "Built for Local Businesses",
       aboutCopy: "BLYNX builds practical digital solutions for local businesses: professional websites, organized customer follow-up and monthly AI-powered content — explained in plain language.",
@@ -571,7 +571,7 @@ const copy = {
         existing: "¿Ya tienes presencia digital? Podemos mejorarla o construir sobre ella — solicita una cotización y cuéntanos qué necesitas.",
         zero: "¿Empiezas desde cero? Podemos construir tu sitio web y tu presencia en Google — solicita una cotización y cuéntanos qué necesitas."
       },
-      heroCaption: "Ilustración: un negocio de ejemplo con fines demostrativos. Los nombres, calificaciones y reseñas son ejemplos, no clientes reales.",
+      heroCaption: "Ilustración: un negocio de ejemplo con fines demostrativos.",
       aboutEyebrow: "Sobre BLYNX",
       aboutTitle: "Creado para Negocios Locales",
       aboutCopy: "BLYNX crea soluciones digitales prácticas para negocios locales: sitios web profesionales, seguimiento organizado de clientes y contenido mensual creado con IA — explicado en lenguaje sencillo.",
@@ -2612,7 +2612,7 @@ const captureFlowCopy = {
     label: "HOW IT WORKS — CUSTOMER JOURNEY",
     headline: "From a Google search to an organized customer request.",
     supporting:
-      "With BLYNX Presence and BLYNX Complete, a customer finds your business, sends a request, receives an automatic response, and your team follows up from one place.",
+      "A customer finds your business and sends a request. With BLYNX Complete, they receive an automatic response and your team follows up from one place.",
     stageLabels: ["They find you", "You capture the opportunity", "You respond and follow up"],
     exampleNote: "Example business shown for illustration only.",
     ui: { foundOn: "Found on", customerReceives: "Customer receives", businessReceives: "Business receives" },
@@ -2628,7 +2628,7 @@ const captureFlowCopy = {
     label: "CÓMO FUNCIONA — RECORRIDO DEL CLIENTE",
     headline: "De una búsqueda en Google a una solicitud de cliente organizada.",
     supporting:
-      "Con BLYNX Presence y BLYNX Complete, un cliente encuentra tu negocio, envía una solicitud, recibe una respuesta automática y tu equipo da seguimiento desde un solo lugar.",
+      "Un cliente encuentra tu negocio y envía una solicitud. Con BLYNX Complete, recibe una respuesta automática y tu equipo da seguimiento desde un solo lugar.",
     stageLabels: ["Te encuentran", "Captas la oportunidad", "Respondes y das seguimiento"],
     exampleNote: "Negocio de ejemplo mostrado solo a modo de ilustración.",
     ui: { foundOn: "Encontrado en", customerReceives: "El cliente recibe", businessReceives: "El negocio recibe" },
@@ -3854,13 +3854,15 @@ function stagePage(lang) {
     <meta property="og:url" content="${lang === "es" ? esUrl : enUrl}">
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
     <meta property="og:locale:alternate" content="${lang === "es" ? "en_US" : "es_ES"}">
-    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image" content="${lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${p.title}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${p.title}">
     <meta name="twitter:description" content="${p.description}">
-    <meta name="twitter:image" content="${OG_IMAGE}">
+    <meta name="twitter:image" content="${lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN}">
+    <meta name="twitter:image:alt" content="${p.title}">
     ${structuredData(lang, p.title, p.description, lang === "es" ? esUrl : enUrl)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -4165,11 +4167,13 @@ function blogShell(lang, meta, body, article = null) {
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
     <meta property="og:image" content="${ogImage}">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">${articleOgTags}
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${meta.title}">${articleOgTags}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${meta.title}">
     <meta name="twitter:description" content="${meta.description}">
     <meta name="twitter:image" content="${ogImage}">
+    <meta name="twitter:image:alt" content="${meta.title}">
     ${blogStructuredData(lang, meta, article)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">

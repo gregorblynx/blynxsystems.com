@@ -85,6 +85,6 @@ Si respondiste "no" o "depende" más de una vez, probablemente estás generando 
 
 ## Por Dónde Empezar
 
-No necesitas construir las seis partes de una vez. La mayoría de los negocios obtiene resultados más rápido arreglando primero la fuga más grande — casi siempre la velocidad de respuesta o la captura — y mejorando el resto paso a paso. Puedes ver cómo BLYNX estructura estas piezas en el [página de servicios](/es/services), tanto si vas a [mejorar una presencia existente](/es/existing) como si estás [empezando desde cero](/es/zero).
+No necesitas construir las seis partes de una vez. La mayoría de los negocios obtiene resultados más rápido arreglando primero la fuga más grande — casi siempre la velocidad de respuesta o la captura — y mejorando el resto paso a paso. Puedes ver cómo BLYNX estructura estas piezas en la [página de servicios](/es/services), tanto si vas a [mejorar una presencia existente](/es/existing) como si estás [empezando desde cero](/es/zero).
 
 El punto de partida es simplemente saber dónde tu flujo actual pierde personas. [Solicita una cotización](/es/contact) y cuéntanos cómo te encuentran los clientes, cómo te contactan y cómo reciben respuesta — te recomendamos el servicio de BLYNX que mejor encaja.
