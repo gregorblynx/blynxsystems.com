@@ -67,4 +67,4 @@ Por eso el trabajo de confianza nunca se desperdicia, aunque no produzca una lla
 
 Lo difícil de las señales de confianza es que no puedes evaluar las tuyas. Tú sabes que eres confiable, así que las fotos viejas y la reseña sin responder de marzo se sienten inofensivas. Un extraño comparándote contra dos competidores a las 9 de la noche ve algo distinto.
 
-Una [auditoría gratis de presencia digital](/es/free-audit) te da exactamente esa mirada externa: cómo se ven tus reseñas, fotos, información, sitio y capacidad de respuesta desde el lado del cliente — y cuál señal débil te está costando más confianza ahora mismo.
+Si quieres que los clientes vean un negocio profesional antes de llamarte, empieza con [BLYNX Presence](/es/services#blynx-presence): un sitio web profesional, un Perfil de Empresa de Google y una forma clara de contactarte. [Solicita una cotización](/es/contact) y te recomendamos por dónde empezar.

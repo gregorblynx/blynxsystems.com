@@ -85,4 +85,4 @@ Dos preguntas lo resuelven:
 
 La mayoría de los negocios locales honestamente no puede responder la primera pregunta, porque sus leads están regados entre buzón de voz, bandejas de correo y memoria — no hay conteo de consultas, así que no hay forma de ver la fuga. Esa falta de medición es en sí misma lo primero que hay que arreglar.
 
-Si quieres una respuesta externa, una [auditoría gratis de presencia digital](/es/free-audit) traza tu flujo real — cómo te encuentran los clientes, qué pasa cuando te escriben y dónde se están fugando oportunidades — para que sepas si tu próximo dólar va al sistema o al marketing.
+Si quieres una opinión externa sobre si tu próximo dólar va al sistema o al marketing, [solicita una cotización](/es/contact) y cuéntanos cómo te encuentran los clientes y qué pasa cuando te escriben. Te recomendamos por dónde empezar.

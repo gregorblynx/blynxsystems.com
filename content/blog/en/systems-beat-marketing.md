@@ -84,4 +84,4 @@ Two questions cut through it:
 
 Most local businesses honestly cannot answer the first question, because their leads are scattered across voicemail, inboxes, and memory — there is no count of inquiries, so there is no way to see the leak. That measurement gap is itself the first thing to fix.
 
-If you want an outside answer, a [free digital presence audit](/en/free-audit) traces your actual flow — how customers find you, what happens when they reach out, and where opportunities are currently leaking — so you know whether your next dollar belongs in the system or in the marketing.
+If you want an outside opinion on whether your next dollar belongs in the system or in the marketing, [request a quote](/en/contact) and tell us how customers find you and what happens when they reach out. We will recommend where to start.

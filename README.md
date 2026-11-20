@@ -2,7 +2,7 @@
 
 Official static website for BLYNX Systems, live at **https://www.blynxsystems.com**.
 
-Bilingual (English / Spanish) site focused on local lead systems for service businesses.
+Bilingual (English / Spanish) site for BLYNX's three core services — BLYNX Presence, BLYNX Complete and BLYNX Content — plus a few secondary services. Services, prices and the FAQ live in the `commercialOffer` object in `scripts/generate-pages.js`; EN and ES are validated for parity at generate time.
 
 ## Structure
 

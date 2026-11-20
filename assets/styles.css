@@ -4050,3 +4050,398 @@ fieldset.field {
   object-fit: cover;
   opacity: 0.6;
 }
+
+/* ============ Commercial offer: BLYNX Presence / Complete / Content ============ */
+/* Appended after the original system-card rules so it can refine them without
+   touching the approved base styles. Cards keep the same black/gold look. */
+
+.system-offer-card {
+  position: relative;
+}
+
+/* Old section ids stay as invisible anchors; absolutely positioned so they never
+   take a grid row or flex slot inside a card. */
+.legacy-anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.service-number {
+  color: var(--gold-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.system-offer-card h3 {
+  margin-top: 0.55rem;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+}
+
+.system-offer-grid-overview .system-offer-topline,
+.system-offer-grid-overview .system-offer-card h3,
+.system-offer-grid-overview .system-result-chain {
+  min-height: 0;
+}
+
+.service-headline {
+  margin: 0.65rem 0 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.service-description {
+  margin: 0.6rem 0 0;
+  color: var(--muted-strong);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.service-bestfor {
+  margin: 1.1rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.service-bestfor strong {
+  color: var(--muted-strong);
+}
+
+.system-price-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+}
+
+.system-price-unit {
+  color: var(--muted-strong);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.system-delivery {
+  flex-basis: 100%;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Content card: three monthly plans in place of a feature checklist */
+.plan-list {
+  display: grid;
+  gap: 0;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plan-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 0.75rem;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding: 0.6rem 0;
+}
+
+.plan-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.plan-name {
+  grid-column: 1;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.plan-summary {
+  grid-column: 1;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.plan-price {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  color: var(--gold-soft);
+  font-size: 1.15rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.plan-price small {
+  margin-left: 0.15rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.plan-note {
+  margin: 0.8rem 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 0.8rem;
+  color: var(--muted-strong);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+/* Where supported, the three home cards share one row grid so the headline,
+   description, list, price and button line up across cards regardless of how
+   many lines each one wraps to. Older browsers keep the flex layout above
+   (price line anchored to the bottom with margin-top:auto). */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 1121px) {
+    .system-offer-grid-overview {
+      grid-template-rows: auto auto auto auto 1fr auto auto auto;
+    }
+
+    .system-offer-grid-overview .system-offer-card {
+      display: grid;
+      grid-row: span 8;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+
+    .system-offer-grid-overview .system-included {
+      margin-top: 1.35rem;
+    }
+
+    .system-offer-grid-overview .system-price-line,
+    .system-offer-grid-overview .system-card-actions {
+      margin-top: 0;
+    }
+
+    .system-offer-grid-overview .system-price-line {
+      margin-top: 1.1rem;
+    }
+  }
+}
+
+/* With only three cards, the third one sits centered under the other two on
+   tablet widths (the old rule keyed off a class the cards no longer carry). */
+@media (max-width: 1120px) and (min-width: 761px) {
+  .system-offer-grid > .system-offer-card:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: 620px;
+    margin-inline: auto;
+  }
+}
+
+/* Services page detail cards */
+.service-visual {
+  margin: 1.1rem 0 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 0.9rem 1rem;
+  color: var(--gold);
+}
+
+.service-visual svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+}
+
+.plan-stack {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+}
+
+.plan-card {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.22);
+  padding: 1rem 1.1rem;
+}
+
+.plan-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.plan-card-head h4 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.plan-card-price {
+  color: var(--gold-soft);
+  font-size: 1.2rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.plan-card-price small {
+  margin-left: 0.15rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.plan-card .check-list {
+  margin-top: 0.75rem;
+}
+
+.service-fine {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.service-care-price {
+  margin: 0.45rem 0 0;
+  color: var(--gold-soft);
+  font-weight: 700;
+}
+
+/* Instagram & Facebook publishing add-on */
+.publishing-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.publishing-col {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.publishing-col h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.publishing-col .check-list {
+  margin-top: 1rem;
+}
+
+.publishing-col .comparison-scroller {
+  margin-top: 0.9rem;
+}
+
+.publishing-table {
+  min-width: 0;
+}
+
+@media (max-width: 860px) {
+  .publishing-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Delivery timeline */
+.impl-step {
+  width: min(19rem, 100%);
+}
+
+.impl-step h3 {
+  font-size: 1.15rem;
+}
+
+.impl-copy {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.timeline-conditions {
+  max-width: 46rem;
+  margin: 2.25rem auto 0;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+}
+
+.timeline-conditions h3 {
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 1rem;
+}
+
+.timeline-conditions .check-list {
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.timeline-conditions .check-list li {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Secondary services (Landing Page / Google Business Profile / Custom AI) */
+.secondary-price {
+  font-size: 1.35rem;
+}
+
+.secondary-meta {
+  font-size: 0.84rem;
+}
+
+/* Quote request flow now has 4 steps (was 6) */
+.audit-flow {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.audit-step {
+  min-height: 0;
+}
+
+@media (max-width: 1100px) {
+  .audit-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .audit-flow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Home cards: button on top, "See full details" link beneath, on all three cards
+   (otherwise the longer Content button pushes its link onto a second line while
+   the other two sit side by side). */
+.system-offer-grid-overview .system-card-actions {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.secondary-grid {
+  align-items: stretch;
+}
+
+/* Grid items default to min-width:auto, so on phones the publishing table's
+   nowrap cells stretched the whole column past the viewport. Let the column
+   shrink; the table scrolls inside its own .comparison-scroller instead. */
+.publishing-col {
+  min-width: 0;
+}
+
+@media (max-width: 860px) {
+  .publishing-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

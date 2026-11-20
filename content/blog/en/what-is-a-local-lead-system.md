@@ -86,4 +86,4 @@ If you answered "no" or "it depends" more than once, you are likely generating m
 
 You do not need to build all six parts at once. Most businesses get the fastest results by fixing the biggest leak first — often response speed or lead capture — and then improving the rest step by step. You can see how BLYNX structures these pieces on the [lead system overview](/en/services), whether you are [improving an existing presence](/en/existing) or [starting from zero](/en/zero).
 
-The starting point is simply knowing where your current flow loses people. That is exactly what a [free digital presence audit](/en/free-audit) is for: a clear snapshot of how customers find you, contact you, and hear back — and where opportunities are slipping away today.
+The starting point is simply knowing where your current flow loses people. [Request a quote](/en/contact) and tell us how customers find you, contact you, and hear back — we will recommend the BLYNX service that fits.

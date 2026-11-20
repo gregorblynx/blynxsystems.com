@@ -66,4 +66,4 @@ This is also why trust work is never wasted, even when it does not produce an im
 
 The hard part of trust signals is that you cannot evaluate your own. You know you are reliable, so the outdated photos and the unanswered review from March feel harmless. A stranger comparing you against two competitors at 9 p.m. sees something different.
 
-A [free digital presence audit](/en/free-audit) gives you exactly that outside view: how your reviews, photos, information, website, and responsiveness look from the customer's side — and which weak signal is costing you the most confidence right now.
+If you want customers to see a professional business before they ever call, start with [BLYNX Presence](/en/services#blynx-presence): a professional website, a Google Business Profile and a clear way to contact you. [Request a quote](/en/contact) and we will recommend where to begin.

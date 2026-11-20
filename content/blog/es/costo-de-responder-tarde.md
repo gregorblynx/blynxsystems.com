@@ -77,4 +77,4 @@ Algunos dueños responden rápido por naturaleza — hasta que llega la temporad
 
 Por eso la velocidad de respuesta es una de las mejoras con mayor retorno que un negocio local puede hacer. No requiere presupuesto de publicidad, ni rediseño, ni habilidades nuevas — solo conectar los lugares donde llegan los leads con la persona que puede contestarlos. Si tus reseñas y tu visibilidad ya son decentes, ser el primero en responder suele ser el trabajo más barato que jamás ganarás.
 
-¿No sabes qué tan rápido responde realmente tu negocio — o dónde hay consultas esperando sin respuesta ahora mismo? Una [auditoría gratis de presencia digital](/es/free-audit) revisa tu flujo completo, desde cómo te encuentran los clientes hasta qué pasa después de que te escriben, y te muestra dónde están las fugas.
+¿No sabes qué tan rápido responde realmente tu negocio — o dónde hay consultas esperando sin respuesta ahora mismo? [BLYNX Complete](/es/services#blynx-complete) mantiene cada solicitud de tus clientes en un solo lugar, con una respuesta automática inicial y recordatorios de seguimiento. O [solicita una cotización](/es/contact) y cuéntanos cómo estás hoy.
