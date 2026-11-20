@@ -58,7 +58,7 @@ Follow-up does not need to be aggressive. A confirmation message when the reques
 
 ## Why a Website Alone Is Not a System
 
-Many owners invest in a website and assume the work is done. But a website is only one piece — it mostly helps with being found and building trust. It does not organize leads, it does not notify you, and it does not follow up with anyone.
+Many owners invest in a website and assume the work is done. But a website is only one piece — it mostly helps with being found and building trust. On its own, a website does not organize leads, notify you, or follow up with anyone unless it is built to. A lead system adds those parts.
 
 Think of it this way: a website is a storefront. A lead system is the storefront plus the person greeting customers, the notebook recording every inquiry, and the habit of calling people back. Traffic without that structure leaks. That is the core argument of [systems beat marketing](/en/blog/systems-beat-marketing).
 
@@ -84,6 +84,6 @@ If you answered "no" or "it depends" more than once, you are likely generating m
 
 ## Where to Start
 
-You do not need to build all six parts at once. Most businesses get the fastest results by fixing the biggest leak first — often response speed or lead capture — and then improving the rest step by step. You can see how BLYNX structures these pieces on the [lead system overview](/en/services), whether you are [improving an existing presence](/en/existing) or [starting from zero](/en/zero).
+You do not need to build all six parts at once. Most businesses get the fastest results by fixing the biggest leak first — often response speed or lead capture — and then improving the rest step by step. You can see how BLYNX structures these pieces on the [services page](/en/services), whether you are [improving an existing presence](/en/existing) or [starting from zero](/en/zero).
 
-The starting point is simply knowing where your current flow loses people. That is exactly what a [free digital presence audit](/en/free-audit) is for: a clear snapshot of how customers find you, contact you, and hear back — and where opportunities are slipping away today.
+The starting point is simply knowing where your current flow loses people. [Request a quote](/en/contact) and tell us how customers find you, contact you, and hear back — we will recommend the BLYNX service that fits.

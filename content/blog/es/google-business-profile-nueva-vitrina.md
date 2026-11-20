@@ -77,4 +77,4 @@ El hábito más importante es un flujo constante de reseñas nuevas. Los negocio
 
 Una advertencia: un gran perfil aumenta las llamadas y los mensajes, pero no puede contestarlos por ti. Si las llamadas caen a un buzón lleno, o los mensajes quedan sin leer un día entero, el perfil está llenando un balde con un agujero. La visibilidad y la [velocidad de respuesta](/es/blog/costo-de-responder-tarde) tienen que mejorar juntas.
 
-Si no estás seguro de cómo se compara tu perfil con los competidores que el cliente ve junto a ti — o si te está costando trabajos en silencio — una [auditoría gratis de presencia digital](/es/free-audit) te muestra exactamente cómo se ve tu vitrina desde el lado del cliente, y qué arreglar primero.
+Si no estás seguro de cómo se compara tu perfil con los competidores que el cliente ve junto a ti, [BLYNX Presence](/es/services#blynx-presence) combina un sitio web profesional con la configuración u optimización básica del Perfil de Empresa de Google (sujeta a elegibilidad y acceso). [Solicita una cotización](/es/contact) para comenzar.

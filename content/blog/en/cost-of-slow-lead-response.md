@@ -76,4 +76,4 @@ Some owners are naturally fast responders — until the busy season hits, or the
 
 That is also why response speed is one of the highest-return improvements a local business can make. It requires no ad budget, no redesign, and no new skills — just plumbing between the places leads arrive and the person who can answer them. If your reviews and visibility are already decent, being the first to respond is often the cheapest job you will ever win.
 
-Not sure how fast your business actually responds — or where inquiries are sitting unanswered right now? A [free digital presence audit](/en/free-audit) looks at your whole flow, from how customers find you to what happens after they reach out, and shows you where the leaks are.
+Not sure how fast your business actually responds — or where inquiries are sitting unanswered right now? [BLYNX Complete](/en/services#blynx-complete) keeps every customer request in one place, with an automatic first response and follow-up reminders. Or [request a quote](/en/contact) and tell us where you are today.

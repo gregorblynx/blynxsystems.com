@@ -76,4 +76,4 @@ The most important habit is a steady flow of new reviews. The businesses that do
 
 One caution: a great profile increases calls and messages, but it cannot answer them for you. If calls go to a full voicemail box, or messages sit unread for a day, the profile is filling a bucket with a hole in it. Visibility and [response speed](/en/blog/cost-of-slow-lead-response) have to improve together.
 
-If you are not sure how your profile compares to the competitors a customer sees next to you — or whether it is quietly costing you jobs — a [free digital presence audit](/en/free-audit) will show you exactly what your storefront looks like from the customer's side, and what to fix first.
+If you are not sure how your profile compares to the competitors a customer sees next to you, [BLYNX Presence](/en/services#blynx-presence) combines a professional website with Google Business Profile setup or basic optimization (subject to eligibility and access). [Request a quote](/en/contact) to get started.

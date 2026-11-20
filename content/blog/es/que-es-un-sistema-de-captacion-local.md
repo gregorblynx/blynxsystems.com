@@ -59,7 +59,7 @@ El seguimiento no necesita ser agresivo. Un mensaje de confirmación cuando lleg
 
 ## Por Qué un Sitio Web por Sí Solo No Es un Sistema
 
-Muchos dueños invierten en un sitio web y asumen que el trabajo está hecho. Pero el sitio es solo una pieza — ayuda sobre todo a ser encontrado y a generar confianza. No organiza leads, no te avisa, y no le da seguimiento a nadie.
+Muchos dueños invierten en un sitio web y asumen que el trabajo está hecho. Pero el sitio es solo una pieza — ayuda sobre todo a ser encontrado y a generar confianza. Por sí solo, un sitio web no organiza leads, no te avisa y no le da seguimiento a nadie, a menos que esté construido para hacerlo. Un sistema de captación agrega esas piezas.
 
 Míralo así: un sitio web es una vitrina. Un sistema de captación es la vitrina más la persona que recibe a los clientes, el cuaderno donde se anota cada consulta, y el hábito de devolver las llamadas. El tráfico sin esa estructura se fuga. Ese es el argumento central de [los sistemas le ganan al marketing](/es/blog/sistemas-le-ganan-al-marketing).
 
@@ -85,6 +85,6 @@ Si respondiste "no" o "depende" más de una vez, probablemente estás generando 
 
 ## Por Dónde Empezar
 
-No necesitas construir las seis partes de una vez. La mayoría de los negocios obtiene resultados más rápido arreglando primero la fuga más grande — casi siempre la velocidad de respuesta o la captura — y mejorando el resto paso a paso. Puedes ver cómo BLYNX estructura estas piezas en el [resumen del sistema de captación](/es/services), tanto si vas a [mejorar una presencia existente](/es/existing) como si estás [empezando desde cero](/es/zero).
+No necesitas construir las seis partes de una vez. La mayoría de los negocios obtiene resultados más rápido arreglando primero la fuga más grande — casi siempre la velocidad de respuesta o la captura — y mejorando el resto paso a paso. Puedes ver cómo BLYNX estructura estas piezas en la [página de servicios](/es/services), tanto si vas a [mejorar una presencia existente](/es/existing) como si estás [empezando desde cero](/es/zero).
 
-El punto de partida es simplemente saber dónde tu flujo actual pierde personas. Para eso existe la [auditoría gratis de presencia digital](/es/free-audit): una foto clara de cómo los clientes te encuentran, te contactan y reciben respuesta — y dónde se están escapando oportunidades hoy.
+El punto de partida es simplemente saber dónde tu flujo actual pierde personas. [Solicita una cotización](/es/contact) y cuéntanos cómo te encuentran los clientes, cómo te contactan y cómo reciben respuesta — te recomendamos el servicio de BLYNX que mejor encaja.

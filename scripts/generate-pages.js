@@ -13,13 +13,13 @@ const blogArticles = {
 };
 
 const SITE_URL = "https://www.blynxsystems.com";
-const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
+const OG_IMAGE = `${SITE_URL}/assets/og-offer-en.png`;
 // Approved per-language social share cards for the two homepages (and the
 // root language-gate, which defaults to the EN card since it's the
 // x-default/English-flavored entry point). Not used elsewhere — every other
 // page keeps the generic OG_IMAGE above.
-const OG_IMAGE_EN = `${SITE_URL}/assets/og-image-en.png`;
-const OG_IMAGE_ES = `${SITE_URL}/assets/og-image-es.png`;
+const OG_IMAGE_EN = `${SITE_URL}/assets/og-offer-en.png`;
+const OG_IMAGE_ES = `${SITE_URL}/assets/og-offer-es.png`;
 
 // Runtime configuration, read from the environment at build time so that neither the lead
 // endpoint nor the analytics ID is hardcoded across source files. Set both in the Vercel
@@ -64,7 +64,8 @@ function runtimeHead() {
       gtag('config', '${GA4_MEASUREMENT_ID}');
     </script>`;
 }
-const LEGAL_EFFECTIVE_DATE = "July 9, 2026";
+const LEGAL_EFFECTIVE_DATE = "November 19, 2026";
+const LEGAL_EFFECTIVE_DATE_ES = "19 de noviembre de 2026";
 const BUSINESS = {
   legalName: "BLYNX Systems",
   displayName: "BLYNX Systems",
@@ -150,8 +151,8 @@ function contactLine(icon, content) {
 function structuredData(lang, title, description, canonicalUrl, breadcrumbs = []) {
   const orgDescription =
     lang === "es"
-      ? "BLYNX crea sistemas digitales que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades y dar seguimiento más rápido."
-      : "BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, and follow up faster.";
+      ? "BLYNX crea sitios web profesionales, organiza las solicitudes de clientes y produce contenido mensual con IA para negocios locales."
+      : "BLYNX builds professional websites, organizes customer requests and creates AI-powered content for local businesses.";
   const data = {
     "@context": "https://schema.org",
     "@graph": [
@@ -162,7 +163,7 @@ function structuredData(lang, title, description, canonicalUrl, breadcrumbs = []
         description: orgDescription,
         url: `${SITE_URL}/`,
         email: BUSINESS.email,
-        image: OG_IMAGE,
+        image: lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN,
         logo: OG_IMAGE,
         ...(hasConfiguredPhone() ? { telephone: phoneHref().replace("tel:", "") } : {}),
         address: {
@@ -222,14 +223,14 @@ const copy = {
     footer: "Built for local business growth.",
     nav: {
       home: "Home",
-      services: "Systems",
+      services: "Services",
       howItWorks: "How It Works",
       about: "About",
       projects: "Projects",
       resources: "Resources",
       contact: "Contact",
       blog: "Blog",
-      audit: "Free Audit",
+      audit: "Request a Quote",
       privacy: "Privacy Policy",
       terms: "Terms of Service"
     },
@@ -249,80 +250,72 @@ const copy = {
       breadcrumbBlog: "Blog",
       relatedTitle: "Keep Reading",
       aboutTitle: "BLYNX",
-      aboutText: "BLYNX builds practical digital systems for local businesses that help them get found, build trust, capture opportunities, and follow up faster.",
+      aboutText: "BLYNX builds professional websites, organizes customer requests and creates monthly AI-powered content for local businesses.",
       aboutLink: "Learn more about BLYNX",
-      ctaTitle: "Not sure what your business is missing online?",
-      ctaText: "Get a free digital presence audit and see where your business may be losing visibility, trust, or qualified opportunities.",
-      ctaButton: "Get Your Free Audit"
+      ctaTitle: "Ready to strengthen your business online?",
+      ctaText: "Tell us about your business and we’ll send you a clear quote.",
+      ctaButton: "Request a Quote"
     },
     cta: {
-      audit: "Request a Free Audit",
-      auditLong: "Request Your Free Audit",
-      auditShort: "Free Audit",
-      findSystem: "Find the Right System",
-      services: "Explore Our Systems",
+      audit: "Request a Quote",
+      auditLong: "Request Your Quote",
+      auditShort: "Request a Quote",
+      findSystem: "Request a Quote",
+      services: "Explore Our Services",
       contact: "Contact BLYNX"
     },
     home: {
-      title: "Digital Systems for Local Businesses | BLYNX Systems",
-      description: "BLYNX builds digital systems that help local businesses get found, build trust, capture opportunities, organize them, and follow up. Three systems, starting at $1,500.",
-      ogTitle: "Digital Systems for Local Businesses | BLYNX",
-      ogDescription: "BLYNX connects digital presence, inquiries, organization and follow-up in one clear system for local businesses.",
+      title: "Websites, Follow-Up & AI Content for Local Businesses | BLYNX Systems",
+      description: "Professional websites, automated customer follow-ups, and AI-powered content for local businesses. BLYNX Presence from $1,500, BLYNX Complete from $2,500, BLYNX Content from $300/month.",
+      ogTitle: "Your Business. Stronger Online. Smarter with AI. | BLYNX",
+      ogDescription: "Professional websites, automated customer follow-ups, and AI-powered content for local businesses.",
       ogImage: OG_IMAGE_EN,
-      ogImageWidth: 1774,
-      ogImageHeight: 887,
-      ogImageAlt: "BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.",
-      eyebrow: "Digital systems for local businesses",
-      headline: 'Get found.<br>Get contacted.<br><span class="text-gold">Stay organized.</span>',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: "BLYNX Systems: Your Business. Stronger Online. Smarter with AI. BLYNX Presence, BLYNX Complete and BLYNX Content.",
+      eyebrow: "Digital solutions for local businesses",
+      headline: 'Your Business.<br>Stronger Online.<br><span class="text-gold">Smarter with AI.</span>',
       subtitle: [
-        "BLYNX connects your digital presence, inquiries and follow-up in one clear system built for local businesses."
+        "Professional websites, automated customer follow-ups, and AI-powered content for local businesses.",
+        "We build practical digital solutions that save you time and help your business operate more efficiently."
       ],
-      trust: ["Be Found", "Build Trust", "Capture", "Organize", "Follow Up"],
-      problemEyebrow: "The real problem",
-      problemTitle: "The opportunity arrives. Then what?",
-      problemCopy: "Most local businesses don’t only have a visibility problem — they have a handoff problem. The work was there. It just wasn’t tracked.",
-      beforeAfter: {
-        beforeLabel: "Before BLYNX",
-        afterLabel: "After BLYNX",
-        before: ["Scattered inquiries", "Unclear digital presence", "No visible next step", "Missed opportunities", "Inconsistent follow-up"],
-        after: ["Professional presence", "Clear contact path", "Organized opportunities", "Visible status and next step", "Defined follow-up process"]
-      },
       stageBanner: {
-        existing: "You already have a digital presence. Any of our three systems can apply — we’ll help you find the right one.",
-        zero: "Starting from zero? Any of our three systems can apply — we’ll help you find the right one."
+        existing: "You already have a digital presence? We can improve it or build on it — request a quote and tell us what you need.",
+        zero: "Starting from zero? We can build your website and Google presence — request a quote and tell us what you need."
       },
+      heroCaption: "Illustration: a sample business shown for demonstration.",
       aboutEyebrow: "About BLYNX",
-      aboutTitle: "Built for Local Service Businesses",
-      aboutCopy: "BLYNX builds practical digital systems focused on visibility, trust, organized opportunities, and follow-up — not disconnected marketing services.",
+      aboutTitle: "Built for Local Businesses",
+      aboutCopy: "BLYNX builds practical digital solutions for local businesses: professional websites, organized customer follow-up and monthly AI-powered content — explained in plain language.",
       aboutBullets: [
         "Based in Nashville, Tennessee.",
         "Serving local businesses across the United States.",
         "English and Spanish support available."
       ],
       statItems: [
-        ["Be Found", "Google visibility, reviews, local trust signals, and clearer online presence."],
-        ["Capture & Organize", "Smart forms and an organized record for every opportunity."],
-        ["Follow Up", "Confirmations, reminders, and review requests that keep opportunities moving."]
+        ["Practical", "Simple solutions, explained in plain language."],
+        ["Transparent", "Clear starting prices and a defined scope for every service."],
+        ["Direct", "You work directly with the founder."]
       ],
-      finalTitle: "Not sure which system fits?",
-      finalSubtitle: "That’s what the first conversation is for. Tell us where your business is today, and we’ll tell you which of the three systems makes sense — and which one doesn’t."
+      finalTitle: "Ready to strengthen your business online?",
+      finalSubtitle: "Tell us about your business and we’ll send you a clear quote."
     },
     auditPage: {
-      title: "Request Your Free Audit | BLYNX Systems",
-      description: "Request a free audit to identify what your local business should keep, improve, or build next.",
-      eyebrow: "Free audit",
-      h1: "Request Your Free Audit",
-      subtitle: "See what your business can keep, what needs improvement, and which of the three BLYNX systems fits best.",
+      title: "Request a Quote | BLYNX Systems",
+      description: "Request a quote for a professional website, customer follow-up or monthly AI-powered content from BLYNX.",
+      eyebrow: "Request a quote",
+      h1: "Request a Quote",
+      subtitle: "Tell us about your business and the service you are interested in. We’ll review it and get back to you with the next steps.",
       trust: "AI-powered for speed. Human-reviewed for quality.",
-      flowTitle: "How the Free Audit Works",
-      flowSubtitle: "AI-assisted for speed. Human-reviewed for quality.",
-      introTitle: "A practical snapshot of your digital system.",
-      introCopy: "This audit reviews your website or landing page, Google presence, business information, trust signals, customer request process, and follow-up opportunities.",
-      fitLine: "This audit works whether you already have a digital presence or you are starting from zero.",
+      flowTitle: "How It Works",
+      flowSubtitle: "From your request to a clear quote.",
+      introTitle: "Tell us what you need.",
+      introCopy: "Share a few details about your business and we’ll recommend the right service and quote it clearly.",
+      fitLine: "Whether you need a website, customer follow-up or monthly content, this is the place to start.",
       bullets: [
-        "Digital presence, website, and Google opportunities.",
-        "Business information, reviews, and local trust signals.",
-        "Customer requests, organization, and follow-up opportunities."
+        "A professional website and Google presence.",
+        "Organized customer requests with automatic responses.",
+        "Monthly images and videos for your brand."
       ],
       fields: {
         fullName: "Full Name",
@@ -337,23 +330,23 @@ const copy = {
         websiteStatus: "Do you currently have a website?",
         gbpStatus: "Do you have a Google Business Profile?",
         language: "Preferred Language",
-        mainGoal: "Main Goal",
+        mainGoal: "Service of Interest",
         improvements: "What do you want to improve?",
-        timeline: "How soon do you want to improve this?",
+        timeline: "How soon do you want to start?",
         message: "Message / Notes"
       },
       placeholders: {
         businessType: "Home services, dental, med spa, restaurant...",
         gbp: "https://g.page/...",
-        message: "Share anything useful about your current goals, challenges, or online presence."
+        message: "Share anything useful about your business, your goals or the service you are interested in."
       },
       improvements: [
-        "More calls",
-        "More website inquiries",
-        "Better Google visibility",
-        "More reviews",
-        "Better landing page",
-        "Follow-up automation",
+        "Professional website",
+        "Google Business Profile",
+        "Customer inquiry organization and follow-up",
+        "Monthly images and videos",
+        "Landing page",
+        "Custom AI solution",
         "Not sure"
       ],
       websiteStatusOptions: ["Yes", "No", "I have one, but it needs improvement"],
@@ -365,45 +358,45 @@ const copy = {
       consentPrivacy: "Privacy Policy",
       consentMiddle: "and",
       consentTerms: "Terms of Service",
-      submit: "Submit My Free Audit Request",
+      submit: "Send My Quote Request",
       loading: "Submitting...",
-      note: "Your information is only used to prepare your free audit — no spam, ever.",
-      success: "Thank you. Your free audit request has been received. We\u2019ll review your business and contact you with the next steps.",
-      error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
+      note: "Your information is only used to respond to your request — no spam, ever.",
+      success: "Thank you. Your quote request has been received. We’ll review your information and contact you with the next steps.",
+      error: `Something went wrong sending your request. Please try again, or email us directly at ${BUSINESS.email}.`
     },
     servicesPage: {
-      title: "Three Digital Systems for Local Businesses | BLYNX Systems",
-      description: "Compare the three BLYNX systems for local businesses — Digital Presence, Customer Requests & Organization, and Customer Requests & Follow-Up — including full implementation scope, starting prices, exclusions, and FAQs.",
-      eyebrow: "BLYNX Systems",
-      h1: "Choose how far your system goes.",
-      subtitle: "Every system includes the digital foundation your business needs to be found and trusted. What changes is how much of the work after that first contact we build for you.",
-      ctaTitle: "Not sure which system fits?",
-      ctaSubtitle: "Tell us where your business is today and we'll help you find the right system."
+      title: "Services & Prices | BLYNX Systems",
+      description: "BLYNX Presence from $1,500, BLYNX Complete from $2,500 and BLYNX Content subscriptions from $300/month — professional websites, customer follow-up and AI-powered content for local businesses.",
+      eyebrow: "BLYNX Services",
+      h1: "Three services. Clear prices.",
+      subtitle: "Professional websites, organized customer follow-up and monthly AI-powered content — each with a clear scope and starting price.",
+      ctaTitle: "Not sure which service fits?",
+      ctaSubtitle: "Tell us about your business and we’ll recommend the right one and send you a clear quote."
     },
     aboutPage: {
       title: "About | BLYNX Systems",
-      description: "BLYNX helps local service businesses get found, turn interest into customer requests, organize every opportunity, and follow up faster.",
+      description: "BLYNX helps local businesses in the United States with professional websites, organized customer follow-up and monthly AI-powered content.",
       eyebrow: "About",
-      h1: "Built for local businesses that need a clearer digital system.",
-      subtitle: "BLYNX builds digital presence and customer systems that improve visibility, trust, opportunity capture, organization, and follow-up.",
+      h1: "Practical digital solutions for local businesses.",
+      subtitle: "BLYNX builds professional websites, organizes customer requests and creates monthly content with AI-powered tools.",
       cards: [
         ["Who BLYNX Helps", "BLYNX serves local businesses across the United States that rely on calls, quote requests, bookings, inquiries, and customer trust to grow."],
-        ["What BLYNX Builds", "We build three levels of the same connected system: Digital Presence, Customer Requests & Organization, and Customer Requests & Follow-Up."],
-        ["Why It Matters", "Local customers compare businesses quickly. A clearer request process helps reduce missed calls, forgotten forms, and lost sales opportunities."]
+        ["What BLYNX Offers", "Three services: BLYNX Presence for your website and Google presence, BLYNX Complete to organize customer requests, and BLYNX Content for monthly images and videos."],
+        ["Why It Matters", "Local customers compare businesses quickly. A professional online presence and a clear way to reach you help you stay visible and respond on time."]
       ],
-      positionEyebrow: "Positioning",
-      positionTitle: "Three systems built around practical growth.",
-      positionCopy: "BLYNX is based in Nashville, Tennessee and supports local businesses nationwide. The focus is practical digital infrastructure: visibility, trust, clear contact pathways, organized opportunities, and follow-up.",
+      positionEyebrow: "Our approach",
+      positionTitle: "Practical, not complicated.",
+      positionCopy: "BLYNX is based in Nashville, Tennessee and supports local businesses nationwide. We use AI to work efficiently, but we sell practical solutions — not technology that is hard to understand.",
       bullets: [
-        "Local visibility improvements that help customers find the business.",
-        "Focused landing pages that help visitors take the next step.",
-        "Customer request organization that keeps every opportunity in one clear flow.",
-        "Simple follow-up support that helps owners respond faster."
+        "Professional websites and Google presence that help customers find you.",
+        "Organized customer requests with automatic responses and follow-up reminders.",
+        "Monthly images and videos created with AI-powered creative tools.",
+        "Clear starting prices and a defined scope for every service."
       ],
       stats: [
         ["Nashville", "Based in Tennessee and serving local businesses across the United States."],
-        ["Practical", "Clear systems for owners who want outcomes, not technical confusion."],
-        ["Focused", "Three system levels are the core offers. Monthly maintenance and social media support are available only as separate add-ons."]
+        ["Practical", "Clear solutions for owners who want results, not technical confusion."],
+        ["Focused", "Three core services: Presence, Complete and Content. Secondary services are available for specific needs."]
       ],
       founder: {
         eyebrow: "Founder-led",
@@ -416,24 +409,25 @@ const copy = {
           "You work directly with the person responsible for the strategy — without being passed between departments.",
         alt: "Gregor Silva, founder of BLYNX"
       },
-      ctaTitle: "See what your business may be missing online.",
-      ctaSubtitle: "The free audit is the simplest first step."
+      ctaTitle: "Ready to strengthen your business online?",
+      ctaSubtitle: "Request a quote and we’ll get back to you with the next steps."
     },
     contactPage: {
-      title: "Contact | BLYNX Systems",
-      description: "Contact BLYNX Systems about digital presence, customer requests, opportunity organization, and follow-up support.",
+      title: "Contact & Request a Quote | BLYNX Systems",
+      description: "Contact BLYNX Systems or request a quote for a professional website, customer follow-up or monthly AI-powered content.",
       eyebrow: "Contact",
-      h1: "Talk with BLYNX about your local business systems.",
-      subtitle: "Use the form below or start with the free audit if you want to see where customer requests may be getting lost.",
+      h1: "Let’s talk about your business.",
+      subtitle: "Tell us which service you’re interested in and we’ll get back to you with a clear quote.",
       emailTitle: "Email",
       phoneTitle: "Phone",
       locationTitle: "Based in",
       serviceAreaTitle: "Service area",
       instagramTitle: "Instagram",
-      auditTitle: "Start with an audit",
-      auditCopy: "Not sure what you need yet? Request a free digital presence audit first.",
+      auditTitle: "Want to share more details?",
+      auditCopy: "Use our detailed quote request form to tell us more about your business and your online presence.",
+      auditButton: "Detailed Quote Request",
       languageTitle: "Language support",
-      languageCopy: "English and Spanish support can be requested through the audit or contact process.",
+      languageCopy: "English and Spanish support is available.",
       fields: {
         name: "Full Name",
         business: "Business Name",
@@ -444,11 +438,12 @@ const copy = {
         message: "Message"
       },
       topics: [
-        "System 1 — Digital Presence",
-        "System 2 — Customer Requests & Organization",
-        "System 3 — Customer Requests & Follow-Up",
-        "Free audit",
-        "Monthly maintenance / social media",
+        "BLYNX Presence — Website & Google presence",
+        "BLYNX Complete — Website + customer follow-up",
+        "BLYNX Content — Monthly images & videos",
+        "Landing Page",
+        "Google Business Profile",
+        "Custom AI Solution",
         "Not sure"
       ],
       languageOptions: ["English", "Spanish"],
@@ -456,20 +451,20 @@ const copy = {
       consentPrivacy: "Privacy Policy",
       consentMiddle: "and",
       consentTerms: "Terms of Service",
-      submit: "Send Message",
+      submit: "Request a Quote",
       loading: "Sending...",
       success: "Thank you. Your message has been received. BLYNX will follow up with the next steps.",
-      error: "Something went wrong sending your message. Please try again, or email us directly at hello@blynxsystems.com."
+      error: `Something went wrong sending your message. Please try again, or email us directly at ${BUSINESS.email}.`
     },
     resourcesPage: {
       title: "Resources | BLYNX Systems",
       description: "Practical resources for handling customer requests, staying organized, and following up.",
       eyebrow: "Resources",
       h1: "Practical growth resources for local business owners.",
-      subtitle: "Use these starting points to think through how customers find you, contact you, and receive follow-up before your free audit.",
+      subtitle: "Use these starting points to think through how customers find you, contact you, and receive follow-up before you request a quote.",
       cards: [
-        ["Customer Request Process Checklist", "Review the basics that help customers find your business, trust it, and take the next step.", "Request a free audit", "/free-audit"],
-        ["Customer Request Readiness", "Check whether your landing page and contact flow make it easy for qualified prospects to reach you.", "Explore the systems", "/services"],
+        ["Customer Request Process Checklist", "Review the basics that help customers find your business, trust it, and take the next step.", "Request a quote", "/contact"],
+        ["Customer Request Readiness", "Check whether your website and contact flow make it easy for customers to reach you.", "Explore the services", "/services"],
         ["Follow-Up Basics", "Understand how simple confirmations, reminders, and organization reduce missed opportunities.", "Ask a question", "/contact"]
       ]
     },
@@ -516,14 +511,14 @@ const copy = {
     footer: "Creado para el crecimiento de negocios locales.",
     nav: {
       home: "Inicio",
-      services: "Sistemas",
+      services: "Servicios",
       howItWorks: "Cómo Funciona",
       about: "Nosotros",
       projects: "Proyectos",
       resources: "Recursos",
       contact: "Contacto",
       blog: "Blog",
-      audit: "Auditoría Gratis",
+      audit: "Solicitar Cotización",
       privacy: "Política de Privacidad",
       terms: "Términos de Servicio"
     },
@@ -543,80 +538,72 @@ const copy = {
       breadcrumbBlog: "Blog",
       relatedTitle: "Sigue Leyendo",
       aboutTitle: "BLYNX",
-      aboutText: "BLYNX construye sistemas digitales prácticos para negocios locales que los ayudan a ser encontrados, generar confianza, captar oportunidades y dar seguimiento más rápido.",
+      aboutText: "BLYNX crea sitios web profesionales, organiza las solicitudes de clientes y produce contenido mensual con IA para negocios locales.",
       aboutLink: "Conoce más sobre BLYNX",
-      ctaTitle: "¿No sabes qué le falta a tu negocio en internet?",
-      ctaText: "Solicita una auditoría gratis de presencia digital y descubre dónde tu negocio puede estar perdiendo visibilidad, confianza u oportunidades calificadas.",
-      ctaButton: "Solicitar Auditoría Gratis"
+      ctaTitle: "¿Listo para fortalecer tu negocio en línea?",
+      ctaText: "Cuéntanos sobre tu negocio y te enviamos una cotización clara.",
+      ctaButton: "Solicitar una Cotización"
     },
     cta: {
-      audit: "Solicita una Auditoría Gratis",
-      auditLong: "Solicita tu Auditoría Gratis",
-      auditShort: "Auditoría Gratis",
-      findSystem: "Encuentra tu Sistema",
-      services: "Conocer Nuestros Sistemas",
+      audit: "Solicitar una Cotización",
+      auditLong: "Solicita tu Cotización",
+      auditShort: "Cotización",
+      findSystem: "Solicitar una Cotización",
+      services: "Conocer Nuestros Servicios",
       contact: "Contactar a BLYNX"
     },
     home: {
-      title: "Sistemas digitales para negocios locales | BLYNX Systems",
-      description: "BLYNX construye sistemas digitales que ayudan a negocios locales a ser encontrados, generar confianza, captar oportunidades, organizarlas y darles seguimiento. Tres sistemas, desde $1,500.",
-      ogTitle: "Sistemas Digitales para Negocios Locales | BLYNX",
-      ogDescription: "BLYNX conecta presencia digital, contactos, organización y seguimiento en un sistema claro para negocios locales.",
+      title: "Sitios web, seguimiento y contenido con IA para negocios locales | BLYNX Systems",
+      description: "Sitios web profesionales, seguimiento automático de clientes y contenido creado con IA para negocios locales. BLYNX Presence desde $1,500, BLYNX Complete desde $2,500, BLYNX Content desde $300/mes.",
+      ogTitle: "Tu negocio. Más fuerte en línea. Más inteligente con IA. | BLYNX",
+      ogDescription: "Sitios web profesionales, seguimiento automático de clientes y contenido creado con IA para negocios locales.",
       ogImage: OG_IMAGE_ES,
-      ogImageWidth: 1774,
-      ogImageHeight: 887,
-      ogImageAlt: "Sistema de cinco pasos de BLYNX: Te encuentran, Generas confianza, Recibes contactos, Organizas oportunidades, Das seguimiento.",
-      eyebrow: "Sistemas digitales para negocios locales",
-      headline: 'Que te encuentren.<br>Que te contacten.<br><span class="text-gold">Organiza tus oportunidades.</span>',
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: "BLYNX Systems: Tu negocio. Más fuerte en línea. Más inteligente con IA. BLYNX Presence, BLYNX Complete y BLYNX Content.",
+      eyebrow: "Soluciones digitales para negocios locales",
+      headline: 'Tu negocio.<br>Más fuerte en línea.<br><span class="text-gold">Más inteligente con IA.</span>',
       subtitle: [
-        "BLYNX conecta tu presencia digital, tus solicitudes y el seguimiento en un sistema claro para negocios locales."
+        "Sitios web profesionales, seguimiento automático de clientes y contenido creado con IA para negocios locales.",
+        "Creamos soluciones digitales prácticas que te ahorran tiempo y ayudan a tu negocio a operar con más eficiencia."
       ],
-      trust: ["Ser Encontrado", "Generar Confianza", "Captar", "Organizar", "Dar Seguimiento"],
-      problemEyebrow: "El problema real",
-      problemTitle: "La oportunidad llega. ¿Y después?",
-      problemCopy: "La mayoría de los negocios locales no solo tiene un problema de visibilidad, sino de continuidad. El trabajo estaba; solo faltó darle seguimiento.",
-      beforeAfter: {
-        beforeLabel: "Antes de BLYNX",
-        afterLabel: "Después de BLYNX",
-        before: ["Solicitudes dispersas", "Presencia digital poco clara", "Sin siguiente paso visible", "Oportunidades perdidas", "Seguimiento inconsistente"],
-        after: ["Presencia profesional", "Camino de contacto claro", "Oportunidades organizadas", "Estado y siguiente paso visibles", "Proceso de seguimiento definido"]
-      },
       stageBanner: {
-        existing: "Ya tienes presencia digital. Cualquiera de nuestros tres sistemas puede aplicar — te ayudamos a encontrar el correcto.",
-        zero: "¿Estás empezando desde cero? Cualquiera de nuestros tres sistemas puede aplicar — te ayudamos a encontrar el correcto."
+        existing: "¿Ya tienes presencia digital? Podemos mejorarla o construir sobre ella — solicita una cotización y cuéntanos qué necesitas.",
+        zero: "¿Empiezas desde cero? Podemos construir tu sitio web y tu presencia en Google — solicita una cotización y cuéntanos qué necesitas."
       },
+      heroCaption: "Ilustración: un negocio de ejemplo con fines demostrativos.",
       aboutEyebrow: "Sobre BLYNX",
       aboutTitle: "Creado para Negocios Locales",
-      aboutCopy: "BLYNX crea sistemas digitales prácticos enfocados en visibilidad, confianza, oportunidades organizadas y seguimiento, no en servicios de marketing desconectados.",
+      aboutCopy: "BLYNX crea soluciones digitales prácticas para negocios locales: sitios web profesionales, seguimiento organizado de clientes y contenido mensual creado con IA — explicado en lenguaje sencillo.",
       aboutBullets: [
         "Basados en Nashville, Tennessee.",
         "Servimos a negocios locales en todo Estados Unidos.",
         "Soporte disponible en inglés y español."
       ],
       statItems: [
-        ["Ser Encontrado", "Visibilidad en Google, reseñas, confianza local y presencia en internet más clara."],
-        ["Captar y Organizar", "Formularios inteligentes y un registro organizado para cada oportunidad."],
-        ["Dar Seguimiento", "Confirmaciones, recordatorios y solicitudes de reseña que mueven cada oportunidad."]
+        ["Práctico", "Soluciones simples, explicadas en lenguaje sencillo."],
+        ["Transparente", "Precios iniciales claros y un alcance definido para cada servicio."],
+        ["Directo", "Trabajas directamente con el fundador."]
       ],
-      finalTitle: "¿No sabes cuál sistema te conviene?",
-      finalSubtitle: "Para eso es la primera conversación. Cuéntanos cómo está tu negocio hoy y te decimos cuál de los tres sistemas tiene sentido — y cuál no."
+      finalTitle: "¿Listo para fortalecer tu negocio en línea?",
+      finalSubtitle: "Cuéntanos sobre tu negocio y te enviamos una cotización clara."
     },
     auditPage: {
-      title: "Solicita tu Auditoría Gratis | BLYNX Systems",
-      description: "Solicita una auditoría gratis para identificar qué debe conservar, mejorar o construir tu negocio local.",
-      eyebrow: "Auditoría gratis",
-      h1: "Solicita tu Auditoría Gratis",
-      subtitle: "Descubre qué puede conservar tu negocio, qué necesita mejorarse y cuál de los tres sistemas de BLYNX te conviene más.",
+      title: "Solicita una Cotización | BLYNX Systems",
+      description: "Solicita una cotización para un sitio web profesional, seguimiento a clientes o contenido mensual creado con IA de BLYNX.",
+      eyebrow: "Solicitar cotización",
+      h1: "Solicita una Cotización",
+      subtitle: "Cuéntanos sobre tu negocio y el servicio que te interesa. Lo revisaremos y te responderemos con los próximos pasos.",
       trust: "Impulsada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
-      flowTitle: "Cómo Funciona la Auditoría Gratis",
-      flowSubtitle: "Apoyada por IA para mayor rapidez. Revisada por BLYNX para mayor calidad.",
-      introTitle: "Una revisión práctica de tu sistema digital.",
-      introCopy: "Esta auditoría revisa tu sitio o landing page, presencia en Google, información comercial, señales de confianza, proceso de solicitudes de clientes y oportunidades de seguimiento.",
-      fitLine: "Esta auditoría funciona tanto si ya tienes presencia digital como si estás empezando desde cero.",
+      flowTitle: "Cómo Funciona",
+      flowSubtitle: "De tu solicitud a una cotización clara.",
+      introTitle: "Cuéntanos qué necesitas.",
+      introCopy: "Comparte algunos datos de tu negocio y te recomendamos el servicio adecuado y lo cotizamos con claridad.",
+      fitLine: "Ya sea que necesites un sitio web, seguimiento a clientes o contenido mensual, este es el lugar para empezar.",
       bullets: [
-        "Oportunidades de presencia digital, sitio web y Google.",
-        "Información comercial, reseñas y señales de confianza local.",
-        "Solicitudes de clientes, organización y seguimiento."
+        "Un sitio web profesional y presencia en Google.",
+        "Solicitudes de clientes organizadas con respuestas automáticas.",
+        "Imágenes y videos mensuales para tu marca."
       ],
       fields: {
         fullName: "Nombre completo",
@@ -631,23 +618,23 @@ const copy = {
         websiteStatus: "¿Actualmente tienes sitio web?",
         gbpStatus: "¿Tienes Google Business Profile?",
         language: "Idioma preferido",
-        mainGoal: "Objetivo principal",
+        mainGoal: "Servicio de interés",
         improvements: "¿Qué quieres mejorar?",
-        timeline: "¿Qué tan pronto quieres mejorar esto?",
+        timeline: "¿Qué tan pronto quieres comenzar?",
         message: "Mensaje / Notas"
       },
       placeholders: {
         businessType: "Servicios del hogar, dental, med spa, restaurante...",
         gbp: "https://g.page/...",
-        message: "Comparte cualquier detalle útil sobre tus metas, retos o presencia digital actual."
+        message: "Comparte cualquier detalle útil sobre tu negocio, tus metas o el servicio que te interesa."
       },
       improvements: [
-        "Más llamadas",
-        "Más solicitudes desde la web",
-        "Mejor visibilidad en Google",
-        "Más reseñas",
-        "Mejor landing page",
-        "Automatización / seguimiento",
+        "Sitio web profesional",
+        "Perfil de Empresa de Google",
+        "Organización y seguimiento de solicitudes de clientes",
+        "Imágenes y videos mensuales",
+        "Landing page",
+        "Solución de IA a medida",
         "No estoy seguro"
       ],
       websiteStatusOptions: ["Sí", "No", "Tengo uno, pero necesita mejorar"],
@@ -659,45 +646,45 @@ const copy = {
       consentPrivacy: "Política de Privacidad",
       consentMiddle: "y nuestros",
       consentTerms: "Términos de Servicio",
-      submit: "Enviar Solicitud de Auditoría Gratis",
+      submit: "Enviar mi Solicitud de Cotización",
       loading: "Enviando...",
-      note: "Tu información solo se usa para preparar tu auditoría gratis — nada de spam.",
-      success: "Gracias. Hemos recibido tu solicitud de auditoría gratis. Revisaremos tu negocio y te contactaremos con los próximos pasos.",
-      error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
+      note: "Tu información solo se usa para responder a tu solicitud — nada de spam.",
+      success: "Gracias. Hemos recibido tu solicitud de cotización. Revisaremos tu información y te contactaremos con los próximos pasos.",
+      error: `Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a ${BUSINESS.email}.`
     },
     servicesPage: {
-      title: "Tres Sistemas Digitales para Negocios Locales | BLYNX Systems",
-      description: "Compara los tres sistemas de BLYNX para negocios locales — Presencia Digital, Solicitudes y Organización, y Solicitudes y Seguimiento — con alcance completo, precios iniciales, exclusiones y preguntas frecuentes.",
-      eyebrow: "BLYNX Systems",
-      h1: "Elige hasta dónde llega tu sistema.",
-      subtitle: "Todos los sistemas incluyen la base digital que tu negocio necesita para que lo encuentren y confíen en él. Lo que cambia es cuánto del trabajo posterior a ese primer contacto construimos por ti.",
-      ctaTitle: "¿No sabes cuál sistema te conviene?",
-      ctaSubtitle: "Cuéntanos cómo está tu negocio hoy y te ayudamos a encontrar el sistema correcto."
+      title: "Servicios y Precios | BLYNX Systems",
+      description: "BLYNX Presence desde $1,500, BLYNX Complete desde $2,500 y suscripciones de BLYNX Content desde $300/mes — sitios web profesionales, seguimiento a clientes y contenido creado con IA para negocios locales.",
+      eyebrow: "Servicios de BLYNX",
+      h1: "Tres servicios. Precios claros.",
+      subtitle: "Sitios web profesionales, seguimiento organizado de clientes y contenido mensual creado con IA — cada uno con un alcance claro y un precio inicial.",
+      ctaTitle: "¿No sabes qué servicio te conviene?",
+      ctaSubtitle: "Cuéntanos sobre tu negocio y te recomendamos el adecuado y te enviamos una cotización clara."
     },
     aboutPage: {
       title: "Nosotros | BLYNX Systems",
-      description: "BLYNX ayuda a negocios locales a ser encontrados en internet, convertir el interés en solicitudes de clientes, organizar cada oportunidad y dar seguimiento más rápido.",
+      description: "BLYNX ayuda a negocios locales en Estados Unidos con sitios web profesionales, seguimiento organizado de clientes y contenido mensual creado con IA.",
       eyebrow: "Nosotros",
-      h1: "Creado para negocios locales que necesitan un sistema digital más claro.",
-      subtitle: "BLYNX crea sistemas de presencia digital y de atención a clientes que mejoran visibilidad, confianza, captación de oportunidades, organización y seguimiento.",
+      h1: "Soluciones digitales prácticas para negocios locales.",
+      subtitle: "BLYNX crea sitios web profesionales, organiza las solicitudes de clientes y produce contenido mensual con herramientas impulsadas por IA.",
       cards: [
         ["A Quién Ayuda BLYNX", "BLYNX sirve a negocios locales en Estados Unidos que dependen de llamadas, solicitudes de cotización, reservas, consultas y confianza del cliente para crecer."],
-        ["Qué Construye BLYNX", "Construimos tres niveles de un mismo sistema conectado: Presencia Digital, Solicitudes y Organización, y Solicitudes y Seguimiento."],
-        ["Por Qué Importa", "Los clientes locales comparan negocios rápidamente. Un proceso más claro de solicitudes ayuda a reducir llamadas perdidas, formularios olvidados y posibles clientes perdidos."]
+        ["Qué Ofrece BLYNX", "Tres servicios: BLYNX Presence para tu sitio web y tu presencia en Google, BLYNX Complete para organizar las solicitudes de clientes, y BLYNX Content para imágenes y videos mensuales."],
+        ["Por Qué Importa", "Los clientes locales comparan negocios rápidamente. Una presencia profesional en línea y una forma clara de contactarte te ayudan a mantenerte visible y a responder a tiempo."]
       ],
-      positionEyebrow: "Posicionamiento",
-      positionTitle: "Tres sistemas creados para un crecimiento práctico.",
-      positionCopy: "BLYNX está basado en Nashville, Tennessee y apoya a negocios locales en todo Estados Unidos. El enfoque es infraestructura digital práctica: visibilidad, confianza, rutas claras de contacto, oportunidades organizadas y seguimiento.",
+      positionEyebrow: "Nuestro enfoque",
+      positionTitle: "Práctico, no complicado.",
+      positionCopy: "BLYNX está basado en Nashville, Tennessee y apoya a negocios locales en todo Estados Unidos. Usamos IA para trabajar con eficiencia, pero vendemos soluciones prácticas — no tecnología difícil de entender.",
       bullets: [
-        "Mejoras de visibilidad local que ayudan a los clientes a encontrar el negocio.",
-        "Landing pages enfocadas que ayudan al visitante a tomar el siguiente paso.",
-        "Organización de solicitudes que mantiene cada oportunidad en un flujo claro.",
-        "Soporte simple de seguimiento que ayuda a responder más rápido."
+        "Sitios web profesionales y presencia en Google que ayudan a los clientes a encontrarte.",
+        "Solicitudes de clientes organizadas con respuestas automáticas y recordatorios de seguimiento.",
+        "Imágenes y videos mensuales creados con herramientas creativas impulsadas por IA.",
+        "Precios iniciales claros y un alcance definido para cada servicio."
       ],
       stats: [
         ["Nashville", "Basados en Tennessee y sirviendo a negocios locales en todo Estados Unidos."],
-        ["Práctico", "Sistemas claros para dueños que quieren resultados, no confusión técnica."],
-        ["Enfocado", "Los tres niveles de sistema son las ofertas principales. El mantenimiento mensual y el apoyo para redes sociales son complementos aparte."]
+        ["Práctico", "Soluciones claras para dueños que quieren resultados, no confusión técnica."],
+        ["Enfocado", "Tres servicios principales: Presence, Complete y Content. Hay servicios secundarios para necesidades específicas."]
       ],
       founder: {
         eyebrow: "Dirigido por su fundador",
@@ -710,24 +697,25 @@ const copy = {
           "Trabajas directamente con la persona responsable de la estrategia, sin pasar entre diferentes departamentos.",
         alt: "Gregor Silva, fundador de BLYNX"
       },
-      ctaTitle: "Descubre qué oportunidades puede estar perdiendo tu negocio en internet.",
-      ctaSubtitle: "La auditoría gratis es el primer paso más simple."
+      ctaTitle: "¿Listo para fortalecer tu negocio en línea?",
+      ctaSubtitle: "Solicita una cotización y te responderemos con los próximos pasos."
     },
     contactPage: {
-      title: "Contacto | BLYNX Systems",
-      description: "Contacta a BLYNX Systems sobre presencia digital, solicitudes de clientes, organización de oportunidades y seguimiento.",
+      title: "Contacto y Cotización | BLYNX Systems",
+      description: "Contacta a BLYNX Systems o solicita una cotización para un sitio web profesional, seguimiento a clientes o contenido mensual creado con IA.",
       eyebrow: "Contacto",
-      h1: "Habla con BLYNX sobre tu sistema para negocio local.",
-      subtitle: "Usa el formulario de abajo o empieza con la auditoría gratis si quieres ver dónde se pueden estar perdiendo oportunidades.",
+      h1: "Hablemos de tu negocio.",
+      subtitle: "Cuéntanos qué servicio te interesa y te responderemos con una cotización clara.",
       emailTitle: "Correo",
       phoneTitle: "Teléfono",
       locationTitle: "Ubicación",
       serviceAreaTitle: "Área de servicio",
       instagramTitle: "Instagram",
-      auditTitle: "Empieza con una auditoría",
-      auditCopy: "¿No estás seguro de qué necesitas? Solicita primero una auditoría gratis de presencia digital.",
+      auditTitle: "¿Quieres compartir más detalles?",
+      auditCopy: "Usa nuestro formulario detallado de cotización para contarnos más sobre tu negocio y tu presencia en línea.",
+      auditButton: "Cotización Detallada",
       languageTitle: "Soporte de idioma",
-      languageCopy: "El soporte en inglés y español puede solicitarse durante el proceso de auditoría o contacto.",
+      languageCopy: "Hay soporte disponible en inglés y español.",
       fields: {
         name: "Nombre completo",
         business: "Nombre del negocio",
@@ -738,11 +726,12 @@ const copy = {
         message: "Mensaje"
       },
       topics: [
-        "Sistema 1 — Presencia Digital",
-        "Sistema 2 — Solicitudes y Organización",
-        "Sistema 3 — Solicitudes y Seguimiento",
-        "Auditoría gratis",
-        "Mantenimiento mensual / redes sociales",
+        "BLYNX Presence — Sitio web y presencia en Google",
+        "BLYNX Complete — Sitio web + seguimiento a clientes",
+        "BLYNX Content — Imágenes y videos mensuales",
+        "Landing Page",
+        "Perfil de Empresa de Google",
+        "Solución de IA a medida",
         "No estoy seguro"
       ],
       languageOptions: ["Inglés", "Español"],
@@ -750,20 +739,20 @@ const copy = {
       consentPrivacy: "Política de Privacidad",
       consentMiddle: "y nuestros",
       consentTerms: "Términos de Servicio",
-      submit: "Enviar Mensaje",
+      submit: "Solicitar una Cotización",
       loading: "Enviando...",
       success: "Gracias. Hemos recibido tu mensaje. BLYNX te contactará con los próximos pasos.",
-      error: "Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
+      error: `Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo o escríbenos directamente a ${BUSINESS.email}.`
     },
     resourcesPage: {
       title: "Recursos | BLYNX Systems",
       description: "Recursos prácticos para recibir solicitudes, mantenerlas organizadas y dar seguimiento.",
       eyebrow: "Recursos",
       h1: "Recursos prácticos de crecimiento para dueños de negocios locales.",
-      subtitle: "Usa estos puntos de partida para revisar cómo los clientes te encuentran, te contactan y reciben seguimiento antes de tu auditoría gratis.",
+      subtitle: "Usa estos puntos de partida para revisar cómo los clientes te encuentran, te contactan y reciben seguimiento antes de solicitar una cotización.",
       cards: [
-        ["Checklist del Proceso de Solicitudes", "Revisa lo básico que ayuda a los clientes a encontrar tu negocio, confiar y tomar el siguiente paso.", "Solicitar auditoría gratis", "/free-audit"],
-        ["Preparación para Recibir Solicitudes", "Revisa si tu landing page y flujo de contacto hacen fácil que prospectos calificados te contacten.", "Explorar el sistema", "/services"],
+        ["Checklist del Proceso de Solicitudes", "Revisa lo básico que ayuda a los clientes a encontrar tu negocio, confiar y tomar el siguiente paso.", "Solicitar una cotización", "/contact"],
+        ["Preparación para Recibir Solicitudes", "Revisa si tu sitio web y tu flujo de contacto hacen fácil que los clientes te contacten.", "Explorar los servicios", "/services"],
         ["Bases de Seguimiento", "Entiende cómo confirmaciones, recordatorios y organización simple reducen oportunidades perdidas.", "Hacer una pregunta", "/contact"]
       ]
     },
@@ -801,613 +790,538 @@ const copy = {
   }
 };
 
+// Commercial offer — single source of truth for the three core services, the
+// optional Content publishing add-on, the compact secondary services and the
+// FAQ. Both languages are rendered from this one object and checked for parity
+// by validateCommercialOfferParity() below, so EN and ES can never advertise
+// different services, quantities or prices.
 const commercialOffer = {
   en: {
-    eyebrow: "Three digital systems",
-    title: "Three systems. Choose how far yours goes.",
-    intro: "Every system includes the digital foundation. What changes is how much of the work after that first contact we build for you.",
+    eyebrow: "Our services",
+    title: "Three services. Clear prices.",
+    intro: "Build your online presence, organize your customer requests, or keep your brand active with fresh content every month.",
     priceLabel: "Starting at",
-    whoTitle: "Choose this if you",
-    implementationTitle: "What we implement",
-    resultTitle: "What this system helps you do",
-    exclusionsTitle: "Not included",
-    detailsLink: "See full implementation scope",
-    compareLink: "Compare all three systems",
-    // Home overview cards only (systemsOverviewSection) — plain-language title/
-    // result-chain/CTA/checklist shown on the card itself. Kept separate from
-    // name/resultChain/cta above (which the Services page detail cards also
-    // read) so this simpler home copy can't drift that page's wording.
-    whatsIncludedTitle: "What's included",
-    leadCaptureDefinition:
-      "BLYNX helps you receive new customer requests, keep them organized, and follow up from one clear system.",
-    systems: [
+    plansTitle: "Choose a plan",
+    bestForLabel: "Best for",
+    includedTitle: "What's included",
+    fullIncludedTitle: "Everything included",
+    deliveryLabel: "Estimated delivery",
+    detailsLink: "See full details",
+    publishingToggle: "Publishing details and limits",
+    services: [
       {
-        id: "digital-presence-system",
-        name: "Digital Presence System",
+        id: "blynx-presence",
+        legacyIds: ["digital-presence-system"],
+        number: "Service 01",
+        name: "BLYNX Presence",
+        kind: "setup",
+        headline: "Build Your Professional Online Presence.",
+        description:
+          "A professional website and Google presence that make it easy for customers to find information about your business and contact you.",
+        bestFor: "Businesses that need a professional website and a clear way for customers to reach them.",
         startingPrice: 1500,
-        badge: null,
-        resultChain: ["Be found", "Build trust", "Receive inquiries"],
-        cardTitle: "Digital Presence System",
-        cardResultChain: ["Get found", "Build trust", "Get contacted"],
-        cardCta: "Start with System 1",
-        whatsIncluded: [
-          "A professional website",
-          "A better Google Business presence",
-          "Clear service pages",
-          "An easy way for people to contact you",
-          "Trust-building reviews",
-          "A mobile-friendly experience"
+        priceUnit: "One-time setup",
+        deliveryShort: "Ready in about 2 weeks",
+        delivery: "Approximately 2 weeks (10 business days)",
+        highlights: [
+          "Professional website, up to 5 pages",
+          "Mobile-friendly design",
+          "Google Business Profile setup or basic optimization",
+          "Contact forms and new inquiry notifications",
+          "Basic local SEO and Google review link"
         ],
-        positioning:
-          "The digital foundation customers use to find your business, understand what you offer, and trust it enough to reach out.",
-        ideal: [
-          "Need people to find you online and understand what you offer",
-          "Want a clear, professional way for customers to reach you",
-          "Are comfortable receiving and handling inquiries yourself",
-          "Need stronger trust signals and a simple contact path",
-          "Want a solid digital foundation other marketing can build on"
+        included: [
+          "Professional website, up to 5 pages",
+          "Mobile-friendly design",
+          "Google Business Profile setup or basic optimization, subject to eligibility and access",
+          "Contact forms and contact buttons",
+          "New inquiry notifications",
+          "Basic local SEO",
+          "Google review link",
+          "Basic launch guidance",
+          "Two rounds of revisions"
         ],
-        implementationLead: "",
-        implementation: [
-          "Brief diagnosis or digital audit, depending on your starting point",
-          "New website, landing page, or improvement of the existing website",
-          "Mobile-friendly customer experience",
-          "Clear service and value proposition",
-          "Contact and quote buttons",
-          "Basic contact or quote form",
-          "Google Business Profile setup or optimization",
-          "Core business information cleanup",
-          "Basic local SEO structure",
-          "Google Analytics and website tracking",
-          "Review-generation foundation",
-          "Connection to your primary communication channels",
-          "Testing and launch"
-        ],
-        exclusions: [
-          "No qualification fields on the contact form",
-          "No opportunity records, stages or owners",
-          "No automated follow-up"
-        ],
-        benefits: [
-          "Be easier to find",
-          "Look more professional",
-          "Build customer confidence",
-          "Explain your services clearly",
-          "Give customers a simple next step"
-        ],
-        cta: "Start with System 1",
-        ctaTarget: "contact",
-        pricingNote:
-          "Investment depends on the condition of the existing digital presence and the approved project scope."
+        care: {
+          name: "Optional Website Care",
+          price: 99,
+          priceUnit: "/month",
+          description: "Basic technical oversight and up to 30 minutes of minor website changes per month."
+        },
+        notes: ["Domain registration, paid licenses and third-party subscriptions are separate."],
+        cardCta: "Request a Quote",
+        cta: "Request a Quote",
+        ctaTarget: "contact"
       },
       {
-        id: "lead-capture-organization",
-        name: "Customer Requests & Organization System",
-        startingPrice: 2250,
-        badge: null,
-        resultChain: ["Receive", "Classify", "Organize"],
-        cardTitle: "Customer Requests & Organization System",
-        cardResultChain: ["Receive requests", "Sort them", "Stay organized"],
-        cardCta: "Start with System 2",
-        whatsIncluded: [
-          "Everything in System 1",
-          "A clear way to receive new inquiries",
-          "All customer inquiries in one place",
-          "Better organization by service or urgency",
-          "A simple view of open opportunities",
-          "A better process to manage incoming requests"
-        ],
-        positioning:
-          "Everything in the Digital Presence System, plus a way to know exactly who contacted you, what they need, and where every request stands.",
-        ideal: [
-          "Already receive inquiries but lose track of who asked for what",
-          "Handle requests from more than one channel: calls, forms, messages",
-          "Need every opportunity classified, staged, and assigned to someone",
-          "Want a confirmation and internal notification the moment a request arrives",
-          "Need real organization, not automated follow-up yet"
-        ],
-        implementationLead: "Everything in the Digital Presence System, plus:",
-        implementation: [
-          "Smart contact and quote forms with qualification fields",
-          "Service, location, urgency, preferred date and budget fields",
-          "Centralized record for every opportunity",
-          "Simple stages: New → Contacted → Quoted → Pending → Won/Lost",
-          "Owner and next action on every opportunity",
-          "Instant confirmation message to the customer",
-          "Internal notification when a new opportunity arrives",
-          "Full system testing"
-        ],
-        exclusions: [
-          "No follow-up automations or reminder sequences",
-          "No message templates or team training",
-          "No unattended-opportunity reminders"
-        ],
-        benefits: [
-          "Know who contacted you and what they need",
-          "See the status of every opportunity at a glance",
-          "Give every request an owner and a next step",
-          "Respond with the right context, faster",
-          "Keep the whole team working from the same record"
-        ],
-        cta: "Start with System 2",
-        ctaTarget: "contact",
-        pricingNote:
-          "Investment depends on the number of channels, qualification fields, and the approved project scope."
-      },
-      {
-        id: "lead-capture-follow-up",
-        legacyId: "local-lead-system",
-        name: "Customer Requests & Follow-Up System",
+        id: "blynx-complete",
+        legacyIds: ["lead-capture-organization", "lead-capture-follow-up", "local-lead-system"],
+        number: "Service 02",
+        name: "BLYNX Complete",
+        kind: "setup",
+        headline: "Your Website. Your Customers. Organized.",
+        description:
+          "Everything in Presence, plus automatic responses and an organized way to keep track of customer requests and follow-ups.",
+        bestFor: "Businesses that receive customer requests and want to respond and follow up on time.",
         startingPrice: 2500,
-        badge: "Best Value",
-        resultChain: ["Receive", "Organize", "Follow up"],
-        cardTitle: "Customer Requests & Follow-Up System",
-        cardResultChain: ["Receive requests", "Stay organized", "Follow up"],
-        cardCta: "Start with System 3",
-        whatsIncluded: [
-          "Everything in System 2",
+        priceUnit: "One-time setup",
+        deliveryShort: "Ready in 2–3 weeks",
+        delivery: "2–3 weeks (10–15 business days)",
+        highlights: [
+          "Everything in BLYNX Presence",
+          "Customer requests organized in one place",
+          "Automatic first response to new inquiries",
+          "Follow-up reminders and request status tracking",
+          "Simple contact and request dashboard"
+        ],
+        included: [
+          "Everything in BLYNX Presence",
+          "Centralized customer inquiry organization",
+          "Automatic initial response to new inquiries",
           "Follow-up reminders",
-          "Quote follow-up",
-          "Review request reminders",
-          "Appointment reminders",
-          "A better system to keep up with opportunities"
+          "Simple contact and request dashboard",
+          "Basic request status tracking",
+          "Connection of one standard inquiry channel",
+          "System configuration and testing",
+          "Basic customer training"
         ],
-        positioning:
-          "Everything in Systems 1 and 2, plus the follow-up layer that catches the opportunities other systems let go quiet.",
-        ideal: [
-          "Lose opportunities to slow or forgotten follow-up",
-          "Send quotes that go unanswered with no reminder process",
-          "Need appointment confirmations and reminders",
-          "Want review requests sent automatically after the job is done",
-          "Need the complete system: capture, organization and follow-up together"
+        care: {
+          name: "Optional Automation Support",
+          price: 350,
+          pricePrefix: "Starting at ",
+          priceUnit: "/month",
+          description: "Limited monitoring, adjustments and basic reporting according to an agreed scope."
+        },
+        notes: [
+          "Advanced AI assistants, complex integrations and unlimited automations are not included.",
+          "Domain registration, paid licenses and third-party subscriptions are separate."
         ],
-        implementationLead: "Everything in Systems 1 and 2, plus 5 core automations:",
-        implementation: [
-          "New Inquiry Confirmation — record created, customer confirmed, business notified",
-          "Unattended Opportunity Reminder — alerts the responsible person",
-          "Quote Follow-Up — reminder plus one or two approved customer messages",
-          "Appointment Confirmation / Reminder, when applicable",
-          "Review Request after the service is completed, with a direct link",
-          "Communication, confirmation and follow-up message templates",
-          "Remote training for your team on statuses and next actions",
-          "Simple process documentation",
-          "Full system testing"
+        cardCta: "Request a Quote",
+        cta: "Request a Quote",
+        ctaTarget: "contact"
+      },
+      {
+        id: "blynx-content",
+        legacyIds: [],
+        number: "Service 03",
+        name: "BLYNX Content",
+        kind: "subscription",
+        headline: "Your Brand. Fresh Content. Every Month.",
+        description: "Professional images, videos and captions created every month with AI-powered creative tools.",
+        bestFor: "Businesses that want fresh images and videos every month, with or without a BLYNX website.",
+        subscriptionLabel: "Monthly subscription",
+        independentNote: "Independent service — no BLYNX website required.",
+        plans: [
+          {
+            name: "Content Images",
+            price: 300,
+            publishingPrice: 400,
+            summary: "12 branded images",
+            items: [
+              "12 branded single-image designs monthly",
+              "Captions and content ideas",
+              "Suggested publishing calendar",
+              "One consolidated revision round"
+            ]
+          },
+          {
+            name: "Content Videos",
+            price: 600,
+            publishingPrice: 700,
+            summary: "4 short videos",
+            items: [
+              "4 short videos monthly, up to 30 seconds each",
+              "Creative ideas and scripts",
+              "AI-assisted editing and production",
+              "Captions",
+              "One consolidated revision round"
+            ]
+          },
+          {
+            name: "Content Complete",
+            price: 750,
+            publishingPrice: 850,
+            summary: "12 images + 4 videos",
+            items: [
+              "12 branded images",
+              "4 short videos, up to 30 seconds each",
+              "Scripts, captions and monthly content calendar",
+              "One consolidated revision round"
+            ]
+          }
         ],
-        exclusions: [
-          "Not unlimited automation — the 5 automations above are the approved scope",
-          "Additional automations require separately approved scope",
-          "Third-party costs (SMS, WhatsApp, other paid business software) are separate when applicable"
+        perMonth: "/month",
+        publishingLine: "Optional: add Instagram & Facebook publishing for +$100/month — $400, $700 or $850 with publishing.",
+        notes: [
+          "Content subscriptions are billed monthly in advance.",
+          "Content does not require a BLYNX website.",
+          "Complex carousels, on-site filming and advanced productions are outside standard scope."
         ],
-        benefits: [
-          "Nothing goes quiet after the first message",
-          "Quotes get a real follow-up process, not hope",
-          "Appointments are confirmed and reminded automatically",
-          "Reviews get requested consistently after every job",
-          "Your team knows exactly what happens next, every time"
-        ],
-        cta: "Start with System 3",
-        ctaTarget: "contact",
-        pricingNote:
-          "Investment depends on the number of automations, communication channels, integrations, and the approved project scope."
+        cardCta: "Explore Content Plans",
+        cta: "Request a Quote",
+        ctaTarget: "services#blynx-content"
       }
     ],
-    comparison: {
-      eyebrow: "System comparison",
-      title: "Compare the three systems",
-      columns: ["Digital Presence", "Requests & Organization", "Requests & Follow-Up"],
-      rows: [
-        { label: "Diagnosis or audit of current presence", values: ["Yes", "Yes", "Yes"] },
-        { label: "Website / landing page built or improved", values: ["Yes", "Yes", "Yes"] },
-        { label: "Mobile optimization", values: ["Yes", "Yes", "Yes"] },
-        { label: "Google Business Profile + basic local SEO", values: ["Yes", "Yes", "Yes"] },
-        { label: "Google Analytics", values: ["Yes", "Yes", "Yes"] },
-        { label: "Review-generation foundation", values: ["Yes", "Yes", "Yes"] },
-        { label: "Contact / quote form", values: ["Basic", "Smart + qualification", "Smart + qualification"] },
-        { label: "Service, location, urgency, date, budget fields", values: ["—", "Yes", "Yes"] },
-        { label: "Centralized opportunity records", values: ["—", "Yes", "Yes"] },
-        { label: "Stages, owner and next action", values: ["—", "Yes", "Yes"] },
-        { label: "Instant confirmation + internal notification", values: ["—", "Yes", "Yes"] },
-        { label: "Unattended-opportunity reminder", values: ["—", "—", "Yes"] },
-        { label: "Quote follow-up reminders", values: ["—", "—", "Yes"] },
-        { label: "Appointment confirmation + reminder", values: ["—", "—", "Yes"] },
-        { label: "Review request after service", values: ["—", "—", "Yes"] },
-        { label: "Message and confirmation templates", values: ["—", "—", "Yes"] },
-        { label: "Remote team training", values: ["—", "—", "Yes"] },
-        { label: "Testing and launch", values: ["Yes", "Yes", "Yes"] }
+    publishing: {
+      eyebrow: "Optional add-on for BLYNX Content",
+      name: "Add Instagram & Facebook Publishing",
+      price: 100,
+      priceUnit: "/month",
+      priceLead: "+",
+      summary: "We schedule and publish your approved content on Instagram and Facebook.",
+      includedTitle: "Included",
+      included: [
+        "Scheduling and publishing up to 16 unique content pieces per month",
+        "Publishing approved pieces on Instagram and Facebook",
+        "Client approval before publication",
+        "Basic monthly publishing calendar",
+        "Use of Meta Business Suite or an appropriate scheduling tool"
       ],
-      recommendationTitle: "Not sure which one fits your business?",
-      recommendation:
-        "Any of the three systems can be built for a business starting from zero or one that already has a website and a Google profile. Your current setup changes how we diagnose you — not which system fits.",
-      cta: "Find the Right System",
-      ctaTarget: "contact"
+      tableTitle: "Monthly price with publishing",
+      tableHead: ["Plan", "Content only", "With publishing"],
+      limitsTitle: "Limits",
+      limits: [
+        "Each unique content piece may be published on both platforms.",
+        "Publishing cannot exceed the content included in your plan: up to 12 images, up to 4 videos, or up to 16 pieces with Content Complete."
+      ],
+      notIncludedTitle: "Not included",
+      notIncluded: [
+        "Responding to comments",
+        "Answering messages",
+        "Daily account management",
+        "Advertising campaigns",
+        "Community management"
+      ]
     },
-    monthly: {
-      eyebrow: "After launch",
-      title: "Keep the system running — and, if you want, keep it visible",
-      intro:
-        "Optional, and separate from the project price. Available once your system is live.",
-      maintenance: {
-        name: "Digital System Maintenance",
-        price: "$650",
-        priceUnit: "/month",
-        inclusions: [
-          "Minor website updates (up to 4 per month)",
-          "Business information updates",
-          "Form monitoring",
-          "Automation monitoring",
-          "Analytics review",
-          "Backups and system checks",
-          "Simple monthly summary",
-          "Minor technical corrections"
-        ]
-      },
-      socialAddOn: {
-        name: "Social Media Management Add-On",
-        price: "+$850",
-        priceUnit: "/month",
-        note: "Added to the $650 monthly maintenance.",
-        inclusions: [
-          "Monthly content planning and calendar",
-          "Up to 8 content pieces",
-          "Static designs and carousels",
-          "Up to 2 simple reels using footage you provide",
-          "Captions",
-          "Instagram / Facebook adaptation",
-          "Scheduling and publishing",
-          "Basic monthly report"
-        ],
-        exclusions: [
-          "Unlimited posting or revisions",
-          "Intensive community management or daily DM responses",
-          "Professional photography or videography",
-          "Paid advertising or ad budget"
-        ]
-      },
-      comboPrice: "$1,500",
-      comboPriceUnit: "/month",
-      comboLabel: "Both together",
-      customNote: "Larger social media requirements receive a custom quote.",
-      cta: "Ask About Monthly Support",
+    secondary: {
+      eyebrow: "Also available",
+      title: "More ways to work with BLYNX",
+      items: [
+        {
+          name: "Landing Page",
+          price: 950,
+          priceText: "Starting at $950",
+          description: "Single-page professional website.",
+          meta: "Estimated delivery: 5–7 business days."
+        },
+        {
+          name: "Google Business Profile",
+          price: 249,
+          priceText: "Starting at $249",
+          description: "Basic setup or optimization for eligible businesses.",
+          meta: "Google controls verification and approval."
+        },
+        {
+          name: "Custom AI Solutions",
+          price: null,
+          priceText: "Custom quote",
+          description:
+            "AI chatbots, virtual assistants, booking automations, custom business integrations, advanced automated workflows, and digital tools and applications.",
+          meta: "Each custom project requires individual evaluation and pricing."
+        }
+      ],
+      cta: "Request a Quote",
       ctaTarget: "contact"
     },
     faq: {
       eyebrow: "Frequently asked questions",
-      title: "Clear answers before you choose a system",
+      title: "Clear answers before you choose",
       items: [
         [
-          "Do I need to start from zero?",
-          "No. Any of the three systems can be built for a business starting from zero or one that already has a website and a Google profile. We begin with a short diagnosis or a free audit to see what exists and recommend the right system."
+          "Which service is right for my business?",
+          "BLYNX Presence is the starting point if you need a professional website and a Google presence. BLYNX Complete adds automatic responses and an organized way to track customer requests and follow-ups. BLYNX Content creates images and videos every month, with or without a BLYNX website. Not sure? Request a quote and we will recommend the best fit."
         ],
         [
-          "What if I already have a website?",
-          "We evaluate what can be kept, improved, or rebuilt. Existing digital assets do not automatically make the project smaller; correcting an outdated or poorly structured system can require more work than starting clean. Projects begin at the listed starting price, and the final investment depends on the approved scope."
+          "How long does a website take?",
+          "BLYNX Presence takes approximately 2 weeks (10 business days) and BLYNX Complete takes 2–3 weeks (10–15 business days). The schedule starts after we receive all required information, materials and access. Timelines are estimates, not guaranteed deadlines, and Google Business Profile verification depends on Google."
         ],
         [
-          "What is the difference between the three systems?",
-          "System 1 builds the digital foundation customers use to find and trust you. System 2 adds smart forms and organizes every opportunity with a status and an owner. System 3 adds the follow-up layer — confirmations, reminders and review requests — so nothing goes quiet."
+          "Do I need a BLYNX website to subscribe to BLYNX Content?",
+          "No. BLYNX Content is an independent monthly subscription. You can subscribe with or without a BLYNX website."
         ],
         [
-          "Does BLYNX guarantee more customers or opportunities?",
-          "No. BLYNX builds the infrastructure and process that helps your business receive and manage opportunities professionally. Results also depend on market demand, your offer, pricing, competition, reputation, sales ability, response speed, customer service and execution."
+          "What does Instagram & Facebook publishing include?",
+          "For +$100/month we schedule and publish up to 16 unique pieces per month on Instagram and Facebook, after you approve each one. Publishing cannot exceed the content in your plan: up to 12 images, up to 4 videos, or up to 16 pieces with Content Complete. It does not include responding to comments, answering messages, daily account management, advertising campaigns or community management."
         ],
         [
-          "Does social media management come included?",
-          "No. Social media support is a separate monthly add-on to maintenance, quoted at a fixed rate for the scope described, with a custom quote for larger requirements."
+          "Are there ongoing costs after my website is built?",
+          "BLYNX Presence and BLYNX Complete are one-time setups. Optional monthly plans are available: Website Care at $99/month and Automation Support starting at $350/month. Domain registration, paid licenses and third-party subscriptions are separate."
         ],
         [
-          "Are automations included, and are they unlimited?",
-          "System 3 includes 5 core follow-up automations in the approved scope: new inquiry confirmation, unattended opportunity reminders, quote follow-up, appointment confirmation/reminders, and review requests. This is not unlimited automation — additional automations require separately approved scope."
+          "What is not included?",
+          "BLYNX Complete does not include advanced AI assistants, complex integrations or unlimited automations. BLYNX Content does not include complex carousels, on-site filming or advanced productions. Anything beyond these scopes, including custom AI solutions, is evaluated and quoted individually."
         ],
         [
-          "How is the final price determined?",
-          "Final pricing depends on the current digital setup, approved project scope, number of automations, communication channels, integrations, and any separately approved add-ons."
+          "Does BLYNX guarantee more customers?",
+          "No. BLYNX builds the website, systems and content that help your business look professional and respond to customers efficiently. Results also depend on market demand, your offer, pricing, competition, reputation, response speed and customer service."
         ],
         [
           "How does payment work?",
-          "50% to begin, 30% after approval of the build, and 20% before launch. Monthly services are billed in advance."
+          "One-time setups are paid in three parts: 50% to begin, 30% after approval of the build and 20% before launch. Content subscriptions and optional monthly plans are billed monthly in advance."
         ]
       ]
     }
   },
   es: {
-    eyebrow: "Tres sistemas digitales",
-    title: "Tres sistemas. Elige hasta dónde llega el tuyo.",
-    intro: "Todos los sistemas incluyen la base digital. Lo que cambia es cuánto del trabajo posterior a ese primer contacto construimos por ti.",
+    eyebrow: "Nuestros servicios",
+    title: "Tres servicios. Precios claros.",
+    intro: "Construye tu presencia en línea, organiza las solicitudes de tus clientes o mantén tu marca activa con contenido fresco cada mes.",
     priceLabel: "Desde",
-    whoTitle: "Elige este sistema si",
-    implementationTitle: "Qué implementamos",
-    resultTitle: "Qué te ayuda a lograr este sistema",
-    exclusionsTitle: "No incluye",
-    detailsLink: "Ver alcance completo de implementación",
-    compareLink: "Comparar los tres sistemas",
-    whatsIncludedTitle: "Qué incluye",
-    leadCaptureDefinition:
-      "BLYNX te ayuda a recibir nuevas solicitudes, mantenerlas organizadas y darles seguimiento desde un sistema claro.",
-    systems: [
+    plansTitle: "Elige un plan",
+    bestForLabel: "Ideal para",
+    includedTitle: "Qué incluye",
+    fullIncludedTitle: "Todo lo incluido",
+    deliveryLabel: "Entrega estimada",
+    detailsLink: "Ver todos los detalles",
+    publishingToggle: "Detalles y límites de la publicación",
+    services: [
       {
-        id: "sistema-presencia-digital",
-        name: "Sistema de Presencia Digital",
+        id: "blynx-presence",
+        legacyIds: ["sistema-presencia-digital"],
+        number: "Servicio 01",
+        name: "BLYNX Presence",
+        kind: "setup",
+        headline: "Construye tu presencia profesional en línea.",
+        description:
+          "Un sitio web profesional y presencia en Google para que tus clientes encuentren fácilmente información sobre tu negocio y te contacten.",
+        bestFor: "Negocios que necesitan un sitio web profesional y una forma clara de que los clientes los contacten.",
         startingPrice: 1500,
-        badge: null,
-        resultChain: ["Ser encontrado", "Generar confianza", "Recibir solicitudes"],
-        cardTitle: "Sistema de Presencia Digital",
-        cardResultChain: ["Te encuentran", "Generas confianza", "Te contactan"],
-        cardCta: "Comienza con Sistema 1",
-        whatsIncluded: [
-          "Un sitio web profesional",
-          "Una mejor presencia en Google Business",
-          "Páginas claras para tus servicios",
-          "Una forma fácil para que te contacten",
-          "Reseñas que generan confianza",
-          "Una experiencia optimizada para celular"
+        priceUnit: "Configuración única",
+        deliveryShort: "Listo en unas 2 semanas",
+        delivery: "Aproximadamente 2 semanas (10 días hábiles)",
+        highlights: [
+          "Sitio web profesional de hasta 5 páginas",
+          "Diseño adaptado a celulares",
+          "Configuración u optimización básica del Perfil de Empresa de Google",
+          "Formularios de contacto y avisos de nuevas solicitudes",
+          "SEO local básico y enlace para reseñas de Google"
         ],
-        positioning:
-          "La base digital que tus clientes usan para encontrar tu negocio, entender qué ofreces y confiar lo suficiente como para contactarte.",
-        ideal: [
-          "Necesitas que te encuentren en internet y entiendan qué ofreces",
-          "Quieres una forma clara y profesional de que los clientes te contacten",
-          "Te sientes cómodo recibiendo y atendiendo las solicitudes tú mismo",
-          "Necesitas más señales de confianza y un camino simple de contacto",
-          "Quieres una base digital sólida sobre la que construir tu marketing"
+        included: [
+          "Sitio web profesional de hasta 5 páginas",
+          "Diseño adaptado a celulares",
+          "Configuración u optimización básica del Perfil de Empresa de Google, sujeta a elegibilidad y acceso",
+          "Formularios y botones de contacto",
+          "Avisos de nuevas solicitudes",
+          "SEO local básico",
+          "Enlace para reseñas de Google",
+          "Orientación básica para el lanzamiento",
+          "Dos rondas de revisiones"
         ],
-        implementationLead: "",
-        implementation: [
-          "Diagnóstico breve o auditoría digital, según tu punto de partida",
-          "Nuevo sitio web, landing page o mejora del sitio existente",
-          "Experiencia optimizada para dispositivos móviles",
-          "Presentación clara de los servicios y la propuesta de valor",
-          "Botones de contacto y cotización",
-          "Formulario básico de contacto o cotización",
-          "Creación u optimización del Perfil de Empresa de Google",
-          "Corrección de la información principal del negocio",
-          "Estructura básica de SEO local",
-          "Google Analytics y medición del sitio",
-          "Base para generar reseñas",
-          "Conexión con tus principales canales de comunicación",
-          "Pruebas y lanzamiento"
-        ],
-        exclusions: [
-          "El formulario de contacto no incluye campos de clasificación",
-          "No incluye registros de oportunidades, estados ni responsables",
-          "No incluye seguimiento automático"
-        ],
-        benefits: [
-          "Ser más fácil de encontrar",
-          "Proyectar una imagen más profesional",
-          "Generar confianza",
-          "Explicar claramente tus servicios",
-          "Facilitar el siguiente paso al cliente"
-        ],
-        cta: "Empezar con el Sistema 1",
-        ctaTarget: "contact",
-        pricingNote:
-          "La inversión depende del estado de la presencia digital existente y del alcance aprobado del proyecto."
+        care: {
+          name: "Website Care opcional",
+          price: 99,
+          priceUnit: "/mes",
+          description: "Supervisión técnica básica y hasta 30 minutos de cambios menores al sitio por mes."
+        },
+        notes: ["El registro del dominio, las licencias de pago y las suscripciones de terceros se cobran aparte."],
+        cardCta: "Solicitar una Cotización",
+        cta: "Solicitar una Cotización",
+        ctaTarget: "contact"
       },
       {
-        id: "sistema-captacion-organizacion",
-        name: "Sistema de Solicitudes y Organización",
-        startingPrice: 2250,
-        badge: null,
-        resultChain: ["Recibir", "Clasificar", "Organizar"],
-        cardTitle: "Sistema de Solicitudes y Organización",
-        cardResultChain: ["Recibes solicitudes", "Las ordenas", "Mantienes todo organizado"],
-        cardCta: "Comienza con Sistema 2",
-        whatsIncluded: [
-          "Todo lo del Sistema 1",
-          "Una forma clara de recibir nuevas solicitudes",
-          "Todas las solicitudes en un solo lugar",
-          "Mejor organización por servicio o urgencia",
-          "Una vista simple de oportunidades abiertas",
-          "Un mejor proceso para manejar los contactos que llegan"
-        ],
-        positioning:
-          "Todo lo incluido en el Sistema de Presencia Digital, más una forma de saber exactamente quién te contactó, qué necesita y en qué punto está cada solicitud.",
-        ideal: [
-          "Ya recibes solicitudes pero pierdes el control de quién pidió qué",
-          "Atiendes solicitudes de más de un canal: llamadas, formularios, mensajes",
-          "Necesitas que cada oportunidad tenga clasificación, estado y responsable",
-          "Quieres una confirmación y notificación interna apenas llega una solicitud",
-          "Necesitas organización real, todavía no seguimiento automático"
-        ],
-        implementationLead: "Todo lo incluido en el Sistema de Presencia Digital, más:",
-        implementation: [
-          "Formularios inteligentes con campos de clasificación",
-          "Campos de servicio, ubicación, urgencia, fecha preferida y presupuesto",
-          "Registro centralizado de cada oportunidad",
-          "Estados simples: Nueva → Contactada → Cotizada → Pendiente → Ganada/Perdida",
-          "Responsable y siguiente acción en cada oportunidad",
-          "Mensaje de confirmación instantánea al cliente",
-          "Notificación interna cuando llega una nueva oportunidad",
-          "Pruebas completas del sistema"
-        ],
-        exclusions: [
-          "No incluye automatizaciones de seguimiento ni secuencias de recordatorios",
-          "No incluye plantillas de mensajes ni capacitación del equipo",
-          "No incluye recordatorios de oportunidades sin atender"
-        ],
-        benefits: [
-          "Saber quién te contactó y qué necesita",
-          "Ver el estado de cada oportunidad de un vistazo",
-          "Darle a cada solicitud un responsable y un siguiente paso",
-          "Responder con el contexto correcto, más rápido",
-          "Mantener a todo el equipo trabajando con el mismo registro"
-        ],
-        cta: "Empezar con el Sistema 2",
-        ctaTarget: "contact",
-        pricingNote:
-          "La inversión depende de la cantidad de canales, campos de clasificación y del alcance aprobado del proyecto."
-      },
-      {
-        id: "sistema-captacion-seguimiento",
-        legacyId: "sistema-local-captacion",
-        name: "Sistema de Solicitudes y Seguimiento",
+        id: "blynx-complete",
+        legacyIds: ["sistema-captacion-organizacion", "sistema-captacion-seguimiento", "sistema-local-captacion"],
+        number: "Servicio 02",
+        name: "BLYNX Complete",
+        kind: "setup",
+        headline: "Tu sitio web. Tus clientes. Organizados.",
+        description:
+          "Todo lo de Presence, más respuestas automáticas y una forma organizada de dar seguimiento a las solicitudes de tus clientes.",
+        bestFor: "Negocios que reciben solicitudes de clientes y quieren responder y dar seguimiento a tiempo.",
         startingPrice: 2500,
-        badge: "Mejor Valor",
-        resultChain: ["Recibir", "Organizar", "Dar seguimiento"],
-        cardTitle: "Sistema de Solicitudes y Seguimiento",
-        cardResultChain: ["Recibes solicitudes", "Mantienes orden", "Das seguimiento"],
-        cardCta: "Comienza con Sistema 3",
-        whatsIncluded: [
-          "Todo lo del Sistema 2",
+        priceUnit: "Configuración única",
+        deliveryShort: "Listo en 2–3 semanas",
+        delivery: "2–3 semanas (10–15 días hábiles)",
+        highlights: [
+          "Todo lo de BLYNX Presence",
+          "Solicitudes de clientes organizadas en un solo lugar",
+          "Respuesta automática inicial a nuevas solicitudes",
+          "Recordatorios de seguimiento y estado de cada solicitud",
+          "Panel simple de contactos y solicitudes"
+        ],
+        included: [
+          "Todo lo de BLYNX Presence",
+          "Organización centralizada de las solicitudes de clientes",
+          "Respuesta automática inicial a nuevas solicitudes",
           "Recordatorios de seguimiento",
-          "Seguimiento de cotizaciones",
-          "Recordatorios para pedir reseñas",
-          "Recordatorios de citas",
-          "Un mejor sistema para no descuidar oportunidades"
+          "Panel simple de contactos y solicitudes",
+          "Seguimiento básico del estado de cada solicitud",
+          "Conexión de un canal estándar de solicitudes",
+          "Configuración y pruebas del sistema",
+          "Capacitación básica para el cliente"
         ],
-        positioning:
-          "Todo lo incluido en los Sistemas 1 y 2, más la capa de seguimiento que rescata las oportunidades que otros sistemas dejan enfriar.",
-        ideal: [
-          "Pierdes oportunidades por un seguimiento lento u olvidado",
-          "Mandas cotizaciones que quedan sin respuesta y sin recordatorio",
-          "Necesitas confirmaciones y recordatorios de citas",
-          "Quieres que se pidan reseñas automáticamente al terminar el trabajo",
-          "Necesitas el sistema completo: captación, organización y seguimiento juntos"
+        care: {
+          name: "Automation Support opcional",
+          price: 350,
+          pricePrefix: "Desde ",
+          priceUnit: "/mes",
+          description: "Monitoreo limitado, ajustes y reportes básicos según un alcance acordado."
+        },
+        notes: [
+          "No incluye asistentes de IA avanzados, integraciones complejas ni automatizaciones ilimitadas.",
+          "El registro del dominio, las licencias de pago y las suscripciones de terceros se cobran aparte."
         ],
-        implementationLead: "Todo lo incluido en los Sistemas 1 y 2, más 5 automatizaciones principales:",
-        implementation: [
-          "Confirmación de Nueva Solicitud — registro creado, cliente confirmado, negocio notificado",
-          "Recordatorio de Oportunidad sin Atender — alerta al responsable",
-          "Seguimiento de Cotización — recordatorio más uno o dos mensajes aprobados al cliente",
-          "Confirmación y Recordatorio de Cita, cuando aplica",
-          "Solicitud de Reseña al terminar el servicio, con enlace directo",
-          "Plantillas de comunicación, confirmación y seguimiento",
-          "Capacitación remota para tu equipo sobre estados y siguientes acciones",
-          "Documentación simple del proceso",
-          "Pruebas completas del sistema"
+        cardCta: "Solicitar una Cotización",
+        cta: "Solicitar una Cotización",
+        ctaTarget: "contact"
+      },
+      {
+        id: "blynx-content",
+        legacyIds: [],
+        number: "Servicio 03",
+        name: "BLYNX Content",
+        kind: "subscription",
+        headline: "Tu marca. Contenido fresco. Cada mes.",
+        description: "Imágenes, videos y textos profesionales creados cada mes con herramientas creativas impulsadas por IA.",
+        bestFor: "Negocios que quieren imágenes y videos nuevos cada mes, con o sin un sitio web de BLYNX.",
+        subscriptionLabel: "Suscripción mensual",
+        independentNote: "Servicio independiente — no requiere un sitio web de BLYNX.",
+        plans: [
+          {
+            name: "Content Images",
+            price: 300,
+            publishingPrice: 400,
+            summary: "12 imágenes de marca",
+            items: [
+              "12 diseños de imagen única con tu marca cada mes",
+              "Textos para publicaciones e ideas de contenido",
+              "Calendario de publicación sugerido",
+              "Una ronda de revisión consolidada"
+            ]
+          },
+          {
+            name: "Content Videos",
+            price: 600,
+            publishingPrice: 700,
+            summary: "4 videos cortos",
+            items: [
+              "4 videos cortos al mes, de hasta 30 segundos cada uno",
+              "Ideas creativas y guiones",
+              "Edición y producción asistidas por IA",
+              "Textos para publicaciones",
+              "Una ronda de revisión consolidada"
+            ]
+          },
+          {
+            name: "Content Complete",
+            price: 750,
+            publishingPrice: 850,
+            summary: "12 imágenes + 4 videos",
+            items: [
+              "12 imágenes con tu marca",
+              "4 videos cortos, de hasta 30 segundos cada uno",
+              "Guiones, textos para publicaciones y calendario mensual de contenido",
+              "Una ronda de revisión consolidada"
+            ]
+          }
         ],
-        exclusions: [
-          "No es automatización ilimitada — las 5 anteriores son el alcance aprobado",
-          "Automatizaciones adicionales requieren alcance aprobado por separado",
-          "Los costos de terceros (SMS, WhatsApp, otro software de pago que ya uses) son aparte cuando aplican"
+        perMonth: "/mes",
+        publishingLine: "Opcional: agrega publicación en Instagram y Facebook por +$100/mes — $400, $700 o $850 con publicación.",
+        notes: [
+          "Las suscripciones de Content se cobran mensualmente por adelantado.",
+          "Content no requiere un sitio web de BLYNX.",
+          "Los carruseles complejos, la grabación en sitio y las producciones avanzadas quedan fuera del alcance estándar."
         ],
-        benefits: [
-          "Nada se queda en el aire después del primer mensaje",
-          "Las cotizaciones tienen un proceso real de seguimiento, no solo esperanza",
-          "Las citas se confirman y recuerdan automáticamente",
-          "Se piden reseñas de forma consistente después de cada trabajo",
-          "Tu equipo sabe exactamente qué sigue, siempre"
-        ],
-        cta: "Empezar con el Sistema 3",
-        ctaTarget: "contact",
-        pricingNote:
-          "La inversión depende de la cantidad de procesos, canales de comunicación, integraciones y del alcance aprobado del proyecto."
+        cardCta: "Conocer los Planes de Content",
+        cta: "Solicitar una Cotización",
+        ctaTarget: "services#blynx-content"
       }
     ],
-    comparison: {
-      eyebrow: "Comparación de sistemas",
-      title: "Compara los tres sistemas",
-      columns: ["Presencia Digital", "Solicitudes y Organización", "Solicitudes y Seguimiento"],
-      rows: [
-        { label: "Diagnóstico o auditoría de la presencia actual", values: ["Sí", "Sí", "Sí"] },
-        { label: "Sitio web / landing page creado o mejorado", values: ["Sí", "Sí", "Sí"] },
-        { label: "Optimización móvil", values: ["Sí", "Sí", "Sí"] },
-        { label: "Perfil de Empresa de Google + SEO local básico", values: ["Sí", "Sí", "Sí"] },
-        { label: "Google Analytics", values: ["Sí", "Sí", "Sí"] },
-        { label: "Base para generar reseñas", values: ["Sí", "Sí", "Sí"] },
-        { label: "Formulario de contacto o cotización", values: ["Básico", "Inteligente + clasificación", "Inteligente + clasificación"] },
-        { label: "Campos de servicio, ubicación, urgencia, fecha, presupuesto", values: ["—", "Sí", "Sí"] },
-        { label: "Registro centralizado de oportunidades", values: ["—", "Sí", "Sí"] },
-        { label: "Estados, responsable y siguiente acción", values: ["—", "Sí", "Sí"] },
-        { label: "Confirmación instantánea + notificación interna", values: ["—", "Sí", "Sí"] },
-        { label: "Recordatorio de oportunidad sin atender", values: ["—", "—", "Sí"] },
-        { label: "Recordatorios de seguimiento de cotización", values: ["—", "—", "Sí"] },
-        { label: "Confirmación y recordatorio de cita", values: ["—", "—", "Sí"] },
-        { label: "Solicitud de reseña tras el servicio", values: ["—", "—", "Sí"] },
-        { label: "Plantillas de mensajes y confirmación", values: ["—", "—", "Sí"] },
-        { label: "Capacitación remota del equipo", values: ["—", "—", "Sí"] },
-        { label: "Pruebas y lanzamiento", values: ["Sí", "Sí", "Sí"] }
+    publishing: {
+      eyebrow: "Complemento opcional para BLYNX Content",
+      name: "Agrega publicación en Instagram y Facebook",
+      price: 100,
+      priceUnit: "/mes",
+      priceLead: "+",
+      summary: "Programamos y publicamos tu contenido aprobado en Instagram y Facebook.",
+      includedTitle: "Incluye",
+      included: [
+        "Programación y publicación de hasta 16 piezas de contenido únicas por mes",
+        "Publicación de las piezas aprobadas en Instagram y Facebook",
+        "Aprobación del cliente antes de publicar",
+        "Calendario mensual básico de publicación",
+        "Uso de Meta Business Suite o una herramienta de programación adecuada"
       ],
-      recommendationTitle: "¿No sabes cuál necesita tu negocio?",
-      recommendation:
-        "Cualquiera de los tres sistemas se puede construir para un negocio que empieza de cero o para uno que ya tiene sitio web y perfil de Google. Tu punto de partida cambia cómo te diagnosticamos, no cuál sistema te conviene.",
-      cta: "Encuentra tu Sistema",
-      ctaTarget: "contact"
+      tableTitle: "Precio mensual con publicación",
+      tableHead: ["Plan", "Solo contenido", "Con publicación"],
+      limitsTitle: "Límites",
+      limits: [
+        "Cada pieza de contenido única puede publicarse en ambas plataformas.",
+        "La publicación no puede superar el contenido incluido en tu plan: hasta 12 imágenes, hasta 4 videos, o hasta 16 piezas con Content Complete."
+      ],
+      notIncludedTitle: "No incluye",
+      notIncluded: [
+        "Responder comentarios",
+        "Contestar mensajes",
+        "Gestión diaria de cuentas",
+        "Campañas publicitarias",
+        "Gestión de comunidad"
+      ]
     },
-    monthly: {
-      eyebrow: "Después del lanzamiento",
-      title: "Mantén el sistema funcionando — y, si quieres, manténlo visible",
-      intro:
-        "Opcional, y aparte del precio del proyecto. Disponible una vez que tu sistema esté en funcionamiento.",
-      maintenance: {
-        name: "Mantenimiento del Sistema Digital",
-        price: "$650",
-        priceUnit: "/mes",
-        inclusions: [
-          "Actualizaciones menores del sitio web (hasta 4 al mes)",
-          "Actualizaciones de información del negocio",
-          "Monitoreo de formularios",
-          "Monitoreo de automatizaciones",
-          "Revisión de Analytics",
-          "Respaldos y revisiones del sistema",
-          "Resumen mensual simple",
-          "Correcciones técnicas menores"
-        ]
-      },
-      socialAddOn: {
-        name: "Complemento de Redes Sociales",
-        price: "+$850",
-        priceUnit: "/mes",
-        note: "Se agrega al mantenimiento mensual de $650.",
-        inclusions: [
-          "Planificación y calendario mensual de contenido",
-          "Hasta 8 piezas de contenido",
-          "Diseños estáticos y carruseles",
-          "Hasta 2 reels simples con material que tú aportes",
-          "Textos para publicaciones",
-          "Adaptación para Instagram / Facebook",
-          "Programación y publicación",
-          "Reporte mensual básico"
-        ],
-        exclusions: [
-          "Publicaciones o revisiones ilimitadas",
-          "Gestión intensiva de comunidad o respuesta diaria de mensajes",
-          "Fotografía o videografía profesional",
-          "Publicidad pagada o presupuesto de anuncios"
-        ]
-      },
-      comboPrice: "$1,500",
-      comboPriceUnit: "/mes",
-      comboLabel: "Los dos juntos",
-      customNote: "Las necesidades más grandes de redes sociales reciben una cotización personalizada.",
-      cta: "Consultar Soporte Mensual",
+    secondary: {
+      eyebrow: "También disponible",
+      title: "Más formas de trabajar con BLYNX",
+      items: [
+        {
+          name: "Landing Page",
+          price: 950,
+          priceText: "Desde $950",
+          description: "Sitio web profesional de una sola página.",
+          meta: "Entrega estimada: 5–7 días hábiles."
+        },
+        {
+          name: "Perfil de Empresa de Google",
+          price: 249,
+          priceText: "Desde $249",
+          description: "Configuración u optimización básica para negocios elegibles.",
+          meta: "Google controla la verificación y la aprobación."
+        },
+        {
+          name: "Soluciones de IA a Medida",
+          price: null,
+          priceText: "Cotización personalizada",
+          description:
+            "Chatbots de IA, asistentes virtuales, automatizaciones de reservas, integraciones personalizadas para el negocio, flujos de trabajo automatizados avanzados, y herramientas y aplicaciones digitales.",
+          meta: "Cada proyecto a medida requiere evaluación y precio individuales."
+        }
+      ],
+      cta: "Solicitar una Cotización",
       ctaTarget: "contact"
     },
     faq: {
       eyebrow: "Preguntas frecuentes",
-      title: "Respuestas claras antes de elegir un sistema",
+      title: "Respuestas claras antes de elegir",
       items: [
         [
-          "¿Necesito comenzar desde cero?",
-          "No. Cualquiera de los tres sistemas se puede construir para un negocio que empieza de cero o para uno que ya tiene sitio web y perfil de Google. Comenzamos con un diagnóstico breve o una auditoría gratis para ver qué existe y recomendarte el sistema correcto."
+          "¿Qué servicio es el adecuado para mi negocio?",
+          "BLYNX Presence es el punto de partida si necesitas un sitio web profesional y presencia en Google. BLYNX Complete agrega respuestas automáticas y una forma organizada de dar seguimiento a las solicitudes de tus clientes. BLYNX Content crea imágenes y videos cada mes, con o sin un sitio web de BLYNX. ¿No estás seguro? Solicita una cotización y te recomendamos la mejor opción."
         ],
         [
-          "¿Qué ocurre si ya tengo un sitio web?",
-          "Evaluamos qué se puede conservar, mejorar o reconstruir. Tener activos digitales no significa automáticamente que el proyecto sea más pequeño; corregir un sistema desactualizado o mal estructurado puede requerir más trabajo que comenzar desde cero. Los proyectos comienzan desde el precio indicado y la inversión final depende del alcance aprobado."
+          "¿Cuánto tarda un sitio web?",
+          "BLYNX Presence tarda aproximadamente 2 semanas (10 días hábiles) y BLYNX Complete tarda de 2 a 3 semanas (10–15 días hábiles). El calendario comienza después de recibir toda la información, los materiales y los accesos necesarios. Los plazos son estimados, no fechas límite garantizadas, y la verificación del Perfil de Empresa de Google depende de Google."
         ],
         [
-          "¿Cuál es la diferencia entre los tres sistemas?",
-          "El Sistema 1 construye la base digital que tus clientes usan para encontrarte y confiar en ti. El Sistema 2 agrega formularios inteligentes y organiza cada oportunidad con estado y responsable. El Sistema 3 agrega la capa de seguimiento — confirmaciones, recordatorios y solicitudes de reseña — para que nada se quede en el aire."
+          "¿Necesito un sitio web de BLYNX para suscribirme a BLYNX Content?",
+          "No. BLYNX Content es una suscripción mensual independiente. Puedes suscribirte con o sin un sitio web de BLYNX."
         ],
         [
-          "¿BLYNX garantiza más clientes o más oportunidades?",
-          "No. BLYNX construye la infraestructura y el proceso que ayuda a tu negocio a recibir y gestionar oportunidades de forma profesional. Los resultados también dependen de la demanda del mercado, tu oferta, tus precios, la competencia, tu reputación, tu capacidad de venta, la velocidad de respuesta, el servicio al cliente y la ejecución."
+          "¿Qué incluye la publicación en Instagram y Facebook?",
+          "Por +$100/mes programamos y publicamos hasta 16 piezas únicas por mes en Instagram y Facebook, después de que apruebes cada una. La publicación no puede superar el contenido de tu plan: hasta 12 imágenes, hasta 4 videos, o hasta 16 piezas con Content Complete. No incluye responder comentarios, contestar mensajes, gestión diaria de cuentas, campañas publicitarias ni gestión de comunidad."
         ],
         [
-          "¿El manejo de redes sociales está incluido?",
-          "No. El apoyo para redes sociales es un complemento mensual aparte del mantenimiento, cotizado a una tarifa fija para el alcance descrito, con cotización personalizada para necesidades mayores."
+          "¿Hay costos continuos después de construir mi sitio web?",
+          "BLYNX Presence y BLYNX Complete son configuraciones únicas. Hay planes mensuales opcionales: Website Care a $99/mes y Automation Support desde $350/mes. El registro del dominio, las licencias de pago y las suscripciones de terceros se cobran aparte."
         ],
         [
-          "¿Las automatizaciones están incluidas y son ilimitadas?",
-          "El Sistema 3 incluye 5 automatizaciones principales de seguimiento en el alcance aprobado: confirmación de nueva solicitud, recordatorios de oportunidades sin atender, seguimiento de cotización, confirmación/recordatorio de citas y solicitudes de reseña. No es automatización ilimitada — las automatizaciones adicionales requieren alcance aprobado por separado."
+          "¿Qué no está incluido?",
+          "BLYNX Complete no incluye asistentes de IA avanzados, integraciones complejas ni automatizaciones ilimitadas. BLYNX Content no incluye carruseles complejos, grabación en sitio ni producciones avanzadas. Cualquier cosa fuera de estos alcances, incluidas las soluciones de IA a medida, se evalúa y se cotiza de forma individual."
         ],
         [
-          "¿Cómo se determina el precio final?",
-          "El precio final depende de la configuración digital actual, el alcance aprobado, la cantidad de procesos, los canales de comunicación, las integraciones y cualquier complemento aprobado por separado."
+          "¿BLYNX garantiza más clientes?",
+          "No. BLYNX construye el sitio web, los sistemas y el contenido que ayudan a tu negocio a verse profesional y a responder a los clientes con eficiencia. Los resultados también dependen de la demanda del mercado, tu oferta, tus precios, la competencia, tu reputación, la velocidad de respuesta y el servicio al cliente."
         ],
         [
           "¿Cómo funciona el pago?",
-          "50% para comenzar, 30% después de la aprobación de la construcción y 20% antes del lanzamiento. Los servicios mensuales se pagan por adelantado."
+          "Las configuraciones únicas se pagan en tres partes: 50% para comenzar, 30% después de la aprobación de la construcción y 20% antes del lanzamiento. Las suscripciones de Content y los planes mensuales opcionales se cobran mensualmente por adelantado."
         ]
       ]
     }
@@ -1420,84 +1334,54 @@ function validateCommercialOfferParity() {
   const sameLength = (left, right, label) => {
     if (left.length !== right.length) throw new Error(`Bilingual offer mismatch: ${label}`);
   };
+  const samePrice = (left, right, label) => {
+    if (left !== right) throw new Error(`Bilingual offer mismatch: ${label}`);
+  };
 
-  // --- Systems: exactly 3, in both languages ---
-  if (en.systems.length !== 3 || es.systems.length !== 3) {
-    throw new Error("Bilingual offer mismatch: expected exactly 3 systems in each language");
+  // --- Exactly three core services, same order, kind, id, CTA target ---
+  if (en.services.length !== 3 || es.services.length !== 3) {
+    throw new Error("Bilingual offer mismatch: expected exactly 3 services in each language");
   }
-  sameLength(en.systems, es.systems, "systems");
-
-  let badgeIndexEn = -1;
-  let badgeIndexEs = -1;
-  let legacyIndexEn = -1;
-  let legacyIndexEs = -1;
-
-  en.systems.forEach((system, index) => {
-    const translated = es.systems[index];
-    if (system.startingPrice !== translated.startingPrice || system.ctaTarget !== translated.ctaTarget) {
-      throw new Error(`Bilingual offer mismatch: system ${index + 1} price or CTA`);
-    }
-    if (!system.id || !translated.id) {
-      throw new Error(`Bilingual offer mismatch: system ${index + 1} missing id`);
-    }
-    sameLength(system.ideal, translated.ideal, `system ${index + 1} audience`);
-    sameLength(system.implementation, translated.implementation, `system ${index + 1} implementation`);
-    sameLength(system.exclusions, translated.exclusions, `system ${index + 1} exclusions`);
-    sameLength(system.benefits, translated.benefits, `system ${index + 1} benefits`);
-    sameLength(system.resultChain, translated.resultChain, `system ${index + 1} result chain`);
-    if (system.badge) badgeIndexEn = index;
-    if (translated.badge) badgeIndexEs = index;
-    if (system.legacyId) legacyIndexEn = index;
-    if (translated.legacyId) legacyIndexEs = index;
-  });
-
-  // Exactly one system carries the Best Value badge, at the same index in both languages.
-  if (badgeIndexEn === -1 || badgeIndexEn !== badgeIndexEs) {
-    throw new Error("Bilingual offer mismatch: badge must appear on exactly one system, at the same index, in both languages");
-  }
-  // Exactly one system (the renamed former Local Lead System) carries a legacy anchor, same index both languages.
-  if (legacyIndexEn === -1 || legacyIndexEn !== legacyIndexEs) {
-    throw new Error("Bilingual offer mismatch: legacyId must appear on exactly one system, at the same index, in both languages");
-  }
-
-  if (!en.priceLabel || !es.priceLabel) {
-    throw new Error("Bilingual offer mismatch: priceLabel missing");
-  }
-
-  // --- Comparison table ---
-  sameLength(en.comparison.columns, es.comparison.columns, "comparison columns");
-  if (en.comparison.columns.length !== 3) {
-    throw new Error("Bilingual offer mismatch: comparison table must have 3 columns");
-  }
-  sameLength(en.comparison.rows, es.comparison.rows, "comparison rows");
-  en.comparison.rows.forEach((row, index) => {
-    sameLength(row.values, es.comparison.rows[index].values, `comparison row ${index + 1} values`);
-    if (row.values.length !== 3 || es.comparison.rows[index].values.length !== 3) {
-      throw new Error(`Bilingual offer mismatch: comparison row ${index + 1} must have 3 values`);
+  en.services.forEach((service, index) => {
+    const translated = es.services[index];
+    const label = `service ${index + 1}`;
+    samePrice(service.id, translated.id, `${label} id`);
+    samePrice(service.kind, translated.kind, `${label} kind`);
+    samePrice(service.ctaTarget, translated.ctaTarget, `${label} CTA destination`);
+    sameLength(service.legacyIds, translated.legacyIds, `${label} legacy anchors`);
+    sameLength(service.notes, translated.notes, `${label} notes`);
+    if (service.kind === "setup") {
+      samePrice(service.startingPrice, translated.startingPrice, `${label} price`);
+      sameLength(service.highlights, translated.highlights, `${label} highlights`);
+      sameLength(service.included, translated.included, `${label} included`);
+      samePrice(service.care.price, translated.care.price, `${label} care price`);
+      samePrice(service.care.priceUnit.startsWith("/"), translated.care.priceUnit.startsWith("/"), `${label} care unit`);
+    } else {
+      sameLength(service.plans, translated.plans, `${label} plans`);
+      service.plans.forEach((plan, planIndex) => {
+        const other = translated.plans[planIndex];
+        samePrice(plan.price, other.price, `${label} plan ${planIndex + 1} price`);
+        samePrice(plan.publishingPrice, other.publishingPrice, `${label} plan ${planIndex + 1} publishing price`);
+        // Publishing is always the plan price + $100 — never let the two drift apart.
+        samePrice(plan.publishingPrice, plan.price + en.publishing.price, `${label} plan ${planIndex + 1} publishing math`);
+        sameLength(plan.items, other.items, `${label} plan ${planIndex + 1} items`);
+      });
     }
   });
-  if (en.comparison.ctaTarget !== es.comparison.ctaTarget) {
-    throw new Error("Bilingual offer mismatch: comparison CTA destination");
-  }
 
-  // --- Monthly services ---
-  // Only the numeric price string must match across languages (e.g. "$650").
-  // The unit suffix ("/month" vs "/mes") is a legitimate translation, not a mismatch.
-  if (en.monthly.maintenance.price !== es.monthly.maintenance.price) {
-    throw new Error("Bilingual offer mismatch: maintenance price");
-  }
-  if (en.monthly.socialAddOn.price !== es.monthly.socialAddOn.price) {
-    throw new Error("Bilingual offer mismatch: social add-on price");
-  }
-  if (en.monthly.comboPrice !== es.monthly.comboPrice) {
-    throw new Error("Bilingual offer mismatch: combo price");
-  }
-  sameLength(en.monthly.maintenance.inclusions, es.monthly.maintenance.inclusions, "maintenance inclusions");
-  sameLength(en.monthly.socialAddOn.inclusions, es.monthly.socialAddOn.inclusions, "social add-on inclusions");
-  sameLength(en.monthly.socialAddOn.exclusions, es.monthly.socialAddOn.exclusions, "social add-on exclusions");
-  if (en.monthly.ctaTarget !== es.monthly.ctaTarget) {
-    throw new Error("Bilingual offer mismatch: monthly CTA destination");
-  }
+  // --- Publishing add-on ---
+  samePrice(en.publishing.price, es.publishing.price, "publishing price");
+  sameLength(en.publishing.included, es.publishing.included, "publishing included");
+  sameLength(en.publishing.limits, es.publishing.limits, "publishing limits");
+  sameLength(en.publishing.notIncluded, es.publishing.notIncluded, "publishing exclusions");
+  sameLength(en.publishing.tableHead, es.publishing.tableHead, "publishing table");
+
+  // --- Secondary services ---
+  sameLength(en.secondary.items, es.secondary.items, "secondary services");
+  en.secondary.items.forEach((item, index) => {
+    samePrice(item.price, es.secondary.items[index].price, `secondary service ${index + 1} price`);
+  });
+  samePrice(en.secondary.ctaTarget, es.secondary.ctaTarget, "secondary CTA destination");
 
   // --- FAQ ---
   sameLength(en.faq.items, es.faq.items, "FAQ topics");
@@ -1505,132 +1389,54 @@ function validateCommercialOfferParity() {
 
 validateCommercialOfferParity();
 
-const pillars = {
-  en: {
-    eyebrow: "What we build",
-    title: "Five parts. One connected system.",
-    items: [
-      { label: "Be found", result: "People searching for your service actually reach you." },
-      { label: "Build trust", result: "What they see makes them comfortable contacting you." },
-      { label: "Capture", result: "The request arrives complete, not as a missed call." },
-      { label: "Organize", result: "Every opportunity has a status, an owner and a next step." },
-      { label: "Follow up", result: "Nothing goes quiet because everyone got busy." }
-    ]
-  },
-  es: {
-    eyebrow: "Lo que construimos",
-    title: "Cinco partes. Un solo sistema conectado.",
-    items: [
-      { label: "Ser encontrado", result: "Quien busca tu servicio llega hasta ti." },
-      { label: "Generar confianza", result: "Lo que ve le da seguridad para contactarte." },
-      { label: "Captar", result: "La solicitud llega completa, no como una llamada perdida." },
-      { label: "Organizar", result: "Cada oportunidad tiene estado, responsable y siguiente paso." },
-      { label: "Dar seguimiento", result: "Nada se queda en el aire porque todos estaban ocupados." }
-    ]
-  }
-};
-
-const routes = {
-  en: {
-    eyebrow: "How we decide together",
-    title: "Find the Right System",
-    intro:
-      "Any of the three systems can be built for a business starting from zero or one that already has a website and a Google profile. Your current setup changes the diagnosis — not the recommendation.",
-    cards: [
-      {
-        label: "Route A",
-        title: "Starting from zero",
-        copy: "A short diagnosis call: what you sell, who you serve, how people reach you today.",
-        result: "We recommend System 1, 2 or 3.",
-        cta: "Start a Diagnosis",
-        ctaTarget: "contact"
-      },
-      {
-        label: "Route B",
-        title: "You already have something",
-        copy: "A free audit of what exists: what works, what's missing, what's disconnected.",
-        result: "We recommend System 1, 2 or 3.",
-        cta: "Request a Free Audit",
-        ctaTarget: "free-audit"
-      }
-    ]
-  },
-  es: {
-    eyebrow: "Cómo lo decidimos juntos",
-    title: "Encuentra tu Sistema",
-    intro:
-      "Cualquiera de los tres sistemas se puede construir para un negocio que empieza de cero o para uno que ya tiene web y perfil de Google. Tu punto de partida cambia el diagnóstico, no la recomendación.",
-    cards: [
-      {
-        label: "Ruta A",
-        title: "Empiezas de cero",
-        copy: "Una llamada corta de diagnóstico: qué vendes, a quién y cómo te contactan hoy.",
-        result: "Te recomendamos el Sistema 1, 2 o 3.",
-        cta: "Iniciar Diagnóstico",
-        ctaTarget: "contact"
-      },
-      {
-        label: "Ruta B",
-        title: "Ya tienes algo armado",
-        copy: "Auditoría gratis de lo que existe: qué funciona, qué falta y qué está desconectado.",
-        result: "Te recomendamos el Sistema 1, 2 o 3.",
-        cta: "Solicitar Auditoría Gratis",
-        ctaTarget: "free-audit"
-      }
-    ]
-  }
-};
-
 const implementationPlan = {
   en: {
-    eyebrow: "What happens if you say yes",
-    title: "Three steps. One milestone each.",
+    eyebrow: "Delivery timeline",
+    title: "Your Website. Ready in Approximately 2 Weeks.",
     steps: [
       {
-        label: "Step 1",
-        title: "Diagnosis & Scope",
-        copy: "Short call or free audit. We agree on the system and the scope.",
-        milestone: "50% to begin"
+        label: "Week 1",
+        title: "Design & Development",
+        copy: "Initial website development, responsive design, contact configuration and first presentation."
       },
       {
-        label: "Step 2",
-        title: "Design, Build & Approval",
-        copy: "Presence, forms, records and follow-up steps for the approved level, reviewed with you.",
-        milestone: "30% after approval"
-      },
-      {
-        label: "Step 3",
-        title: "Testing & Launch",
-        copy: "Everything tested end to end, then launched live.",
-        milestone: "20% before launch"
+        label: "Week 2",
+        title: "Revisions & Launch",
+        copy: "Client feedback, included corrections, testing and publication."
       }
     ],
-    note: "The final 20% is received before production launch. Monthly services are billed in advance. Third-party platform costs are separate when they apply."
+    conditionsTitle: "Good to know",
+    conditions: [
+      "The schedule starts after we receive all required information, materials and access.",
+      "Estimated timelines are not guaranteed deadlines.",
+      "Delayed client responses or additional requirements may extend delivery.",
+      "Google Business Profile verification depends on Google.",
+      "More complex implementations have individually confirmed timelines."
+    ]
   },
   es: {
-    eyebrow: "Qué pasa si dices que sí",
-    title: "Tres pasos. Un hito cada uno.",
+    eyebrow: "Plazo de entrega",
+    title: "Tu sitio web. Listo en aproximadamente 2 semanas.",
     steps: [
       {
-        label: "Paso 1",
-        title: "Diagnóstico y Alcance",
-        copy: "Llamada corta o auditoría gratis. Acordamos sistema y alcance.",
-        milestone: "50% para comenzar"
+        label: "Semana 1",
+        title: "Diseño y desarrollo",
+        copy: "Desarrollo inicial del sitio, diseño adaptable, configuración de contacto y primera presentación."
       },
       {
-        label: "Paso 2",
-        title: "Diseño, Construcción y Aprobación",
-        copy: "Presencia, formularios, registros y flujos del nivel aprobado, revisados contigo.",
-        milestone: "30% después de la aprobación"
-      },
-      {
-        label: "Paso 3",
-        title: "Pruebas y Lanzamiento",
-        copy: "Todo probado de principio a fin y luego puesto en marcha.",
-        milestone: "20% antes del lanzamiento"
+        label: "Semana 2",
+        title: "Revisiones y lanzamiento",
+        copy: "Comentarios del cliente, correcciones incluidas, pruebas y publicación."
       }
     ],
-    note: "El 20% final se recibe antes del lanzamiento a producción. Los servicios mensuales se pagan por adelantado. Los costos de plataformas externas son aparte cuando aplican."
+    conditionsTitle: "Es bueno saber",
+    conditions: [
+      "El calendario comienza después de recibir toda la información, los materiales y los accesos necesarios.",
+      "Los plazos estimados no son fechas límite garantizadas.",
+      "Las respuestas tardías del cliente o los requisitos adicionales pueden extender la entrega.",
+      "La verificación del Perfil de Empresa de Google depende de Google.",
+      "Las implementaciones más complejas tienen plazos confirmados individualmente."
+    ]
   }
 };
 
@@ -1639,7 +1445,7 @@ const stagePages = {
     title: "Choose Your Starting Point | BLYNX",
     description: "Choose whether your business already has a digital presence or is starting from zero.",
     aria: "Choose business stage",
-    eyebrow: "Digital Systems for Service Businesses",
+    eyebrow: "Digital Solutions for Local Businesses",
     h1: "What best describes your business?",
     subtitle: "Choose where your business is today so we can show you the clearest next step.",
     skip: "Skip for now",
@@ -1647,15 +1453,15 @@ const stagePages = {
       {
         value: "existing",
         title: "I already have a digital presence",
-        copy: "You already have a website, Google profile, or some online presence — but you need better visibility, more qualified requests, faster follow-up, and better control.",
-        bullets: ["Improve visibility", "Capture more qualified opportunities", "Organize opportunities", "Follow up faster"],
+        copy: "You already have a website, Google profile, or some online presence — and you want to improve it, organize your customer requests, or add monthly content.",
+        bullets: ["Improve your website or Google presence", "Organize customer requests", "Add automatic responses and reminders", "Create monthly content"],
         cta: "Continue"
       },
       {
         value: "zero",
         title: "I’m starting from zero",
-        copy: "You do not have a website, Google Business Profile, or customer request system yet. BLYNX can build the digital foundation needed to get found, receive opportunities, and follow up professionally.",
-        bullets: ["Google Business Profile setup", "Contact-focused landing page", "Smart contact form", "Basic request tracking", "Follow-up automation"],
+        copy: "You do not have a website or Google Business Profile yet. BLYNX can build the professional foundation customers expect to find.",
+        bullets: ["Professional website", "Google Business Profile setup", "Contact forms and notifications", "Basic local SEO", "Monthly content, if you want it"],
         cta: "Continue"
       }
     ]
@@ -1664,7 +1470,7 @@ const stagePages = {
     title: "Elige tu Punto de Partida | BLYNX",
     description: "Elige si tu negocio ya tiene presencia digital o está empezando desde cero.",
     aria: "Elegir etapa del negocio",
-    eyebrow: "Sistemas Digitales para Negocios de Servicios",
+    eyebrow: "Soluciones Digitales para Negocios Locales",
     h1: "¿Qué describe mejor tu negocio?",
     subtitle: "Elige en qué punto está tu negocio para mostrarte el siguiente paso más claro.",
     skip: "Saltar por ahora",
@@ -1672,15 +1478,15 @@ const stagePages = {
       {
         value: "existing",
         title: "Ya tengo presencia digital",
-        copy: "Ya tienes sitio web, Google Business Profile o alguna presencia online — pero necesitas mejor visibilidad, más oportunidades calificadas, seguimiento más rápido y mayor control.",
-        bullets: ["Mejorar visibilidad", "Capturar más oportunidades calificadas", "Organizar solicitudes", "Dar seguimiento rápido"],
+        copy: "Ya tienes sitio web, Perfil de Empresa de Google o alguna presencia en línea — y quieres mejorarla, organizar las solicitudes de tus clientes o agregar contenido mensual.",
+        bullets: ["Mejorar tu sitio web o tu presencia en Google", "Organizar las solicitudes de clientes", "Agregar respuestas automáticas y recordatorios", "Crear contenido mensual"],
         cta: "Continuar"
       },
       {
         value: "zero",
         title: "Estoy empezando desde cero",
-        copy: "Todavía no tienes sitio web, Google Business Profile o un sistema para recibir solicitudes. BLYNX puede construir la base digital necesaria para ser encontrado, recibir oportunidades y dar seguimiento profesional.",
-        bullets: ["Configuración de Google Business Profile", "Landing page enfocada en contacto", "Formulario inteligente", "Control básico de solicitudes", "Automatización de seguimiento"],
+        copy: "Todavía no tienes sitio web ni Perfil de Empresa de Google. BLYNX puede construir la base profesional que los clientes esperan encontrar.",
+        bullets: ["Sitio web profesional", "Configuración del Perfil de Empresa de Google", "Formularios de contacto y avisos", "SEO local básico", "Contenido mensual, si lo quieres"],
         cta: "Continuar"
       }
     ]
@@ -1691,84 +1497,84 @@ const stageLandingPages = {
   en: {
     existing: {
       title: "Improve What You Already Have | BLYNX",
-      description: "Improve visibility, customer requests, follow-up, and organization for an existing local business presence.",
+      description: "Improve your website, Google presence, customer follow-up or monthly content with BLYNX.",
       eyebrow: "Existing digital presence",
       h1: "Improve What You Already Have",
-      subtitle: "For businesses that already have a website, Google profile, or online presence. We start with a free audit — any of BLYNX's three systems can apply, depending on what your business needs, not just what you already have.",
+      subtitle: "For businesses that already have a website, Google profile, or online presence. Tell us what you want to improve and we’ll recommend the right BLYNX service.",
       cards: [
-        ["Visibility Tune-Up", "Improve local signals that help qualified customers find and trust your business."],
-        ["Customer Request Review", "Make your current website, landing page, or profile easier to turn into calls and requests."],
-        ["Opportunity Tracking", "Organize incoming requests so every inquiry has a clear place and next action."],
-        ["Faster Follow-Up", "Add simple confirmations, alerts, and reminders so fewer requests get missed."]
+        ["A Stronger Website", "Improve or rebuild your website so customers can find information and contact you easily."],
+        ["Google Presence", "Optimize your Google Business Profile and basic local SEO, subject to eligibility and access."],
+        ["Organized Customer Requests", "Keep every inquiry in one place, with automatic responses and follow-up reminders (BLYNX Complete)."],
+        ["Fresh Monthly Content", "Professional images and videos created every month (BLYNX Content)."]
       ],
-      processTitle: "What BLYNX Improves",
-      steps: ["Audit current presence", "Find request gaps", "Improve capture points", "Connect follow-up"],
+      processTitle: "How It Works",
+      steps: ["Tell us about your business", "We review what you have", "Get a clear quote", "Start improving"],
       ctaTitle: "Ready to improve what you already have?",
-      ctaSubtitle: "Start with a free audit and see where your current presence may be losing opportunities.",
-      cta: "Get a Free Audit",
+      ctaSubtitle: "Tell us what you need and we’ll send you a clear quote.",
+      cta: "Request a Quote",
       auditSlug: "free-audit-existing"
     },
     zero: {
-      title: "Build Your Digital Foundation From Zero | BLYNX",
-      description: "Build the digital foundation local service businesses need to get found, receive opportunities, and follow up professionally.",
+      title: "Build Your Online Presence From Zero | BLYNX",
+      description: "Build the professional website and Google presence your local business needs to be found and contacted.",
       eyebrow: "Starting from zero",
-      h1: "Build Your Digital Foundation From Zero",
-      subtitle: "For businesses that don't yet have a website, Google Business Profile, or a way to organize inquiries. We start with a short diagnosis — any of BLYNX's three systems can apply, depending on what your business needs.",
+      h1: "Build Your Online Presence From Zero",
+      subtitle: "For businesses that don’t yet have a website or Google Business Profile. Tell us about your business and we’ll recommend the right BLYNX service.",
       cards: [
-        ["Google Business Profile Setup", "Create the local presence customers expect to find when they search for your business."],
-        ["Contact-Focused Landing Page", "A focused page designed to explain the service and help visitors call, request a quote, or book the next step."],
-        ["Smart Contact Form", "A clean form that collects the right information without making the process complicated."],
-        ["Basic Request Tracking", "A simple place to organize new opportunities and keep track of next steps."],
-        ["Follow-Up Automation", "Basic email, SMS, or WhatsApp follow-up so new opportunities do not get lost."],
-        ["Review Request System", "A simple flow to start requesting and organizing customer reviews."]
+        ["Professional Website", "Up to 5 pages, mobile-friendly, with contact forms."],
+        ["Google Business Profile", "Setup or basic optimization, subject to eligibility and access."],
+        ["Easy Contact", "Contact forms, contact buttons and new inquiry notifications."],
+        ["Basic Local SEO", "Help customers in your area find you, plus a Google review link."],
+        ["Organized Customer Requests", "Add BLYNX Complete to track requests and follow up on time."],
+        ["Monthly Content", "Add BLYNX Content for fresh images and videos every month."]
       ],
       processTitle: "What BLYNX Builds First",
-      steps: ["Set up local visibility", "Create a contact-focused landing page", "Connect customer requests", "Add follow-up"],
+      steps: ["Plan your website and Google presence", "Design and build your website", "Review, revise and launch", "Add follow-up or content, if you want"],
       ctaTitle: "Starting from zero?",
-      ctaSubtitle: "Start with a free audit so we can map the clearest digital foundation for your business.",
-      cta: "Start With a Free Audit",
+      ctaSubtitle: "Tell us about your business and we’ll send you a clear quote.",
+      cta: "Request a Quote",
       auditSlug: "free-audit-zero"
     }
   },
   es: {
     existing: {
       title: "Mejora lo que Ya Tienes | BLYNX",
-      description: "Mejora visibilidad, solicitudes de clientes, seguimiento y organización para un negocio local que ya tiene presencia digital.",
+      description: "Mejora tu sitio web, tu presencia en Google, el seguimiento a clientes o tu contenido mensual con BLYNX.",
       eyebrow: "Presencia digital existente",
       h1: "Mejora lo que Ya Tienes",
-      subtitle: "Para negocios que ya tienen sitio web, Google Business Profile o presencia online. Empezamos con una auditoría gratis — cualquiera de los tres sistemas de BLYNX puede aplicar, según lo que tu negocio necesite, no solo lo que ya tengas.",
+      subtitle: "Para negocios que ya tienen sitio web, Perfil de Empresa de Google o presencia en línea. Cuéntanos qué quieres mejorar y te recomendamos el servicio de BLYNX adecuado.",
       cards: [
-        ["Mejora de Visibilidad", "Mejoramos señales locales que ayudan a clientes calificados a encontrar y confiar en tu negocio."],
-        ["Revisión de Solicitudes", "Hacemos que tu sitio, landing page o perfil actual sea más claro para generar llamadas y solicitudes."],
-        ["Organización de Oportunidades", "Ordenamos las solicitudes entrantes para que cada una tenga un lugar y una próxima acción."],
-        ["Seguimiento Más Rápido", "Agregamos confirmaciones, avisos y recordatorios simples para que menos oportunidades se pierdan."]
+        ["Un Sitio Web Más Fuerte", "Mejoramos o reconstruimos tu sitio web para que los clientes encuentren información y te contacten fácilmente."],
+        ["Presencia en Google", "Optimizamos tu Perfil de Empresa de Google y el SEO local básico, sujeto a elegibilidad y acceso."],
+        ["Solicitudes de Clientes Organizadas", "Cada solicitud en un solo lugar, con respuestas automáticas y recordatorios de seguimiento (BLYNX Complete)."],
+        ["Contenido Fresco Cada Mes", "Imágenes y videos profesionales creados cada mes (BLYNX Content)."]
       ],
-      processTitle: "Qué Mejora BLYNX",
-      steps: ["Auditar presencia actual", "Encontrar fallos en el proceso", "Mejorar puntos de captación", "Conectar seguimiento"],
+      processTitle: "Cómo Funciona",
+      steps: ["Cuéntanos sobre tu negocio", "Revisamos lo que tienes", "Recibe una cotización clara", "Empieza a mejorar"],
       ctaTitle: "¿Listo para mejorar lo que ya tienes?",
-      ctaSubtitle: "Empieza con una auditoría gratis y descubre dónde tu presencia actual puede estar perdiendo oportunidades.",
-      cta: "Solicitar Auditoría Gratis",
+      ctaSubtitle: "Cuéntanos qué necesitas y te enviamos una cotización clara.",
+      cta: "Solicitar una Cotización",
       auditSlug: "free-audit-existing"
     },
     zero: {
-      title: "Construye tu Base Digital Desde Cero | BLYNX",
-      description: "Construye la base digital que un negocio local necesita para ser encontrado, recibir oportunidades y dar seguimiento profesional.",
+      title: "Construye tu Presencia en Línea Desde Cero | BLYNX",
+      description: "Construye el sitio web profesional y la presencia en Google que tu negocio local necesita para que lo encuentren y lo contacten.",
       eyebrow: "Empezando desde cero",
-      h1: "Construye tu Base Digital Desde Cero",
-      subtitle: "Para negocios que todavía no tienen sitio web, Google Business Profile o una forma de organizar solicitudes. Empezamos con un diagnóstico breve — cualquiera de los tres sistemas de BLYNX puede aplicar, según lo que tu negocio necesite.",
+      h1: "Construye tu Presencia en Línea Desde Cero",
+      subtitle: "Para negocios que todavía no tienen sitio web ni Perfil de Empresa de Google. Cuéntanos sobre tu negocio y te recomendamos el servicio de BLYNX adecuado.",
       cards: [
-        ["Configuración de Google Business Profile", "Creamos la presencia local que los clientes esperan encontrar cuando buscan tu negocio."],
-        ["Landing Page Enfocada en Contacto", "Una página enfocada para explicar el servicio y ayudar al visitante a llamar, pedir cotización o agendar el siguiente paso."],
-        ["Formulario Inteligente", "Un formulario claro que recoge la información correcta sin complicar el proceso."],
-        ["Control Básico de Solicitudes", "Un lugar simple para organizar nuevas oportunidades y dar seguimiento a los próximos pasos."],
-        ["Automatización de Seguimiento", "Seguimiento básico por email, SMS o WhatsApp para que las nuevas oportunidades no se pierdan."],
-        ["Sistema para Pedir Reseñas", "Un flujo simple para empezar a pedir y organizar reseñas de clientes."]
+        ["Sitio Web Profesional", "Hasta 5 páginas, adaptado a celulares y con formularios de contacto."],
+        ["Perfil de Empresa de Google", "Configuración u optimización básica, sujeta a elegibilidad y acceso."],
+        ["Contacto Fácil", "Formularios y botones de contacto, y avisos de nuevas solicitudes."],
+        ["SEO Local Básico", "Ayudamos a que los clientes de tu zona te encuentren, y agregamos un enlace para reseñas de Google."],
+        ["Solicitudes de Clientes Organizadas", "Agrega BLYNX Complete para controlar las solicitudes y dar seguimiento a tiempo."],
+        ["Contenido Mensual", "Agrega BLYNX Content para tener imágenes y videos nuevos cada mes."]
       ],
       processTitle: "Qué Construye BLYNX Primero",
-      steps: ["Configurar visibilidad local", "Crear landing page enfocada en contacto", "Conectar solicitudes de clientes", "Agregar seguimiento"],
+      steps: ["Planificar tu sitio web y tu presencia en Google", "Diseñar y construir tu sitio web", "Revisar, ajustar y lanzar", "Agregar seguimiento o contenido, si lo quieres"],
       ctaTitle: "¿Estás empezando desde cero?",
-      ctaSubtitle: "Empieza con una auditoría gratis para mapear la base digital más clara para tu negocio.",
-      cta: "Empezar con Auditoría Gratis",
+      ctaSubtitle: "Cuéntanos sobre tu negocio y te enviamos una cotización clara.",
+      cta: "Solicitar una Cotización",
       auditSlug: "free-audit-zero"
     }
   }
@@ -1777,114 +1583,142 @@ const stageLandingPages = {
 const stageAuditPages = {
   en: {
     existing: {
-      title: "Free Audit for Existing Digital Presence | BLYNX",
-      description: "Request a free audit for your existing local digital presence and customer request process.",
-      eyebrow: "Free audit",
-      h1: "Audit Your Current Digital Presence",
-      subtitle: "Show us what you already have and we’ll look for ways to improve visibility, capture more qualified opportunities, and follow up faster.",
+      title: "Request a Quote | Existing Digital Presence | BLYNX",
+      description: "Request a quote to improve your existing website, Google presence, customer follow-up or monthly content.",
+      eyebrow: "Request a quote",
+      h1: "Tell Us About Your Current Presence",
+      subtitle: "Show us what you already have and we’ll recommend the right service and send you a clear quote.",
       introTitle: "For businesses that already have something online.",
-      introCopy: "This audit reviews your current website or landing page, Google presence, contact points, reviews, and follow-up flow.",
-      bullets: ["Visibility and trust gaps.", "Contact points and missed opportunities.", "Follow-up and organization improvements."],
+      introCopy: "We review your current website or landing page, Google presence and contact points before quoting.",
+      bullets: ["Website and Google presence.", "Contact points and customer requests.", "Follow-up and content needs."],
       fields: {
         website: "Website URL",
         gbp: "Google Business Profile Link",
         improvements: "What do you want to improve?",
-        timeline: "How soon do you want to improve this?",
+        timeline: "How soon do you want to start?",
         message: "Message / Notes"
       },
-      improvements: ["More calls", "More website inquiries", "Better Google visibility", "More reviews", "Better landing page", "Follow-up automation", "Not sure"],
+      improvements: [
+        "Professional website",
+        "Google Business Profile",
+        "Customer inquiry organization and follow-up",
+        "Monthly images and videos",
+        "Landing page",
+        "Custom AI solution",
+        "Not sure"
+      ],
       timelines: ["Immediately", "This month", "Next 2–3 months", "Just researching"],
-      submit: "Submit My Free Audit Request",
+      submit: "Send My Quote Request",
       hiddenLanguage: "English",
-      success: "Thank you. Your free audit request has been received. We\u2019ll review your business and contact you with the next steps.",
-      error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
+      success: "Thank you. Your quote request has been received. We’ll review your information and contact you with the next steps.",
+      error: `Something went wrong sending your request. Please try again, or email us directly at ${BUSINESS.email}.`
     },
     zero: {
-      title: "Free Digital Foundation Audit | BLYNX",
-      description: "Request a free audit for a local business starting from zero.",
-      eyebrow: "Free audit",
-      h1: "Plan Your Digital Foundation",
-      subtitle: "Tell us about your business and we’ll map the clearest first steps to get found, receive opportunities, and follow up professionally.",
+      title: "Request a Quote | Starting From Zero | BLYNX",
+      description: "Request a quote for a professional website and Google presence for a local business starting from zero.",
+      eyebrow: "Request a quote",
+      h1: "Plan Your Online Presence",
+      subtitle: "Tell us about your business and we’ll recommend the right first steps and send you a clear quote.",
       introTitle: "For businesses starting from zero.",
-      introCopy: "This audit does not assume you already have a website or Google profile. We review what your business needs first to create a practical digital foundation and customer request system.",
-      bullets: ["Google Business Profile setup path.", "Contact-focused landing page needs.", "Customer request capture, tracking, follow-up, and review basics."],
+      introCopy: "You don’t need a website or Google profile yet. Tell us what your business needs and we’ll quote it clearly.",
+      bullets: ["Professional website.", "Google Business Profile setup.", "Organized customer requests and monthly content."],
       fields: {
-        needs: "What do you need help setting up?",
-        timeline: "How soon do you want to launch this?",
+        needs: "What do you need help with?",
+        timeline: "How soon do you want to start?",
         message: "Message / Notes"
       },
-      needs: ["Google Business Profile setup", "Contact-focused landing page", "Smart contact form", "Basic request tracking", "Follow-up automation", "Review request system", "Not sure"],
+      needs: [
+        "Professional website",
+        "Google Business Profile",
+        "Customer inquiry organization and follow-up",
+        "Monthly images and videos",
+        "Landing page",
+        "Custom AI solution",
+        "Not sure"
+      ],
       timelines: ["Immediately", "This month", "Next 2–3 months", "Just researching"],
-      submit: "Start My Free Audit",
+      submit: "Send My Quote Request",
       hiddenLanguage: "English",
-      success: "Thank you. Your free audit request has been received. We\u2019ll review your business and contact you with the next steps.",
-      error: "Something went wrong sending your request. Please try again, or email us directly at hello@blynxsystems.com."
+      success: "Thank you. Your quote request has been received. We’ll review your information and contact you with the next steps.",
+      error: `Something went wrong sending your request. Please try again, or email us directly at ${BUSINESS.email}.`
     }
   },
   es: {
     existing: {
-      title: "Auditoría Gratis para Presencia Digital Existente | BLYNX",
-      description: "Solicita una auditoría gratis para mejorar tu presencia digital y tu proceso de solicitudes actual.",
-      eyebrow: "Auditoría gratis",
-      h1: "Audita tu Presencia Digital Actual",
-      subtitle: "Muéstranos lo que ya tienes y revisaremos formas de mejorar visibilidad, capturar más oportunidades calificadas y dar seguimiento más rápido.",
-      introTitle: "Para negocios que ya tienen algo en internet.",
-      introCopy: "Esta auditoría revisa tu sitio o landing page actual, presencia en Google, puntos de contacto, reseñas y flujo de seguimiento.",
-      bullets: ["Brechas de visibilidad y confianza.", "Puntos de contacto y oportunidades perdidas.", "Mejoras de seguimiento y organización."],
+      title: "Solicita una Cotización | Presencia Digital Existente | BLYNX",
+      description: "Solicita una cotización para mejorar tu sitio web, tu presencia en Google, el seguimiento a clientes o tu contenido mensual.",
+      eyebrow: "Solicitar cotización",
+      h1: "Cuéntanos sobre tu Presencia Actual",
+      subtitle: "Muéstranos lo que ya tienes y te recomendamos el servicio adecuado y te enviamos una cotización clara.",
+      introTitle: "Para negocios que ya tienen algo en línea.",
+      introCopy: "Revisamos tu sitio web o landing page actual, tu presencia en Google y tus puntos de contacto antes de cotizar.",
+      bullets: ["Sitio web y presencia en Google.", "Puntos de contacto y solicitudes de clientes.", "Necesidades de seguimiento y contenido."],
       fields: {
         website: "Sitio web",
-        gbp: "Link de Google Business Profile",
+        gbp: "Enlace del Perfil de Empresa de Google",
         improvements: "¿Qué quieres mejorar?",
-        timeline: "¿Qué tan pronto quieres mejorar esto?",
+        timeline: "¿Qué tan pronto quieres comenzar?",
         message: "Mensaje / Notas"
       },
-      improvements: ["Más llamadas", "Más solicitudes desde la web", "Mejor visibilidad en Google", "Más reseñas", "Mejor landing page", "Automatización / seguimiento", "No estoy seguro"],
+      improvements: [
+        "Sitio web profesional",
+        "Perfil de Empresa de Google",
+        "Organización y seguimiento de solicitudes de clientes",
+        "Imágenes y videos mensuales",
+        "Landing page",
+        "Solución de IA a medida",
+        "No estoy seguro"
+      ],
       timelines: ["Inmediatamente", "Este mes", "En los próximos 2–3 meses", "Solo estoy investigando"],
-      submit: "Enviar Solicitud de Auditoría Gratis",
+      submit: "Enviar mi Solicitud de Cotización",
       hiddenLanguage: "Spanish",
-      success: "Gracias. Hemos recibido tu solicitud de auditoría gratis. Revisaremos tu negocio y te contactaremos con los próximos pasos.",
-      error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
+      success: "Gracias. Hemos recibido tu solicitud de cotización. Revisaremos tu información y te contactaremos con los próximos pasos.",
+      error: `Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a ${BUSINESS.email}.`
     },
     zero: {
-      title: "Auditoría Gratis para Base Digital | BLYNX",
-      description: "Solicita una auditoría gratis para un negocio local que empieza desde cero.",
-      eyebrow: "Auditoría gratis",
-      h1: "Planifica tu Base Digital",
-      subtitle: "Cuéntanos sobre tu negocio y trazaremos los primeros pasos más claros para ser encontrado, recibir oportunidades y dar seguimiento profesional.",
+      title: "Solicita una Cotización | Desde Cero | BLYNX",
+      description: "Solicita una cotización para un sitio web profesional y presencia en Google para un negocio local que empieza desde cero.",
+      eyebrow: "Solicitar cotización",
+      h1: "Planifica tu Presencia en Línea",
+      subtitle: "Cuéntanos sobre tu negocio y te recomendamos los primeros pasos y te enviamos una cotización clara.",
       introTitle: "Para negocios que empiezan desde cero.",
-      introCopy: "Esta auditoría no asume que ya tienes sitio web o perfil de Google. Revisamos qué necesita primero tu negocio para crear una base digital práctica y un sistema para recibir solicitudes.",
-      bullets: ["Ruta para configurar Google Business Profile.", "Necesidades de landing page enfocada en contacto.", "Bases de recepción de solicitudes, control, seguimiento y reseñas."],
+      introCopy: "Todavía no necesitas un sitio web ni un perfil de Google. Cuéntanos qué necesita tu negocio y lo cotizamos con claridad.",
+      bullets: ["Sitio web profesional.", "Configuración del Perfil de Empresa de Google.", "Solicitudes de clientes organizadas y contenido mensual."],
       fields: {
-        needs: "¿Qué necesitas configurar?",
-        timeline: "¿Qué tan pronto quieres lanzar esto?",
+        needs: "¿Con qué necesitas ayuda?",
+        timeline: "¿Qué tan pronto quieres comenzar?",
         message: "Mensaje / Notas"
       },
-      needs: ["Configuración de Google Business Profile", "Landing page enfocada en contacto", "Formulario inteligente", "Control básico de solicitudes", "Automatización de seguimiento", "Sistema para pedir reseñas", "No estoy seguro"],
+      needs: [
+        "Sitio web profesional",
+        "Perfil de Empresa de Google",
+        "Organización y seguimiento de solicitudes de clientes",
+        "Imágenes y videos mensuales",
+        "Landing page",
+        "Solución de IA a medida",
+        "No estoy seguro"
+      ],
       timelines: ["Inmediatamente", "Este mes", "En los próximos 2–3 meses", "Solo estoy investigando"],
-      submit: "Empezar mi Auditoría Gratis",
+      submit: "Enviar mi Solicitud de Cotización",
       hiddenLanguage: "Spanish",
-      success: "Gracias. Hemos recibido tu solicitud de auditoría gratis. Revisaremos tu negocio y te contactaremos con los próximos pasos.",
-      error: "Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a hello@blynxsystems.com."
+      success: "Gracias. Hemos recibido tu solicitud de cotización. Revisaremos tu información y te contactaremos con los próximos pasos.",
+      error: `Ocurrió un error al enviar tu solicitud. Inténtalo de nuevo o escríbenos directamente a ${BUSINESS.email}.`
     }
   }
 };
 
 const auditFlow = {
   en: [
-    ["Click Free Audit", "Start your free audit request on our website."],
-    ["Choose Language", "English or Spanish support available."],
-    ["Answer Smart Form", "Share your business, goals, contact information, and current online presence."],
-    ["Initial Digital Snapshot", "Your current presence and customer request details are organized for review."],
-    ["Human Review", "BLYNX reviews the findings and adds personalized recommendations."],
-    ["Audit Delivered + Book a Call", "You receive your audit summary and can book a strategy call."]
+    ["Tell us about your business", "Share your business, the service you are interested in and how to reach you."],
+    ["We review your request", "BLYNX reviews your information and your current online presence."],
+    ["Get a clear quote", "You receive a proposal with scope, price and estimated timeline."],
+    ["Start your project", "Once you approve the quote, we get to work."]
   ],
   es: [
-    ["Haz clic en Auditoría Gratis", "Inicia tu solicitud de auditoría gratis en nuestro sitio."],
-    ["Elige Idioma", "Soporte disponible en inglés o español."],
-    ["Responde el Formulario", "Comparte tu negocio, metas, contacto y presencia actual en internet."],
-    ["Revisión Digital Inicial", "La información de tu presencia actual y de tus solicitudes se organiza para revisión."],
-    ["Revisión de BLYNX", "BLYNX revisa los hallazgos y agrega recomendaciones personalizadas."],
-    ["Auditoría Entregada + Agenda una Llamada", "Recibes el resumen de tu auditoría y puedes agendar una llamada estratégica."]
+    ["Cuéntanos sobre tu negocio", "Comparte tu negocio, el servicio que te interesa y cómo contactarte."],
+    ["Revisamos tu solicitud", "BLYNX revisa tu información y tu presencia actual en línea."],
+    ["Recibe una cotización clara", "Recibes una propuesta con alcance, precio y plazo estimado."],
+    ["Comienza tu proyecto", "Cuando apruebas la cotización, nos ponemos a trabajar."]
   ]
 };
 
@@ -1900,9 +1734,9 @@ const legalPages = {
       sections: [
         ["Introduction", "This Privacy Policy explains how BLYNX Systems collects, uses and protects information submitted through this website and normal website use. By using the website or submitting a form, you acknowledge the practices described here."],
         ["Information We Collect", "We may collect information you provide directly, including full name, business name, email, phone, website, city and state, business type, Google Business Profile URL, business goals, messages and notes. We may also collect technical information produced by normal website use, such as browser type, device information, pages visited and general performance information."],
-        ["Information Submitted Through Forms", "Free audit and contact forms may ask for information needed to understand your business, respond to your request, prepare an audit, route communications and maintain internal records. Some fields may be optional, but submitting incomplete information may limit how useful our response can be."],
-        ["How We Use Information", "We use information to respond to requests, prepare free audits, provide services, maintain related communications, improve the website, understand performance and keep operational records."],
-        ["Communications", "When you submit a form, BLYNX may contact you about that request, your audit or related service needs. Promotional communications require an appropriate basis and opt-out option when applicable."],
+        ["Information Submitted Through Forms", "Quote request and contact forms may ask for information needed to understand your business, respond to your request, prepare a quote, route communications and maintain internal records. Some fields may be optional, but submitting incomplete information may limit how useful our response can be."],
+        ["How We Use Information", "We use information to respond to requests, prepare quotes, provide services, maintain related communications, improve the website, understand performance and keep operational records."],
+        ["Communications", "When you submit a form, BLYNX may contact you about that request, your quote or related service needs. Promotional communications require an appropriate basis and opt-out option when applicable."],
         ["Service Providers and Third-Party Tools", "Information may be processed by trusted service providers used to operate the website, deliver forms, send messages, maintain records, analyze performance or provide requested services. BLYNX does not sell personal information."],
         ["Cookies and Analytics", "The website may use basic cookies, analytics or performance tools to understand website use and improve the experience. Analytics events should not include names, email addresses, phone numbers, private messages or other personal information."],
         ["Data Retention", "We keep information for as long as reasonably needed to respond to requests, provide services, maintain records, comply with obligations and resolve disputes. Retention periods may vary based on operational needs."],
@@ -1921,8 +1755,8 @@ const legalPages = {
       effective: `Effective date: ${LEGAL_EFFECTIVE_DATE}`,
       sections: [
         ["Acceptance of Terms", "By accessing this website, submitting a form or using BLYNX materials, you agree to these Terms of Service. If you do not agree, do not use the website."],
-        ["Description of Services", "BLYNX provides practical local lead system support for service businesses, including local visibility, focused landing pages, lead capture, lead organization, follow-up workflows, review strategy and related reporting or advisory work."],
-        ["Free Audits and Informational Materials", "Free audits, website content, recommendations and informational materials are provided for general business evaluation. A free audit is not a guarantee of rankings, leads, sales, revenue or any specific outcome."],
+        ["Description of Services", "BLYNX provides professional websites and Google presence setup, customer inquiry organization and follow-up systems, monthly AI-powered content creation, and related custom digital solutions for local businesses."],
+        ["Quotes and Informational Materials", "Quotes, website content, recommendations and informational materials are provided for general business evaluation. They are not a guarantee of rankings, leads, sales, revenue or any specific outcome."],
         ["No Guarantee of Results", "BLYNX does not guarantee search rankings, number of leads, sales, revenue, advertising results, customer reviews, platform approvals or other business outcomes. Results depend on many factors outside BLYNX’s control."],
         ["AI-Assisted Processes", "BLYNX may use AI-assisted workflows to organize information, speed up review and support implementation. Important final recommendations and client-facing decisions receive human review."],
         ["Client Responsibilities", "Recommendations and implementation may require accurate information, timely approvals, account access, platform permissions, client cooperation and follow-through. Delays or incomplete information can affect timelines and results."],
@@ -1945,13 +1779,13 @@ const legalPages = {
       description: "Política de Privacidad de BLYNX Systems.",
       eyebrow: "Privacidad",
       h1: "Política de Privacidad",
-      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
+      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE_ES}`,
       sections: [
         ["Introducción", "Esta Política de Privacidad explica cómo BLYNX Systems recopila, utiliza y protege la información enviada a través de este sitio web y la información generada por el uso normal del sitio. Al usar el sitio o enviar un formulario, reconoces las prácticas descritas aquí."],
         ["Información que Recopilamos", "Podemos recopilar información que proporcionas directamente, incluyendo nombre completo, nombre del negocio, correo, teléfono, sitio web, ciudad y estado, tipo de negocio, URL de Google Business Profile, objetivos del negocio, mensajes y notas. También podemos recopilar información técnica generada por el uso normal del sitio, como tipo de navegador, información del dispositivo, páginas visitadas e información general de rendimiento."],
-        ["Información Enviada en Formularios", "Los formularios de auditoría gratis y contacto pueden solicitar información necesaria para entender tu negocio, responder a tu solicitud, preparar una auditoría, dirigir comunicaciones y mantener registros internos. Algunos campos pueden ser opcionales, pero enviar información incompleta puede limitar la utilidad de nuestra respuesta."],
-        ["Cómo Usamos la Información", "Usamos la información para responder solicitudes, preparar auditorías gratis, prestar servicios, mantener comunicaciones relacionadas, mejorar el sitio, entender el rendimiento y conservar registros operativos."],
-        ["Comunicaciones", "Cuando envías un formulario, BLYNX puede contactarte sobre esa solicitud, tu auditoría o necesidades de servicio relacionadas. Las comunicaciones promocionales requieren una base adecuada y opción de exclusión cuando corresponda."],
+        ["Información Enviada en Formularios", "Los formularios de solicitud de cotización y contacto pueden solicitar información necesaria para entender tu negocio, responder a tu solicitud, preparar una cotización, dirigir comunicaciones y mantener registros internos. Algunos campos pueden ser opcionales, pero enviar información incompleta puede limitar la utilidad de nuestra respuesta."],
+        ["Cómo Usamos la Información", "Usamos la información para responder solicitudes, preparar cotizaciones, prestar servicios, mantener comunicaciones relacionadas, mejorar el sitio, entender el rendimiento y conservar registros operativos."],
+        ["Comunicaciones", "Cuando envías un formulario, BLYNX puede contactarte sobre esa solicitud, tu cotización o necesidades de servicio relacionadas. Las comunicaciones promocionales requieren una base adecuada y opción de exclusión cuando corresponda."],
         ["Proveedores de Servicios y Herramientas de Terceros", "La información puede ser procesada por proveedores de confianza utilizados para operar el sitio, entregar formularios, enviar mensajes, mantener registros, analizar rendimiento o prestar servicios solicitados. BLYNX no vende información personal."],
         ["Cookies y Analítica", "El sitio puede usar cookies básicas, analítica o herramientas de rendimiento para entender el uso del sitio y mejorar la experiencia. Los eventos de analítica no deben incluir nombres, correos, teléfonos, mensajes privados u otra información personal."],
         ["Retención de Datos", "Conservamos la información durante el tiempo razonablemente necesario para responder solicitudes, prestar servicios, mantener registros, cumplir obligaciones y resolver disputas. Los periodos de retención pueden variar según necesidades operativas."],
@@ -1967,11 +1801,11 @@ const legalPages = {
       description: "Términos de Servicio de BLYNX Systems.",
       eyebrow: "Términos",
       h1: "Términos de Servicio",
-      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE}`,
+      effective: `Fecha de vigencia: ${LEGAL_EFFECTIVE_DATE_ES}`,
       sections: [
         ["Aceptación de los Términos", "Al acceder a este sitio, enviar un formulario o usar materiales de BLYNX, aceptas estos Términos de Servicio. Si no estás de acuerdo, no uses el sitio."],
-        ["Descripción de los Servicios", "BLYNX ofrece soporte práctico para sistemas de captación local para negocios de servicios, incluyendo visibilidad local, landing pages enfocadas, captura de leads, organización de oportunidades, flujos de seguimiento, estrategia de reseñas y reportes o asesoría relacionada."],
-        ["Auditorías Gratis y Materiales Informativos", "Las auditorías gratis, contenido del sitio, recomendaciones y materiales informativos se proporcionan para evaluación general del negocio. Una auditoría gratis no garantiza rankings, leads, ventas, ingresos ni resultados específicos."],
+        ["Descripción de los Servicios", "BLYNX ofrece sitios web profesionales y configuración de presencia en Google, sistemas de organización y seguimiento de solicitudes de clientes, creación mensual de contenido con IA, y soluciones digitales a medida relacionadas para negocios locales."],
+        ["Cotizaciones y Materiales Informativos", "Las cotizaciones, el contenido del sitio, las recomendaciones y los materiales informativos se proporcionan para evaluación general del negocio. No garantizan rankings, leads, ventas, ingresos ni resultados específicos."],
         ["Sin Garantía de Resultados", "BLYNX no garantiza posiciones en buscadores, cantidad de leads, ventas, ingresos, resultados publicitarios, reseñas de clientes, aprobaciones de plataformas u otros resultados de negocio. Los resultados dependen de muchos factores fuera del control de BLYNX."],
         ["Procesos Apoyados por IA", "BLYNX puede usar procesos apoyados por inteligencia artificial para organizar información, acelerar revisiones y apoyar la implementación. Las recomendaciones finales importantes y decisiones orientadas al cliente reciben revisión humana."],
         ["Responsabilidades del Cliente", "Las recomendaciones e implementación pueden requerir información correcta, aprobaciones oportunas, acceso a cuentas, permisos de plataformas, cooperación del cliente y seguimiento de tareas. Los retrasos o información incompleta pueden afectar tiempos y resultados."],
@@ -2046,7 +1880,6 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
   const systemHref = `${pagePath(lang, "services")}#systems`;
   const journeyHref = `${home}#journey`;
   const aboutHref = pagePath(lang, "about");
-  const auditHref = pagePath(lang, auditSlug);
   const contactHref = pagePath(lang, "contact");
 
   const activeClass = (name) => (active === name ? ' class="is-active"' : "");
@@ -2069,7 +1902,6 @@ function header(lang, active, switchPath = "", auditSlug = "free-audit", switchP
           <a${activeClass("about")} href="${aboutHref}">${t.nav.about}</a>
           <a${activeClass("projects")} href="${pagePath(lang, "projects")}">${t.nav.projects}</a>
           ${blogArticles[lang].length ? `<a${activeClass("blog")} href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
-          <a class="nav-audit-link" href="${auditHref}">${t.nav.audit}</a>
         </nav>
         <div class="header-actions">
           ${languageSwitcher(lang, switchPath, switchPaths)}
@@ -2103,7 +1935,6 @@ function footer(lang, auditSlug = "free-audit") {
           <a href="${pagePath(lang, "projects")}">${t.nav.projects}</a>
           <a href="${pagePath(lang, "contact")}">${t.nav.contact}</a>
           ${blogArticles[lang].length ? `<a href="${pagePath(lang, "blog")}">${t.nav.blog}</a>` : ""}
-          <a href="${pagePath(lang, auditSlug)}">${t.nav.audit}</a>
         </div>
         <div class="footer-links">
           <a href="${pagePath(lang, "privacy")}">${t.nav.privacy}</a>
@@ -2138,7 +1969,7 @@ function shell(lang, meta, active, switchPath, body) {
   // sitewide card when a page (nearly all of them) doesn't set these.
   const ogTitle = meta.ogTitle || meta.title;
   const ogDescription = meta.ogDescription || meta.description;
-  const ogImage = meta.ogImage || OG_IMAGE;
+  const ogImage = meta.ogImage || (lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN);
   const ogImageWidth = meta.ogImageWidth || 1200;
   const ogImageHeight = meta.ogImageHeight || 630;
   const ogImageAlt = meta.ogImageAlt || ogTitle;
@@ -2244,45 +2075,8 @@ const PRODUCT_IMAGES = {
       en: "The BLYNX system in five steps: Be Found, Website, Reviews, Inquiries and Follow-Up, shown as one flow for an example business.",
       es: "El sistema BLYNX en cinco pasos: Te encuentran, Sitio web, Reseñas, Contactos y Seguimiento, mostrados como un solo flujo para un negocio de ejemplo."
     }
-  },
-  system1: {
-    en: { base: "blynx-system-1-digital-presence-en", width: 1448, height: 1086 },
-    es: { base: "blynx-system-1-digital-presence-es", width: 1672, height: 941 },
-    alt: {
-      en: "System 1 in action: a mobile business listing, a business website, a customer review, and a contact form.",
-      es: "Sistema 1 en acción: una ficha de negocio en el móvil, un sitio web de negocio, una reseña de cliente y un formulario de contacto."
-    }
-  },
-  system2: {
-    en: { base: "blynx-system-2-capture-organization-en", width: 1448, height: 1086 },
-    es: { base: "blynx-system-2-capture-organization-es", width: 1672, height: 941 },
-    alt: {
-      en: "System 2 in action: a new contact request organized by status and priority on a simple opportunity board.",
-      es: "Sistema 2 en acción: una nueva solicitud de contacto organizada por estado y prioridad en un tablero simple de oportunidades."
-    }
-  },
-  system3: {
-    en: { base: "blynx-system-3-follow-up-en", width: 1448, height: 1086 },
-    es: { base: "blynx-system-3-follow-up-es", width: 1672, height: 941 },
-    alt: {
-      en: "System 3 in action: automatic reply, reminder, quote follow-up, appointment reminder, review request and confirmed booking.",
-      es: "Sistema 3 en acción: respuesta automática, recordatorio, seguimiento de cotización, recordatorio de cita, solicitud de reseña y reserva confirmada."
-    }
-  },
-  // Approved final before/after comparison graphic replacing the old
-  // text-only "problem" section. Both languages happen to share the same
-  // native size, but each has its own source file (own baked-in text).
-  beforeAfter: {
-    en: { base: "blynx-before-after-en", width: 1672, height: 941 },
-    es: { base: "blynx-before-after-es", width: 1672, height: 941 },
-    alt: {
-      en: "Before BLYNX: requests get lost across phone calls, unread emails, forgotten texts and website forms with no follow-up. After BLYNX: every request lands in one place, gets contacted, followed up on time, and turns into more customers and growth — 35% more jobs won, 70% less time spent chasing, 4.9-star reviews, month-over-month growth.",
-      es: "Antes de BLYNX: las solicitudes se pierden entre llamadas, correos sin leer, mensajes de texto sin responder y formularios web sin seguimiento. Después de BLYNX: cada solicitud queda en un solo lugar, recibe contacto, seguimiento a tiempo, y se convierte en más clientes y crecimiento — 35% más trabajos ganados, 70% menos tiempo persiguiendo, reseñas de 4.9 estrellas, crecimiento mes tras mes."
-    }
   }
 };
-
-const SYSTEM_IMAGE_KEYS = ["system1", "system2", "system3"];
 
 function productImage(key, lang, { priority = false, sizes = "(max-width: 760px) 100vw, 800px", className = "" } = {}) {
   const entry = PRODUCT_IMAGES[key];
@@ -2304,47 +2098,77 @@ function productImage(key, lang, { priority = false, sizes = "(max-width: 760px)
             </div>`;
 }
 
-function systemPriceDisplay(offer, system) {
-  return `${offer.priceLabel} $${system.startingPrice.toLocaleString("en-US")}`;
+function money(amount) {
+  return `$${Number(amount).toLocaleString("en-US")}`;
 }
 
-function legacyAnchor(system) {
-  return system.legacyId ? `<span id="${system.legacyId}" aria-hidden="true"></span>` : "";
+// Old section ids (from the previous three-system structure) stay in the page as
+// invisible anchors so any saved/shared link to /services#<old-id> still lands on
+// the closest matching service instead of the top of the page.
+function legacyAnchors(service) {
+  return (service.legacyIds || []).map((id) => `<span id="${id}" class="legacy-anchor" aria-hidden="true"></span>`).join("");
 }
 
-function comparisonDetails(lang) {
-  const offer = commercialOffer[lang];
-  const comparison = offer.comparison;
-  return `
-          <details class="comparison-details" id="compare">
-            <summary>${offer.compareLink}</summary>
-            <div class="comparison-scroller">
-              <table class="comparison-table">
-                <thead>
-                  <tr>
-                    <th scope="col"></th>
-                    ${comparison.columns.map((name) => `<th scope="col">${name}</th>`).join("")}
-                  </tr>
-                </thead>
-                <tbody>
-                  ${comparison.rows
-                    .map(
-                      (row) => `
-                  <tr>
-                    <th scope="row">${row.label}</th>
-                    ${row.values.map((value) => `<td${value === "—" ? ' class="is-empty"' : ""}>${value}</td>`).join("")}
-                  </tr>`
-                    )
-                    .join("")}
-                </tbody>
-              </table>
-            </div>
-          </details>
-          <div class="system-recommendation">
-            <h3>${comparison.recommendationTitle}</h3>
-            <p>${comparison.recommendation}</p>
-            <a class="btn btn-primary" href="${pagePath(lang, comparison.ctaTarget)}">${comparison.cta}</a>
-          </div>`;
+// Lightweight inline-SVG illustrations for the three service cards. They are
+// plain line drawings (no screenshots, no invented results) and replace the old
+// "System 1/2/3" product images, whose baked-in labels no longer match the
+// BLYNX Presence / Complete / Content naming — and whose third image depicted
+// automation, which would misrepresent Content.
+function serviceVisual(service) {
+  const open =
+    '<svg viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">';
+  let shapes = "";
+  if (service.id === "blynx-presence") {
+    shapes = `
+      <rect x="18" y="14" width="190" height="112" rx="10"/>
+      <path d="M18 40h190"/>
+      <circle cx="34" cy="27" r="3" fill="currentColor" stroke="none"/><circle cx="46" cy="27" r="3" fill="currentColor" stroke="none"/><circle cx="58" cy="27" r="3" fill="currentColor" stroke="none"/>
+      <path d="M36 62h92M36 78h130M36 94h74"/>
+      <rect x="140" y="92" width="52" height="22" rx="6"/>
+      <rect x="226" y="30" width="78" height="84" rx="10"/>
+      <path d="M265 50c-9 0-15 6-15 14 0 10 15 24 15 24s15-14 15-24c0-8-6-14-15-14z"/>
+      <circle cx="265" cy="64" r="5"/>
+      <path d="M244 102h42"/>`;
+  } else if (service.id === "blynx-complete") {
+    shapes = `
+      <rect x="18" y="14" width="284" height="112" rx="10"/>
+      <path d="M18 42h284"/>
+      <path d="M36 28h60"/>
+      <circle cx="44" cy="62" r="7"/><path d="M62 62h110"/><rect x="214" y="54" width="70" height="16" rx="8"/>
+      <circle cx="44" cy="86" r="7"/><path d="M62 86h90"/><rect x="214" y="78" width="70" height="16" rx="8"/>
+      <circle cx="44" cy="110" r="7"/><path d="M62 110h124"/><rect x="214" y="102" width="70" height="16" rx="8"/>
+      <path d="M232 62h34M232 86h34M232 110h34" stroke-width="1.5"/>`;
+  } else {
+    const tiles = [];
+    for (let row = 0; row < 3; row += 1) {
+      for (let col = 0; col < 4; col += 1) {
+        tiles.push(`<rect x="${18 + col * 38}" y="${14 + row * 38}" width="30" height="30" rx="5"/>`);
+      }
+    }
+    shapes = `
+      ${tiles.join("")}
+      <rect x="184" y="14" width="118" height="54" rx="8"/>
+      <path d="M232 28l24 13-24 13z"/>
+      <rect x="184" y="72" width="118" height="54" rx="8"/>
+      <path d="M232 86l24 13-24 13z"/>`;
+  }
+  return `<div class="service-visual" aria-hidden="true">${open}${shapes}</svg></div>`;
+}
+
+function servicePriceHtml(offer, service) {
+  if (service.kind === "subscription") {
+    return `<span class="system-price">${service.subscriptionLabel}</span>`;
+  }
+  return `<span class="system-price">${offer.priceLabel} ${money(service.startingPrice)}</span><span class="system-price-unit">${service.priceUnit}</span>`;
+}
+
+function planListHtml(offer, service) {
+  return `<ul class="plan-list">${service.plans
+    .map(
+      (plan) =>
+        `<li><span class="plan-name">${plan.name}</span><span class="plan-summary">${plan.summary}</span><span class="plan-price">${money(plan.price)}<small>${service.perMonth}</small></span></li>`
+    )
+    .join("")}</ul>`;
 }
 
 function systemsOverviewSection(lang) {
@@ -2356,44 +2180,92 @@ function systemsOverviewSection(lang) {
             <p class="eyebrow">${offer.eyebrow}</p>
             <h2>${offer.title}</h2>
             <p>${offer.intro}</p>
-            <p class="lead-capture-definition">${offer.leadCaptureDefinition}</p>
           </div>
           <div class="system-offer-grid system-offer-grid-overview">
-            ${offer.systems
+            ${offer.services
               .map(
-                (system) => `
-            <article class="system-offer-card${system.badge ? " is-complete" : ""}" id="${system.id}">
-              ${legacyAnchor(system)}
-              <div class="system-offer-topline">${system.badge ? `<span class="system-badge">${system.badge}</span>` : ""}</div>
-              <h3>${system.cardTitle}</h3>
-              <p class="system-result-chain">${system.cardResultChain.join(" → ")}</p>
+                (service) => `
+            <article class="system-offer-card" id="${service.id}">
+              ${legacyAnchors(service)}
+              <div class="system-offer-topline"><span class="service-number">${service.number}</span></div>
+              <h3>${service.name}</h3>
+              <p class="service-headline">${service.headline}</p>
+              <p class="service-description">${service.description}</p>
               <div class="system-included">
-                <h4 class="system-included-title">${offer.whatsIncludedTitle}</h4>
-                ${offerList(system.whatsIncluded)}
+                ${
+                  service.kind === "subscription"
+                    ? `<h4 class="system-included-title">${offer.plansTitle}</h4>
+                ${planListHtml(offer, service)}
+                <p class="plan-note">${service.publishingLine}</p>`
+                    : `<h4 class="system-included-title">${offer.includedTitle}</h4>
+                ${offerList(service.highlights)}`
+                }
               </div>
-              <p class="system-price-line"><span class="system-price">${systemPriceDisplay(offer, system)}</span></p>
+              <p class="service-bestfor"><strong>${offer.bestForLabel}:</strong> ${service.bestFor}</p>
+              <p class="system-price-line">${servicePriceHtml(offer, service)}${
+                  service.kind === "setup" ? `<span class="system-delivery">${service.deliveryShort}</span>` : `<span class="system-delivery">${service.independentNote}</span>`
+                }</p>
               <div class="system-card-actions">
-                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cardCta}</a>
+                <a class="btn btn-primary" href="${localizedHref(lang, `/${service.ctaTarget}`)}">${service.cardCta}</a>
+                <a class="system-details-link" href="${pagePath(lang, "services")}#${service.id}">${offer.detailsLink}</a>
               </div>
-              <details class="system-summary-toggle">
-                <summary>${offer.detailsLink}</summary>
-                <div class="system-summary-block">
-                  <h4>${offer.whoTitle}</h4>
-                  ${offerList(system.ideal.slice(0, 2))}
-                </div>
-                <div class="system-summary-block">
-                  <h4>${offer.resultTitle}</h4>
-                  ${offerList(system.benefits.slice(0, 3))}
-                </div>
-                <a class="system-details-link" href="${pagePath(lang, "services")}#${system.id}">${offer.detailsLink}</a>
-              </details>
             </article>`
               )
               .join("")}
           </div>
-          <p class="compare-link-line"><a class="system-details-link" href="${pagePath(lang, "services")}#compare">${offer.compareLink}</a></p>
         </div>
       </section>`;
+}
+
+function serviceDetailCard(lang, offer, service) {
+  const isSubscription = service.kind === "subscription";
+  return `
+            <article class="system-offer-card system-offer-card-full" id="${service.id}">
+              ${legacyAnchors(service)}
+              <div class="system-offer-topline"><span class="service-number">${service.number}</span></div>
+              <h3>${service.name}</h3>
+              <p class="service-headline">${service.headline}</p>
+              ${serviceVisual(service)}
+              <p class="service-description">${service.description}</p>
+              <p class="system-price-line">${servicePriceHtml(offer, service)}</p>
+              <p class="service-bestfor"><strong>${offer.bestForLabel}:</strong> ${service.bestFor}</p>
+              ${
+                isSubscription
+                  ? `<div class="plan-stack">
+                ${service.plans
+                  .map(
+                    (plan) => `
+                <section class="plan-card">
+                  <div class="plan-card-head">
+                    <h4>${plan.name}</h4>
+                    <span class="plan-card-price">${money(plan.price)}<small>${service.perMonth}</small></span>
+                  </div>
+                  ${offerList(plan.items)}
+                </section>`
+                  )
+                  .join("")}
+              </div>`
+                  : `<section class="system-card-section">
+                <h4>${offer.fullIncludedTitle}</h4>
+                ${offerList(service.included)}
+              </section>
+              <section class="system-card-section">
+                <h4>${offer.deliveryLabel}</h4>
+                <p class="service-fine">${service.delivery}</p>
+              </section>
+              <section class="system-card-section service-care">
+                <h4>${service.care.name}</h4>
+                <p class="service-care-price">${service.care.pricePrefix || ""}${money(service.care.price)}${service.care.priceUnit}</p>
+                <p class="service-fine">${service.care.description}</p>
+              </section>`
+              }
+              <section class="system-card-section">
+                ${offerList(service.notes, "exclusion-list")}
+              </section>
+              <div class="system-card-actions">
+                <a class="btn btn-primary" href="${localizedHref(lang, `/${service.ctaTarget === "services#blynx-content" ? "contact" : service.ctaTarget}`)}">${service.cta}</a>
+              </div>
+            </article>`;
 }
 
 function systemsDetailSection(lang) {
@@ -2405,113 +2277,88 @@ function systemsDetailSection(lang) {
             <p class="eyebrow">${offer.eyebrow}</p>
             <h2>${offer.title}</h2>
             <p>${offer.intro}</p>
-            <p class="lead-capture-definition">${offer.leadCaptureDefinition}</p>
           </div>
           <div class="system-offer-grid">
-            ${offer.systems
-              .map(
-                (system, index) => `
-            <article class="system-offer-card system-offer-card-full${system.badge ? " is-complete" : ""}" id="${system.id}">
-              ${legacyAnchor(system)}
-              ${system.badge ? `<div class="system-offer-topline"><span class="system-badge">${system.badge}</span></div>` : ""}
-              <h3>${system.name}</h3>
-              <p class="system-result-chain">${system.resultChain.join(" → ")}</p>
-              ${productImage(SYSTEM_IMAGE_KEYS[index], lang, { sizes: "(max-width: 760px) 100vw, 420px" })}
-              <p class="system-price-line"><span class="system-price">${systemPriceDisplay(offer, system)}</span></p>
-              <div class="system-card-actions">
-                <a class="btn btn-primary" href="${pagePath(lang, system.ctaTarget)}">${system.cta}</a>
+            ${offer.services.map((service) => serviceDetailCard(lang, offer, service)).join("")}
+          </div>
+        </div>
+      </section>`;
+}
+
+function publishingSection(lang) {
+  const offer = commercialOffer[lang];
+  const pub = offer.publishing;
+  const content = offer.services.find((service) => service.kind === "subscription");
+  return `
+      <section class="section section-soft" id="publishing">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">${pub.eyebrow}</p>
+            <h2>${pub.name} <span class="text-gold">${pub.priceLead}${money(pub.price)}${pub.priceUnit}</span></h2>
+            <p>${pub.summary}</p>
+          </div>
+          <div class="publishing-panel">
+            <div class="publishing-col">
+              <h3>${pub.includedTitle}</h3>
+              ${offerList(pub.included)}
+            </div>
+            <div class="publishing-col">
+              <h3>${pub.tableTitle}</h3>
+              <div class="comparison-scroller">
+                <table class="comparison-table publishing-table">
+                  <thead>
+                    <tr>${pub.tableHead.map((name) => `<th scope="col">${name}</th>`).join("")}</tr>
+                  </thead>
+                  <tbody>
+                    ${content.plans
+                      .map(
+                        (plan) =>
+                          `<tr><th scope="row">${plan.name}</th><td>${money(plan.price)}</td><td><strong>${money(plan.publishingPrice)}</strong></td></tr>`
+                      )
+                      .join("")}
+                  </tbody>
+                </table>
               </div>
-              <p class="pricing-note">${system.pricingNote}</p>
               <details class="system-full-scope">
-                <summary>${offer.implementationTitle}</summary>
-                <p class="system-positioning">${system.positioning}</p>
-                <section class="system-card-section" aria-labelledby="${system.id}-who">
-                  <h4 id="${system.id}-who">${offer.whoTitle}</h4>
-                  ${offerList(system.ideal)}
+                <summary>${offer.publishingToggle}</summary>
+                <section class="system-card-section">
+                  <h4>${pub.limitsTitle}</h4>
+                  ${offerList(pub.limits)}
                 </section>
-                <section class="system-card-section" aria-labelledby="${system.id}-implementation">
-                  <h4 id="${system.id}-implementation">${offer.implementationTitle}</h4>
-                  ${system.implementationLead ? `<p class="implementation-lead">${system.implementationLead}</p>` : ""}
-                  ${offerList(system.implementation)}
-                </section>
-                <section class="system-card-section" aria-labelledby="${system.id}-exclusions">
-                  <h4 id="${system.id}-exclusions">${offer.exclusionsTitle}</h4>
-                  ${offerList(system.exclusions, "exclusion-list")}
-                </section>
-                <section class="system-card-section" aria-labelledby="${system.id}-results">
-                  <h4 id="${system.id}-results">${offer.resultTitle}</h4>
-                  ${offerList(system.benefits)}
+                <section class="system-card-section">
+                  <h4>${pub.notIncludedTitle}</h4>
+                  ${offerList(pub.notIncluded, "exclusion-list")}
                 </section>
               </details>
-            </article>`
-              )
-              .join("")}
-          </div>
-          ${comparisonDetails(lang)}
-        </div>
-      </section>`;
-}
-
-const PILLAR_ICONS = ["search", "star", "form", "pipeline", "bell"];
-
-function fivePillarsSection(lang) {
-  const p = pillars[lang];
-  return `
-      <section class="section section-soft" id="pillars">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">${p.eyebrow}</p>
-            <h2>${p.title}</h2>
-          </div>
-          <div class="pillars-strip">
-            ${p.items
-              .map(
-                (item, index) => `
-            <div class="pillar-node">
-              <span class="pillar-icon">${icon(PILLAR_ICONS[index])}</span>
-              <div class="pillar-text">
-                <h3 class="pillar-label">${item.label}</h3>
-                <p class="pillar-result">${item.result}</p>
-              </div>
             </div>
-            ${index < p.items.length - 1 ? `<span class="pillar-connector" aria-hidden="true">${icon("arrowRight")}</span>` : ""}`
-              )
-              .join("")}
           </div>
         </div>
       </section>`;
 }
 
-const ROUTE_ICONS = ["route", "monitor"];
-
-function routeSelectorSection(lang) {
-  const r = routes[lang];
+function secondaryServicesSection(lang, soft = true) {
+  const s = commercialOffer[lang].secondary;
   return `
-      <section class="section" id="choose">
+      <section class="section${soft ? " section-soft" : ""}" id="more-services">
         <div class="container">
           <div class="section-heading">
-            <p class="eyebrow">${r.eyebrow}</p>
-            <h2>${r.title}</h2>
+            <p class="eyebrow">${s.eyebrow}</p>
+            <h2>${s.title}</h2>
           </div>
-          <div class="route-grid">
-            ${r.cards
+          <div class="monthly-grid secondary-grid">
+            ${s.items
               .map(
-                (card, index) => `
-            <article class="route-card">
-              <div class="route-card-top">
-                <span class="route-icon">${icon(ROUTE_ICONS[index])}</span>
-                <div>
-                  <span class="route-label">${card.label}</span>
-                  <h3>${card.title}</h3>
-                </div>
-              </div>
-              <p>${card.copy}</p>
-              <a class="btn btn-secondary" href="${pagePath(lang, card.ctaTarget)}">${card.cta}</a>
+                (item) => `
+            <article class="monthly-card">
+              <h3>${item.name}</h3>
+              <p class="monthly-price secondary-price">${item.priceText}</p>
+              <p class="monthly-note">${item.description}</p>
+              <p class="monthly-note secondary-meta">${item.meta}</p>
             </article>`
               )
               .join("")}
           </div>
-          <p class="route-outcome">${r.intro}</p>
+          <p class="compare-link-line"><a class="btn btn-secondary" href="${pagePath(lang, s.ctaTarget)}">${s.cta}</a></p>
         </div>
       </section>`;
 }
@@ -2531,49 +2378,17 @@ function implementationSection(lang) {
                 (step, index) => `
             <div class="impl-step">
               <span class="impl-step-dot">0${index + 1}</span>
+              <span class="impl-milestone">${step.label}</span>
               <h3>${step.title}</h3>
-              <span class="impl-milestone">${step.milestone}</span>
+              <p class="impl-copy">${step.copy}</p>
             </div>
             ${index < plan.steps.length - 1 ? `<span class="impl-arrow">${icon("arrowRight")}</span>` : ""}`
               )
               .join("")}
           </div>
-          <p class="section-disclaimer">${plan.note}</p>
-        </div>
-      </section>`;
-}
-
-function monthlyServicesSection(lang, soft = true, compact = false) {
-  const m = commercialOffer[lang].monthly;
-  const maintenanceItems = compact ? m.maintenance.inclusions.slice(0, 3) : m.maintenance.inclusions;
-  const socialItems = compact ? m.socialAddOn.inclusions.slice(0, 3) : m.socialAddOn.inclusions;
-  return `
-      <section class="section${soft ? " section-soft" : ""}" id="monthly">
-        <div class="container">
-          <div class="section-heading">
-            <p class="eyebrow">${m.eyebrow}</p>
-            <h2>${m.title}</h2>
-            ${compact ? "" : `<p>${m.intro}</p>`}
-          </div>
-          <div class="monthly-grid">
-            <article class="monthly-card">
-              <h3>${m.maintenance.name}</h3>
-              <p class="monthly-price">${m.maintenance.price}<span class="monthly-unit">${m.maintenance.priceUnit}</span></p>
-              ${offerList(maintenanceItems)}
-            </article>
-            <article class="monthly-card">
-              <h3>${m.socialAddOn.name}</h3>
-              <p class="monthly-price">${m.socialAddOn.price}<span class="monthly-unit">${m.socialAddOn.priceUnit}</span></p>
-              ${compact ? "" : `<p class="monthly-note">${m.socialAddOn.note}</p>`}
-              ${offerList(socialItems)}
-              ${compact ? "" : offerList(m.socialAddOn.exclusions, "exclusion-list")}
-            </article>
-            <article class="monthly-card monthly-card-combo">
-              <h3>${m.comboLabel}</h3>
-              <p class="monthly-price">${m.comboPrice}<span class="monthly-unit">${m.comboPriceUnit}</span></p>
-              <p class="monthly-note">${m.customNote}</p>
-              <a class="btn btn-secondary" href="${pagePath(lang, m.ctaTarget)}">${m.cta}</a>
-            </article>
+          <div class="timeline-conditions">
+            <h3>${plan.conditionsTitle}</h3>
+            ${offerList(plan.conditions)}
           </div>
         </div>
       </section>`;
@@ -2795,10 +2610,11 @@ const captureFlowExamples = {
 const captureFlowCopy = {
   en: {
     label: "HOW IT WORKS — CUSTOMER JOURNEY",
-    headline: "From a search to an organized opportunity.",
+    headline: "From a Google search to an organized customer request.",
     supporting:
-      "A customer finds the business, submits a request or booking, the system records the opportunity, and an immediate response is triggered.",
+      "A customer finds your business and sends a request. With BLYNX Complete, they receive an automatic response and your team follows up from one place.",
     stageLabels: ["They find you", "You capture the opportunity", "You respond and follow up"],
+    exampleNote: "Example business shown for illustration only.",
     ui: { foundOn: "Found on", customerReceives: "Customer receives", businessReceives: "Business receives" },
     summary: [
       "They find you",
@@ -2810,10 +2626,11 @@ const captureFlowCopy = {
   },
   es: {
     label: "CÓMO FUNCIONA — RECORRIDO DEL CLIENTE",
-    headline: "De una búsqueda a una oportunidad organizada.",
+    headline: "De una búsqueda en Google a una solicitud de cliente organizada.",
     supporting:
-      "Una persona encuentra el negocio, solicita información o reserva, el sistema registra la oportunidad y activa una respuesta inmediata.",
+      "Un cliente encuentra tu negocio y envía una solicitud. Con BLYNX Complete, recibe una respuesta automática y tu equipo da seguimiento desde un solo lugar.",
     stageLabels: ["Te encuentran", "Captas la oportunidad", "Respondes y das seguimiento"],
+    exampleNote: "Negocio de ejemplo mostrado solo a modo de ilustración.",
     ui: { foundOn: "Encontrado en", customerReceives: "El cliente recibe", businessReceives: "El negocio recibe" },
     summary: [
       "Te encuentran",
@@ -2907,9 +2724,7 @@ function captureFlowSection(lang) {
                     ${results
                       .map(
                         (name, index) =>
-                          `<li class="${index === 0 ? "is-active" : ""}"><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">${name}</span>${
-                            index === 0 ? `<span class="flow-stars">★ ${ex.rating}</span>` : ""
-                          }</li>`
+                          `<li class="${index === 0 ? "is-active" : ""}"><span class="flow-result-pin" aria-hidden="true"></span><span class="flow-result-name">${name}</span></li>`
                       )
                       .join("")}
                   </ul>
@@ -2968,6 +2783,7 @@ function captureFlowSection(lang) {
               </div>
             </article>
           </div>
+          <p class="flow-example-note">${c.exampleNote}</p>
         </div>
       </section>`;
 }
@@ -2980,6 +2796,7 @@ const portfolioProjects = [
     type: "real",
     name: "Klinner Cleaning & Maintenance",
     url: "https://klinnercleaning.com",
+    badgeLabel: { en: "Real Project · Operated by BLYNX", es: "Proyecto real · Operado por BLYNX" },
     image: "/public/images/projects/klinner.jpg",
     imageAlt: {
       en: "Homepage of the Klinner Cleaning & Maintenance website showing its hero section and main navigation",
@@ -2987,16 +2804,16 @@ const portfolioProjects = [
     },
     industry: { en: "Cleaning & Property Services", es: "Limpieza y servicios para propiedades" },
     summary: {
-      en: "A professional digital presence created for a Nashville cleaning and property-services company, designed to explain its services clearly, build trust, improve local visibility, and make requesting a quote easier.",
-      es: "Una presencia digital profesional creada para una empresa de limpieza y servicios para propiedades en Nashville, diseñada para explicar sus servicios claramente, generar confianza, mejorar la visibilidad local y facilitar la solicitud de cotizaciones."
+      en: "A professional digital presence for Klinner Cleaning & Maintenance, a Nashville cleaning and property-services business operated by BLYNX, designed to explain its services clearly, build trust, improve local visibility, and make requesting a quote easier.",
+      es: "Una presencia digital profesional para Klinner Cleaning & Maintenance, un negocio de limpieza y servicios para propiedades en Nashville operado por BLYNX, diseñada para explicar sus servicios claramente, generar confianza, mejorar la visibilidad local y facilitar la solicitud de cotizaciones."
     },
     business: {
-      en: "A cleaning and property-services company based in Nashville, Tennessee.",
-      es: "Una empresa de limpieza y servicios para propiedades con sede en Nashville, Tennessee."
+      en: "A cleaning and property-services business based in Nashville, Tennessee, operated internally by BLYNX.",
+      es: "Un negocio de limpieza y servicios para propiedades con sede en Nashville, Tennessee, operado internamente por BLYNX."
     },
     need: {
-      en: "The company needed a professional way to present its services, build trust with local customers, and make requesting a quote simple on any device.",
-      es: "La empresa necesitaba una forma profesional de presentar sus servicios, generar confianza con clientes locales y facilitar la solicitud de cotizaciones desde cualquier dispositivo."
+      en: "As an internally operated business, it needed a professional way to present its services, build trust with local customers, and make requesting a quote simple on any device.",
+      es: "Como negocio operado internamente, necesitaba una forma profesional de presentar sus servicios, generar confianza con clientes locales y facilitar la solicitud de cotizaciones desde cualquier dispositivo."
     },
     built: {
       en: "A responsive website that presents the company clearly, explains its services, provides a direct quote pathway, and lays an SEO foundation for local visibility.",
@@ -3207,7 +3024,7 @@ function projectCard(lang, project, p) {
             ${shot}
             <div class="project-body">
               <div class="project-top">
-                <span class="project-badge${isDemo ? " is-demo" : ""}">${isDemo ? p.demoBadge : p.realBadge}</span>
+                <span class="project-badge${isDemo ? " is-demo" : ""}">${isDemo ? p.demoBadge : project.badgeLabel ? project.badgeLabel[lang] : p.realBadge}</span>
                 <span class="project-industry">${project.industry[lang]}</span>
               </div>
               <h2 class="project-name">${project.name}</h2>
@@ -3305,14 +3122,15 @@ function homePage(lang) {
         <div class="container">
           <div class="hero-grid hero-grid-solo">
             ${productImage("hero", lang, { priority: true, sizes: "(max-width: 1024px) 100vw, 1180px", className: "product-visual-hero" })}
+            <p class="visual-caption">${h.heroCaption}</p>
             <div class="hero-copy">
               <h1>${h.headline}</h1>
               <div class="hero-supporting-copy">
                 ${h.subtitle.map((paragraph) => `<p>${paragraph}</p>`).join("")}
               </div>
               <div class="hero-actions hero-actions-stacked">
-                <a class="btn btn-primary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
-                <a class="btn btn-secondary btn-full" href="${pagePath(lang, "free-audit")}">${t.cta.audit} <span aria-hidden="true">&rarr;</span></a>
+                <a class="btn btn-primary btn-full" href="#systems">${t.cta.services} <span aria-hidden="true">&rarr;</span></a>
+                <a class="btn btn-secondary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
               </div>
               <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
             </div>
@@ -3320,17 +3138,7 @@ function homePage(lang) {
         </div>
       </section>
 
-      <section class="section" id="problem">
-        <div class="container">
-          ${productImage("beforeAfter", lang, { sizes: "(max-width: 1024px) 100vw, 1180px", className: "before-after-visual" })}
-        </div>
-      </section>
-
-      ${fivePillarsSection(lang)}
-
       ${systemsOverviewSection(lang)}
-
-      ${routeSelectorSection(lang)}
 
 ${captureFlowSection(lang)}
 
@@ -3352,7 +3160,7 @@ ${captureFlowSection(lang)}
 
       ${implementationSection(lang)}
 
-      ${monthlyServicesSection(lang, true, true)}
+      ${secondaryServicesSection(lang)}
 
       <section class="section section-soft" id="about-preview">
         <div class="container about-band">
@@ -3387,7 +3195,7 @@ ${captureFlowSection(lang)}
             <p>${h.finalSubtitle}</p>
             <div class="cta-actions">
               <a class="btn btn-primary" href="${pagePath(lang, "contact")}">${t.cta.findSystem}</a>
-              <a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
+              <a class="btn btn-secondary" href="#systems">${t.cta.services}</a>
             </div>
           </div>
         </div>
@@ -3420,7 +3228,7 @@ function auditPage(lang) {
             <h2>${p.flowTitle}</h2>
             <p>${p.flowSubtitle}</p>
           </div>
-          <div class="audit-flow" aria-label="Free audit flow">
+          <div class="audit-flow" aria-label="${p.flowTitle}">
             ${auditFlow[lang]
               .map(
                 ([title, text], index) => `
@@ -3547,7 +3355,7 @@ function stageLandingPage(lang, stage) {
           <p>${p.subtitle}</p>
           <div class="hero-actions centered-actions">
             <a class="btn btn-primary" href="${auditHref}" data-stage-choice="${stage}">${p.cta}</a>
-            <a class="btn btn-secondary" href="#stage-process">${copy[lang].cta.services}</a>
+            <a class="btn btn-secondary" href="#stage-process">${p.processTitle}</a>
           </div>
         </div>
       </section>
@@ -3747,7 +3555,9 @@ function servicesPage(lang) {
 ${pageMediaBand("/public/images/site/services-flow.jpg", SITE_MEDIA_ALTS.services[lang])}
       ${systemsDetailSection(lang)}
 
-      ${monthlyServicesSection(lang)}
+      ${publishingSection(lang)}
+
+      ${secondaryServicesSection(lang, false)}
 
       ${faqSection(lang)}
 
@@ -3758,7 +3568,6 @@ ${pageMediaBand("/public/images/site/services-flow.jpg", SITE_MEDIA_ALTS.service
             <p>${p.ctaSubtitle}</p>
             <div class="cta-actions">
               <a class="btn btn-primary" href="${pagePath(lang, "contact")}">${t.cta.findSystem}</a>
-              <a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
             </div>
           </div>
         </div>
@@ -3850,7 +3659,7 @@ function aboutPage(lang) {
             <h2>${p.ctaTitle}</h2>
             <p>${p.ctaSubtitle}</p>
             <div class="cta-actions">
-              <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}">${t.cta.audit}</a>
+              <a class="btn btn-primary" href="${pagePath(lang, "contact")}">${t.cta.findSystem}</a>
             </div>
           </div>
         </div>
@@ -3909,7 +3718,7 @@ function contactPage(lang) {
             <div class="contact-card">
               <h3>${p.auditTitle}</h3>
               <p>${p.auditCopy}</p>
-              <p><a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}" data-analytics-event="free_audit_cta_click">${t.cta.audit}</a></p>
+              <p><a class="btn btn-secondary" href="${pagePath(lang, "free-audit")}" data-analytics-event="free_audit_cta_click">${p.auditButton}</a></p>
             </div>
           </aside>
 
@@ -4045,13 +3854,15 @@ function stagePage(lang) {
     <meta property="og:url" content="${lang === "es" ? esUrl : enUrl}">
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
     <meta property="og:locale:alternate" content="${lang === "es" ? "en_US" : "es_ES"}">
-    <meta property="og:image" content="${OG_IMAGE}">
+    <meta property="og:image" content="${lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${p.title}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${p.title}">
     <meta name="twitter:description" content="${p.description}">
-    <meta name="twitter:image" content="${OG_IMAGE}">
+    <meta name="twitter:image" content="${lang === "es" ? OG_IMAGE_ES : OG_IMAGE_EN}">
+    <meta name="twitter:image:alt" content="${p.title}">
     ${structuredData(lang, p.title, p.description, lang === "es" ? esUrl : enUrl)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -4102,8 +3913,8 @@ function languageGate() {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BLYNX Systems | Digital Systems for Local Businesses</title>
-    <meta name="description" content="BLYNX builds digital presence and customer systems that help local businesses get found, build trust, capture opportunities, and follow up faster.">
+    <title>BLYNX Systems | Websites, Follow-Up & AI Content for Local Businesses</title>
+    <meta name="description" content="Professional websites, automated customer follow-ups, and AI-powered content for local businesses.">
     <link rel="canonical" href="${SITE_URL}/">
     <link rel="alternate" hreflang="en" href="${SITE_URL}/en">
     <link rel="alternate" hreflang="es" href="${SITE_URL}/es">
@@ -4111,18 +3922,18 @@ function languageGate() {
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="${BUSINESS.displayName}">
     <meta property="og:title" content="${BUSINESS.displayName}">
-    <meta property="og:description" content="Digital presence and customer systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
+    <meta property="og:description" content="Professional websites, automated customer follow-ups, and AI-powered content for local businesses.">
     <meta property="og:url" content="${SITE_URL}/">
     <meta property="og:image" content="${OG_IMAGE_EN}">
-    <meta property="og:image:width" content="1774">
-    <meta property="og:image:height" content="887">
-    <meta property="og:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="BLYNX Systems: Your Business. Stronger Online. Smarter with AI. BLYNX Presence, BLYNX Complete and BLYNX Content.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${BUSINESS.displayName}">
-    <meta name="twitter:description" content="Digital presence and customer systems for local businesses: visibility, trust, opportunity capture, organization, and faster follow-up.">
+    <meta name="twitter:description" content="Professional websites, automated customer follow-ups, and AI-powered content for local businesses.">
     <meta name="twitter:image" content="${OG_IMAGE_EN}">
-    <meta name="twitter:image:alt" content="BLYNX five-step system: Be Found, Build Trust, Receive Inquiries, Organize Opportunities, Follow Up.">
-    ${structuredData("en", "BLYNX Systems | Digital Systems for Local Businesses", "BLYNX builds digital presence and customer systems that help local businesses get found, build trust, capture opportunities, and follow up faster.", `${SITE_URL}/`)}
+    <meta name="twitter:image:alt" content="BLYNX Systems: Your Business. Stronger Online. Smarter with AI. BLYNX Presence, BLYNX Complete and BLYNX Content.">
+    ${structuredData("en", "BLYNX Systems | Websites, Follow-Up & AI Content for Local Businesses", "Professional websites, automated customer follow-ups, and AI-powered content for local businesses.", `${SITE_URL}/`)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -4153,7 +3964,7 @@ function languageGate() {
           </span>
         </a>
         <p class="eyebrow">BLYNX Systems</p>
-        <h1>Digital Systems for Local Businesses</h1>
+        <h1>Digital Solutions for Local Businesses</h1>
         <p>Redirecting you to the best language version. You can choose manually below.</p>
         <div class="language-actions">
           <a class="btn btn-primary" href="/en" data-language-choice="en">English</a>
@@ -4356,11 +4167,13 @@ function blogShell(lang, meta, body, article = null) {
     <meta property="og:locale" content="${lang === "es" ? "es_ES" : "en_US"}">
     <meta property="og:image" content="${ogImage}">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">${articleOgTags}
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${meta.title}">${articleOgTags}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${meta.title}">
     <meta name="twitter:description" content="${meta.description}">
     <meta name="twitter:image" content="${ogImage}">
+    <meta name="twitter:image:alt" content="${meta.title}">
     ${blogStructuredData(lang, meta, article)}
     ${runtimeHead()}
     <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -4463,7 +4276,7 @@ function blogIndexPage(lang) {
             <h2>${b.ctaTitle}</h2>
             <p>${b.ctaText}</p>
             <div class="cta-actions">
-              <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}" data-blog-cta>${b.ctaButton}</a>
+              <a class="btn btn-primary" href="${pagePath(lang, "contact")}" data-blog-cta>${b.ctaButton}</a>
             </div>
           </div>
         </div>
@@ -4517,7 +4330,7 @@ function blogArticlePage(lang, article) {
           <aside class="article-cta">
             <h2>${b.ctaTitle}</h2>
             <p>${b.ctaText}</p>
-            <a class="btn btn-primary" href="${pagePath(lang, "free-audit")}" data-blog-cta>${b.ctaButton}</a>
+            <a class="btn btn-primary" href="${pagePath(lang, "contact")}" data-blog-cta>${b.ctaButton}</a>
           </aside>
           <aside class="article-author">
             <span class="brand-mark" aria-hidden="true">BX</span>

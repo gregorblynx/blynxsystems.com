@@ -1,6 +1,6 @@
 # BLYNX Homepage Restructure — Technical Implementation Plan
 
-**Status:** **APPROVED — FROZEN.** Architecture is final. Build to this document.
+**Status:** **SUPERSEDED (historical record only).** The commercial offer described below — three lead-capture systems at $1,500 / $2,250 / $2,500, $650 maintenance and +$850 social media — was replaced on 2026-11-19 by BLYNX Presence, BLYNX Complete and BLYNX Content. The current source of truth for services, prices and FAQ is the `commercialOffer` object in `scripts/generate-pages.js`. Do not build to this document or reuse its prices.
 **Author:** Architecture pass (Claude Opus)
 **Builder:** Sonnet
 **Independent audit:** Codex
