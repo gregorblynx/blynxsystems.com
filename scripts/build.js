@@ -405,24 +405,26 @@ const requiredSnippets = new Map([
     "LEAD_WEBHOOK_URL"
   ]],
   ["en/projects/index.html", [
-    "REAL BLYNX PROJECTS",
-    "See the systems we have built.",
+    "Selected Work & Digital Projects",
+    "founder-led projects",
     "Klinner Cleaning & Maintenance",
     "Gladiadores App",
     "Fitness & Community Platform",
     "https://klinnercleaning.com",
-    "Real Project",
+    "Founder-Owned Case Study",
+    "Founder-Built Project",
     "View Live Project",
     "/public/images/projects/gladiadores.jpg"
   ]],
   ["es/projects/index.html", [
-    "PROYECTOS REALES DE BLYNX",
-    "Descubre los sistemas que hemos construido.",
+    "Trabajos Seleccionados y Proyectos Digitales",
+    "proyectos del fundador",
     "Klinner Cleaning & Maintenance",
     "Gladiadores App",
     "Plataforma de Fitness y Comunidad",
     "https://klinnercleaning.com",
-    "Proyecto real",
+    "Caso de Estudio del Fundador",
+    "Proyecto del Fundador",
     "Ver proyecto",
     "/public/images/projects/gladiadores.jpg"
   ]]
@@ -520,7 +522,21 @@ const obsoleteSnippets = [
   "up to 16",
   "hasta 16 piezas",
   "16 unique",
-  "16 piezas únicas"
+  "16 piezas únicas",
+  // Klinner and Gladiadores belong to BLYNX's founder: they are not external clients and are
+  // not "operated by BLYNX". The portfolio must not claim real-client work or e-commerce brands.
+  "Operated by BLYNX",
+  "Operado por BLYNX",
+  "operated internally",
+  "operado internamente",
+  "Real Project",
+  "Proyecto real",
+  "REAL BLYNX PROJECTS",
+  "PROYECTOS REALES DE BLYNX",
+  "e-commerce brands",
+  "marcas de comercio electrónico",
+  "Happy Clients",
+  "Clientes satisfechos"
 ];
 function listHtml(dir) {
   const out = [];
