@@ -1,33 +1,51 @@
-// Generates responsive AVIF/WebP/PNG derivatives for the six approved service
-// images (BLYNX Presence / Complete / Content, EN + ES).
+// Generates responsive AVIF/WebP/PNG derivatives for the approved commercial
+// images, EN + ES:
+//   services -> BLYNX Presence / Complete / Content   (blynx-service-*)
+//   extras   -> Landing Page / Google Business Profile / Custom AI Solutions
+//               (blynx-extra-*)
 //
-// The originals (BLYNX_<Service>_<LANG>.png, 1448x1086) live in the owner's
-// Google Drive and are intentionally NOT stored in the repository: assets/ is
-// deployed as-is, so keeping ~11MB of PNGs there would only be shipped to
-// visitors' CDN for nothing. Only the optimized copies are committed.
+// The originals (BLYNX_<Name>_<LANG>.png) live in the owner's Google Drive and
+// are intentionally NOT stored in the repository: assets/ is deployed as-is, so
+// keeping several MB of PNGs there would only be shipped to visitors' CDN for
+// nothing. Only the optimized copies are committed.
 //
-// Usage: node scripts/optimize-service-images.js <directory-with-the-six-PNGs>
-// (requires `npm install sharp --no-save`).
+// Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|all]
+// (requires `npm install sharp --no-save`). Default set: all.
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 const { widthsForNative } = require("./lib/responsive-widths");
 
 const OUT = path.join(__dirname, "..", "assets", "images");
-const SERVICES = ["Presence", "Complete", "Content"];
 const LANGS = ["EN", "ES"];
+
+// source file stem -> output base name (without the -<lang> suffix)
+const SETS = {
+  services: [
+    { file: "Presence", base: "blynx-service-presence" },
+    { file: "Complete", base: "blynx-service-complete" },
+    { file: "Content", base: "blynx-service-content" }
+  ],
+  extras: [
+    { file: "Landing_Page", base: "blynx-extra-landing-page" },
+    { file: "Google_Business_Profile", base: "blynx-extra-google-business-profile" },
+    { file: "Custom_AI_Solutions", base: "blynx-extra-custom-ai" }
+  ]
+};
 
 async function run() {
   const srcDir = process.argv[2];
-  if (!srcDir) {
-    console.error("Usage: node scripts/optimize-service-images.js <directory-with-the-six-PNGs>");
+  const which = process.argv[3] || "all";
+  if (!srcDir || (which !== "all" && !SETS[which])) {
+    console.error("Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|all]");
     process.exit(1);
   }
-  for (const service of SERVICES) {
+  const items = which === "all" ? [...SETS.services, ...SETS.extras] : SETS[which];
+  for (const item of items) {
     for (const lang of LANGS) {
-      const src = path.join(srcDir, `BLYNX_${service}_${lang}.png`);
+      const src = path.join(srcDir, `BLYNX_${item.file}_${lang}.png`);
       if (!fs.existsSync(src)) throw new Error(`Missing approved source: ${src}`);
-      const base = `blynx-service-${service.toLowerCase()}-${lang.toLowerCase()}`;
+      const base = `${item.base}-${lang.toLowerCase()}`;
       const meta = await sharp(src).metadata();
       const widths = widthsForNative(meta.width);
       for (const width of widths) {

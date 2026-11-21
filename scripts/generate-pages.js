@@ -998,6 +998,7 @@ const commercialOffer = {
       items: [
         {
           name: "Landing Page",
+          imageKey: "landing-page",
           price: 950,
           priceText: "Starting at $950",
           description: "Single-page professional website.",
@@ -1005,6 +1006,7 @@ const commercialOffer = {
         },
         {
           name: "Google Business Profile",
+          imageKey: "google-business-profile",
           price: 249,
           priceText: "Starting at $249",
           description: "Basic setup or optimization for eligible businesses.",
@@ -1012,6 +1014,7 @@ const commercialOffer = {
         },
         {
           name: "Custom AI Solutions",
+          imageKey: "custom-ai",
           price: null,
           priceText: "Custom quote",
           description:
@@ -1263,6 +1266,7 @@ const commercialOffer = {
       items: [
         {
           name: "Landing Page",
+          imageKey: "landing-page",
           price: 950,
           priceText: "Desde $950",
           description: "Sitio web profesional de una sola página.",
@@ -1270,6 +1274,7 @@ const commercialOffer = {
         },
         {
           name: "Perfil de Empresa de Google",
+          imageKey: "google-business-profile",
           price: 249,
           priceText: "Desde $249",
           description: "Configuración u optimización básica para negocios elegibles.",
@@ -1277,6 +1282,7 @@ const commercialOffer = {
         },
         {
           name: "Soluciones de IA a Medida",
+          imageKey: "custom-ai",
           price: null,
           priceText: "Cotización personalizada",
           description:
@@ -2352,6 +2358,71 @@ function publishingSection(lang) {
       </section>`;
 }
 
+// Approved commercial images for the three extra services, one per language.
+// Each one is a fictional-business example and is captioned on the page as an
+// illustrative example, never as a real client or a verified result. EN and ES
+// are separate files picked from the page language at build time, so an English
+// image can never appear on a Spanish page (or the reverse). The originals live
+// in the owner's Drive; scripts/optimize-service-images.js extras writes the
+// AVIF/WebP/PNG derivatives. width/height must match the source files.
+const EXTRA_IMAGES = {
+  "landing-page": {
+    width: 1536,
+    height: 1024,
+    base: { en: "blynx-extra-landing-page-en", es: "blynx-extra-landing-page-es" },
+    alt: {
+      en: "BLYNX Landing Page extra service shown with a fictional cleaning company, Riverstone Cleaning Co.: a professional single-page website on a laptop with a quote request button, next to a list of what is included.",
+      es: "Servicio extra Landing Page de BLYNX mostrado con una empresa de limpieza ficticia, Riverstone Cleaning Co.: un sitio web profesional de una sola página en una laptop con un botón para solicitar cotización, junto a una lista de lo que incluye."
+    }
+  },
+  "google-business-profile": {
+    width: 1536,
+    height: 1024,
+    base: { en: "blynx-extra-google-business-profile-en", es: "blynx-extra-google-business-profile-es" },
+    alt: {
+      en: "BLYNX Google Business Profile extra service shown with a fictional cleaning company, Riverstone Cleaning Co.: a sample Google Business Profile on a phone with photos, call, directions, website and share buttons, and business information.",
+      es: "Servicio extra Perfil de Empresa de Google de BLYNX mostrado con una empresa de limpieza ficticia, Riverstone Cleaning Co.: un perfil de empresa de ejemplo en un teléfono con fotos, botones para llamar, cómo llegar, sitio web y compartir, e información del negocio."
+    }
+  },
+  "custom-ai": {
+    width: 1672,
+    height: 941,
+    base: { en: "blynx-extra-custom-ai-en", es: "blynx-extra-custom-ai-es" },
+    alt: {
+      en: "BLYNX Custom AI Solutions extra service shown with a fictional business, Riverstone Home Services: a customer request system with automated steps and connected tools on a laptop, and an AI assistant chat on a phone.",
+      es: "Servicio extra Soluciones de IA a Medida de BLYNX mostrado con un negocio ficticio, Riverstone Home Services: un sistema de solicitudes de clientes con pasos automáticos y herramientas conectadas en una laptop, y un chat con asistente de IA en un teléfono."
+    }
+  }
+};
+
+const EXTRA_IMAGE_TEXT = {
+  caption: {
+    en: "Illustrative example with a fictional business. Not a real client or a verified result. Click or tap to enlarge.",
+    es: "Ejemplo ilustrativo con un negocio ficticio. No es un cliente real ni un resultado comprobado. Haz clic o toca para ampliar."
+  },
+  enlarge: { en: "View larger image", es: "Ver imagen ampliada" }
+};
+
+function extraServiceImage(item, lang) {
+  const entry = EXTRA_IMAGES[item.imageKey];
+  if (!entry) throw new Error("No approved image for extra service " + item.imageKey);
+  const base = `/assets/images/${entry.base[lang]}`;
+  const widths = widthsForNative(entry.width);
+  const srcset = (ext) => widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(", ");
+  const sizes = "(max-width: 900px) 100vw, 700px";
+  return `
+              <figure class="service-figure extra-figure">
+                <a class="service-figure-link" href="${base}-${entry.width}.webp" target="_blank" rel="noopener" aria-label="${escapeAttr(EXTRA_IMAGE_TEXT.enlarge[lang])}: ${escapeAttr(item.name)}">
+                  <picture>
+                    <source type="image/avif" srcset="${srcset("avif")}" sizes="${sizes}">
+                    <source type="image/webp" srcset="${srcset("webp")}" sizes="${sizes}">
+                    <img src="${base}-1200-fallback.png" width="${entry.width}" height="${entry.height}" alt="${escapeAttr(entry.alt[lang])}" loading="lazy" decoding="async">
+                  </picture>
+                </a>
+                <figcaption>${EXTRA_IMAGE_TEXT.caption[lang]}</figcaption>
+              </figure>`;
+}
+
 function secondaryServicesSection(lang, soft = true) {
   const s = commercialOffer[lang].secondary;
   return `
@@ -2365,8 +2436,8 @@ function secondaryServicesSection(lang, soft = true) {
             ${s.items
               .map(
                 (item) => `
-            <article class="monthly-card">
-              <h3>${item.name}</h3>
+            <article class="monthly-card monthly-card-extra">
+              <h3>${item.name}</h3>${extraServiceImage(item, lang)}
               <p class="monthly-price secondary-price">${item.priceText}</p>
               <p class="monthly-note">${item.description}</p>
               <p class="monthly-note secondary-meta">${item.meta}</p>
