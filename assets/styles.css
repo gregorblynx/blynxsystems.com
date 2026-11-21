@@ -4461,6 +4461,85 @@ fieldset.field {
   align-items: stretch;
 }
 
+/* Extra services with an approved image. The images carry small text, so they
+   get a wide column of their own: one card per row, image left and text right,
+   instead of three cramped columns. The image keeps its intrinsic ratio
+   (width/height attributes + aspect-ratio), so nothing shifts while loading and
+   nothing is cropped. The two 1fr rows centre the text beside a taller image. */
+.secondary-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.monthly-card-extra {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto auto auto 1fr;
+  grid-template-areas:
+    "fig ."
+    "fig title"
+    "fig price"
+    "fig note"
+    "fig meta"
+    "fig .";
+  column-gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.monthly-card-extra > h3 {
+  grid-area: title;
+  font-size: 1.35rem;
+}
+
+.monthly-card-extra > .extra-figure {
+  grid-area: fig;
+  margin: 0;
+}
+
+.monthly-card-extra > .monthly-price {
+  grid-area: price;
+}
+
+.monthly-card-extra > .monthly-note:not(.secondary-meta) {
+  grid-area: note;
+}
+
+.monthly-card-extra > .secondary-meta {
+  grid-area: meta;
+}
+
+.extra-figure .service-figure-link img {
+  aspect-ratio: auto;
+}
+
+/* Tablet and phone: title, image, then price and notes in one column. The image
+   uses the full card width so its text stays as large as it can be. */
+@media (max-width: 900px) {
+  .monthly-card-extra {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "title"
+      "fig"
+      "price"
+      "note"
+      "meta";
+  }
+
+  .monthly-card-extra > h3 {
+    font-size: 1.2rem;
+  }
+
+  .monthly-card-extra > .extra-figure {
+    margin-top: 1rem;
+  }
+
+  .extra-figure .service-figure-link {
+    margin-inline: calc(-1 * clamp(1.25rem, 3vw, 1.75rem));
+    border-inline: 0;
+    border-radius: 0;
+  }
+}
+
 /* Grid items default to min-width:auto, so on phones the publishing table's
    nowrap cells stretched the whole column past the viewport. Let the column
    shrink; the table scrolls inside its own .comparison-scroller instead. */

@@ -559,6 +559,34 @@ for (const [lang, other] of [["en", "es"], ["es", "en"]]) {
     }
   }
 }
+// Approved extra-service images (Landing Page / Google Business Profile / Custom
+// AI): same rule as above, plus the extra-service prices must stay as approved.
+const extraImages = [
+  { key: "landing-page", native: 1536 },
+  { key: "google-business-profile", native: 1536 },
+  { key: "custom-ai", native: 1672 }
+];
+for (const [lang, other, prices] of [
+  ["en", "es", ["Starting at $950", "Starting at $249", "Custom quote"]],
+  ["es", "en", ["Desde $950", "Desde $249", "Cotización personalizada"]]
+]) {
+  for (const page of [`${lang}/index.html`, `${lang}/services/index.html`]) {
+    const contents = fs.readFileSync(path.join(root, page), "utf8");
+    for (const { key, native } of extraImages) {
+      const own = `blynx-extra-${key}-${lang}`;
+      assert(contents.includes(`/assets/images/${own}-1200-fallback.png`), `${page} must show ${own}`);
+      assert(contents.includes(`/assets/images/${own}-${native}.webp`), `${page} must link the enlarged ${own}`);
+      assert(!contents.includes(`blynx-extra-${key}-${other}`), `${page} must not reference the ${other.toUpperCase()} ${key} image`);
+      for (const width of [480, 800, 1200, native]) {
+        for (const ext of ["avif", "webp"]) {
+          assert(fs.existsSync(path.join(root, "assets", "images", `${own}-${width}.${ext}`)), `Missing ${own}-${width}.${ext}`);
+        }
+      }
+      assert(fs.existsSync(path.join(root, "assets", "images", `${own}-1200-fallback.png`)), `Missing ${own}-1200-fallback.png`);
+    }
+    for (const price of prices) assert(contents.includes(price), `Extra service price "${price}" missing in ${page}`);
+  }
+}
 // Content plan quantities: 6 videos / 18 unique pieces must read the same everywhere.
 for (const [file, snippets] of [
   ["en/services/index.html", ["6 short videos monthly, up to 30 seconds each", "6 short videos, up to 30 seconds each", "up to 18 unique content pieces per month", "up to 12 images, up to 6 videos, or up to 18 pieces"]],
