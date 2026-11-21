@@ -470,12 +470,12 @@ const copy = {
     },
     projectsPage: {
       title: "Projects | BLYNX Systems",
-      description: "Explore real BLYNX projects created for local service businesses and e-commerce brands.",
-      eyebrow: "REAL BLYNX PROJECTS",
-      h1: "See the systems we have built.",
+      description: "Explore practical digital solutions and founder-led projects demonstrating websites, customer experiences, and business systems.",
+      eyebrow: "OUR WORK",
+      h1: "Selected Work & Digital Projects",
       subtitle:
-        "Explore real projects created to help businesses strengthen their digital presence, communicate their value clearly, and create a better customer journey.",
-      realBadge: "Real Project",
+        "Explore practical digital solutions and founder-led projects demonstrating websites, customer experiences, and business systems.",
+      realBadge: "Founder Project",
       demoBadge: "Demo · Concept",
       industryLabel: "Industry",
       viewLive: "View Live Project",
@@ -493,8 +493,8 @@ const copy = {
       },
       homeEntry: {
         label: "OUR WORK",
-        headline: "Explore real BLYNX projects.",
-        copy: "See how we have built digital experiences for service businesses and e-commerce brands.",
+        headline: "Selected Work & Digital Projects",
+        copy: "Explore practical digital solutions and founder-led projects demonstrating websites, customer experiences, and business systems.",
         cta: "View Projects"
       }
     }
@@ -759,12 +759,12 @@ const copy = {
     projectsPage: {
       title: "Proyectos | BLYNX Systems",
       description:
-        "Explora proyectos reales de BLYNX creados para negocios de servicios locales y marcas de comercio electrónico.",
-      eyebrow: "PROYECTOS REALES DE BLYNX",
-      h1: "Descubre los sistemas que hemos construido.",
+        "Explora soluciones digitales prácticas y proyectos del fundador que muestran sitios web, experiencias de usuario y sistemas para negocios.",
+      eyebrow: "NUESTRO TRABAJO",
+      h1: "Trabajos Seleccionados y Proyectos Digitales",
       subtitle:
-        "Explora proyectos reales creados para ayudar a negocios a fortalecer su presencia digital, comunicar claramente su valor y construir un mejor recorrido para sus clientes.",
-      realBadge: "Proyecto real",
+        "Explora soluciones digitales prácticas y proyectos del fundador que muestran sitios web, experiencias de usuario y sistemas para negocios.",
+      realBadge: "Proyecto del fundador",
       demoBadge: "Demo · Concepto",
       industryLabel: "Industria",
       viewLive: "Ver proyecto",
@@ -782,8 +782,8 @@ const copy = {
       },
       homeEntry: {
         label: "NUESTRO TRABAJO",
-        headline: "Explora proyectos reales de BLYNX.",
-        copy: "Descubre cómo hemos construido experiencias digitales para negocios de servicios y marcas de comercio electrónico.",
+        headline: "Trabajos Seleccionados y Proyectos Digitales",
+        copy: "Explora soluciones digitales prácticas y proyectos del fundador que muestran sitios web, experiencias de usuario y sistemas para negocios.",
         cta: "Ver proyectos"
       }
     }
@@ -2883,7 +2883,7 @@ const portfolioProjects = [
     type: "real",
     name: "Klinner Cleaning & Maintenance",
     url: "https://klinnercleaning.com",
-    badgeLabel: { en: "Real Project · Operated by BLYNX", es: "Proyecto real · Operado por BLYNX" },
+    badgeLabel: { en: "Founder-Owned Case Study", es: "Caso de Estudio del Fundador" },
     image: "/public/images/projects/klinner.jpg",
     imageAlt: {
       en: "Homepage of the Klinner Cleaning & Maintenance website showing its hero section and main navigation",
@@ -2891,16 +2891,16 @@ const portfolioProjects = [
     },
     industry: { en: "Cleaning & Property Services", es: "Limpieza y servicios para propiedades" },
     summary: {
-      en: "A professional digital presence for Klinner Cleaning & Maintenance, a Nashville cleaning and property-services business operated by BLYNX, designed to explain its services clearly, build trust, improve local visibility, and make requesting a quote easier.",
-      es: "Una presencia digital profesional para Klinner Cleaning & Maintenance, un negocio de limpieza y servicios para propiedades en Nashville operado por BLYNX, diseñada para explicar sus servicios claramente, generar confianza, mejorar la visibilidad local y facilitar la solicitud de cotizaciones."
+      en: "Klinner Cleaning & Maintenance is an independently operated Nashville service business owned by BLYNX’s founder. Its website demonstrates professional service presentation, responsive design, and a clear customer quote pathway.",
+      es: "Klinner Cleaning & Maintenance es un negocio independiente de Nashville perteneciente al fundador de BLYNX. Su sitio web demuestra una presentación profesional de servicios, diseño adaptable y una forma clara de solicitar cotizaciones."
     },
     business: {
-      en: "A cleaning and property-services business based in Nashville, Tennessee, operated internally by BLYNX.",
-      es: "Un negocio de limpieza y servicios para propiedades con sede en Nashville, Tennessee, operado internamente por BLYNX."
+      en: "A cleaning and property-services business based in Nashville, Tennessee. It is independently operated and owned by BLYNX’s founder; it is not an external client of BLYNX.",
+      es: "Un negocio de limpieza y servicios para propiedades con sede en Nashville, Tennessee. Es independiente y pertenece al fundador de BLYNX; no es un cliente externo de BLYNX."
     },
     need: {
-      en: "As an internally operated business, it needed a professional way to present its services, build trust with local customers, and make requesting a quote simple on any device.",
-      es: "Como negocio operado internamente, necesitaba una forma profesional de presentar sus servicios, generar confianza con clientes locales y facilitar la solicitud de cotizaciones desde cualquier dispositivo."
+      en: "As a founder-owned service business, it needed a professional way to present its services and make requesting a quote simple on any device.",
+      es: "Como negocio de servicios del fundador, necesitaba una forma profesional de presentar sus servicios y facilitar la solicitud de cotizaciones desde cualquier dispositivo."
     },
     built: {
       en: "A responsive website that presents the company clearly, explains its services, provides a direct quote pathway, and lays an SEO foundation for local visibility.",
@@ -2934,6 +2934,7 @@ const portfolioProjects = [
   {
     id: "gladiadores",
     type: "real",
+    badgeLabel: { en: "Founder-Built Project", es: "Proyecto del Fundador" },
     name: "Gladiadores App",
     url: "https://gladiadores.app",
     ctaLabel: { en: "View Live Project", es: "Ver Proyecto en Vivo" },
@@ -2951,16 +2952,16 @@ const portfolioProjects = [
     },
     industry: { en: "Fitness & Community Platform", es: "Plataforma de Fitness y Comunidad" },
     summary: {
-      en: "A digital fitness and community platform built to guide members through training, habits and personal progress in one connected experience.",
-      es: "Una plataforma digital de fitness y comunidad creada para guiar a sus miembros a través del entrenamiento, los hábitos y su progreso personal en una experiencia conectada."
+      en: "An independent digital fitness and community platform developed by BLYNX’s founder, built to guide members through training, habits and personal progress in one connected experience.",
+      es: "Una plataforma digital independiente de fitness y comunidad desarrollada por el fundador de BLYNX, creada para guiar a sus miembros a través del entrenamiento, los hábitos y su progreso personal en una experiencia conectada."
     },
     business: {
-      en: "A fitness and community platform built to keep members engaged through structured training and shared progress.",
-      es: "Una plataforma de fitness y comunidad creada para mantener a sus miembros comprometidos mediante entrenamiento estructurado y progreso compartido."
+      en: "A fitness and community product developed by BLYNX’s founder, independent from BLYNX and not an external client.",
+      es: "Un producto de fitness y comunidad desarrollado por el fundador de BLYNX, independiente de BLYNX y no un cliente externo."
     },
     need: {
-      en: "The team needed a connected experience where members could follow guided training, build habits, and track personal progress from their phone.",
-      es: "El equipo necesitaba una experiencia conectada donde los miembros pudieran seguir entrenamiento guiado, construir hábitos y monitorear su progreso personal desde el teléfono."
+      en: "The platform was designed so members can follow guided training, build habits, and track personal progress from their phone.",
+      es: "La plataforma fue diseñada para que los miembros puedan seguir entrenamiento guiado, construir hábitos y monitorear su progreso personal desde el teléfono."
     },
     built: {
       en: "A mobile-first fitness and community platform that guides members through training, habit-building and progress tracking in one connected experience.",
