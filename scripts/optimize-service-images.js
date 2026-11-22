@@ -3,13 +3,14 @@
 //   services -> BLYNX Presence / Complete / Content   (blynx-service-*)
 //   extras   -> Landing Page / Google Business Profile / Custom AI Solutions
 //               (blynx-extra-*)
+//   hero     -> Home hero illustration (blynx-hero-restaurant-*), natively 1672x941
 //
 // The originals (BLYNX_<Name>_<LANG>.png) live in the owner's Google Drive and
 // are intentionally NOT stored in the repository: assets/ is deployed as-is, so
 // keeping several MB of PNGs there would only be shipped to visitors' CDN for
 // nothing. Only the optimized copies are committed.
 //
-// Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|all]
+// Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|hero|all]
 // (requires `npm install sharp --no-save`). Default set: all.
 const sharp = require("sharp");
 const fs = require("fs");
@@ -30,17 +31,22 @@ const SETS = {
     { file: "Landing_Page", base: "blynx-extra-landing-page" },
     { file: "Google_Business_Profile", base: "blynx-extra-google-business-profile" },
     { file: "Custom_AI_Solutions", base: "blynx-extra-custom-ai" }
-  ]
+  ],
+  // mobileCrop: a strip of the SAME approved art (devices and customer journey
+  // only, without the baked-in headline and pillar captions) used on phones
+  // (<= 480px); those texts are shown there as real HTML instead. Same crop for
+  // EN and ES: the device row sits at identical coordinates in both files.
+  hero: [{ file: "Hero_Restaurant_NoLogo", base: "blynx-hero-restaurant", mobileCrop: { top: 272, height: 432, widths: [480, 800, 1200] } }]
 };
 
 async function run() {
   const srcDir = process.argv[2];
   const which = process.argv[3] || "all";
   if (!srcDir || (which !== "all" && !SETS[which])) {
-    console.error("Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|all]");
+    console.error("Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|hero|all]");
     process.exit(1);
   }
-  const items = which === "all" ? [...SETS.services, ...SETS.extras] : SETS[which];
+  const items = which === "all" ? [...SETS.services, ...SETS.extras, ...SETS.hero] : SETS[which];
   for (const item of items) {
     for (const lang of LANGS) {
       const src = path.join(srcDir, `BLYNX_${item.file}_${lang}.png`);
@@ -58,6 +64,20 @@ async function run() {
         .resize({ width: 1200, withoutEnlargement: true })
         .png({ compressionLevel: 9, palette: true, quality: 90 })
         .toFile(path.join(OUT, `${base}-1200-fallback.png`));
+      if (item.mobileCrop) {
+        const { top, height, widths: cropWidths } = item.mobileCrop;
+        const region = { left: 0, top, width: meta.width, height };
+        for (const width of cropWidths) {
+          const img = sharp(src).extract(region).resize({ width });
+          await img.clone().avif({ quality: 68, effort: 5 }).toFile(path.join(OUT, `${base}-mobile-${width}.avif`));
+          await img.clone().webp({ quality: 82 }).toFile(path.join(OUT, `${base}-mobile-${width}.webp`));
+        }
+        await sharp(src)
+          .extract(region)
+          .resize({ width: 800 })
+          .png({ compressionLevel: 9, palette: true, quality: 90 })
+          .toFile(path.join(OUT, `${base}-mobile-800-fallback.png`));
+      }
       console.log(`done: ${base} (native ${meta.width}x${meta.height}; widths ${widths.join(", ")})`);
     }
   }
