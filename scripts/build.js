@@ -267,7 +267,7 @@ const requiredSnippets = new Map([
     "BLYNX Content",
     "Content Images",
     "Content Videos",
-    "Content Complete",
+    "BLYNX Content Plus",
     "Everything included",
     "Estimated delivery",
     "Optional Website Care",
@@ -295,7 +295,7 @@ const requiredSnippets = new Map([
     "BLYNX Content",
     "Content Images",
     "Content Videos",
-    "Content Complete",
+    "BLYNX Content Plus",
     "Todo lo incluido",
     "Entrega estimada",
     "Website Care opcional",
@@ -523,6 +523,9 @@ const obsoleteSnippets = [
   "hasta 16 piezas",
   "16 unique",
   "16 piezas únicas",
+  // The $750 content plan is BLYNX Content Plus; "Content Complete" collided with BLYNX Complete.
+  "Content Complete",
+  "Contenido Complete",
   // Klinner and Gladiadores belong to BLYNX's founder: they are not external clients and are
   // not "operated by BLYNX". The portfolio must not claim real-client work or e-commerce brands.
   "Operated by BLYNX",

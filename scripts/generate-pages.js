@@ -808,6 +808,7 @@ const commercialOffer = {
     deliveryLabel: "Estimated delivery",
     detailsLink: "See full details",
     publishingToggle: "Publishing details and limits",
+    externalCostsNote: "Domain registration, hosting, paid licenses and third-party services may have separate recurring costs.",
     services: [
       {
         id: "blynx-presence",
@@ -821,6 +822,7 @@ const commercialOffer = {
         bestFor: "Businesses that need a professional website and a clear way for customers to reach them.",
         startingPrice: 1500,
         priceUnit: "One-time setup",
+        priceNote: "One-time project. No mandatory monthly service contract. Optional support available after launch.",
         deliveryShort: "Ready in about 2 weeks",
         delivery: "Approximately 2 weeks (10 business days)",
         highlights: [
@@ -845,9 +847,9 @@ const commercialOffer = {
           name: "Optional Website Care",
           price: 99,
           priceUnit: "/month",
-          description: "Basic technical oversight and up to 30 minutes of minor website changes per month."
+          description: "Basic maintenance, technical oversight and up to 30 minutes of minor changes per month. Optional and contracted separately."
         },
-        notes: ["Domain registration, paid licenses and third-party subscriptions are separate."],
+        notes: ["Domain registration, hosting, paid licenses and third-party services may have separate recurring costs."],
         cardCta: "Request a Quote",
         cta: "Request a Quote",
         ctaTarget: "contact"
@@ -864,6 +866,7 @@ const commercialOffer = {
         bestFor: "Businesses that receive customer requests and want to respond and follow up on time.",
         startingPrice: 2500,
         priceUnit: "One-time setup",
+        priceNote: "One-time project. No mandatory monthly service contract. Optional support available after launch.",
         deliveryShort: "Ready in 2–3 weeks",
         delivery: "2–3 weeks (10–15 business days)",
         highlights: [
@@ -889,11 +892,11 @@ const commercialOffer = {
           price: 350,
           pricePrefix: "Starting at ",
           priceUnit: "/month",
-          description: "Limited monitoring, adjustments and basic reporting according to an agreed scope."
+          description: "Ongoing technical support for automations, forms and integrations, within the contracted scope. Optional and contracted separately."
         },
         notes: [
           "Advanced AI assistants, complex integrations and unlimited automations are not included.",
-          "Domain registration, paid licenses and third-party subscriptions are separate."
+          "Domain registration, hosting, paid licenses and third-party services may have separate recurring costs."
         ],
         cardCta: "Request a Quote",
         cta: "Request a Quote",
@@ -937,7 +940,7 @@ const commercialOffer = {
             ]
           },
           {
-            name: "Content Complete",
+            name: "BLYNX Content Plus",
             price: 750,
             publishingPrice: 850,
             summary: "12 images + 6 videos",
@@ -981,7 +984,7 @@ const commercialOffer = {
       limitsTitle: "Limits",
       limits: [
         "Each unique content piece may be published on both platforms.",
-        "Publishing cannot exceed the content included in your plan: up to 12 images, up to 6 videos, or up to 18 pieces with Content Complete."
+        "Publishing cannot exceed the content included in your plan: up to 12 images, up to 6 videos, or up to 18 pieces with BLYNX Content Plus."
       ],
       notIncludedTitle: "Not included",
       notIncluded: [
@@ -1043,11 +1046,11 @@ const commercialOffer = {
         ],
         [
           "What does Instagram & Facebook publishing include?",
-          "For +$100/month we schedule and publish up to 18 unique pieces per month on Instagram and Facebook, after you approve each one. Publishing cannot exceed the content in your plan: up to 12 images, up to 6 videos, or up to 18 pieces with Content Complete. It does not include responding to comments, answering messages, daily account management, advertising campaigns or community management."
+          "For +$100/month we schedule and publish up to 18 unique pieces per month on Instagram and Facebook, after you approve each one. Publishing cannot exceed the content in your plan: up to 12 images, up to 6 videos, or up to 18 pieces with BLYNX Content Plus. It does not include responding to comments, answering messages, daily account management, advertising campaigns or community management."
         ],
         [
           "Are there ongoing costs after my website is built?",
-          "BLYNX Presence and BLYNX Complete are one-time setups. Optional monthly plans are available: Website Care at $99/month and Automation Support starting at $350/month. Domain registration, paid licenses and third-party subscriptions are separate."
+          "BLYNX Presence and BLYNX Complete are one-time projects with no mandatory monthly service contract. Optional monthly support is available separately: Website Care at $99/month and Automation Support starting at $350/month. Domain registration, hosting, paid licenses and third-party services may have separate recurring costs."
         ],
         [
           "What is not included?",
@@ -1076,6 +1079,7 @@ const commercialOffer = {
     deliveryLabel: "Entrega estimada",
     detailsLink: "Ver todos los detalles",
     publishingToggle: "Detalles y límites de la publicación",
+    externalCostsNote: "El registro del dominio, el hosting, las licencias de pago y los servicios de terceros pueden tener costos recurrentes independientes.",
     services: [
       {
         id: "blynx-presence",
@@ -1089,6 +1093,7 @@ const commercialOffer = {
         bestFor: "Negocios que necesitan un sitio web profesional y una forma clara de que los clientes los contacten.",
         startingPrice: 1500,
         priceUnit: "Configuración única",
+        priceNote: "Proyecto de pago único. Sin contrato mensual de servicio obligatorio. Soporte opcional disponible después del lanzamiento.",
         deliveryShort: "Listo en unas 2 semanas",
         delivery: "Aproximadamente 2 semanas (10 días hábiles)",
         highlights: [
@@ -1113,9 +1118,9 @@ const commercialOffer = {
           name: "Website Care opcional",
           price: 99,
           priceUnit: "/mes",
-          description: "Supervisión técnica básica y hasta 30 minutos de cambios menores al sitio por mes."
+          description: "Mantenimiento básico, supervisión técnica y hasta 30 minutos mensuales de cambios menores. Opcional y se contrata por separado."
         },
-        notes: ["El registro del dominio, las licencias de pago y las suscripciones de terceros se cobran aparte."],
+        notes: ["El registro del dominio, el hosting, las licencias de pago y los servicios de terceros pueden tener costos recurrentes independientes."],
         cardCta: "Solicitar una Cotización",
         cta: "Solicitar una Cotización",
         ctaTarget: "contact"
@@ -1132,6 +1137,7 @@ const commercialOffer = {
         bestFor: "Negocios que reciben solicitudes de clientes y quieren responder y dar seguimiento a tiempo.",
         startingPrice: 2500,
         priceUnit: "Configuración única",
+        priceNote: "Proyecto de pago único. Sin contrato mensual de servicio obligatorio. Soporte opcional disponible después del lanzamiento.",
         deliveryShort: "Listo en 2–3 semanas",
         delivery: "2–3 semanas (10–15 días hábiles)",
         highlights: [
@@ -1157,11 +1163,11 @@ const commercialOffer = {
           price: 350,
           pricePrefix: "Desde ",
           priceUnit: "/mes",
-          description: "Monitoreo limitado, ajustes y reportes básicos según un alcance acordado."
+          description: "Soporte técnico continuo para automatizaciones, formularios e integraciones, dentro del alcance contratado. Opcional y se contrata por separado."
         },
         notes: [
           "No incluye asistentes de IA avanzados, integraciones complejas ni automatizaciones ilimitadas.",
-          "El registro del dominio, las licencias de pago y las suscripciones de terceros se cobran aparte."
+          "El registro del dominio, el hosting, las licencias de pago y los servicios de terceros pueden tener costos recurrentes independientes."
         ],
         cardCta: "Solicitar una Cotización",
         cta: "Solicitar una Cotización",
@@ -1205,7 +1211,7 @@ const commercialOffer = {
             ]
           },
           {
-            name: "Content Complete",
+            name: "BLYNX Content Plus",
             price: 750,
             publishingPrice: 850,
             summary: "12 imágenes + 6 videos",
@@ -1249,7 +1255,7 @@ const commercialOffer = {
       limitsTitle: "Límites",
       limits: [
         "Cada pieza de contenido única puede publicarse en ambas plataformas.",
-        "La publicación no puede superar el contenido incluido en tu plan: hasta 12 imágenes, hasta 6 videos, o hasta 18 piezas con Content Complete."
+        "La publicación no puede superar el contenido incluido en tu plan: hasta 12 imágenes, hasta 6 videos, o hasta 18 piezas con BLYNX Content Plus."
       ],
       notIncludedTitle: "No incluye",
       notIncluded: [
@@ -1311,11 +1317,11 @@ const commercialOffer = {
         ],
         [
           "¿Qué incluye la publicación en Instagram y Facebook?",
-          "Por +$100/mes programamos y publicamos hasta 18 piezas únicas por mes en Instagram y Facebook, después de que apruebes cada una. La publicación no puede superar el contenido de tu plan: hasta 12 imágenes, hasta 6 videos, o hasta 18 piezas con Content Complete. No incluye responder comentarios, contestar mensajes, gestión diaria de cuentas, campañas publicitarias ni gestión de comunidad."
+          "Por +$100/mes programamos y publicamos hasta 18 piezas únicas por mes en Instagram y Facebook, después de que apruebes cada una. La publicación no puede superar el contenido de tu plan: hasta 12 imágenes, hasta 6 videos, o hasta 18 piezas con BLYNX Content Plus. No incluye responder comentarios, contestar mensajes, gestión diaria de cuentas, campañas publicitarias ni gestión de comunidad."
         ],
         [
           "¿Hay costos continuos después de construir mi sitio web?",
-          "BLYNX Presence y BLYNX Complete son configuraciones únicas. Hay planes mensuales opcionales: Website Care a $99/mes y Automation Support desde $350/mes. El registro del dominio, las licencias de pago y las suscripciones de terceros se cobran aparte."
+          "BLYNX Presence y BLYNX Complete son proyectos de pago único, sin contrato mensual de servicio obligatorio. El soporte mensual opcional se contrata por separado: Website Care a $99/mes y Automation Support desde $350/mes. El registro del dominio, el hosting, las licencias de pago y los servicios de terceros pueden tener costos recurrentes independientes."
         ],
         [
           "¿Qué no está incluido?",
@@ -1361,6 +1367,7 @@ function validateCommercialOfferParity() {
       sameLength(service.highlights, translated.highlights, `${label} highlights`);
       sameLength(service.included, translated.included, `${label} included`);
       samePrice(service.care.price, translated.care.price, `${label} care price`);
+      if (!service.priceNote || !translated.priceNote) throw new Error(`Bilingual offer mismatch: ${label} one-time price note`);
       samePrice(service.care.priceUnit.startsWith("/"), translated.care.priceUnit.startsWith("/"), `${label} care unit`);
     } else {
       sameLength(service.plans, translated.plans, `${label} plans`);
@@ -2225,7 +2232,7 @@ function systemsOverviewSection(lang) {
               </div>
               <p class="service-bestfor"><strong>${offer.bestForLabel}:</strong> ${service.bestFor}</p>
               <p class="system-price-line">${servicePriceHtml(offer, service)}${
-                  service.kind === "setup" ? `<span class="system-delivery">${service.deliveryShort}</span>` : `<span class="system-delivery">${service.independentNote}</span>`
+                  service.kind === "setup" ? `<span class="system-delivery">${service.deliveryShort}</span><span class="system-delivery">${service.priceNote}</span>` : `<span class="system-delivery">${service.independentNote}</span>`
                 }</p>
               <div class="system-card-actions">
                 <a class="btn btn-primary" href="${localizedHref(lang, `/${service.ctaTarget}`)}">${service.cardCta}</a>
@@ -2235,6 +2242,7 @@ function systemsOverviewSection(lang) {
               )
               .join("")}
           </div>
+          <p class="service-fine systems-footnote">${offer.externalCostsNote}</p>
         </div>
       </section>`;
 }
@@ -2250,6 +2258,7 @@ function serviceDetailCard(lang, offer, service) {
               ${serviceImage(service, lang)}
               <p class="service-description">${service.description}</p>
               <p class="system-price-line">${servicePriceHtml(offer, service)}</p>
+              ${service.priceNote ? `<p class="service-fine">${service.priceNote}</p>` : ""}
               <p class="service-bestfor"><strong>${offer.bestForLabel}:</strong> ${service.bestFor}</p>
               ${
                 isSubscription
