@@ -284,6 +284,12 @@ const copy = {
         zero: "Starting from zero? We can build your website and Google presence — request a quote and tell us what you need."
       },
       heroCaption: "Illustrative example. Not a real client or verified result.",
+      // Phone-only blocks under the hero strip; wording taken from the approved hero art.
+      heroPillars: [
+        ["Digital Presence", "Get found and get contacted."],
+        ["Automation", "Requests and follow-up in one place."],
+        ["AI Content", "Images and videos to promote your business."]
+      ],
       aboutEyebrow: "About BLYNX",
       aboutTitle: "Built for Local Businesses",
       aboutCopy: "BLYNX builds practical digital solutions for local businesses: professional websites, organized customer follow-up and monthly AI-powered content — explained in plain language.",
@@ -572,6 +578,11 @@ const copy = {
         zero: "¿Empiezas desde cero? Podemos construir tu sitio web y tu presencia en Google — solicita una cotización y cuéntanos qué necesitas."
       },
       heroCaption: "Ejemplo ilustrativo. No representa un cliente real ni resultados verificados.",
+      heroPillars: [
+        ["Presencia Digital", "Que te encuentren y te contacten."],
+        ["Automatización", "Solicitudes y seguimiento en un solo lugar."],
+        ["Contenido con IA", "Imágenes y videos para promocionar tu negocio."]
+      ],
       aboutEyebrow: "Sobre BLYNX",
       aboutTitle: "Creado para Negocios Locales",
       aboutCopy: "BLYNX crea soluciones digitales prácticas para negocios locales: sitios web profesionales, seguimiento organizado de clientes y contenido mensual creado con IA — explicado en lenguaje sencillo.",
@@ -2082,7 +2093,13 @@ const PRODUCT_IMAGES = {
       en: "Illustrative example with a fictional restaurant, El Sabor Latino: digital systems that help a business grow. A Google profile on a phone, a website with a Book Now button, a new booking with request, CRM and follow-up, and AI-made food images and video, shown as digital presence, automation and AI content.",
       es: "Ejemplo ilustrativo con un restaurante ficticio, El Sabor Latino: sistemas digitales que hacen crecer un negocio. Un perfil de Google en un teléfono, un sitio web con un botón Reservar, una nueva reserva con solicitud, CRM y seguimiento, e imágenes y video de comida creados con IA, presentados como presencia digital, automatización y contenido con IA."
     },
-    enlarge: { en: "View larger image", es: "Ver imagen ampliada" }
+    enlarge: { en: "View larger image", es: "Ver imagen ampliada" },
+    // Phones (<= 480px) get a strip of the same art (devices and customer
+    // journey only) — the baked-in headline and pillar captions would be too
+    // small to read there; they are rendered as HTML below the image instead.
+    // The strip is 1672x432 for both languages (see mobileCrop in
+    // scripts/optimize-service-images.js).
+    mobile: { maxWidth: 480, width: 1672, height: 432, widths: [480, 800, 1200] }
   }
 };
 
@@ -2096,8 +2113,20 @@ function productImage(key, lang, { priority = false, sizes = "(max-width: 760px)
   // scripts/optimize-images.js really wrote for each (see lib/responsive-widths).
   const widths = widthsForNative(variant.width);
   const srcset = (ext) => widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(", ");
+  const mobile = entry.mobile;
+  const mobileSources = mobile
+    ? (() => {
+        const mBase = `${base}-mobile`;
+        const mSrcset = (ext) => mobile.widths.map((w) => `${mBase}-${w}.${ext} ${w}w`).join(", ");
+        const media = `(max-width: ${mobile.maxWidth}px)`;
+        return `<source media="${media}" type="image/avif" srcset="${mSrcset("avif")}" sizes="100vw">
+                <source media="${media}" type="image/webp" srcset="${mSrcset("webp")}" sizes="100vw">
+                <source media="${media}" srcset="${mBase}-800-fallback.png">
+                `;
+      })()
+    : "";
   const picture = `<picture>
-                <source type="image/avif" srcset="${srcset("avif")}" sizes="${sizes}">
+                ${mobileSources}<source type="image/avif" srcset="${srcset("avif")}" sizes="${sizes}">
                 <source type="image/webp" srcset="${srcset("webp")}" sizes="${sizes}">
                 <img src="${base}-1200-fallback.png" width="${variant.width}" height="${variant.height}" alt="${escapeAttr(entry.alt[lang])}" loading="${priority ? "eager" : "lazy"}" decoding="async"${priority ? ' fetchpriority="high"' : ""}>
               </picture>`;
@@ -3222,6 +3251,9 @@ function homePage(lang) {
           <div class="hero-grid hero-grid-solo">
             ${productImage("hero", lang, { priority: true, sizes: "(max-width: 1024px) 100vw, 1180px", className: "product-visual-hero" })}
             <p class="visual-caption">${h.heroCaption}</p>
+            <ul class="hero-pillars">
+              ${h.heroPillars.map(([title, text]) => `<li><strong>${title}</strong><span>${text}</span></li>`).join("\n              ")}
+            </ul>
             <div class="hero-copy">
               <h1>${h.headline}</h1>
               <div class="hero-supporting-copy">

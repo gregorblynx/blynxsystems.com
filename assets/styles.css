@@ -4578,3 +4578,48 @@ fieldset.field {
   display: block;
   cursor: zoom-in;
 }
+
+/* Home hero on phones (<= 480px): the picture swaps to a strip of the same art
+   (devices and customer journey), and the headline/pillar captions that are
+   baked into the full illustration are shown as three readable HTML blocks
+   instead. Tablet and desktop keep the complete approved image. */
+.hero-pillars {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .product-visual-hero img {
+    aspect-ratio: 1672 / 432;
+  }
+
+  .hero-pillars {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero-pillars li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border: 1px solid var(--line);
+    border-left: 3px solid rgba(245, 184, 73, 0.75);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.8rem 1rem;
+  }
+
+  .hero-pillars strong {
+    color: var(--gold-soft);
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  .hero-pillars span {
+    color: var(--muted-strong);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}

@@ -32,7 +32,11 @@ const SETS = {
     { file: "Google_Business_Profile", base: "blynx-extra-google-business-profile" },
     { file: "Custom_AI_Solutions", base: "blynx-extra-custom-ai" }
   ],
-  hero: [{ file: "Hero_Restaurant_NoLogo", base: "blynx-hero-restaurant" }]
+  // mobileCrop: a strip of the SAME approved art (devices and customer journey
+  // only, without the baked-in headline and pillar captions) used on phones
+  // (<= 480px); those texts are shown there as real HTML instead. Same crop for
+  // EN and ES: the device row sits at identical coordinates in both files.
+  hero: [{ file: "Hero_Restaurant_NoLogo", base: "blynx-hero-restaurant", mobileCrop: { top: 272, height: 432, widths: [480, 800, 1200] } }]
 };
 
 async function run() {
@@ -60,6 +64,20 @@ async function run() {
         .resize({ width: 1200, withoutEnlargement: true })
         .png({ compressionLevel: 9, palette: true, quality: 90 })
         .toFile(path.join(OUT, `${base}-1200-fallback.png`));
+      if (item.mobileCrop) {
+        const { top, height, widths: cropWidths } = item.mobileCrop;
+        const region = { left: 0, top, width: meta.width, height };
+        for (const width of cropWidths) {
+          const img = sharp(src).extract(region).resize({ width });
+          await img.clone().avif({ quality: 68, effort: 5 }).toFile(path.join(OUT, `${base}-mobile-${width}.avif`));
+          await img.clone().webp({ quality: 82 }).toFile(path.join(OUT, `${base}-mobile-${width}.webp`));
+        }
+        await sharp(src)
+          .extract(region)
+          .resize({ width: 800 })
+          .png({ compressionLevel: 9, palette: true, quality: 90 })
+          .toFile(path.join(OUT, `${base}-mobile-800-fallback.png`));
+      }
       console.log(`done: ${base} (native ${meta.width}x${meta.height}; widths ${widths.join(", ")})`);
     }
   }
