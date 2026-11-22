@@ -3,7 +3,7 @@
 //   services -> BLYNX Presence / Complete / Content   (blynx-service-*)
 //   extras   -> Landing Page / Google Business Profile / Custom AI Solutions
 //               (blynx-extra-*)
-//   hero     -> Home hero illustration (blynx-hero-restaurant-*), natively 1672x941
+//   hero     -> Home hero: horizontal (blynx-hero-restaurant-*, 1672x941) and phone (blynx-hero-mobile-*, 941x1672)
 //
 // The originals (BLYNX_<Name>_<LANG>.png) live in the owner's Google Drive and
 // are intentionally NOT stored in the repository: assets/ is deployed as-is, so
@@ -32,11 +32,13 @@ const SETS = {
     { file: "Google_Business_Profile", base: "blynx-extra-google-business-profile" },
     { file: "Custom_AI_Solutions", base: "blynx-extra-custom-ai" }
   ],
-  // mobileCrop: a strip of the SAME approved art (devices and customer journey
-  // only, without the baked-in headline and pillar captions) used on phones
-  // (<= 480px); those texts are shown there as real HTML instead. Same crop for
-  // EN and ES: the device row sits at identical coordinates in both files.
-  hero: [{ file: "Hero_Restaurant_NoLogo", base: "blynx-hero-restaurant", mobileCrop: { top: 272, height: 432, widths: [480, 800, 1200] } }]
+  // Home hero: the complete horizontal art (tablet/desktop, 1672x941) and the
+  // vertical phone version (<= 480px, 941x1672). Both are separate approved
+  // files per language; none is derived from the other.
+  hero: [
+    { file: "Hero_Restaurant_NoLogo", base: "blynx-hero-restaurant" },
+    { file: "Hero_Mobile", base: "blynx-hero-mobile", fallbackWidth: 800 }
+  ]
 };
 
 async function run() {
@@ -60,24 +62,11 @@ async function run() {
         await img.clone().avif({ quality: 68, effort: 5 }).toFile(path.join(OUT, `${base}-${width}.avif`));
         await img.clone().webp({ quality: 82 }).toFile(path.join(OUT, `${base}-${width}.webp`));
       }
+      const fallbackWidth = item.fallbackWidth || 1200;
       await sharp(src)
-        .resize({ width: 1200, withoutEnlargement: true })
+        .resize({ width: fallbackWidth, withoutEnlargement: true })
         .png({ compressionLevel: 9, palette: true, quality: 90 })
-        .toFile(path.join(OUT, `${base}-1200-fallback.png`));
-      if (item.mobileCrop) {
-        const { top, height, widths: cropWidths } = item.mobileCrop;
-        const region = { left: 0, top, width: meta.width, height };
-        for (const width of cropWidths) {
-          const img = sharp(src).extract(region).resize({ width });
-          await img.clone().avif({ quality: 68, effort: 5 }).toFile(path.join(OUT, `${base}-mobile-${width}.avif`));
-          await img.clone().webp({ quality: 82 }).toFile(path.join(OUT, `${base}-mobile-${width}.webp`));
-        }
-        await sharp(src)
-          .extract(region)
-          .resize({ width: 800 })
-          .png({ compressionLevel: 9, palette: true, quality: 90 })
-          .toFile(path.join(OUT, `${base}-mobile-800-fallback.png`));
-      }
+        .toFile(path.join(OUT, `${base}-${fallbackWidth}-fallback.png`));
       console.log(`done: ${base} (native ${meta.width}x${meta.height}; widths ${widths.join(", ")})`);
     }
   }
