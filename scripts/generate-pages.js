@@ -2136,9 +2136,13 @@ function productImage(key, lang, { priority = false, sizes = "(max-width: 760px)
               </picture>`;
   // Images that carry small baked-in text can be opened full size (native webp,
   // pinch-zoomable on phones) from a plain link around the picture.
+  // When the picture swaps to a vertical phone version, the link carries that
+  // file in data-mobile-href; assets/site.js points the link at it on phones so
+  // a tap enlarges the vertical image (never the wide one).
+  const mobileHref = mobile ? ` data-mobile-href="/assets/images/${mobile[lang].base}-${mobile.width}.webp" data-mobile-max="${mobile.maxWidth}"` : "";
   const content =
     entry.enlarge && entry.enlarge[lang]
-      ? `<a class="product-visual-link" href="${base}-${variant.width}.webp" target="_blank" rel="noopener" aria-label="${escapeAttr(entry.enlarge[lang])}">
+      ? `<a class="product-visual-link" href="${base}-${variant.width}.webp"${mobileHref} target="_blank" rel="noopener" aria-label="${escapeAttr(entry.enlarge[lang])}">
               ${picture}
               </a>`
       : picture;
