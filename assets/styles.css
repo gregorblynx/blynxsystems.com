@@ -4572,3 +4572,9 @@ fieldset.field {
 .hero-grid .visual-caption {
   margin-top: -1.1rem;
 }
+
+/* Home hero: the illustration opens full size (tap/click) because its baked-in text is small on phones. */
+.product-visual-link {
+  display: block;
+  cursor: zoom-in;
+}

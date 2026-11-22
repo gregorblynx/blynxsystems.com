@@ -3,13 +3,14 @@
 //   services -> BLYNX Presence / Complete / Content   (blynx-service-*)
 //   extras   -> Landing Page / Google Business Profile / Custom AI Solutions
 //               (blynx-extra-*)
+//   hero     -> Home hero illustration (blynx-hero-restaurant-*), natively 1672x941
 //
 // The originals (BLYNX_<Name>_<LANG>.png) live in the owner's Google Drive and
 // are intentionally NOT stored in the repository: assets/ is deployed as-is, so
 // keeping several MB of PNGs there would only be shipped to visitors' CDN for
 // nothing. Only the optimized copies are committed.
 //
-// Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|all]
+// Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|hero|all]
 // (requires `npm install sharp --no-save`). Default set: all.
 const sharp = require("sharp");
 const fs = require("fs");
@@ -30,17 +31,18 @@ const SETS = {
     { file: "Landing_Page", base: "blynx-extra-landing-page" },
     { file: "Google_Business_Profile", base: "blynx-extra-google-business-profile" },
     { file: "Custom_AI_Solutions", base: "blynx-extra-custom-ai" }
-  ]
+  ],
+  hero: [{ file: "Hero_Restaurant_NoLogo", base: "blynx-hero-restaurant" }]
 };
 
 async function run() {
   const srcDir = process.argv[2];
   const which = process.argv[3] || "all";
   if (!srcDir || (which !== "all" && !SETS[which])) {
-    console.error("Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|all]");
+    console.error("Usage: node scripts/optimize-service-images.js <directory-with-the-PNGs> [services|extras|hero|all]");
     process.exit(1);
   }
-  const items = which === "all" ? [...SETS.services, ...SETS.extras] : SETS[which];
+  const items = which === "all" ? [...SETS.services, ...SETS.extras, ...SETS.hero] : SETS[which];
   for (const item of items) {
     for (const lang of LANGS) {
       const src = path.join(srcDir, `BLYNX_${item.file}_${lang}.png`);

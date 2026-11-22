@@ -283,7 +283,7 @@ const copy = {
         existing: "You already have a digital presence? We can improve it or build on it — request a quote and tell us what you need.",
         zero: "Starting from zero? We can build your website and Google presence — request a quote and tell us what you need."
       },
-      heroCaption: "Illustration: a sample business shown for demonstration.",
+      heroCaption: "Illustrative example. Not a real client or verified result.",
       aboutEyebrow: "About BLYNX",
       aboutTitle: "Built for Local Businesses",
       aboutCopy: "BLYNX builds practical digital solutions for local businesses: professional websites, organized customer follow-up and monthly AI-powered content — explained in plain language.",
@@ -571,7 +571,7 @@ const copy = {
         existing: "¿Ya tienes presencia digital? Podemos mejorarla o construir sobre ella — solicita una cotización y cuéntanos qué necesitas.",
         zero: "¿Empiezas desde cero? Podemos construir tu sitio web y tu presencia en Google — solicita una cotización y cuéntanos qué necesitas."
       },
-      heroCaption: "Ilustración: un negocio de ejemplo con fines demostrativos.",
+      heroCaption: "Ejemplo ilustrativo. No representa un cliente real ni resultados verificados.",
       aboutEyebrow: "Sobre BLYNX",
       aboutTitle: "Creado para Negocios Locales",
       aboutCopy: "BLYNX crea soluciones digitales prácticas para negocios locales: sitios web profesionales, seguimiento organizado de clientes y contenido mensual creado con IA — explicado en lenguaje sencillo.",
@@ -2072,15 +2072,17 @@ function offerList(items, className = "check-list") {
 // disk as a rollback fallback but are no longer referenced here.
 const PRODUCT_IMAGES = {
   hero: {
-    // Approved final v3 assets (5 pillars, no "CRM"). Native dimensions differ
-    // slightly between languages (real on-disk sizes, not upscaled/matched) —
-    // width/height here must stay in sync with the actual files for 0 CLS.
-    en: { base: "blynx-connected-system-hero-en", width: 1672, height: 941 },
-    es: { base: "blynx-connected-system-hero-es", width: 1659, height: 948 },
+    // Approved hero (fictional restaurant "El Sabor Latino", no logo baked in).
+    // Both languages are natively 1672x941 — width/height here must stay in
+    // sync with the actual files for 0 CLS. The originals live in the owner's
+    // Drive; scripts/optimize-service-images.js hero writes the derivatives.
+    en: { base: "blynx-hero-restaurant-en", width: 1672, height: 941 },
+    es: { base: "blynx-hero-restaurant-es", width: 1672, height: 941 },
     alt: {
-      en: "The BLYNX system in five steps: Be Found, Website, Reviews, Inquiries and Follow-Up, shown as one flow for an example business.",
-      es: "El sistema BLYNX en cinco pasos: Te encuentran, Sitio web, Reseñas, Contactos y Seguimiento, mostrados como un solo flujo para un negocio de ejemplo."
-    }
+      en: "Illustrative example with a fictional restaurant, El Sabor Latino: digital systems that help a business grow. A Google profile on a phone, a website with a Book Now button, a new booking with request, CRM and follow-up, and AI-made food images and video, shown as digital presence, automation and AI content.",
+      es: "Ejemplo ilustrativo con un restaurante ficticio, El Sabor Latino: sistemas digitales que hacen crecer un negocio. Un perfil de Google en un teléfono, un sitio web con un botón Reservar, una nueva reserva con solicitud, CRM y seguimiento, e imágenes y video de comida creados con IA, presentados como presencia digital, automatización y contenido con IA."
+    },
+    enlarge: { en: "View larger image", es: "Ver imagen ampliada" }
   }
 };
 
@@ -2094,13 +2096,22 @@ function productImage(key, lang, { priority = false, sizes = "(max-width: 760px)
   // scripts/optimize-images.js really wrote for each (see lib/responsive-widths).
   const widths = widthsForNative(variant.width);
   const srcset = (ext) => widths.map((w) => `${base}-${w}.${ext} ${w}w`).join(", ");
-  return `
-            <div class="product-visual${className ? " " + className : ""}">
-              <picture>
+  const picture = `<picture>
                 <source type="image/avif" srcset="${srcset("avif")}" sizes="${sizes}">
                 <source type="image/webp" srcset="${srcset("webp")}" sizes="${sizes}">
                 <img src="${base}-1200-fallback.png" width="${variant.width}" height="${variant.height}" alt="${escapeAttr(entry.alt[lang])}" loading="${priority ? "eager" : "lazy"}" decoding="async"${priority ? ' fetchpriority="high"' : ""}>
-              </picture>
+              </picture>`;
+  // Images that carry small baked-in text can be opened full size (native webp,
+  // pinch-zoomable on phones) from a plain link around the picture.
+  const content =
+    entry.enlarge && entry.enlarge[lang]
+      ? `<a class="product-visual-link" href="${base}-${variant.width}.webp" target="_blank" rel="noopener" aria-label="${escapeAttr(entry.enlarge[lang])}">
+              ${picture}
+              </a>`
+      : picture;
+  return `
+            <div class="product-visual${className ? " " + className : ""}">
+              ${content}
             </div>`;
 }
 
