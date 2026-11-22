@@ -892,7 +892,7 @@ const commercialOffer = {
           price: 350,
           pricePrefix: "Starting at ",
           priceUnit: "/month",
-          description: "Ongoing technical support for automations, forms and integrations, within the contracted scope. Optional and contracted separately."
+          description: "Limited technical monitoring, support and minor adjustments to existing automations, within the contracted scope. Optional and contracted separately."
         },
         notes: [
           "Advanced AI assistants, complex integrations and unlimited automations are not included.",
@@ -915,7 +915,7 @@ const commercialOffer = {
         independentNote: "Independent service — no BLYNX website required.",
         plans: [
           {
-            name: "Content Images",
+            name: "BLYNX Content Images",
             price: 300,
             publishingPrice: 400,
             summary: "12 branded images",
@@ -927,7 +927,7 @@ const commercialOffer = {
             ]
           },
           {
-            name: "Content Videos",
+            name: "BLYNX Content Videos",
             price: 600,
             publishingPrice: 700,
             summary: "6 short videos",
@@ -1163,7 +1163,7 @@ const commercialOffer = {
           price: 350,
           pricePrefix: "Desde ",
           priceUnit: "/mes",
-          description: "Soporte técnico continuo para automatizaciones, formularios e integraciones, dentro del alcance contratado. Opcional y se contrata por separado."
+          description: "Supervisión técnica limitada, soporte y ajustes menores de las automatizaciones existentes, dentro del alcance contratado. Opcional y se contrata por separado."
         },
         notes: [
           "No incluye asistentes de IA avanzados, integraciones complejas ni automatizaciones ilimitadas.",
@@ -1186,7 +1186,7 @@ const commercialOffer = {
         independentNote: "Servicio independiente — no requiere un sitio web de BLYNX.",
         plans: [
           {
-            name: "Content Images",
+            name: "BLYNX Content Images",
             price: 300,
             publishingPrice: 400,
             summary: "12 imágenes de marca",
@@ -1198,7 +1198,7 @@ const commercialOffer = {
             ]
           },
           {
-            name: "Content Videos",
+            name: "BLYNX Content Videos",
             price: 600,
             publishingPrice: 700,
             summary: "6 videos cortos",
