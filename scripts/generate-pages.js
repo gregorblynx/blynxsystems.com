@@ -3266,9 +3266,13 @@ function homePage(lang) {
               <div class="hero-supporting-copy">
                 ${h.subtitle.map((paragraph) => `<p>${paragraph}</p>`).join("")}
               </div>
-              <div class="hero-actions hero-actions-stacked">
+              <div class="hero-actions hero-actions-stacked hero-actions-desktop">
                 <a class="btn btn-primary btn-full" href="#systems">${t.cta.services} <span aria-hidden="true">&rarr;</span></a>
                 <a class="btn btn-secondary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
+              </div>
+              <div class="hero-actions hero-actions-stacked hero-actions-mobile">
+                <a class="btn btn-primary btn-full" href="${pagePath(lang, "contact")}">${t.cta.findSystem} <span aria-hidden="true">&rarr;</span></a>
+                <a class="btn btn-secondary btn-full" href="#systems">${t.cta.services} <span aria-hidden="true">&rarr;</span></a>
               </div>
               <div class="stage-banner" hidden data-stage-banner data-existing-message="${h.stageBanner.existing}" data-zero-message="${h.stageBanner.zero}"></div>
             </div>

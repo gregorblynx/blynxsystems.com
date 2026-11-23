@@ -530,6 +530,11 @@ button {
   max-width: 420px;
 }
 
+/* Phone-only button group (see the <=480px block at the end of the file). */
+.hero-home .hero-actions-mobile {
+  display: none;
+}
+
 .hero-actions-stacked .btn span {
   margin-left: 0.35rem;
   transition: transform 180ms ease;
@@ -4627,26 +4632,17 @@ fieldset.field {
     margin-top: 0;
   }
 
-  /* On phones the quote request leads: "Request a Quote" is shown first with
-     the gold primary look, "Explore Our Services" second with the secondary
-     look. Links and markup are unchanged (only order and look differ here;
-     tablet and desktop keep the original order and styles). */
-  .hero-home .hero-actions-stacked {
-    flex-direction: column-reverse;
+  /* On phones the quote request leads: a second button group (same links, own
+     DOM order) shows "Request a Quote" first as the gold primary button and
+     "Explore Our Services" second. Only one group is displayed per breakpoint
+     (the other is display:none, so it is out of the tab order and the
+     accessibility tree): visual order and keyboard order always match. */
+  .hero-home .hero-actions-desktop {
+    display: none;
   }
 
-  .hero-home .hero-actions .btn-secondary {
-    border-color: transparent;
-    background: linear-gradient(135deg, var(--gold), var(--amber));
-    color: #130e05;
-    box-shadow: 0 18px 42px rgba(245, 184, 73, 0.2);
-  }
-
-  .hero-home .hero-actions .btn-primary {
-    border-color: var(--line-strong);
-    background: rgba(255, 255, 255, 0.04);
-    color: var(--text);
-    box-shadow: none;
+  .hero-home .hero-actions-mobile {
+    display: flex;
   }
 
   /* Tapping the image opens the vertical file (href is switched by
