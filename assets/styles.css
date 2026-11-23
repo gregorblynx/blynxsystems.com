@@ -4579,59 +4579,86 @@ fieldset.field {
   cursor: zoom-in;
 }
 
-/* Home hero on phones (<= 480px): the picture swaps to a strip of the same art
-   (devices and customer journey), and the headline/pillar captions that are
-   baked into the full illustration are shown as three readable HTML blocks
-   instead. Tablet and desktop keep the complete approved image. */
-.hero-pillars {
-  display: none;
-}
-
+/* Home hero on phones (<= 480px): the picture swaps to the vertical 9:16 hero
+   (941x1672, one file per language). It already contains the headline, the
+   three pillars and the illustrative notice, so on phones the page does not
+   repeat any of that: the HTML caption is hidden, and the real H1 and the
+   supporting paragraphs stay in the DOM for screen readers and search engines
+   (visually hidden, never display:none) while the two buttons sit right under
+   the image so "Request a Quote" is reachable without a long scroll. The image
+   fills the available width at its own proportion (no crop); the wide image is
+   kept for tablet and desktop. */
 @media (max-width: 480px) {
+  .hero.hero-home {
+    padding-top: 0.5rem;
+  }
+
+  .hero-home .hero-grid {
+    gap: 0.75rem;
+  }
+
   .product-visual-hero img {
-    aspect-ratio: 1672 / 432;
+    aspect-ratio: 941 / 1672;
   }
 
-  .hero-pillars {
-    display: grid;
-    gap: 0.7rem;
-    margin: 0;
+  .hero-grid .visual-caption {
+    display: none;
+  }
+
+  .hero-home .hero-copy h1,
+  .hero-home .hero-supporting-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
     padding: 0;
-    list-style: none;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
   }
 
-  .hero-pillars li {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    border: 1px solid var(--line);
-    border-left: 3px solid rgba(245, 184, 73, 0.75);
-    border-radius: 10px;
+  .hero-home .hero-copy {
+    position: relative;
+  }
+
+  .hero-home .hero-actions {
+    margin-top: 0;
+  }
+
+  /* On phones the quote request leads: "Request a Quote" is shown first with
+     the gold primary look, "Explore Our Services" second with the secondary
+     look. Links and markup are unchanged (only order and look differ here;
+     tablet and desktop keep the original order and styles). */
+  .hero-home .hero-actions-stacked {
+    flex-direction: column-reverse;
+  }
+
+  .hero-home .hero-actions .btn-secondary {
+    border-color: transparent;
+    background: linear-gradient(135deg, var(--gold), var(--amber));
+    color: #130e05;
+    box-shadow: 0 18px 42px rgba(245, 184, 73, 0.2);
+  }
+
+  .hero-home .hero-actions .btn-primary {
+    border-color: var(--line-strong);
     background: rgba(255, 255, 255, 0.04);
-    padding: 0.8rem 1rem;
+    color: var(--text);
+    box-shadow: none;
   }
 
-  .hero-pillars strong {
-    color: var(--gold-soft);
-    font-size: 1.05rem;
-    line-height: 1.25;
+  /* Tapping the image opens the vertical file (href is switched by
+     assets/site.js); without JS the link stays inert instead of opening the
+     wide composition. */
+  .product-visual-link {
+    pointer-events: none;
+    cursor: default;
   }
 
-  .hero-pillars span {
-    color: var(--muted-strong);
-    font-size: 0.95rem;
-    line-height: 1.4;
+  .product-visual-link.is-zoomable {
+    pointer-events: auto;
+    cursor: zoom-in;
   }
-
-/* Home overview: the price rows can differ in height (the one-time cards carry an
-   extra clarification line), so keep every pill pinned to the top of its row. */
-.system-offer-grid-overview .system-price-line {
-  align-content: flex-start;
-}
-
-/* Home: one short line under the three service cards about third-party costs. */
-.systems-footnote {
-  max-width: 62ch;
-  margin: 1.25rem auto 0;
-  text-align: center;
 }

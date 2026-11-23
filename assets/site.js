@@ -125,6 +125,21 @@ function trackEvent(eventName, data = {}) {
     });
   }
 
+  // Hero enlarge link: on phones the picture is the vertical 9:16 version, so the
+  // link must open that same vertical file. Without JS the link stays inert on
+  // phones (see styles.css) rather than opening the wide image.
+  document.querySelectorAll("[data-mobile-href]").forEach((link) => {
+    const wideHref = link.getAttribute("href");
+    const query = window.matchMedia("(max-width: " + (link.dataset.mobileMax || "480") + "px)");
+    const sync = () => {
+      link.setAttribute("href", query.matches ? link.dataset.mobileHref : wideHref);
+      link.classList.add("is-zoomable");
+    };
+    sync();
+    if (query.addEventListener) query.addEventListener("change", sync);
+    else if (query.addListener) query.addListener(sync);
+  });
+
   if (header) {
     const syncHeader = () => {
       header.classList.toggle("is-scrolled", window.scrollY > 8);
